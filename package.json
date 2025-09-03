@@ -1,0 +1,27 @@
+{
+  "name": "entersys-frontend",
+  "version": "1.0.0",
+  "description": "Frontend web application for Entersys.mx project",
+  "main": "src/index.html",
+  "scripts": {
+    "dev": "live-server src/",
+    "start": "live-server src/",
+    "serve": "live-server src/ --port=8080 --host=localhost",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/armando-entersys/entersys-frontend.git"
+  },
+  "keywords": ["entersys", "frontend", "web", "html", "css", "javascript"],
+  "author": "Entersys Team",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/armando-entersys/entersys-frontend/issues"
+  },
+  "homepage": "https://github.com/armando-entersys/entersys-frontend#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
