@@ -8,7 +8,7 @@ import { Layout241 } from "../components/Layout241";
 import { Faq4 } from "../components/Faq4";
 import { Footer11 } from "../components/Footer11";
 
-export default function Inicio() {
+export default function Page() {
   return (
     <div>
       <Navbar11 />

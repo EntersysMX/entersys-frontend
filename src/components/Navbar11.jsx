@@ -1,4 +1,4 @@
-
+"use client";
 
 import { Button, useMediaQuery } from "@relume_io/relume-ui";
 import { AnimatePresence, motion } from "framer-motion";
@@ -48,7 +48,7 @@ export function Navbar11() {
         <div className="grid min-h-16 grid-cols-2 items-center justify-between px-[5%] md:min-h-18 lg:min-h-full lg:px-0">
           <a href="#">
             <img
-              src="/src/assets/images/logo_entersys.png"
+              src="https://d22po4pjz3o32e.cloudfront.net/logo-image.svg"
               alt="Company logo"
             />
           </a>

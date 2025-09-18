@@ -1,8 +1,7 @@
+"use client";
 
-
-
-import React from "react";
 import { Card } from "./Card";
+import React from "react";
 import {
   BiLogoFacebookCircle,
   BiLogoInstagram,
@@ -20,7 +19,7 @@ export function Footer11() {
             <div className="mb-6 md:mb-8">
               <a href="#">
                 <img
-                  src="/src/assets/images/logo_entersys.png"
+                  src="https://d22po4pjz3o32e.cloudfront.net/logo-image.svg"
                   alt="Logo image"
                   className="inline-block"
                 />

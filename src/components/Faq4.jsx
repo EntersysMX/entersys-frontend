@@ -1,5 +1,5 @@
+"use client";
 
-import { Card } from "./Card";
 import {
   Accordion,
   AccordionContent,
@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
   Button,
 } from "@relume_io/relume-ui";
-
+import { Card } from "./Card";
 import React from "react";
 import { RxPlus } from "react-icons/rx";
 
