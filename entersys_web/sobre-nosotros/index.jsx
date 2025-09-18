@@ -1,0 +1,26 @@
+import React from "react";
+import { Navbar11 } from "./components/Navbar11";
+import { Header64 } from "./components/Header64";
+import { Layout149 } from "./components/Layout149";
+import { Layout93 } from "./components/Layout93";
+import { Timeline20 } from "./components/Timeline20";
+import { Layout213 } from "./components/Layout213";
+import { Logo3 } from "./components/Logo3";
+import { Cta39 } from "./components/Cta39";
+import { Footer11 } from "./components/Footer11";
+
+export default function Page() {
+  return (
+    <div>
+      <Navbar11 />
+      <Header64 />
+      <Layout149 />
+      <Layout93 />
+      <Timeline20 />
+      <Layout213 />
+      <Logo3 />
+      <Cta39 />
+      <Footer11 />
+    </div>
+  );
+}

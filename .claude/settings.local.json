@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for file in AwaFooter11.jsx AwaGallery01.jsx AwaNavbar11.jsx AwaStats30.jsx AwaTestimonial17.jsx)",
+      "Bash(do echo \"$file:\")",
+      "Bash(grep:*)",
+      "Bash(done)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
