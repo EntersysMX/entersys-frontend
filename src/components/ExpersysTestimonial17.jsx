@@ -3,6 +3,7 @@
 
 import React from "react";
 import { BiSolidStar } from "react-icons/bi";
+import { Card } from "./Card";
 
 export function ExpersysTestimonial17() {
   return (

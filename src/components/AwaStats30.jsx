@@ -2,6 +2,7 @@
 
 
 import React, { Fragment } from "react";
+import { Card } from "./Card";
 
 export function AwaStats30() {
   return (

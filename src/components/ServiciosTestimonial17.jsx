@@ -1,6 +1,6 @@
 
 
-
+import { Card } from "./Card";
 import React from "react";
 import { BiSolidStar } from "react-icons/bi";
 

@@ -1,6 +1,7 @@
 
 
 import { Button, Input } from "@relume_io/relume-ui";
+import { Card } from "./Card";
 
 import React from "react";
 
