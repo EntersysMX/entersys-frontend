@@ -1,3 +1,23 @@
+version: '3.9'
+
+services:
+  entersys-frontend:
+    build: .
+    container_name: entersys-frontend
+    restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.entersys-frontend.rule=Host(`dev.entersys.mx`)"
+      - "traefik.http.routers.entersys-frontend.entrypoints=websecure"
+      - "traefik.http.routers.entersys-frontend.tls.certresolver=letsencrypt"
+      - "traefik.http.services.entersys-frontend.loadbalancer.server.port=80"
+
+networks:
+  traefik:
+    external: true
+=======
 version: '3.8'
 
 services:
