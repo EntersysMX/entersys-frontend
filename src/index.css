@@ -3,6 +3,7 @@
 /* APLICACIÓN VISUAL RELUME - USANDO DESIGN TOKENS */
 @import url('./styles/relume-components.css');
 @import url('./styles/section-color-schemes.css');
+@import url('./styles/relume-design-mode.css');
 
 @tailwind base;
 @tailwind components;
