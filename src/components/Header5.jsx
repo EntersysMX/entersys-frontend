@@ -2,24 +2,25 @@
 
 import { Button } from "@relume_io/relume-ui";
 import React from "react";
+import { applyColorScheme } from '../design-tokens';
 
 export function Header5() {
   return (
-    <section id="relume" className="relative px-[5%]">
+    <section id="relume" className="relative px-[5%] hero-section">
       <div className="relative z-10 container">
         <div className="flex max-h-[60rem] min-h-svh items-center py-16 md:py-24 lg:py-28">
           <div className="max-w-md">
-            <h1 className="mb-5 text-6xl font-bold text-text-alternative md:mb-6 md:text-9xl lg:text-10xl">
+            <h1 className="hero-title mb-5 md:mb-6">
               Simplificamos la complejidad operativa con inteligencia digital
             </h1>
-            <p className="text-text-alternative md:text-md">
+            <p className="hero-subtitle md:text-md">
               Convertimos procesos manuales en sistemas inteligentes que
               optimizan tu operación. Resultados visibles en semanas, no en
               meses.
             </p>
             <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
-              <Button title="Agendar demo">Agendar demo</Button>
-              <Button title="Conocer más" variant="secondary-alt">
+              <Button className="btn-primary" title="Agendar demo">Agendar demo</Button>
+              <Button className="btn-secondary" title="Conocer más" variant="secondary">
                 Conocer más
               </Button>
             </div>
