@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+Eres un DISEÑADOR WEB EXPERTO y necesito que apliques con PRECISIÓN ABSOLUTA todos los estilos de mi design system basado en los PDFs de especificaciones técnicas. NO modifiques ninguna estructura HTML, solo aplica estilos visuales.
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+## 🎯 VARIABLES CSS OBLIGATORIAS (Design Tokens):
 
-/* Design System Variables - Complete Specification */
+```
 :root {
   /* COLORES - Variables.pdf */
   --neutral-white: #FFFFFF;
@@ -15,7 +13,7 @@
   --neutral-dark: #4C5252;
   --neutral-darker: #192020;
   --neutral-darkest: #000808;
-
+  
   --primary-lightest: #E5F5F6;
   --primary-lighter: #CCEBED;
   --primary-light: #4CB9C0;
@@ -23,7 +21,7 @@
   --primary-dark: #007C84;
   --primary-darker: #003E42;
   --primary-darkest: #002E31;
-
+  
   --secondary-lightest: #E6EBED;
   --secondary-lighter: #CDD8DC;
   --secondary-light: #527786;
@@ -31,7 +29,7 @@
   --secondary-dark: #073042;
   --secondary-darker: #031821;
   --secondary-darkest: #021218;
-
+  
   --gold-lightest: #F8F6F0;
   --gold-lighter: #F2EDE1;
   --gold-light: #D4C098;
@@ -43,7 +41,7 @@
   /* TIPOGRAFÍA - Typography.pdf */
   --font-heading: 'Titillium Web', sans-serif;
   --font-body: 'Inter', sans-serif;
-
+  
   /* Desktop Sizes */
   --h1-desktop: 56px; --h1-lh-desktop: 120%;
   --h2-desktop: 48px; --h2-lh-desktop: 120%;
@@ -51,7 +49,7 @@
   --h4-desktop: 32px; --h4-lh-desktop: 130%;
   --h5-desktop: 24px; --h5-lh-desktop: 130%;
   --h6-desktop: 20px; --h6-lh-desktop: 140%;
-
+  
   /* Mobile Sizes */
   --h1-mobile: 40px; --h1-lh-mobile: 120%;
   --h2-mobile: 36px; --h2-lh-mobile: 120%;
@@ -59,13 +57,13 @@
   --h4-mobile: 24px; --h4-lh-mobile: 140%;
   --h5-mobile: 20px; --h5-lh-mobile: 140%;
   --h6-mobile: 18px; --h6-lh-mobile: 140%;
-
+  
   /* Body Text */
   --text-large: 18px; --text-large-lh: 150%;
   --text-medium: 16px; --text-medium-lh: 150%;
   --text-regular: 14px; --text-regular-lh: 150%;
   --text-small: 12px; --text-small-lh: 150%;
-
+  
   /* Weights */
   --font-light: 300; --font-normal: 400; --font-medium: 500;
   --font-semibold: 600; --font-bold: 700; --font-extrabold: 800;
@@ -94,32 +92,29 @@
   --transition-fast: 150ms ease-in-out;
   --transition-normal: 200ms ease-in-out;
   --transition-slow: 300ms ease-in-out;
+}
+```
 
-  /* Variables por sección (compatibilidad) */
-  --header-bg: #FFFFFF;
-  --header-text: #000808;
-  --header-accent: #009CA6;
-  --hero-bg: #E5F5F6;
-  --hero-text: #000808;
-  --hero-accent: #009CA6;
-  --servicios-bg: #FFFFFF;
-  --servicios-worksys: #009CA6;
-  --servicios-expersys: #093D53;
-  --propuesta-bg: #009CA6;
-  --propuesta-text: #FFFFFF;
-  --faq-bg: #192020;
-  --faq-text: #FFFFFF;
-  --footer-bg: #000808;
-  --footer-text: #D8D9D9;
+## 📋 ESPECIFICACIONES POR SECCIÓN:
+
+### 🏠 1. HEADER/NAVEGACIÓN
+```
+.header {
+  background: var(--neutral-white);
+  border-bottom: 1px solid var(--neutral-lighter);
+  padding: var(--spacing-4) var(--spacing-6);
 }
 
-#root {
-  min-height: 100vh;
+.header-logo { color: var(--primary); }
+.header-nav-link { 
+  font: var(--font-medium) var(--text-medium)/var(--text-medium-lh) var(--font-body);
+  color: var(--neutral-darkest);
 }
+.header-nav-link:hover { color: var(--primary); }
+```
 
-/* =========================
-   HERO SECTION
-   ========================= */
+### 🌟 2. HERO SECTION
+```
 .hero-section {
   background: var(--primary-lightest);
   padding: 120px var(--spacing-6) 80px;
@@ -141,9 +136,6 @@
   margin-right: auto;
 }
 
-/* =========================
-   BUTTONS - Design System
-   ========================= */
 .btn-primary {
   background: var(--primary);
   color: var(--neutral-white);
@@ -152,14 +144,8 @@
   border-radius: var(--radius-medium);
   border: none;
   transition: var(--transition-normal);
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
 }
-.btn-primary:hover {
-  background: var(--primary-dark);
-}
+.btn-primary:hover { background: var(--primary-dark); }
 
 .btn-secondary {
   background: transparent;
@@ -169,35 +155,17 @@
   padding: 10px var(--spacing-8);
   border-radius: var(--radius-medium);
   transition: var(--transition-normal);
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
 }
-.btn-secondary:hover {
-  background: var(--primary-lightest);
-}
+.btn-secondary:hover { background: var(--primary-lightest); }
 
-.btn-white {
-  background: var(--neutral-white);
-  color: var(--primary);
-  font: var(--font-semibold) var(--text-medium)/var(--text-medium-lh) var(--font-body);
-  padding: 12px var(--spacing-8);
-  border-radius: var(--radius-medium);
-  border: none;
-  transition: var(--transition-normal);
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
+/* MOBILE */
+@media (max-width: 768px) {
+  .hero-title { font-size: var(--h1-mobile); line-height: var(--h1-lh-mobile); }
 }
-.btn-white:hover {
-  background: var(--primary-lightest);
-}
+```
 
-/* =========================
-   SERVICIOS SECTION
-   ========================= */
+### 🛠️ 3. SERVICIOS SECTION
+```
 .servicios-section {
   background: var(--neutral-white);
   padding: 100px var(--spacing-6);
@@ -225,7 +193,7 @@
   box-shadow: var(--shadow-small);
   transition: var(--transition-normal);
 }
-.service-card:hover {
+.service-card:hover { 
   box-shadow: var(--shadow-medium);
   transform: translateY(-2px);
 }
@@ -256,9 +224,15 @@
 }
 .service-link:hover { color: var(--primary-dark); }
 
-/* =========================
-   DIFERENCIADORES SECTION
-   ========================= */
+/* MOBILE */
+@media (max-width: 768px) {
+  .servicios-title { font-size: var(--h2-mobile); line-height: var(--h2-lh-mobile); }
+  .service-card-title { font-size: var(--h5-mobile); line-height: var(--h5-lh-mobile); }
+}
+```
+
+### 🎯 4. DIFERENCIADORES SECTION
+```
 .diferenciadores-section {
   background: var(--neutral-white);
   padding: 100px var(--spacing-6);
@@ -285,8 +259,8 @@
   padding: var(--spacing-8);
   box-shadow: var(--shadow-small);
 }
-.card-eficiencia .eficiencia-label { color: var(--primary); }
-.card-eficiencia .eficiencia-title {
+.card-eficiencia .icon { color: var(--primary); font-size: 32px; }
+.card-eficiencia .title { 
   font: var(--font-semibold) var(--h5-desktop)/var(--h5-lh-desktop) var(--font-heading);
   color: var(--primary-dark);
   margin: var(--spacing-4) 0 var(--spacing-2);
@@ -298,8 +272,8 @@
   padding: var(--spacing-8);
   box-shadow: var(--shadow-small);
 }
-.card-escalabilidad .escalabilidad-label { color: var(--secondary); }
-.card-escalabilidad .escalabilidad-title {
+.card-escalabilidad .icon { color: var(--secondary); font-size: 32px; }
+.card-escalabilidad .title {
   font: var(--font-semibold) var(--h5-desktop)/var(--h5-lh-desktop) var(--font-heading);
   color: var(--secondary-dark);
   margin: var(--spacing-4) 0 var(--spacing-2);
@@ -311,8 +285,8 @@
   padding: var(--spacing-8);
   box-shadow: var(--shadow-small);
 }
-.card-cumplimiento .cumplimiento-label { color: var(--gold); }
-.card-cumplimiento .cumplimiento-title {
+.card-cumplimiento .icon { color: var(--gold); font-size: 32px; }
+.card-cumplimiento .title {
   font: var(--font-semibold) var(--h5-desktop)/var(--h5-lh-desktop) var(--font-heading);
   color: var(--gold-dark);
   margin: var(--spacing-4) 0 var(--spacing-2);
@@ -324,25 +298,22 @@
   margin-bottom: var(--spacing-4);
 }
 
-/* Worksys - Color primary */
-.worksys-card .service-card-title { color: var(--primary); }
-.worksys-card .service-card-subtitle { color: var(--primary-dark); }
+.card-link {
+  font: var(--font-medium) var(--text-regular)/var(--text-regular-lh) var(--font-body);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
 
-/* Expersys - Color secondary */
-.expersys-card .service-card-title { color: var(--secondary); }
-.expersys-card .service-card-subtitle { color: var(--secondary-light); }
+/* MOBILE */
+@media (max-width: 768px) {
+  .diferenciadores-title { font-size: var(--h2-mobile); line-height: var(--h2-lh-mobile); }
+}
+```
 
-/* Labels específicos */
-.eficiencia-label { color: var(--primary); }
-.eficiencia-title { color: var(--primary-dark); }
-.escalabilidad-label { color: var(--secondary); }
-.escalabilidad-title { color: var(--secondary-dark); }
-.cumplimiento-label { color: var(--gold); }
-.cumplimiento-title { color: var(--gold-dark); }
-
-/* =========================
-   PROPUESTA SECTION
-   ========================= */
+### 💎 5. PROPUESTA DE VALOR SECTION
+```
 .propuesta-section {
   background: var(--primary);
   color: var(--neutral-white);
@@ -356,15 +327,31 @@
   margin-bottom: var(--spacing-4);
 }
 
-.propuesta-text {
+.propuesta-subtitle {
   font: var(--font-normal) var(--text-large)/var(--text-large-lh) var(--font-body);
   color: var(--primary-lightest);
   margin-bottom: var(--spacing-8);
 }
 
-/* =========================
-   FAQ SECTION
-   ========================= */
+.btn-white {
+  background: var(--neutral-white);
+  color: var(--primary);
+  font: var(--font-semibold) var(--text-medium)/var(--text-medium-lh) var(--font-body);
+  padding: 12px var(--spacing-8);
+  border-radius: var(--radius-medium);
+  border: none;
+  transition: var(--transition-normal);
+}
+.btn-white:hover { background: var(--primary-lightest); }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .propuesta-title { font-size: var(--h2-mobile); line-height: var(--h2-lh-mobile); }
+}
+```
+
+### ❓ 6. FAQ SECTION
+```
 .faq-section {
   background: var(--neutral-darker);
   padding: 100px var(--spacing-6);
@@ -377,234 +364,128 @@
   margin-bottom: var(--spacing-4);
 }
 
-.faq-text {
+.faq-subtitle {
   font: var(--font-normal) var(--text-medium)/var(--text-medium-lh) var(--font-body);
   color: var(--neutral-lighter);
   text-align: center;
   margin-bottom: var(--spacing-12);
 }
 
-/* Diferenciadores */
-.diferenciadores-section {
-  background-color: var(--neutral-white);
+.faq-item {
+  border-bottom: 1px solid var(--neutral);
+  padding: var(--spacing-6) 0;
+  transition: var(--transition-normal);
 }
+.faq-item:hover { background: rgba(255,255,255,0.05); }
 
-.diferenciadores-header {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto 80px auto;
-}
-
-.diferenciadores-subtitle {
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--primary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 16px;
-}
-
-.diferenciadores-title {
-  font-family: 'Titillium Web', sans-serif;
-  font-size: 48px;
-  line-height: 120%;
-  font-weight: 700;
-  color: var(--neutral-darkest);
-  margin-bottom: 24px;
-}
-
-.diferenciadores-description {
-  font-family: 'Inter', sans-serif;
-  font-size: 18px;
-  line-height: 150%;
-  font-weight: 400;
-  color: var(--neutral-dark);
-}
-
-/* Cards de diferenciadores - Solo colores de fondo */
-.card-eficiencia {
-  background-color: var(--primary-lightest);
-}
-
-.card-escalabilidad {
-  background-color: var(--secondary-lightest);
-}
-
-.card-cumplimiento {
-  background-color: var(--gold-lightest);
-}
-
-
-/* Propuesta de Valor */
-.propuesta-section {
-  background-color: var(--primary);
+.faq-question {
+  font: var(--font-semibold) var(--text-large)/140% var(--font-body);
   color: var(--neutral-white);
-  padding: 5rem 1.5rem;
-}
-
-.propuesta-title {
-  color: var(--neutral-white);
-  font-family: 'Titillium Web', sans-serif;
-}
-
-.propuesta-text {
-  color: var(--primary-lightest);
-}
-
-.btn-white {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;           /* Text medium */
-  font-weight: 600;          /* Semi-bold - CRÍTICO */
-  line-height: 150%;
-  padding: 12px 32px;        /* Padding específico */
-  border-radius: 8px;        /* Medium radius */
-  border: 2px solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  background-color: var(--neutral-white);
+}
+
+.faq-icon {
   color: var(--primary);
-  border-color: var(--neutral-white);
+  font-size: 24px;
+  transition: var(--transition-fast);
 }
 
-.btn-white:hover {
-  background-color: var(--primary-lightest);
-  border-color: var(--primary-lightest);
-}
-
-/* FAQ Section */
-.faq-section {
-  background-color: var(--neutral-darker);
-  color: var(--neutral-white);
-  padding: 5rem 1.5rem;
-}
-
-.faq-title {
-  color: var(--neutral-white);
-}
-
-.faq-text {
+.faq-answer {
+  font: var(--font-normal) var(--text-medium)/var(--text-medium-lh) var(--font-body);
   color: var(--neutral-lighter);
+  padding-top: var(--spacing-4);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-slow);
+}
+.faq-answer.open { max-height: 200px; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .faq-title { font-size: var(--h2-mobile); line-height: var(--h2-lh-mobile); }
+  .faq-question { font-size: var(--text-medium); }
+}
+```
+
+### 📞 7. CTA FINAL SECTION
+```
+.cta-final-section {
+  background: var(--secondary);
+  padding: 100px var(--spacing-6);
+  text-align: center;
 }
 
-/* =========================
-   FOOTER SECTION
-   ========================= */
-.footer-section {
+.cta-final-title {
+  font: var(--font-bold) var(--h2-desktop)/var(--h2-lh-desktop) var(--font-heading);
+  color: var(--neutral-white);
+  margin-bottom: var(--spacing-4);
+}
+
+.cta-final-text {
+  font: var(--font-normal) var(--text-large)/var(--text-large-lh) var(--font-body);
+  color: var(--secondary-lighter);
+  margin-bottom: var(--spacing-8);
+}
+
+.btn-white-secondary {
+  background: var(--neutral-white);
+  color: var(--secondary);
+  font: var(--font-semibold) var(--text-medium)/var(--text-medium-lh) var(--font-body);
+  padding: 12px var(--spacing-8);
+  border-radius: var(--radius-medium);
+  border: none;
+  transition: var(--transition-normal);
+}
+.btn-white-secondary:hover { background: var(--secondary-lightest); }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .cta-final-title { font-size: var(--h2-mobile); line-height: var(--h2-lh-mobile); }
+}
+```
+
+### 🔗 8. FOOTER
+```
+.footer {
   background: var(--neutral-darkest);
   padding: var(--spacing-12) var(--spacing-6) var(--spacing-6);
 }
 
-.footer-links {
+.footer-logo { color: var(--primary); }
+
+.footer-link {
   font: var(--font-normal) var(--text-medium)/var(--text-medium-lh) var(--font-body);
   color: var(--neutral-lighter);
   text-decoration: none;
   transition: var(--transition-fast);
 }
-.footer-links:hover { color: var(--primary); }
+.footer-link:hover { color: var(--primary); }
 
 .footer-text {
   font: var(--font-normal) var(--text-regular)/var(--text-regular-lh) var(--font-body);
   color: var(--neutral);
 }
 
-/* Layout helpers */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+.footer-divider {
+  border-color: var(--neutral-dark);
+  margin: var(--spacing-8) 0 var(--spacing-4);
 }
+```
 
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 32px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+## ⚡ INSTRUCCIONES CRÍTICAS:
 
-/* Específico para diferenciadores - 3 columnas en desktop */
-.diferenciadores-section .cards-grid {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
-}
+1. **USA EXCLUSIVAMENTE** las variables CSS definidas
+2. **NO CAMBIES** ninguna estructura HTML existente
+3. **APLICA EXACTAMENTE** estos estilos sin modificaciones
+4. **VERIFICA** que cada sección use el color scheme correcto
+5. **INCLUYE** todas las transiciones y hover states
+6. **ASEGURA** responsive design en todos los elementos
+7. **MANTÉN** las proporciones y spacing exactos
+8. **USA** las sombras específicas según la jerarquía
+9. **APLICA** border-radius según las especificaciones
+10. **RESPETA** la tipografía exacta: familia, peso, tamaño, line-height
 
-@media (min-width: 1024px) {
-  .diferenciadores-section .cards-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-/* Base Typography */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-}
-
-/* =========================
-   MOBILE RESPONSIVE
-   ========================= */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: var(--h1-mobile);
-    line-height: var(--h1-lh-mobile);
-  }
-
-  .servicios-title {
-    font-size: var(--h2-mobile);
-    line-height: var(--h2-lh-mobile);
-  }
-
-  .service-card-title {
-    font-size: var(--h5-mobile);
-    line-height: var(--h5-lh-mobile);
-  }
-
-  .diferenciadores-title {
-    font-size: var(--h2-mobile);
-    line-height: var(--h2-lh-mobile);
-  }
-
-  .propuesta-title {
-    font-size: var(--h2-mobile);
-    line-height: var(--h2-lh-mobile);
-  }
-
-  .faq-title {
-    font-size: var(--h2-mobile);
-    line-height: var(--h2-lh-mobile);
-  }
-
-  .buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero-section {
-    padding: 80px var(--spacing-4) 60px;
-  }
-
-  .servicios-section,
-  .diferenciadores-section,
-  .propuesta-section,
-  .faq-section {
-    padding: 80px var(--spacing-4);
-  }
-
-  .card-eficiencia,
-  .card-escalabilidad,
-  .card-cumplimiento {
-    padding: var(--spacing-6) var(--spacing-4);
-  }
-}
+Este CSS debe aplicarse manteniendo PERFECTA FIDELIDAD a los PDFs de Variables, Typography, Shadows y Radius sin cambiar formas ni estructura.
