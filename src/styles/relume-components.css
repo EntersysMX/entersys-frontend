@@ -1,0 +1,686 @@
+/* RELUME COMPONENTS - DESIGN TOKEN IMPLEMENTATION */
+/* Extracted from paste.txt and converted to use design tokens */
+
+/* ========================= */
+/* TYPOGRAPHY CLASSES        */
+/* ========================= */
+
+/* Heading Styles */
+.U_heading-style-h1,
+.Uheading-style-h1 {
+  font-family: var(--font-heading);  /* Titillium Web */
+  font-size: var(--h1-desktop);      /* 56px */
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--neutral-darkest);     /* #000808 */
+}
+
+.U_heading-style-h2,
+.Uheading-style-h2 {
+  font-family: var(--font-heading);  /* Titillium Web */
+  font-size: var(--h2-desktop);      /* 48px */
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--neutral-darkest);     /* #000808 */
+}
+
+.U_heading-style-h3,
+.Uheading-style-h3 {
+  font-family: var(--font-heading);  /* Titillium Web */
+  font-size: var(--h3-desktop);      /* 40px */
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--neutral-darkest);     /* #000808 */
+}
+
+.U_heading-style-h4,
+.Uheading-style-h4 {
+  font-family: var(--font-heading);  /* Titillium Web */
+  font-size: var(--h4-desktop);      /* 32px */
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--neutral-darkest);     /* #000808 */
+}
+
+.U_heading-style-h5,
+.Uheading-style-h5 {
+  font-family: var(--font-heading);  /* Titillium Web */
+  font-size: var(--h5-desktop);      /* 24px */
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--neutral-darkest);     /* #000808 */
+}
+
+.U_heading-style-h6,
+.Uheading-style-h6 {
+  font-family: var(--font-heading);  /* Titillium Web */
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--neutral-darkest);     /* #000808 */
+}
+
+/* Text Styles */
+.U_text-style-body,
+.Utext-style-body {
+  font-family: var(--font-body);     /* Inter */
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--neutral-dark);        /* #4C5252 */
+}
+
+.U_text-size-medium,
+.Utext-size-medium {
+  font-family: var(--font-body);     /* Inter */
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--neutral-dark);        /* #4C5252 */
+}
+
+.U_text-size-small,
+.Utext-size-small {
+  font-family: var(--font-body);     /* Inter */
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--neutral);             /* #7F8383 */
+}
+
+.U_text-weight-semibold,
+.Utext-weight-semibold {
+  font-weight: 600;
+}
+
+.U_text-style-link,
+.Utext-style-link {
+  color: var(--primary);             /* #009CA6 */
+  text-decoration: underline;
+  transition: var(--transition-normal);
+}
+
+.U_text-style-link:hover,
+.Utext-style-link:hover {
+  color: var(--primary-dark);        /* #007C84 */
+}
+
+.U_text-style-quote,
+.Utext-style-quote {
+  margin-bottom: 0rem;
+  padding: 12px 20px;
+  border-left: 3px solid var(--primary);  /* #009CA6 */
+  font-size: 20px;
+  line-height: 1.5;
+  font-style: italic;
+  background-color: var(--neutral-lightest);  /* #F2F2F2 */
+}
+
+/* Text Utilities */
+.U_text-style-italic,
+.Utext-style-italic {
+  font-style: italic;
+}
+
+.U_text-style-strikethrough,
+.Utext-style-strikethrough {
+  text-decoration: line-through;
+}
+
+.U_text-style-muted,
+.Utext-style-muted {
+  opacity: 0.6;
+}
+
+.U_text-style-nowrap,
+.Utext-style-nowrap {
+  white-space: nowrap;
+}
+
+.U_text-style-allcaps,
+.Utext-style-allcaps {
+  text-transform: uppercase;
+}
+
+/* ========================= */
+/* LAYOUT CLASSES           */
+/* ========================= */
+
+/* Container Classes */
+.U_container-large,
+.Ucontainer-large {
+  width: 100%;
+  max-width: 1280px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--spacing-6);    /* 24px */
+  padding-left: var(--spacing-6);     /* 24px */
+}
+
+.U_container-medium,
+.Ucontainer-medium {
+  width: 100%;
+  max-width: 1024px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--spacing-6);    /* 24px */
+  padding-left: var(--spacing-6);     /* 24px */
+}
+
+.U_container-small,
+.Ucontainer-small {
+  width: 100%;
+  max-width: 768px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--spacing-6);    /* 24px */
+  padding-left: var(--spacing-6);     /* 24px */
+}
+
+/* Max Width Classes */
+.U_max-width-full,
+.Umax-width-full {
+  width: 100%;
+  max-width: none;
+}
+
+.U_max-width-xxlarge,
+.Umax-width-xxlarge {
+  width: 100%;
+  max-width: 1280px;
+}
+
+.U_max-width-xlarge,
+.Umax-width-xlarge {
+  width: 100%;
+  max-width: 1024px;
+}
+
+.U_max-width-large,
+.Umax-width-large {
+  width: 100%;
+  max-width: 768px;
+}
+
+.U_max-width-medium,
+.Umax-width-medium {
+  width: 100%;
+  max-width: 560px;
+}
+
+.U_max-width-small,
+.Umax-width-small {
+  width: 100%;
+  max-width: 480px;
+}
+
+.U_max-width-xsmall,
+.Umax-width-xsmall {
+  width: 100%;
+  max-width: 400px;
+}
+
+.U_max-width-xxsmall,
+.Umax-width-xxsmall {
+  width: 100%;
+  max-width: 320px;
+}
+
+/* Alignment Classes */
+.U_align-center,
+.Ualign-center {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Spacing Classes */
+.U_spacing-clean,
+.Uspacing-clean {
+  margin: 0;
+  padding: 0;
+}
+
+/* ========================= */
+/* MARGIN & PADDING UTILITIES */
+/* ========================= */
+
+/* Margin Classes */
+.U_margin-0,
+.Umargin-0 {
+  margin: 0;
+}
+
+.U_margin-tiny,
+.Umargin-tiny {
+  margin: 4px;
+}
+
+.U_margin-xxsmall,
+.Umargin-xxsmall {
+  margin: 8px;
+}
+
+.U_margin-xsmall,
+.Umargin-xsmall {
+  margin: var(--spacing-4);           /* 16px */
+}
+
+.U_margin-small,
+.Umargin-small {
+  margin: var(--spacing-6);           /* 24px */
+}
+
+.U_margin-medium,
+.Umargin-medium {
+  margin: var(--spacing-8);           /* 32px */
+}
+
+.U_margin-large,
+.Umargin-large {
+  margin: 48px;
+}
+
+.U_margin-xlarge,
+.Umargin-xlarge {
+  margin: 64px;
+}
+
+.U_margin-xxlarge,
+.Umargin-xxlarge {
+  margin: 80px;
+}
+
+.U_margin-huge,
+.Umargin-huge {
+  margin: 96px;
+}
+
+.U_margin-xhuge,
+.Umargin-xhuge {
+  margin: 112px;
+}
+
+.U_margin-xxhuge,
+.Umargin-xxhuge {
+  margin: 160px;
+}
+
+/* Margin Top Classes */
+.U_margin-top,
+.Umargin-top {
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+}
+
+.U_margin-top.U_margin-small,
+.Umargin-top.Umargin-small {
+  margin-top: var(--spacing-6);       /* 24px */
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+}
+
+.U_margin-top.U_margin-medium,
+.Umargin-top.Umargin-medium {
+  margin-top: var(--spacing-8);       /* 32px */
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+}
+
+/* Margin Bottom Classes */
+.U_margin-bottom,
+.Umargin-bottom {
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.U_margin-bottom.U_margin-small,
+.Umargin-bottom.Umargin-small {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: var(--spacing-6);    /* 24px */
+  margin-left: 0;
+}
+
+.U_margin-bottom.U_margin-medium,
+.Umargin-bottom.Umargin-medium {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: var(--spacing-8);    /* 32px */
+  margin-left: 0;
+}
+
+/* Padding Classes */
+.U_padding-0,
+.Upadding-0 {
+  padding: 0;
+}
+
+.U_padding-tiny,
+.Upadding-tiny {
+  padding: 4px;
+}
+
+.U_padding-xxsmall,
+.Upadding-xxsmall {
+  padding: 8px;
+}
+
+.U_padding-xsmall,
+.Upadding-xsmall {
+  padding: var(--spacing-4);          /* 16px */
+}
+
+.U_padding-small,
+.Upadding-small {
+  padding: var(--spacing-6);          /* 24px */
+}
+
+.U_padding-medium,
+.Upadding-medium {
+  padding: var(--spacing-8);          /* 32px */
+}
+
+.U_padding-large,
+.Upadding-large {
+  padding: 48px;
+}
+
+.U_padding-xlarge,
+.Upadding-xlarge {
+  padding: 64px;
+}
+
+.U_padding-xxlarge,
+.Upadding-xxlarge {
+  padding: 80px;
+}
+
+.U_padding-huge,
+.Upadding-huge {
+  padding: 96px;
+}
+
+.U_padding-xhuge,
+.Upadding-xhuge {
+  padding: 112px;
+}
+
+.U_padding-xxhuge,
+.Upadding-xxhuge {
+  padding: 160px;
+}
+
+/* Global Padding */
+.U_padding-global,
+.Upadding-global {
+  padding-right: var(--spacing-6);    /* 24px */
+  padding-left: var(--spacing-6);     /* 24px */
+}
+
+.U_padding-section-large,
+.Upadding-section-large {
+  padding-top: 120px;
+  padding-bottom: 80px;
+}
+
+.U_padding-section-medium,
+.Upadding-section-medium {
+  padding-top: 96px;
+  padding-bottom: 64px;
+}
+
+.U_padding-section-small,
+.Upadding-section-small {
+  padding-top: 64px;
+  padding-bottom: 48px;
+}
+
+/* ========================= */
+/* BUTTON CLASSES           */
+/* ========================= */
+
+.U_button-styled,
+.Ubutton-styled {
+  display: inline-block;
+  padding: 12px var(--spacing-6);     /* 24px */
+  background-color: var(--primary);   /* #009CA6 */
+  color: var(--neutral-white);        /* #FFFFFF */
+  font-family: var(--font-body);      /* Inter */
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius-medium); /* 8px */
+  border: none;
+  transition: var(--transition-normal); /* 200ms ease-in-out */
+  cursor: pointer;
+}
+
+.U_button-styled:hover,
+.Ubutton-styled:hover {
+  background-color: var(--primary-dark); /* #007C84 */
+}
+
+.U_button-styled.U_is-small,
+.Ubutton-styled.Uis-small {
+  padding: 8px var(--spacing-4);      /* 16px */
+  font-size: 14px;
+}
+
+.U_button-styled.U_is-secondary,
+.Ubutton-styled.Uis-secondary {
+  background-color: transparent;
+  color: var(--primary);              /* #009CA6 */
+  border: 2px solid var(--primary);   /* #009CA6 */
+}
+
+.U_button-styled.U_is-secondary:hover,
+.Ubutton-styled.Uis-secondary:hover {
+  background-color: var(--primary-lightest); /* #E5F5F6 */
+}
+
+.U_button-styled.U_is-alternate,
+.Ubutton-styled.Uis-alternate {
+  background-color: var(--neutral-white);    /* #FFFFFF */
+  color: var(--neutral-darkest);             /* #000808 */
+}
+
+.U_button-styled.U_is-alternate:hover,
+.Ubutton-styled.Uis-alternate:hover {
+  background-color: var(--neutral-lightest); /* #F2F2F2 */
+}
+
+/* Button Group */
+.U_button-group,
+.Ubutton-group {
+  display: flex;
+  gap: var(--spacing-4);              /* 16px */
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ========================= */
+/* UTILITY CLASSES          */
+/* ========================= */
+
+/* Display Classes */
+.U_hide,
+.Uhide {
+  display: none;
+}
+
+.U_hide-tablet,
+.Uhide-tablet {
+  /* Hidden on tablet breakpoints via media queries */
+}
+
+.U_hide-mobile-landscape,
+.Uhide-mobile-landscape {
+  /* Hidden on mobile landscape via media queries */
+}
+
+.U_hide-mobile-portrait,
+.Uhide-mobile-portrait {
+  /* Hidden on mobile portrait via media queries */
+}
+
+/* Position Classes */
+.U_layer,
+.Ulayer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.U_z-index-1,
+.Uz-index-1 {
+  position: relative;
+  z-index: 1;
+}
+
+.U_z-index-2,
+.Uz-index-2 {
+  position: relative;
+  z-index: 2;
+}
+
+/* Overflow Classes */
+.U_overflow-hidden,
+.Uoverflow-hidden {
+  overflow: hidden;
+}
+
+/* ========================= */
+/* RESPONSIVE BREAKPOINTS   */
+/* ========================= */
+
+/* Tablet Breakpoint */
+@media (max-width: 991px) {
+  .U_heading-style-h1,
+  .Uheading-style-h1 {
+    font-size: calc(var(--h1-desktop) * 0.9);  /* ~50px */
+  }
+
+  .U_heading-style-h2,
+  .Uheading-style-h2 {
+    font-size: calc(var(--h2-desktop) * 0.9);  /* ~43px */
+  }
+
+  .U_heading-style-h3,
+  .Uheading-style-h3 {
+    font-size: calc(var(--h3-desktop) * 0.9);  /* ~36px */
+  }
+
+  .U_heading-style-h4,
+  .Uheading-style-h4 {
+    font-size: calc(var(--h4-desktop) * 0.9);  /* ~29px */
+  }
+
+  .U_hide-tablet,
+  .Uhide-tablet {
+    display: none;
+  }
+
+  .U_max-width-full-tablet,
+  .Umax-width-full-tablet {
+    max-width: none;
+  }
+
+  .U_padding-section-large,
+  .Upadding-section-large {
+    padding-top: 96px;
+    padding-bottom: 64px;
+  }
+
+  .U_padding-section-medium,
+  .Upadding-section-medium {
+    padding-top: 80px;
+    padding-bottom: 48px;
+  }
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 767px) {
+  .U_heading-style-h1,
+  .Uheading-style-h1 {
+    font-size: var(--h1-mobile);       /* 40px */
+  }
+
+  .U_heading-style-h2,
+  .Uheading-style-h2 {
+    font-size: var(--h2-mobile);       /* 36px */
+  }
+
+  .U_heading-style-h3,
+  .Uheading-style-h3 {
+    font-size: var(--h3-mobile);       /* 32px */
+  }
+
+  .U_heading-style-h4,
+  .Uheading-style-h4 {
+    font-size: var(--h4-mobile);       /* 24px */
+    line-height: 1.4;
+  }
+
+  .U_heading-style-h5,
+  .Uheading-style-h5 {
+    font-size: var(--h5-mobile);       /* 20px */
+  }
+
+  .U_text-style-nowrap,
+  .Utext-style-nowrap {
+    white-space: normal;
+  }
+
+  .U_hide-mobile-landscape,
+  .Uhide-mobile-landscape {
+    display: none;
+  }
+
+  .U_hide-mobile-portrait,
+  .Uhide-mobile-portrait {
+    display: none;
+  }
+
+  .U_max-width-full-mobile-landscape,
+  .Umax-width-full-mobile-landscape {
+    max-width: none;
+  }
+
+  .U_padding-section-large,
+  .Upadding-section-large {
+    padding-top: 80px;
+    padding-bottom: 48px;
+  }
+
+  .U_padding-section-medium,
+  .Upadding-section-medium {
+    padding-top: 64px;
+    padding-bottom: 32px;
+  }
+
+  .U_padding-section-small,
+  .Upadding-section-small {
+    padding-top: 48px;
+    padding-bottom: 32px;
+  }
+
+  .U_button-group,
+  .Ubutton-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .U_button-styled,
+  .Ubutton-styled {
+    width: 100%;
+    text-align: center;
+  }
+}

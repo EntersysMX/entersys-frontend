@@ -12,13 +12,13 @@ export function Layout245() {
         <div className="flex flex-col items-start">
           <div className="rb-12 mb-12 grid grid-cols-1 items-start justify-between gap-5 md:mb-18 md:grid-cols-2 md:gap-x-12 md:gap-y-8 lg:mb-20 lg:gap-x-20">
             <div>
-              <p className="mb-3 font-semibold md:mb-4" style={{color: 'var(--primary-lightest)'}}>Propuesta de valor</p>
-              <h2 className="propuesta-title text-5xl font-bold md:text-7xl lg:text-8xl" style={{color: 'var(--neutral-white)'}}>
+              <p className="mb-3 font-semibold md:mb-4" >Propuesta de valor</p>
+              <h2 className="propuesta-title text-5xl font-bold md:text-7xl lg:text-8xl" >
                 Prueba hoy, comprométete después
               </h2>
             </div>
             <div>
-              <p className="propuesta-text md:text-md" style={{color: 'var(--primary-lightest)'}}>
+              <p className="propuesta-text md:text-md" >
                 En Entersys, te ofrecemos la oportunidad de probar nuestras
                 soluciones antes de comprometerte. Nuestro modelo comercial de
                 'Try and Buy' te permite experimentar los beneficios de la
@@ -36,10 +36,10 @@ export function Layout245() {
                   className="size-12 brightness-0 invert"
                 />
               </div>
-              <h3 className="mb-5 text-xl font-bold md:mb-6" style={{color: 'var(--neutral-white)'}}>
+              <h3 className="mb-5 text-xl font-bold md:mb-6" >
                 Resultados visibles en semanas, no en meses
               </h3>
-              <p style={{color: 'var(--neutral-white)'}}>Comienza a ver cambios significativos rápidamente.</p>
+              <p >Comienza a ver cambios significativos rápidamente.</p>
             </div>
             <div>
               <div className="rb-5 mb-5 md:mb-6">
@@ -49,10 +49,10 @@ export function Layout245() {
                   className="size-12 brightness-0 invert"
                 />
               </div>
-              <h3 className="mb-5 text-xl font-bold md:mb-6" style={{color: 'var(--neutral-white)'}}>
+              <h3 className="mb-5 text-xl font-bold md:mb-6" >
                 Soporte personalizado durante todo el proceso
               </h3>
-              <p style={{color: 'var(--neutral-white)'}}>Nuestro equipo está contigo en cada paso.</p>
+              <p >Nuestro equipo está contigo en cada paso.</p>
             </div>
             <div>
               <div className="rb-5 mb-5 md:mb-6">
@@ -62,15 +62,15 @@ export function Layout245() {
                   className="size-12 brightness-0 invert"
                 />
               </div>
-              <h3 className="mb-5 text-xl font-bold md:mb-6" style={{color: 'var(--neutral-white)'}}>
+              <h3 className="mb-5 text-xl font-bold md:mb-6" >
                 Equipo funcional que comprende tus operaciones
               </h3>
-              <p style={{color: 'var(--neutral-white)'}}>Sabemos lo que hacemos y podemos comprobarlo.</p>
+              <p >Sabemos lo que hacemos y podemos comprobarlo.</p>
             </div>
           </div>
           <div className="mt-10 flex items-center gap-4 md:mt-14 lg:mt-16">
             <Button className="btn-white" variant="secondary">Solicitar</Button>
-            <Button iconRight={<RxChevronRight />} variant="link" size="link" style={{color: 'var(--neutral-white)'}}>
+            <Button iconRight={<RxChevronRight />} variant="link" size="link" >
               Ver clientes
             </Button>
           </div>

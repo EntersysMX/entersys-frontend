@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+/* APLICACIÓN VISUAL RELUME - USANDO DESIGN TOKENS */
+@import url('./styles/relume-components.css');
+@import url('./styles/section-color-schemes.css');
+@import url('./styles/relume-design-mode.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -95,6 +100,15 @@
   --transition-normal: 200ms ease-in-out;
   --transition-slow: 300ms ease-in-out;
 
+  /* MAPEO COMPLETO DE VARIABLES RELUME → DESIGN TOKENS */
+  --u-relume-variable-background-color-1: var(--neutral-white);
+  --u-relume-variable-text-color-1: var(--neutral-darkest);
+  --u-relume-variable-color-scheme-1-background: var(--primary-lightest);
+  --u-relume-variable-color-scheme-1-text: var(--neutral-darkest);
+  --u-relume-variable-color-neutral-1: var(--primary);
+  --u-relume-variable-color-neutral-2: var(--neutral-white);
+  --u-relume-variable-link-color-1: var(--primary);
+
   /* Variables por sección (compatibilidad) */
   --header-bg: #FFFFFF;
   --header-text: #000808;
@@ -102,15 +116,15 @@
   --hero-bg: #E5F5F6;
   --hero-text: #000808;
   --hero-accent: #009CA6;
-  --servicios-bg: #FFFFFF;
+  --servicios-bg: #093D53;
   --servicios-worksys: #009CA6;
   --servicios-expersys: #093D53;
-  --propuesta-bg: #009CA6;
-  --propuesta-text: #FFFFFF;
-  --faq-bg: #192020;
-  --faq-text: #FFFFFF;
-  --footer-bg: #000808;
-  --footer-text: #D8D9D9;
+  --propuesta-bg: #E5F5F6;
+  --propuesta-text: #000808;
+  --faq-bg: #FFFFFF;
+  --faq-text: #000808;
+  --footer-bg: #FFFFFF;
+  --footer-text: #4C5252;
 }
 
 #root {
@@ -118,12 +132,24 @@
 }
 
 /* =========================
-   HERO SECTION
+   FONDOS DE SECCIÓN EXACTOS (según paste.txt)
    ========================= */
+
+/* 1. NAVBAR SECTION */
+.navbar-section {
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+}
+
+/* 2. HERO SECTION */
 .hero-section {
-  background: var(--primary-lightest);
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+  color: var(--neutral-darkest) !important;
   padding: 120px var(--spacing-6) 80px;
   text-align: center;
+}
+
+.hero-section .Uheading-style-h1 {
+  color: var(--neutral-darkest) !important;
 }
 
 .hero-title {
@@ -142,29 +168,32 @@
 }
 
 /* =========================
-   BUTTONS - Design System
+   BOTONES CON DESIGN TOKENS
    ========================= */
-.btn-primary {
-  background: var(--primary);
-  color: var(--neutral-white);
+.btn-primary,
+.Ubutton-styled:not(.Uis-secondary):not(.Uis-link) {
+  background-color: var(--primary) !important; /* #009CA6 */
+  color: var(--neutral-white) !important;
+  border: 1px solid var(--primary) !important;
   font: var(--font-semibold) var(--text-medium)/var(--text-medium-lh) var(--font-body);
   padding: 12px var(--spacing-8);
   border-radius: var(--radius-medium);
-  border: none;
   transition: var(--transition-normal);
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
   text-align: center;
 }
-.btn-primary:hover {
-  background: var(--primary-dark);
+.btn-primary:hover,
+.Ubutton-styled:not(.Uis-secondary):not(.Uis-link):hover {
+  background: var(--primary-dark) !important;
 }
 
-.btn-secondary {
-  background: transparent;
-  color: var(--primary);
-  border: 2px solid var(--primary);
+.btn-secondary,
+.Ubutton-styled.Uis-secondary {
+  background-color: transparent !important;
+  color: var(--primary) !important;
+  border: 1px solid var(--primary) !important;
   font: var(--font-semibold) var(--text-medium)/var(--text-medium-lh) var(--font-body);
   padding: 10px var(--spacing-8);
   border-radius: var(--radius-medium);
@@ -174,8 +203,9 @@
   display: inline-block;
   text-align: center;
 }
-.btn-secondary:hover {
-  background: var(--primary-lightest);
+.btn-secondary:hover,
+.Ubutton-styled.Uis-secondary:hover {
+  background: var(--primary-lightest) !important;
 }
 
 .btn-white {
@@ -195,24 +225,29 @@
   background: var(--primary-lightest);
 }
 
-/* =========================
-   SERVICIOS SECTION
-   ========================= */
+/* 3. SERVICIOS SECTION */
 .servicios-section {
-  background: var(--neutral-white);
+  background-color: var(--secondary) !important; /* #093D53 */
+  color: var(--neutral-white) !important;
   padding: 100px var(--spacing-6);
+}
+
+.servicios-section .Uheading-style-h2,
+.servicios-section .Utext-size-medium,
+.servicios-section .Ulayout363card-content * {
+  color: var(--neutral-white) !important;
 }
 
 .servicios-title {
   font: var(--font-bold) var(--h2-desktop)/var(--h2-lh-desktop) var(--font-heading);
-  color: var(--neutral-darkest);
+  color: var(--neutral-white) !important;
   text-align: center;
   margin-bottom: var(--spacing-4);
 }
 
 .servicios-subtitle {
   font: var(--font-normal) var(--text-medium)/var(--text-medium-lh) var(--font-body);
-  color: var(--neutral-dark);
+  color: var(--neutral-white) !important;
   text-align: center;
   margin-bottom: var(--spacing-12);
 }
@@ -230,8 +265,18 @@
   transform: translateY(-2px);
 }
 
-.worksys-title { color: var(--primary); }
-.expersys-title { color: var(--secondary); }
+/* CARDS SERVICIOS ESPECÍFICAS */
+/* Worksys card */
+.layout363card:first-child .service-title,
+.worksys-title {
+  color: var(--primary) !important; /* #009CA6 */
+}
+
+/* Expersys card */
+.layout363card:last-child .service-title,
+.expersys-title {
+  color: var(--secondary) !important; /* #093D53 */
+}
 
 .service-card-title {
   font: var(--font-semibold) var(--h5-desktop)/var(--h5-lh-desktop) var(--font-heading);
@@ -256,11 +301,10 @@
 }
 .service-link:hover { color: var(--primary-dark); }
 
-/* =========================
-   DIFERENCIADORES SECTION
-   ========================= */
+/* 4. DIFERENCIADORES SECTION */
 .diferenciadores-section {
-  background: var(--neutral-white);
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+  color: var(--neutral-darkest) !important;
   padding: 100px var(--spacing-6);
 }
 
@@ -340,53 +384,54 @@
 .cumplimiento-label { color: var(--gold); }
 .cumplimiento-title { color: var(--gold-dark); }
 
-/* =========================
-   PROPUESTA SECTION
-   ========================= */
+/* 6. PROPUESTA SECTION */
 .propuesta-section {
-  background: var(--primary);
-  color: var(--neutral-white);
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+  color: var(--neutral-darkest) !important;
   padding: 100px var(--spacing-6);
   text-align: center;
 }
 
+.propuesta-section .Uheading-style-h2 {
+  color: var(--neutral-darkest) !important;
+}
+
 .propuesta-title {
   font: var(--font-bold) var(--h2-desktop)/var(--h2-lh-desktop) var(--font-heading);
-  color: var(--neutral-white);
+  color: var(--neutral-darkest) !important;
   margin-bottom: var(--spacing-4);
 }
 
 .propuesta-text {
   font: var(--font-normal) var(--text-large)/var(--text-large-lh) var(--font-body);
-  color: var(--primary-lightest);
+  color: var(--neutral-dark) !important;
   margin-bottom: var(--spacing-8);
 }
 
-/* =========================
-   FAQ SECTION
-   ========================= */
+/* 7. FAQ SECTION */
 .faq-section {
-  background: var(--neutral-darker);
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+  color: var(--neutral-darkest) !important;
   padding: 100px var(--spacing-6);
 }
 
 .faq-title {
   font: var(--font-bold) var(--h2-desktop)/var(--h2-lh-desktop) var(--font-heading);
-  color: var(--neutral-white);
+  color: var(--neutral-darkest) !important;
   text-align: center;
   margin-bottom: var(--spacing-4);
 }
 
 .faq-text {
   font: var(--font-normal) var(--text-medium)/var(--text-medium-lh) var(--font-body);
-  color: var(--neutral-lighter);
+  color: var(--neutral-dark) !important;
   text-align: center;
   margin-bottom: var(--spacing-12);
 }
 
-/* Diferenciadores */
+/* SOBREESCRIBIR ESTILOS DUPLICADOS */
 .diferenciadores-section {
-  background-color: var(--neutral-white);
+  background-color: var(--primary-lightest) !important;
 }
 
 .diferenciadores-header {
@@ -436,65 +481,64 @@
 }
 
 
-/* Propuesta de Valor */
+/* 6. PROPUESTA DE VALOR - FORZAR ESTILOS EXACTOS */
 .propuesta-section {
-  background-color: var(--primary);
-  color: var(--neutral-white);
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+  color: var(--neutral-darkest) !important;
   padding: 5rem 1.5rem;
 }
 
 .propuesta-title {
-  color: var(--neutral-white);
+  color: var(--neutral-darkest) !important;
   font-family: 'Titillium Web', sans-serif;
 }
 
 .propuesta-text {
-  color: var(--primary-lightest);
+  color: var(--neutral-dark) !important;
 }
 
 .btn-white {
   font-family: 'Inter', sans-serif;
-  font-size: 16px;           /* Text medium */
-  font-weight: 600;          /* Semi-bold - CRÍTICO */
+  font-size: 16px;
+  font-weight: 600;
   line-height: 150%;
-  padding: 12px 32px;        /* Padding específico */
-  border-radius: 8px;        /* Medium radius */
+  padding: 12px 32px;
+  border-radius: 8px;
   border: 2px solid;
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
   display: inline-block;
   text-align: center;
-  background-color: var(--neutral-white);
-  color: var(--primary);
-  border-color: var(--neutral-white);
+  background-color: var(--primary) !important;
+  color: var(--neutral-white) !important;
+  border-color: var(--primary) !important;
 }
 
 .btn-white:hover {
-  background-color: var(--primary-lightest);
-  border-color: var(--primary-lightest);
+  background-color: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
 }
 
-/* FAQ Section */
+/* FAQ Section - FORZAR ESTILOS EXACTOS */
 .faq-section {
-  background-color: var(--neutral-darker);
-  color: var(--neutral-white);
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+  color: var(--neutral-darkest) !important;
   padding: 5rem 1.5rem;
 }
 
 .faq-title {
-  color: var(--neutral-white);
+  color: var(--neutral-darkest) !important;
 }
 
 .faq-text {
-  color: var(--neutral-lighter);
+  color: var(--neutral-dark) !important;
 }
 
-/* =========================
-   FOOTER SECTION
-   ========================= */
+/* 8. FOOTER SECTION */
 .footer-section {
-  background: var(--neutral-darkest);
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+  color: var(--neutral-dark) !important;
   padding: var(--spacing-12) var(--spacing-6) var(--spacing-6);
 }
 
@@ -606,5 +650,159 @@ body {
   .card-escalabilidad,
   .card-cumplimiento {
     padding: var(--spacing-6) var(--spacing-4);
+  }
+}
+
+/* ========================================
+   FORZAR DESIGN TOKENS SOBRE RELUME CSS
+   ======================================== */
+
+/* 5. INDUSTRIAS SECTION */
+.industrias-section {
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+  color: var(--neutral-darkest) !important;
+}
+
+/* NAVBAR COMPLETO */
+.navbar-section,
+.Uheader,
+.Uheader-container,
+.navbar {
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+  color: var(--neutral-darkest) !important;
+}
+
+/* HERO - FORZAR TODOS LOS ELEMENTOS */
+.hero-section,
+.hero-section * {
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+}
+
+.hero-section .Uheading-style-h1,
+.hero-section .Utext-size-large,
+.hero-section p,
+.hero-section h1 {
+  color: var(--neutral-darkest) !important;
+}
+
+/* SERVICIOS - FORZAR FONDO OSCURO */
+.servicios-section,
+.servicios-section .container,
+.servicios-section .Ulayout363 {
+  background-color: var(--secondary) !important; /* #093D53 */
+}
+
+.servicios-section h2,
+.servicios-section h3,
+.servicios-section p,
+.servicios-section .Uheading-style-h2,
+.servicios-section .Utext-size-medium {
+  color: var(--neutral-white) !important;
+}
+
+/* DIFERENCIADORES - FONDO CLARO */
+.diferenciadores-section,
+.diferenciadores-section .container {
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+}
+
+.diferenciadores-section h2,
+.diferenciadores-section p,
+.diferenciadores-section .Uheading-style-h2 {
+  color: var(--neutral-darkest) !important;
+}
+
+/* PROPUESTA - FONDO CLARO */
+.propuesta-section,
+.propuesta-section .container {
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+}
+
+.propuesta-section h2,
+.propuesta-section p,
+.propuesta-section .Uheading-style-h2 {
+  color: var(--neutral-darkest) !important;
+}
+
+/* FAQ - FONDO BLANCO */
+.faq-section,
+.faq-section .container {
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+}
+
+.faq-section h2,
+.faq-section p,
+.faq-section .Uheading-style-h2 {
+  color: var(--neutral-darkest) !important;
+}
+
+/* FOOTER - FONDO BLANCO */
+.footer-section,
+.footer-section .container {
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+}
+
+.footer-section p,
+.footer-section a,
+.footer-section .footer-links {
+  color: var(--neutral-dark) !important;
+}
+
+/* CLASES GENERALES RELUME */
+.Ulayout363card,
+.Ulayout394card {
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-small);
+  transition: var(--transition-normal);
+}
+
+/* LINKS Y NAVEGACIÓN */
+.Ulink,
+a {
+  color: var(--primary) !important;
+  transition: var(--transition-fast);
+}
+
+.Ulink:hover,
+a:hover {
+  color: var(--primary-dark) !important;
+}
+
+/* TIPOGRAFÍA GENERAL */
+.Uheading-style-h1 {
+  font-family: var(--font-heading) !important;
+  font-weight: var(--font-bold) !important;
+  font-size: var(--h1-desktop) !important;
+  line-height: var(--h1-lh-desktop) !important;
+}
+
+.Uheading-style-h2 {
+  font-family: var(--font-heading) !important;
+  font-weight: var(--font-bold) !important;
+  font-size: var(--h2-desktop) !important;
+  line-height: var(--h2-lh-desktop) !important;
+}
+
+.Utext-size-large {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-large) !important;
+  line-height: var(--text-large-lh) !important;
+}
+
+.Utext-size-medium {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-medium) !important;
+  line-height: var(--text-medium-lh) !important;
+}
+
+@media (max-width: 768px) {
+  .Uheading-style-h1 {
+    font-size: var(--h1-mobile) !important;
+    line-height: var(--h1-lh-mobile) !important;
+  }
+
+  .Uheading-style-h2 {
+    font-size: var(--h2-mobile) !important;
+    line-height: var(--h2-lh-mobile) !important;
   }
 }

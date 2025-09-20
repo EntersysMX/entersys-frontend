@@ -1,0 +1,490 @@
+/* IMPLEMENTACIÓN EXACTA MODO DESIGN RELUME → DESIGN TOKENS */
+/* Fuente de verdad: paste.txt del MODO DESIGN de Relume */
+/* URL: https://www.relume.io/app/project/P2453611_oag8C2on9umZBayEY139bU5aI8khlSkG9ePwSrqRXq0#mode=design */
+
+/* ========================================
+   SISTEMA TIPOGRÁFICO EXACTO DEL DESIGN MODE
+   ======================================== */
+
+/* FONT SYSTEM OVERRIDE - NO Titillium Web, usar system-ui como en Design Mode */
+*,
+html,
+body,
+.Uheading-style-h1,
+.Uheading-style-h2,
+.Uheading-style-h3,
+.Uheading-style-h4,
+.Uheading-style-h5,
+.Uheading-style-h6,
+.Utext-size-large,
+.Utext-size-medium,
+.Utext-size-small,
+.hero-title,
+.servicios-title,
+.diferenciadores-title,
+.propuesta-title,
+.faq-title,
+.footer-text,
+.service-card-title,
+.service-card-description {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* ========================================
+   HEADINGS DESIGN MODE - TAMAÑOS EXACTOS
+   ======================================== */
+
+/* H1 - 3.5rem (56px) */
+.Uheading-style-h1,
+.hero-title,
+.diferenciadores-title,
+.propuesta-title,
+.faq-title {
+  font-size: 3.5rem !important;         /* 56px */
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* H2 - 3rem (48px) */
+.Uheading-style-h2,
+.servicios-title {
+  font-size: 3rem !important;           /* 48px */
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* H3 - 2.5rem (40px) */
+.Uheading-style-h3,
+.service-card-title,
+.diferenciador-title {
+  font-size: 2.5rem !important;         /* 40px */
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* H4 - 2rem (32px) */
+.Uheading-style-h4,
+.eficiencia-title,
+.escalabilidad-title,
+.cumplimiento-title {
+  font-size: 2rem !important;           /* 32px */
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+}
+
+/* H5 - 1.5rem (24px) */
+.Uheading-style-h5 {
+  font-size: 1.5rem !important;         /* 24px */
+  line-height: 1.4 !important;
+  font-weight: 700 !important;
+}
+
+/* H6 - 1.25rem (20px) */
+.Uheading-style-h6 {
+  font-size: 1.25rem !important;        /* 20px */
+  line-height: 1.4 !important;
+  font-weight: 700 !important;
+}
+
+/* ========================================
+   BODY TEXT DESIGN MODE - TAMAÑOS EXACTOS
+   ======================================== */
+
+/* Text Large - 1.25rem (20px) */
+.Utext-size-large,
+.hero-subtitle,
+.propuesta-text {
+  font-size: 1.25rem !important;        /* 20px */
+  line-height: 1.5 !important;
+  font-weight: 400 !important;
+}
+
+/* Text Medium - 1rem (16px) */
+.Utext-size-medium,
+.servicios-subtitle,
+.diferenciadores-description,
+.service-card-description,
+.diferenciador-description {
+  font-size: 1rem !important;           /* 16px */
+  line-height: 1.5 !important;
+  font-weight: 400 !important;
+}
+
+/* Text Small - 0.875rem (14px) */
+.Utext-size-small,
+.eficiencia-label,
+.escalabilidad-label,
+.cumplimiento-label {
+  font-size: 0.875rem !important;       /* 14px */
+  line-height: 1.5 !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* ========================================
+   RESPONSIVE EXACTO DESIGN MODE
+   ======================================== */
+
+/* Tablet (.breakpoint-medium - max-width: 991px) */
+@media (max-width: 991px) {
+  .Uheading-style-h1,
+  .hero-title,
+  .diferenciadores-title,
+  .propuesta-title,
+  .faq-title {
+    font-size: 3.25rem !important;      /* 52px */
+  }
+
+  .Uheading-style-h2,
+  .servicios-title {
+    font-size: 2.75rem !important;      /* 44px */
+  }
+
+  .Uheading-style-h3,
+  .service-card-title {
+    font-size: 2.25rem !important;      /* 36px */
+  }
+
+  .Uheading-style-h4,
+  .eficiencia-title,
+  .escalabilidad-title,
+  .cumplimiento-title {
+    font-size: 1.75rem !important;      /* 28px */
+  }
+}
+
+/* Mobile (.breakpoint-small - max-width: 767px) */
+@media (max-width: 767px) {
+  .Uheading-style-h1,
+  .hero-title,
+  .diferenciadores-title,
+  .propuesta-title,
+  .faq-title {
+    font-size: 2.5rem !important;       /* 40px */
+    line-height: 1.2 !important;
+  }
+
+  .Uheading-style-h2,
+  .servicios-title {
+    font-size: 2.25rem !important;      /* 36px */
+    line-height: 1.2 !important;
+  }
+
+  .Uheading-style-h3,
+  .service-card-title {
+    font-size: 2rem !important;         /* 32px */
+    line-height: 1.2 !important;
+  }
+
+  .Uheading-style-h4,
+  .eficiencia-title,
+  .escalabilidad-title,
+  .cumplimiento-title {
+    font-size: 1.5rem !important;       /* 24px */
+    line-height: 1.4 !important;
+  }
+
+  .Uheading-style-h5 {
+    font-size: 1.25rem !important;      /* 20px */
+    line-height: 1.4 !important;
+  }
+
+  .Uheading-style-h6 {
+    font-size: 1.125rem !important;     /* 18px */
+    line-height: 1.4 !important;
+  }
+}
+
+/* ========================================
+   COLORES POR SECCIÓN DESIGN MODE
+   ======================================== */
+
+/* NAVBAR - Fondo blanco, texto oscuro */
+.navbar-section,
+.Uheader,
+.Unavbar11_link {
+  color: var(--neutral-darkest) !important;
+}
+
+/* HERO - Fondo primary-lightest, texto oscuro */
+.hero-section {
+  color: var(--neutral-darkest) !important;
+}
+
+.hero-title {
+  color: var(--neutral-darkest) !important;
+}
+
+.hero-subtitle {
+  color: var(--neutral-dark) !important;
+}
+
+/* SERVICIOS - Fondo secondary oscuro, texto blanco */
+.servicios-section {
+  color: var(--neutral-white) !important;
+}
+
+.servicios-title,
+.servicios-subtitle {
+  color: var(--neutral-white) !important;
+}
+
+/* Cards individuales dentro de servicios (fondo blanco) */
+.service-card,
+.Ulayout363card {
+  background-color: var(--neutral-white) !important;
+  color: var(--neutral-darkest) !important;
+}
+
+.service-card-description {
+  color: var(--neutral-dark) !important;
+}
+
+/* DIFERENCIADORES - Fondo primary-lightest, texto oscuro */
+.diferenciadores-section {
+  color: var(--neutral-darkest) !important;
+}
+
+.diferenciadores-title,
+.diferenciadores-description {
+  color: var(--neutral-darkest) !important;
+}
+
+/* PROPUESTA - Fondo primary-lightest, texto oscuro */
+.propuesta-section {
+  color: var(--neutral-darkest) !important;
+}
+
+.propuesta-title {
+  color: var(--neutral-darkest) !important;
+}
+
+.propuesta-text {
+  color: var(--neutral-dark) !important;
+}
+
+/* FAQ - Fondo blanco, texto oscuro */
+.faq-section {
+  color: var(--neutral-darkest) !important;
+}
+
+.faq-title {
+  color: var(--neutral-darkest) !important;
+}
+
+.faq-text {
+  color: var(--neutral-dark) !important;
+}
+
+/* FOOTER - Fondo blanco, texto medio */
+.footer-section {
+  color: var(--neutral-dark) !important;
+}
+
+/* ========================================
+   COLORES BRAND ESPECÍFICOS
+   ======================================== */
+
+/* Worksys - Primary color */
+.worksys-card .service-card-title,
+.worksys-title,
+.layout363card:first-child .service-title {
+  color: var(--primary) !important;      /* #009CA6 */
+}
+
+/* Expersys - Secondary color */
+.expersys-card .service-card-title,
+.expersys-title,
+.layout363card:last-child .service-title {
+  color: var(--secondary) !important;    /* #093D53 */
+}
+
+/* Labels de diferenciadores */
+.eficiencia-label {
+  color: var(--primary) !important;      /* #009CA6 */
+}
+
+.escalabilidad-label {
+  color: var(--secondary) !important;    /* #093D53 */
+}
+
+.cumplimiento-label {
+  color: var(--gold) !important;         /* #C2A56D */
+}
+
+/* Títulos de diferenciadores con colores contrastados */
+.eficiencia-title {
+  color: var(--primary-dark) !important;  /* #007C84 */
+}
+
+.escalabilidad-title {
+  color: var(--secondary-dark) !important; /* #073042 */
+}
+
+.cumplimiento-title {
+  color: var(--gold-dark) !important;     /* #9B8457 */
+}
+
+/* ========================================
+   BOTONES DESIGN MODE
+   ======================================== */
+
+.btn-primary,
+.Ubutton-styled:not(.Uis-secondary) {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
+}
+
+.btn-secondary,
+.Ubutton-styled.Uis-secondary {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
+}
+
+/* ========================================
+   LINKS Y NAVEGACIÓN
+   ======================================== */
+
+.Ulink,
+.footer-links,
+a {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  color: var(--primary) !important;
+  transition: color 0.2s ease !important;
+}
+
+.Ulink:hover,
+.footer-links:hover,
+a:hover {
+  color: var(--primary-dark) !important;
+}
+
+/* ========================================
+   CONTRASTES Y ACCESIBILIDAD
+   ======================================== */
+
+/* Asegurar contraste adecuado en sección servicios */
+.servicios-section .service-card-title,
+.servicios-section .service-card-description {
+  color: var(--neutral-darkest) !important;
+}
+
+/* Contraste en cards de diferenciadores */
+.card-eficiencia .diferenciador-description,
+.card-escalabilidad .diferenciador-description,
+.card-cumplimiento .diferenciador-description {
+  color: var(--neutral-dark) !important;
+}
+
+/* ========================================
+   CONTENEDORES FULL WIDTH - AJUSTES
+   ======================================== */
+
+/* Sistema de contenedores limpio y consistente */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+  position: relative;
+}
+
+/* Fix para evitar overflow horizontal */
+body {
+  overflow-x: hidden;
+}
+
+/* Asegurar que las secciones no tengan overflow */
+section {
+  overflow-x: hidden;
+}
+
+/* Cards dentro de servicios mantienen su diseño */
+.servicios-section .cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* Responsive para contenedores */
+@media (max-width: 768px) {
+  .hero-section .container,
+  .servicios-section .container,
+  .diferenciadores-section .container,
+  .industrias-section .container,
+  .propuesta-section .container,
+  .faq-section .container,
+  .footer-section .container {
+    padding: 0 1rem;
+  }
+}
+
+/* ========================================
+   FONDOS FULL WIDTH CORRECTOS
+   ======================================== */
+
+/* Aplicar fondos full-width a las secciones reales */
+section.hero-section,
+section.servicios-section,
+section.diferenciadores-section,
+section.industrias-section,
+section.propuesta-section,
+section.faq-section,
+section.footer-section {
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  position: relative;
+}
+
+/* Hero section con fondo claro y sin imagen */
+section.hero-section {
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+  color: var(--neutral-darkest) !important;
+}
+
+/* Servicios section con fondo oscuro */
+section.servicios-section {
+  background-color: var(--secondary) !important; /* #093D53 */
+  color: var(--neutral-white) !important;
+}
+
+/* Diferenciadores section con fondo claro */
+section.diferenciadores-section {
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+  color: var(--neutral-darkest) !important;
+}
+
+/* Industrias section con fondo claro */
+section.industrias-section {
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+  color: var(--neutral-darkest) !important;
+}
+
+/* Propuesta section con fondo claro */
+section.propuesta-section {
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+  color: var(--neutral-darkest) !important;
+}
+
+/* FAQ section con fondo blanco */
+section.faq-section {
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+  color: var(--neutral-darkest) !important;
+}
+
+/* Footer section con fondo blanco */
+section.footer-section {
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+  color: var(--neutral-dark) !important;
+}
+

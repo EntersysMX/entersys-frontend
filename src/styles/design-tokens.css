@@ -1,0 +1,48 @@
+:root {
+/* DESIGN TOKENS PRINCIPALES - Variables.pdf */
+--neutral-white: #FFFFFF;
+--neutral-lightest: #F2F2F2;
+--neutral-lighter: #D8D9D9;
+--neutral-light: #B2B4B4;
+--neutral: #7F8383;
+--neutral-dark: #4C5252;
+--neutral-darker: #192020;
+--neutral-darkest: #000808;
+
+--primary-lightest: #E5F5F6;
+--primary-lighter: #CCEBED;
+--primary-light: #4CB9C0;
+--primary: #009CA6;
+--primary-dark: #007C84;
+--primary-darker: #003E42;
+--primary-darkest: #002E31;
+
+--secondary-lightest: #E6EBED;
+--secondary-lighter: #CDD8DC;
+--secondary-light: #527786;
+--secondary: #093D53;
+--secondary-dark: #073042;
+--secondary-darker: #031821;
+--secondary-darkest: #021218;
+
+--gold-lightest: #F8F6F0;
+--gold-lighter: #F2EDE1;
+--gold-light: #D4C098;
+--gold: #C2A56D;
+--gold-dark: #9B8457;
+--gold-darker: #4D422B;
+--gold-darkest: #3A3120;
+
+/* TIPOGRAFÍA - Typography.pdf */
+--font-heading: 'Titillium Web', sans-serif;
+--font-body: 'Inter', sans-serif;
+
+/* SPACING, SHADOWS, RADIUS */
+--spacing-4: 16px;
+--spacing-6: 24px;
+--spacing-8: 32px;
+--shadow-small: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+--radius-medium: 8px;
+--radius-large: 12px;
+--transition-normal: 200ms ease-in-out;
+}

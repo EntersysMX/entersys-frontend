@@ -17,10 +17,10 @@ export function Faq4() {
     <section id="relume" className="faq-section">
       <div className="container max-w-lg">
         <div className="rb-12 mb-12 text-center md:mb-18 lg:mb-20">
-          <h2 className="faq-title rb-5 mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl" style={{color: 'var(--neutral-white)'}}>
+          <h2 className="faq-title rb-5 mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
             Preguntas más frecuentes
           </h2>
-          <p className="faq-text md:text-md" style={{color: 'var(--neutral-lighter)'}}>
+          <p className="faq-text md:text-md">
             Resolvemos tus dudas sobre transformación digital y nuestros
             servicios
           </p>
@@ -33,7 +33,7 @@ export function Faq4() {
             <AccordionItem value="item-0" className="border-none px-5 md:px-6">
               <AccordionTrigger
                 icon={
-                  <RxPlus className="size-7 shrink-0 transition-transform duration-300 md:size-8" style={{color: 'var(--primary)'}} />
+                  <RxPlus className="size-7 shrink-0 transition-transform duration-300 md:size-8"  />
                 }
                 className="md:py-5 text-neutral-white [&[data-state=open]>svg]:rotate-45"
               >
@@ -50,7 +50,7 @@ export function Faq4() {
             <AccordionItem value="item-1" className="border-none px-5 md:px-6">
               <AccordionTrigger
                 icon={
-                  <RxPlus className="size-7 shrink-0 transition-transform duration-300 md:size-8" style={{color: 'var(--primary)'}} />
+                  <RxPlus className="size-7 shrink-0 transition-transform duration-300 md:size-8"  />
                 }
                 className="md:py-5 text-neutral-white [&[data-state=open]>svg]:rotate-45"
               >
@@ -66,7 +66,7 @@ export function Faq4() {
             <AccordionItem value="item-2" className="border-none px-5 md:px-6">
               <AccordionTrigger
                 icon={
-                  <RxPlus className="size-7 shrink-0 transition-transform duration-300 md:size-8" style={{color: 'var(--primary)'}} />
+                  <RxPlus className="size-7 shrink-0 transition-transform duration-300 md:size-8"  />
                 }
                 className="md:py-5 text-neutral-white [&[data-state=open]>svg]:rotate-45"
               >
@@ -82,7 +82,7 @@ export function Faq4() {
             <AccordionItem value="item-3" className="border-none px-5 md:px-6">
               <AccordionTrigger
                 icon={
-                  <RxPlus className="size-7 shrink-0 transition-transform duration-300 md:size-8" style={{color: 'var(--primary)'}} />
+                  <RxPlus className="size-7 shrink-0 transition-transform duration-300 md:size-8"  />
                 }
                 className="md:py-5 text-neutral-white [&[data-state=open]>svg]:rotate-45"
               >
@@ -98,7 +98,7 @@ export function Faq4() {
             <AccordionItem value="item-4" className="border-none px-5 md:px-6">
               <AccordionTrigger
                 icon={
-                  <RxPlus className="size-7 shrink-0 transition-transform duration-300 md:size-8" style={{color: 'var(--primary)'}} />
+                  <RxPlus className="size-7 shrink-0 transition-transform duration-300 md:size-8"  />
                 }
                 className="md:py-5 text-neutral-white [&[data-state=open]>svg]:rotate-45"
               >

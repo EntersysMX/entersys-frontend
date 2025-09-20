@@ -1,0 +1,655 @@
+/* SECTION COLOR SCHEMES - DESIGN TOKEN IMPLEMENTATION */
+/* Color schemes for specific sections using design tokens */
+
+/* ========================= */
+/* HERO SECTION              */
+/* ========================= */
+
+/* Hero Section - Primary Lightest (basado en paste.txt rgb(229, 245, 246)) */
+.hero-section,
+.U_section_header5,
+.Usection_header5,
+.U_header5_content,
+.Uheader5_content {
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+  color: var(--neutral-darkest) !important; /* #000808 */
+}
+
+.hero-title,
+.U_header5_content .U_heading-style-h1,
+.Uheader5_content .Uheading-style-h1 {
+  color: var(--neutral-darkest) !important; /* #000808 */
+  font-family: var(--font-heading) !important; /* Titillium Web */
+  font-size: var(--h1-desktop) !important; /* 56px */
+  font-weight: 700 !important;
+}
+
+.hero-description,
+.U_header5_content .U_text-size-medium,
+.Uheader5_content .Utext-size-medium {
+  color: var(--neutral-dark) !important; /* #4C5252 */
+  font-family: var(--font-body) !important; /* Inter */
+}
+
+/* ========================= */
+/* NAVBAR SECTION           */
+/* ========================= */
+
+/* Fix Navbar Background usando design tokens */
+#relume {
+ 
+  border-bottom: 1px solid var(--neutral-light) !important; /* #B2B4B4 */
+}
+
+/* Fix clases de navbar específicas */
+.bg-background-primary,
+.bg-background-alternative {
+  
+}
+
+.border-border-primary {
+  border-color: var(--neutral-light) !important; /* #B2B4B4 */
+}
+
+.text-text-primary {
+  color: var(--neutral-darkest) !important; /* #000808 */
+}
+
+.text-text-alternative {
+  color: var(--neutral-white) !important; /* #FFFFFF */
+}
+
+.U_navbar11_component,
+.Unavbar11_component {
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+}
+
+.U_navbar11_link,
+.Unavbar11_link {
+  color: var(--neutral-darkest) !important; /* #000808 */
+  font-family: var(--font-body) !important; /* Inter */
+  font-weight: 500 !important;
+  transition: var(--transition-normal) !important; /* 200ms ease-in-out */
+}
+
+.U_navbar11_link:hover,
+.Unavbar11_link:hover {
+  color: var(--primary) !important; /* #009CA6 */
+}
+
+.U_navbar11_dropdown-link,
+.Unavbar11_dropdown-link {
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+  border-radius: var(--radius-medium) !important; /* 8px */
+  padding: var(--spacing-4) !important; /* 16px */
+  transition: var(--transition-normal) !important; /* 200ms ease-in-out */
+}
+
+.U_navbar11_dropdown-link:hover,
+.Unavbar11_dropdown-link:hover {
+  background-color: var(--neutral-lightest) !important; /* #F2F2F2 */
+}
+
+/* ========================= */
+/* SERVICES SECTION         */
+/* ========================= */
+
+/* Services Section - Secondary Dark Background (basado en paste.txt rgb(9, 61, 83)) */
+.servicios-section,
+.U_layout363_container,
+.Ulayout363_container {
+  background-color: var(--secondary) !important; /* #093D53 */
+  color: var(--neutral-white) !important;
+}
+
+.servicios-title,
+.U_layout363_content .U_heading-style-h2,
+.Ulayout363_content .Uheading-style-h2 {
+  color: var(--neutral-white) !important; /* #FFFFFF */
+  font-family: var(--font-heading) !important; /* Titillium Web */
+  font-size: var(--h2-desktop) !important; /* 48px */
+}
+
+.servicios-description,
+.U_layout363_content .U_text-size-medium,
+.Ulayout363_content .Utext-size-medium {
+  color: var(--neutral-white) !important; /* #FFFFFF */
+}
+
+/* Worksys Service - Primary Color */
+.worksys-title,
+.worksys-card .service-card-title,
+.U_layout363_item:first-child .U_heading-style-h3,
+.Ulayout363_item:first-child .Uheading-style-h3 {
+  color: var(--primary) !important; /* #009CA6 */
+  font-family: var(--font-heading) !important; /* Titillium Web */
+}
+
+.worksys-card,
+.U_layout363_item:first-child {
+  border-left: 4px solid var(--primary) !important; /* #009CA6 */
+  padding-left: var(--spacing-6) !important; /* 24px */
+}
+
+.worksys-description,
+.U_layout363_item:first-child .U_text-size-medium,
+.Ulayout363_item:first-child .Utext-size-medium {
+  color: var(--neutral-white) !important; /* #FFFFFF */
+}
+
+/* Expersys Service - Secondary Color */
+.expersys-title,
+.expersys-card .service-card-title,
+.U_layout363_item:nth-child(2) .U_heading-style-h3,
+.Ulayout363_item:nth-child(2) .Uheading-style-h3 {
+  color: var(--secondary) !important; /* #093D53 */
+  font-family: var(--font-heading) !important; /* Titillium Web */
+}
+
+.expersys-card,
+.U_layout363_item:nth-child(2) {
+  border-left: 4px solid var(--secondary) !important; /* #093D53 */
+  padding-left: var(--spacing-6) !important; /* 24px */
+}
+
+.expersys-description,
+.U_layout363_item:nth-child(2) .U_text-size-medium,
+.Ulayout363_item:nth-child(2) .Utext-size-medium {
+  color: var(--neutral-white) !important; /* #FFFFFF */
+}
+
+/* ========================= */
+/* PROPUESTA SECTION        */
+/* ========================= */
+
+/* Propuesta Section - Primary Lightest Background (basado en paste.txt rgb(229, 245, 246)) */
+.propuesta-section,
+.U_propuesta_container,
+.Upropuesta_container {
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+  color: var(--neutral-darkest) !important; /* #000808 */
+}
+
+.propuesta-title {
+  color: var(--neutral-darkest) !important; /* #000808 */
+  font-family: var(--font-heading) !important; /* Titillium Web */
+}
+
+.propuesta-text,
+.propuesta-description {
+  color: var(--neutral-dark) !important; /* #4C5252 */
+  font-family: var(--font-body) !important; /* Inter */
+}
+
+/* ========================= */
+/* INDUSTRIAS SECTION       */
+/* ========================= */
+
+/* Industrias Section - Primary Lightest Background (basado en paste.txt rgb(229, 245, 246)) */
+.industrias-section,
+.U_industrias_container,
+.Uindustrias_container {
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+  color: var(--neutral-darkest) !important; /* #000808 */
+}
+
+.industrias-title {
+  color: var(--neutral-darkest) !important;
+  font-family: var(--font-heading) !important;
+}
+
+.industrias-description {
+  color: var(--neutral-dark) !important;
+  font-family: var(--font-body) !important;
+}
+
+/* ========================= */
+/* DIFERENCIADORES SECTION  */
+/* ========================= */
+
+/* Eficiencia Card - Primary Light Scheme */
+.card-eficiencia,
+.diferenciador-eficiencia {
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+  border-radius: var(--radius-large) !important; /* 12px */
+  padding: var(--spacing-8) !important; /* 32px */
+  box-shadow: var(--shadow-small) !important;
+  transition: var(--transition-normal) !important; /* 200ms ease-in-out */
+}
+
+.card-eficiencia:hover,
+.diferenciador-eficiencia:hover {
+  background-color: var(--primary-lighter) !important; /* #CCEBED */
+}
+
+.eficiencia-label,
+.card-eficiencia .diferenciador-label {
+  color: var(--primary) !important; /* #009CA6 */
+  font-family: var(--font-body) !important; /* Inter */
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.eficiencia-title,
+.card-eficiencia .diferenciador-title {
+  color: var(--primary-dark) !important; /* #007C84 */
+  font-family: var(--font-heading) !important; /* Titillium Web */
+  font-size: var(--h4-desktop) !important; /* 32px */
+  font-weight: 700 !important;
+  margin: var(--spacing-4) 0 !important; /* 16px */
+}
+
+.eficiencia-description,
+.card-eficiencia .diferenciador-description {
+  color: var(--neutral-dark) !important; /* #4C5252 */
+  font-family: var(--font-body) !important; /* Inter */
+  line-height: 1.6 !important;
+}
+
+/* Escalabilidad Card - Secondary Light Scheme */
+.card-escalabilidad,
+.diferenciador-escalabilidad {
+  background-color: var(--secondary-lightest) !important; /* #E6EBED */
+  border-radius: var(--radius-large) !important; /* 12px */
+  padding: var(--spacing-8) !important; /* 32px */
+  box-shadow: var(--shadow-small) !important;
+  transition: var(--transition-normal) !important; /* 200ms ease-in-out */
+}
+
+.card-escalabilidad:hover,
+.diferenciador-escalabilidad:hover {
+  background-color: var(--secondary-lighter) !important; /* #CDD8DC */
+}
+
+.escalabilidad-label,
+.card-escalabilidad .diferenciador-label {
+  color: var(--secondary) !important; /* #093D53 */
+  font-family: var(--font-body) !important; /* Inter */
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.escalabilidad-title,
+.card-escalabilidad .diferenciador-title {
+  color: var(--secondary-dark) !important; /* #073042 */
+  font-family: var(--font-heading) !important; /* Titillium Web */
+  font-size: var(--h4-desktop) !important; /* 32px */
+  font-weight: 700 !important;
+  margin: var(--spacing-4) 0 !important; /* 16px */
+}
+
+.escalabilidad-description,
+.card-escalabilidad .diferenciador-description {
+  color: var(--neutral-dark) !important; /* #4C5252 */
+  font-family: var(--font-body) !important; /* Inter */
+  line-height: 1.6 !important;
+}
+
+/* Cumplimiento Card - Gold Light Scheme */
+.card-cumplimiento,
+.diferenciador-cumplimiento {
+  background-color: var(--gold-lightest) !important; /* #F8F6F0 */
+  border-radius: var(--radius-large) !important; /* 12px */
+  padding: var(--spacing-8) !important; /* 32px */
+  box-shadow: var(--shadow-small) !important;
+  transition: var(--transition-normal) !important; /* 200ms ease-in-out */
+}
+
+.card-cumplimiento:hover,
+.diferenciador-cumplimiento:hover {
+  background-color: var(--gold-lighter) !important; /* #F2EDE1 */
+}
+
+.cumplimiento-label,
+.card-cumplimiento .diferenciador-label {
+  color: var(--gold) !important; /* #C2A56D */
+  font-family: var(--font-body) !important; /* Inter */
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.cumplimiento-title,
+.card-cumplimiento .diferenciador-title {
+  color: var(--gold-dark) !important; /* #9B8457 */
+  font-family: var(--font-heading) !important; /* Titillium Web */
+  font-size: var(--h4-desktop) !important; /* 32px */
+  font-weight: 700 !important;
+  margin: var(--spacing-4) 0 !important; /* 16px */
+}
+
+.cumplimiento-description,
+.card-cumplimiento .diferenciador-description {
+  color: var(--neutral-dark) !important; /* #4C5252 */
+  font-family: var(--font-body) !important; /* Inter */
+  line-height: 1.6 !important;
+}
+
+/* ========================= */
+/* STATS SECTION            */
+/* ========================= */
+
+.stats-section,
+.U_stats30_container,
+.Ustats30_container {
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+  padding: var(--spacing-8) 0 !important; /* 32px */
+}
+
+.stats-item .stats-number {
+  color: var(--primary) !important; /* #009CA6 */
+  font-family: var(--font-heading) !important; /* Titillium Web */
+  font-size: var(--h2-desktop) !important; /* 48px */
+  font-weight: 700 !important;
+}
+
+.stats-item .stats-label {
+  color: var(--neutral-dark) !important; /* #4C5252 */
+  font-family: var(--font-body) !important; /* Inter */
+  font-size: 16px !important;
+}
+
+/* ========================= */
+/* TESTIMONIAL SECTION      */
+/* ========================= */
+
+.testimonial-section,
+.U_testimonial17_container,
+.Utestimonial17_container {
+  background-color: var(--secondary-lightest) !important; /* #E6EBED */
+  padding: var(--spacing-8) 0 !important; /* 32px */
+}
+
+.testimonial-quote {
+  color: var(--neutral-darkest) !important; /* #000808 */
+  font-family: var(--font-body) !important; /* Inter */
+  font-size: 20px !important;
+  font-style: italic !important;
+  line-height: 1.6 !important;
+}
+
+.testimonial-author {
+  color: var(--secondary) !important; /* #093D53 */
+  font-family: var(--font-heading) !important; /* Titillium Web */
+  font-weight: 600 !important;
+}
+
+.testimonial-company {
+  color: var(--neutral) !important; /* #7F8383 */
+  font-family: var(--font-body) !important; /* Inter */
+}
+
+/* ========================= */
+/* FAQ SECTION              */
+/* ========================= */
+
+/* FAQ Section - White Background (basado en paste.txt rgb(255, 255, 255)) */
+.faq-section,
+.U_faq4_container,
+.Ufaq4_container {
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+  color: var(--neutral-darkest) !important; /* #000808 */
+  padding: var(--spacing-8) 0 !important; /* 32px */
+}
+
+.faq-title,
+.U_faq4_content .U_heading-style-h2,
+.Ufaq4_content .Uheading-style-h2 {
+  color: var(--neutral-darkest) !important; /* #000808 */
+  font-family: var(--font-heading) !important; /* Titillium Web */
+  text-align: center !important;
+  margin-bottom: var(--spacing-8) !important; /* 32px */
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--neutral-dark) !important; /* #4C5252 */
+  padding: var(--spacing-6) 0 !important; /* 24px */
+}
+
+.faq-question {
+  color: var(--neutral-darkest) !important; /* #000808 */
+  font-family: var(--font-heading) !important; /* Titillium Web */
+  font-size: 18px !important;
+  font-weight: 600 !important;
+}
+
+.faq-answer {
+  color: var(--neutral-dark) !important; /* #4C5252 */
+  font-family: var(--font-body) !important; /* Inter */
+  line-height: 1.6 !important;
+  margin-top: var(--spacing-4) !important; /* 16px */
+}
+
+/* ========================= */
+/* FOOTER SECTION           */
+/* ========================= */
+
+/* Footer Section - White Background (basado en paste.txt rgb(255, 255, 255)) */
+.footer-section,
+.U_footer11_container,
+.Ufooter11_container {
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+  color: var(--neutral-dark) !important; /* #4C5252 */
+  padding: var(--spacing-8) 0 !important; /* 32px */
+}
+
+.footer-logo {
+  filter: brightness(0) invert(1) !important; /* Make logo white */
+}
+
+.footer-links,
+.U_footer11_link,
+.Ufooter11_link {
+  color: var(--neutral-dark) !important; /* #4C5252 */
+  font-family: var(--font-body) !important; /* Inter */
+  text-decoration: none !important;
+  transition: var(--transition-normal) !important; /* 200ms ease-in-out */
+}
+
+.footer-links:hover,
+.U_footer11_link:hover,
+.Ufooter11_link:hover {
+  color: var(--primary) !important; /* #009CA6 */
+}
+
+.footer-text,
+.footer-copyright {
+  color: var(--neutral) !important; /* #7F8383 */
+  font-family: var(--font-body) !important; /* Inter */
+  font-size: 14px !important;
+}
+
+.footer-section-title {
+  color: var(--neutral-darkest) !important; /* #000808 */
+  font-family: var(--font-heading) !important; /* Titillium Web */
+  font-weight: 600 !important;
+  margin-bottom: var(--spacing-4) !important; /* 16px */
+}
+
+/* ========================= */
+/* GLOBAL BUTTON OVERRIDES  */
+/* ========================= */
+
+/* Primary Buttons */
+.btn-primary,
+.U_button.primary,
+.Ubutton.primary {
+  background-color: var(--primary) !important; /* #009CA6 */
+  color: var(--neutral-white) !important; /* #FFFFFF */
+  font-family: var(--font-body) !important; /* Inter */
+  font-weight: 600 !important;
+  border-radius: var(--radius-medium) !important; /* 8px */
+  border: none !important;
+  padding: 12px var(--spacing-6) !important; /* 24px */
+  transition: var(--transition-normal) !important; /* 200ms ease-in-out */
+}
+
+.btn-primary:hover,
+.U_button.primary:hover,
+.Ubutton.primary:hover {
+  background-color: var(--primary-dark) !important; /* #007C84 */
+}
+
+/* Secondary Buttons */
+.btn-secondary,
+.U_button.secondary,
+.Ubutton.secondary {
+  background-color: transparent !important;
+  color: var(--primary) !important; /* #009CA6 */
+  border: 2px solid var(--primary) !important; /* #009CA6 */
+  font-family: var(--font-body) !important; /* Inter */
+  font-weight: 600 !important;
+  border-radius: var(--radius-medium) !important; /* 8px */
+  padding: 10px 22px !important; /* Adjust for border */
+  transition: var(--transition-normal) !important; /* 200ms ease-in-out */
+}
+
+.btn-secondary:hover,
+.U_button.secondary:hover,
+.Ubutton.secondary:hover {
+  background-color: var(--primary-lightest) !important; /* #E5F5F6 */
+}
+
+/* Ghost/Alternate Buttons */
+.btn-ghost,
+.btn-alternate,
+.U_button.alternate,
+.Ubutton.alternate {
+  background-color: var(--neutral-white) !important; /* #FFFFFF */
+  color: var(--neutral-darkest) !important; /* #000808 */
+  border: 2px solid var(--neutral-lighter) !important; /* #D8D9D9 */
+  font-family: var(--font-body) !important; /* Inter */
+  font-weight: 600 !important;
+  border-radius: var(--radius-medium) !important; /* 8px */
+  transition: var(--transition-normal) !important; /* 200ms ease-in-out */
+}
+
+.btn-ghost:hover,
+.btn-alternate:hover,
+.U_button.alternate:hover,
+.Ubutton.alternate:hover {
+  background-color: var(--neutral-lightest) !important; /* #F2F2F2 */
+  border-color: var(--neutral-light) !important; /* #B2B4B4 */
+}
+
+/* ========================= */
+/* GLOBAL TYPOGRAPHY        */
+/* ========================= */
+
+/* Typography Overrides using Design Tokens */
+.U_heading-style-h1,
+.U_heading-style-h2,
+.U_heading-style-h3,
+.U_heading-style-h4,
+.U_heading-style-h5,
+.U_heading-style-h6,
+.Uheading-style-h1,
+.Uheading-style-h2,
+.Uheading-style-h3,
+.Uheading-style-h4,
+.Uheading-style-h5,
+.Uheading-style-h6,
+.diferenciadores-title,
+.propuesta-title,
+.faq-title,
+.section-title {
+  font-family: var(--font-heading) !important; /* Titillium Web */
+  font-weight: 700 !important;
+}
+
+.U_text-style-body,
+.Utext-style-body,
+.U_text-size-medium,
+.Utext-size-medium,
+.diferenciadores-description,
+.service-card-description,
+.card-description,
+.section-description {
+  font-family: var(--font-body) !important; /* Inter */
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+}
+
+/* Text Color Utilities */
+.text-color-white {
+  color: var(--neutral-white) !important; /* #FFFFFF */
+}
+
+.text-color-primary {
+  color: var(--primary) !important; /* #009CA6 */
+}
+
+.text-color-secondary {
+  color: var(--secondary) !important; /* #093D53 */
+}
+
+.text-color-gold {
+  color: var(--gold) !important; /* #C2A56D */
+}
+
+.text-color-dark {
+  color: var(--neutral-darkest) !important; /* #000808 */
+}
+
+.text-color-muted {
+  color: var(--neutral) !important; /* #7F8383 */
+}
+
+/* ========================= */
+/* RESPONSIVE ADJUSTMENTS   */
+/* ========================= */
+
+/* Tablet Breakpoint */
+@media (max-width: 991px) {
+  .eficiencia-title,
+  .escalabilidad-title,
+  .cumplimiento-title,
+  .card-eficiencia .diferenciador-title,
+  .card-escalabilidad .diferenciador-title,
+  .card-cumplimiento .diferenciador-title {
+    font-size: calc(var(--h4-desktop) * 0.875) !important; /* ~28px */
+  }
+
+  .stats-item .stats-number {
+    font-size: calc(var(--h2-desktop) * 0.875) !important; /* ~42px */
+  }
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 767px) {
+  .card-eficiencia,
+  .card-escalabilidad,
+  .card-cumplimiento,
+  .diferenciador-eficiencia,
+  .diferenciador-escalabilidad,
+  .diferenciador-cumplimiento {
+    padding: var(--spacing-6) !important; /* 24px */
+    margin-bottom: var(--spacing-6) !important; /* 24px */
+  }
+
+  .eficiencia-title,
+  .escalabilidad-title,
+  .cumplimiento-title,
+  .card-eficiencia .diferenciador-title,
+  .card-escalabilidad .diferenciador-title,
+  .card-cumplimiento .diferenciador-title {
+    font-size: var(--h4-mobile) !important; /* 24px */
+  }
+
+  .stats-item .stats-number {
+    font-size: var(--h3-mobile) !important; /* 32px */
+  }
+
+  .faq-question {
+    font-size: 16px !important;
+  }
+
+  .testimonial-quote {
+    font-size: 18px !important;
+  }
+}

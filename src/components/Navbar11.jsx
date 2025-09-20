@@ -43,7 +43,7 @@ export function Navbar11() {
   return (
     <section
       id="relume"
-      className="z-[999] flex w-full items-center border-b border-border-primary bg-background-primary md:min-h-18 lg:px-[5%]"
+      className="z-[999] flex w-full items-center border-b bg-white md:min-h-18 lg:px-[5%]"
     >
       <div className="mx-auto size-full items-center justify-between lg:flex">
         <div className="grid min-h-16 grid-cols-2 items-center justify-between px-[5%] md:min-h-18 lg:min-h-full lg:px-0">
@@ -162,7 +162,7 @@ export function Navbar11() {
                     },
                   }}
                   transition={{ duration: 0.3 }}
-                  className="z-50 bg-background-primary lg:absolute lg:w-80 lg:border lg:border-border-primary lg:p-6 lg:[--y-close:25%]"
+                  className="z-50 bg-white lg:absolute lg:w-80 lg:border border-gray-200 lg:p-6 lg:[--y-close:25%]"
                 >
                   <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-2 py-3 md:py-3 lg:gap-y-4 lg:py-0">
                     <Link
