@@ -1,0 +1,74 @@
+name: Deploy to SCRAM Server
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # Permite ejecutar manualmente
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run linting (if configured)
+      run: npm run lint --if-present
+
+    - name: Build application
+      run: npm run build
+
+    - name: Test build directory exists
+      run: ls -la dist/
+
+    - name: Deploy to SCRAM server
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: 34.134.14.202
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        port: 22
+        script: |
+          echo "🚀 Starting deployment..."
+
+          # Navigate to project directory
+          cd /srv/servicios/entersys-frontend || { echo "❌ Directory not found"; exit 1; }
+
+          # Pull latest changes
+          echo "📥 Pulling latest changes..."
+          git pull origin main
+
+          # Install/update dependencies
+          echo "📦 Installing dependencies..."
+          npm ci
+
+          # Build the application
+          echo "🔨 Building application..."
+          npm run build
+
+          # Restart services with Docker
+          echo "🐳 Restarting Docker services..."
+          docker compose down
+          docker compose up -d --build
+
+          # Verify deployment
+          echo "✅ Deployment completed!"
+          docker compose ps
+
+    - name: Deployment notification
+      if: success()
+      run: echo "✅ Deployment to SCRAM server completed successfully!"
+
+    - name: Deployment failure notification
+      if: failure()
+      run: echo "❌ Deployment failed! Check the logs above."
