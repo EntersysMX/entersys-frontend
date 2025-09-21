@@ -105,11 +105,11 @@ export const analyticsAPI = {
         setTimeout(() => reject(new Error('Request timeout after 15 seconds')), 15000);
       });
 
-      // Create fetch promise
+      // Create fetch promise - Use text/plain to avoid preflight
       const fetchOptions = {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'text/plain',
           'Accept': 'application/json'
         },
         body: JSON.stringify(leadData)
