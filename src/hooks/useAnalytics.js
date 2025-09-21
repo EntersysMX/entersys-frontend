@@ -105,14 +105,16 @@ export const analyticsAPI = {
         setTimeout(() => reject(new Error('Request timeout after 15 seconds')), 15000);
       });
 
-      // Create fetch promise - Use text/plain to avoid preflight
+      // Create fetch promise - Use form-urlencoded to avoid preflight
+      const formData = new URLSearchParams();
+      formData.append('data', JSON.stringify(leadData));
+
       const fetchOptions = {
         method: 'POST',
         headers: {
-          'Content-Type': 'text/plain',
-          'Accept': 'application/json'
+          'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: JSON.stringify(leadData)
+        body: formData
       };
 
       // Add signal if supported and provided
