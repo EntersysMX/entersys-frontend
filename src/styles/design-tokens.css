@@ -1,0 +1,304 @@
+/* Google Fonts - Fuentes necesarias */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+/* Design tokens para Entersys */
+
+:root {
+  /* Typography - Fuentes según Typography.pdf */
+  --font-heading: 'Titillium Web', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Monaco', monospace;
+
+  /* Color Schemes - Esquemas Entersys según Excel */
+
+  /* Esquema 1 */
+  --color-scheme-1-background: #ffffff;
+  --color-scheme-1-text: #000808;
+  --color-scheme-1-foreground: #ffffff;
+  --color-scheme-1-border: rgba(0, 8, 8, 0.15);
+  --color-scheme-1-accent: #009CA6;
+
+  /* Esquema 2 */
+  --color-scheme-2-background: #E5F5F6;
+  --color-scheme-2-text: #000808;
+  --color-scheme-2-foreground: #E5F5F6;
+  --color-scheme-2-border: rgba(0, 8, 8, 0.15);
+  --color-scheme-2-accent: #000808;
+
+  /* Esquema 3 */
+  --color-scheme-3-background: #009CA6;
+  --color-scheme-3-text: #ffffff;
+  --color-scheme-3-foreground: #009CA6;
+  --color-scheme-3-border: rgba(255, 255, 255, 0.20);
+  --color-scheme-3-accent: #ffffff;
+
+  /* Esquema 4 */
+  --color-scheme-4-background: #093D53;
+  --color-scheme-4-text: #ffffff;
+  --color-scheme-4-foreground: #093D53;
+  --color-scheme-4-border: rgba(255, 255, 255, 0.20);
+  --color-scheme-4-accent: #ffffff;
+
+  /* Google Material Icons */
+  --icon-font-family: 'Material Symbols Outlined';
+  --icon-size-md: 24px;
+  --icon-size-lg: 32px;
+}
+
+/* Color Scheme Classes */
+.color-scheme-1 {
+  background-color: var(--color-scheme-1-background) !important;
+  color: var(--color-scheme-1-text) !important;
+  border-color: var(--color-scheme-1-border) !important;
+}
+
+.color-scheme-1 h1, .color-scheme-1 h2, .color-scheme-1 h3, .color-scheme-1 h4, .color-scheme-1 h5, .color-scheme-1 h6 {
+  color: var(--color-scheme-1-text) !important;
+}
+
+.color-scheme-1 p, .color-scheme-1 span, .color-scheme-1 div {
+  color: var(--color-scheme-1-text) !important;
+}
+
+.color-scheme-2 {
+  background-color: var(--color-scheme-2-background) !important;
+  color: var(--color-scheme-2-text) !important;
+  border-color: var(--color-scheme-2-border) !important;
+}
+
+.color-scheme-2 h1, .color-scheme-2 h2, .color-scheme-2 h3, .color-scheme-2 h4, .color-scheme-2 h5, .color-scheme-2 h6 {
+  color: var(--color-scheme-2-text) !important;
+}
+
+.color-scheme-2 p, .color-scheme-2 span, .color-scheme-2 div {
+  color: var(--color-scheme-2-text) !important;
+}
+
+.color-scheme-3 {
+  background-color: var(--color-scheme-3-background) !important;
+  color: var(--color-scheme-3-text) !important;
+  border-color: var(--color-scheme-3-border) !important;
+}
+
+.color-scheme-3 h1, .color-scheme-3 h2, .color-scheme-3 h3, .color-scheme-3 h4, .color-scheme-3 h5, .color-scheme-3 h6 {
+  color: var(--color-scheme-3-text) !important;
+}
+
+.color-scheme-3 p, .color-scheme-3 span, .color-scheme-3 div {
+  color: var(--color-scheme-3-text) !important;
+}
+
+.color-scheme-4 {
+  background-color: var(--color-scheme-4-background) !important;
+  color: var(--color-scheme-4-text) !important;
+  border-color: var(--color-scheme-4-border) !important;
+}
+
+.color-scheme-4 h1, .color-scheme-4 h2, .color-scheme-4 h3, .color-scheme-4 h4, .color-scheme-4 h5, .color-scheme-4 h6 {
+  color: var(--color-scheme-4-text) !important;
+}
+
+.color-scheme-4 p, .color-scheme-4 span, .color-scheme-4 div {
+  color: var(--color-scheme-4-text) !important;
+}
+
+/* Border styles per color scheme */
+.color-scheme-1 .border,
+.color-scheme-1 .border-border-primary,
+.color-scheme-1 .rounded-lg {
+  border-color: var(--color-scheme-1-border) !important;
+}
+
+.color-scheme-2 .border,
+.color-scheme-2 .border-border-primary,
+.color-scheme-2 .rounded-lg {
+  border-color: var(--color-scheme-2-border) !important;
+}
+
+.color-scheme-3 .border,
+.color-scheme-3 .border-border-primary,
+.color-scheme-3 .rounded-lg {
+  border-color: var(--color-scheme-3-border) !important;
+}
+
+.color-scheme-4 .border,
+.color-scheme-4 .border-border-primary,
+.color-scheme-4 .rounded-lg {
+  border-color: var(--color-scheme-4-border) !important;
+}
+
+/* Background styles for cards and containers */
+.color-scheme-1 .bg-background-primary {
+  background-color: var(--color-scheme-1-foreground) !important;
+}
+
+.color-scheme-2 .bg-background-primary {
+  background-color: var(--color-scheme-2-foreground) !important;
+}
+
+.color-scheme-3 .bg-background-primary {
+  background-color: var(--color-scheme-3-foreground) !important;
+}
+
+.color-scheme-4 .bg-background-primary {
+  background-color: var(--color-scheme-4-foreground) !important;
+}
+
+/* Button accent colors */
+.color-scheme-1 button,
+.color-scheme-1 .button {
+  color: var(--color-scheme-1-accent) !important;
+}
+
+.color-scheme-2 button,
+.color-scheme-2 .button {
+  color: var(--color-scheme-2-accent) !important;
+}
+
+.color-scheme-3 button,
+.color-scheme-3 .button {
+  color: var(--color-scheme-3-accent) !important;
+}
+
+.color-scheme-4 button,
+.color-scheme-4 .button {
+  color: var(--color-scheme-4-accent) !important;
+}
+
+/* Material Icons Base Styles */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Icon Colors per Color Scheme */
+.color-scheme-1 .material-symbols-outlined {
+  color: var(--color-scheme-1-accent);
+  font-size: var(--icon-size-lg);
+}
+
+.color-scheme-2 .material-symbols-outlined {
+  color: var(--color-scheme-2-accent);
+  font-size: var(--icon-size-lg);
+}
+
+.color-scheme-3 .material-symbols-outlined {
+  color: var(--color-scheme-3-accent);
+  font-size: var(--icon-size-lg);
+}
+
+.color-scheme-4 .material-symbols-outlined {
+  color: var(--color-scheme-4-accent);
+  font-size: var(--icon-size-lg);
+}
+
+/* Hover states */
+.color-scheme-1 .material-symbols-outlined:hover {
+  color: var(--color-scheme-1-text);
+}
+
+.color-scheme-4 .material-symbols-outlined:hover {
+  color: var(--color-scheme-4-text);
+}
+
+/* Typography - Aplicación de fuentes */
+
+/* Títulos usan Titillium Web */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+/* Texto del cuerpo usa Inter */
+body, p, span, div, a, button, input, textarea, label {
+  font-family: var(--font-body);
+}
+
+/* Código usa JetBrains Mono */
+code, pre, .code {
+  font-family: var(--font-mono);
+}
+
+/* Tamaños de fuente responsive según Typography.pdf */
+h1 {
+  font-size: 3.5rem;
+  line-height: 120%;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 3rem;
+  line-height: 120%;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 2.5rem;
+  line-height: 120%;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 2rem;
+  line-height: 130%;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1.5rem;
+  line-height: 130%;
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 1.25rem;
+  line-height: 140%;
+  font-weight: 600;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 150%;
+  font-weight: 400;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+  }
+
+  h5 {
+    font-size: 1.25rem;
+  }
+
+  h6 {
+    font-size: 1.125rem;
+  }
+}

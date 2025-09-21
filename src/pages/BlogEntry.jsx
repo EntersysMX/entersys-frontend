@@ -1,18 +1,18 @@
 import React from "react";
-import { Navbar11 } from "../components/Navbar11";
-import { BlogEntryBlogPostHeader04 } from "../components/BlogEntryBlogPostHeader04";
-import { BlogEntryContent27 } from "../components/BlogEntryContent27";
-import { BlogEntryBlog30 } from "../components/BlogEntryBlog30";
-import { Footer11 } from "../components/Footer11";
+import Header from "../components/layout/Header";
+import { BlogEntryBlogPostHeader04 } from "../components/pages/BlogEntry/BlogEntryBlogPostHeader04";
+import { BlogEntryContent27 } from "../components/pages/BlogEntry/BlogEntryContent27";
+import { BlogEntryBlog30 } from "../components/pages/BlogEntry/BlogEntryBlog30";
+import Footer from "../components/layout/Footer";
 
 export default function BlogEntry() {
   return (
     <div>
-      <Navbar11 />
+      <Header />
       <BlogEntryBlogPostHeader04 />
       <BlogEntryContent27 />
       <BlogEntryBlog30 />
-      <Footer11 />
+      <Footer />
     </div>
   );
 }

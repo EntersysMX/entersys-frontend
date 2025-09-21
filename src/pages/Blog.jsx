@@ -1,20 +1,20 @@
 import React from "react";
-import { Navbar11 } from "../components/Navbar11";
-import { BlogBlog30 } from "../components/BlogBlog30";
-import { BlogCta52 } from "../components/BlogCta52";
-import { BlogContact13 } from "../components/BlogContact13";
-import { BlogFaq05 } from "../components/BlogFaq05";
-import { Footer11 } from "../components/Footer11";
+import Header from "../components/layout/Header";
+import { BlogBlog30 } from "../components/pages/Blog/BlogBlog30";
+import { BlogCta52 } from "../components/pages/Blog/BlogCta52";
+import { BlogContact13 } from "../components/pages/Blog/BlogContact13";
+import { BlogFaq05 } from "../components/pages/Blog/BlogFaq05";
+import Footer from "../components/layout/Footer";
 
 export default function Blog() {
   return (
     <div>
-      <Navbar11 />
+      <Header />
       <BlogBlog30 />
       <BlogCta52 />
       <BlogContact13 />
       <BlogFaq05 />
-      <Footer11 />
+      <Footer />
     </div>
   );
 }

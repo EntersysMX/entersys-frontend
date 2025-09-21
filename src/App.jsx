@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Inicio from './pages/Inicio'
+import Home from './pages/Home'
 import Blog from './pages/Blog'
 import BlogEntry from './pages/BlogEntry'
 import Clientes from './pages/Clientes'
@@ -14,8 +14,8 @@ import Worksys from './pages/Worksys'
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Inicio />} />
-      <Route path="/inicio" element={<Inicio />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/inicio" element={<Home />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog-entry" element={<BlogEntry />} />
       <Route path="/clientes" element={<Clientes />} />

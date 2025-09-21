@@ -1,18 +1,18 @@
 import React from "react";
-import { Navbar11 } from "../components/Navbar11";
-import { ServiciosHeader64 } from "../components/ServiciosHeader64";
-import { ServiciosLayout239 } from "../components/ServiciosLayout239";
-import { ServiciosLayout362 } from "../components/ServiciosLayout362";
-import { ServiciosLayout395 } from "../components/ServiciosLayout395";
-import { ServiciosTestimonial17 } from "../components/ServiciosTestimonial17";
-import { ServiciosFaq05 } from "../components/ServiciosFaq05";
-import { ServiciosCta39 } from "../components/ServiciosCta39";
-import { Footer11 } from "../components/Footer11";
+import Header from "../components/layout/Header";
+import { ServiciosHeader64 } from "../components/pages/Servicios/ServiciosHeader64";
+import { ServiciosLayout239 } from "../components/pages/Servicios/ServiciosLayout239";
+import { ServiciosLayout362 } from "../components/pages/Servicios/ServiciosLayout362";
+import { ServiciosLayout395 } from "../components/pages/Servicios/ServiciosLayout395";
+import { ServiciosTestimonial17 } from "../components/pages/Servicios/ServiciosTestimonial17";
+import { ServiciosFaq05 } from "../components/pages/Servicios/ServiciosFaq05";
+import { ServiciosCta39 } from "../components/pages/Servicios/ServiciosCta39";
+import Footer from "../components/layout/Footer";
 
 export default function Servicios() {
   return (
     <div>
-      <Navbar11 />
+      <Header />
       <ServiciosHeader64 />
       <ServiciosLayout239 />
       <ServiciosLayout362 />
@@ -20,7 +20,7 @@ export default function Servicios() {
       <ServiciosTestimonial17 />
       <ServiciosFaq05 />
       <ServiciosCta39 />
-      <Footer11 />
+      <Footer />
     </div>
   );
 }

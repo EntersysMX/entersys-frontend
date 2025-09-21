@@ -1,24 +1,26 @@
-import React from "react";
-import { Navbar11 } from "../components/Navbar11";
-import { Header5 } from "../components/Header5";
-import { Layout363 } from "../components/Layout363";
-import { Layout394 } from "../components/Layout394";
-import { Layout245 } from "../components/Layout245";
-import { Layout241 } from "../components/Layout241";
-import { Faq4 } from "../components/Faq4";
-import { Footer11 } from "../components/Footer11";
+import React from 'react';
+import Header from '../components/layout/Header';
+import Hero from '../components/sections/Home/Hero';
+import Services from '../components/sections/Home/Services';
+import Differentiators from '../components/sections/Home/Differentiators';
+import Value from '../components/sections/Home/Value';
+import Technology from '../components/sections/Home/Technology';
+import Industries from '../components/sections/Home/Industries';
+import FAQ from '../components/sections/Home/FAQ';
+import Footer from '../components/layout/Footer';
 
-export default function Page() {
+export default function Inicio() {
   return (
-    <div>
-      <Navbar11 />
-      <Header5 />
-      <Layout363 />
-      <Layout394 />
-      <Layout245 />
-      <Layout241 />
-      <Faq4 />
-      <Footer11 />
+    <div className="home-page">
+      <Header colorScheme={4} />
+      <Hero colorScheme={4} />
+      <Services colorScheme={4} />
+      <Differentiators colorScheme={1} />
+      <Value colorScheme={2} />
+      <Technology colorScheme={4} />
+      <Industries colorScheme={2} />
+      <FAQ colorScheme={1} />
+      <Footer colorScheme={5} />
     </div>
   );
 }
