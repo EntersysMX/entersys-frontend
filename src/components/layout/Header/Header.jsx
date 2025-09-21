@@ -4,6 +4,7 @@ import { Button, useMediaQuery } from "@relume_io/relume-ui";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import { RxChevronDown } from "react-icons/rx";
+import { Link } from "react-router-dom";
 
 const useRelume = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -78,13 +79,13 @@ const Header = ({ colorScheme = 1, ...props }) => {
       >
         <div className="mx-auto size-full items-center justify-between lg:flex">
           <div className="grid min-h-16 grid-cols-2 items-center justify-between px-[5%] md:min-h-18 lg:min-h-full lg:px-0">
-            <a href="/">
+            <Link to="/">
               <img
                 src="/entersys_logo.png"
                 alt="Entersys Logo"
                 className="h-8"
               />
-            </a>
+            </Link>
             <button
               className="-mr-2 flex size-12 flex-col items-center justify-center justify-self-end lg:hidden"
               onClick={useActive.toggleMobileMenu}
@@ -108,18 +109,18 @@ const Header = ({ colorScheme = 1, ...props }) => {
             className="overflow-hidden px-[5%] lg:flex lg:items-center lg:px-0 lg:[--height-closed:auto] lg:[--height-open:auto]"
           >
             <nav className="lg:flex lg:items-center">
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 text-black"
               >
                 Inicio
-              </a>
-              <a
-                href="/sobre-nosotros"
+              </Link>
+              <Link
+                to="/sobre-nosotros"
                 className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 text-black"
               >
                 Nosotros
-              </a>
+              </Link>
               <div
                 onMouseEnter={useActive.openOnDesktopServicesDropdownMenu}
                 onMouseLeave={useActive.closeOnDesktopServicesDropdownMenu}
@@ -165,8 +166,8 @@ const Header = ({ colorScheme = 1, ...props }) => {
                     className="z-50 bg-white lg:absolute lg:w-80 lg:border lg:border-neutral-300 lg:p-6 lg:[--y-close:25%]"
                   >
                     <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-2 py-3 md:py-3 lg:gap-y-4 lg:py-0">
-                      <a
-                        href="/worksys"
+                      <Link
+                        to="/worksys"
                         className="block py-2 lg:py-1 text-black"
                       >
                         <div className="flex flex-col items-start justify-center">
@@ -178,9 +179,9 @@ const Header = ({ colorScheme = 1, ...props }) => {
                             empresariales
                           </p>
                         </div>
-                      </a>
-                      <a
-                        href="/expersys"
+                      </Link>
+                      <Link
+                        to="/expersys"
                         className="block py-2 lg:py-1 text-black"
                       >
                         <div className="flex flex-col items-start justify-center">
@@ -192,7 +193,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
                             de calidad
                           </p>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                   </motion.nav>
                 </AnimatePresence>
@@ -242,8 +243,8 @@ const Header = ({ colorScheme = 1, ...props }) => {
                     className="z-50 bg-white lg:absolute lg:w-80 lg:border lg:border-neutral-300 lg:p-6 lg:[--y-close:25%]"
                   >
                     <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-2 py-3 md:py-3 lg:gap-y-4 lg:py-0">
-                      <a
-                        href="/awalab"
+                      <Link
+                        to="/awalab"
                         className="block py-2 lg:py-1 text-black"
                       >
                         <div className="flex flex-col items-start justify-center">
@@ -254,24 +255,24 @@ const Header = ({ colorScheme = 1, ...props }) => {
                             Centro de investigación e innovación tecnológica
                           </p>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                   </motion.nav>
                 </AnimatePresence>
               </div>
-              <a
-                href="/blog"
+              <Link
+                to="/blog"
                 className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 text-black"
               >
                 Blog
-              </a>
+              </Link>
             </nav>
             <div className="mt-6 flex flex-col gap-4 lg:mt-0 lg:ml-4 lg:flex-row lg:items-center">
-              <a href="/contacto">
+              <Link to="/contacto">
                 <Button title="Contacto" size="sm">
                   Contacto
                 </Button>
-              </a>
+              </Link>
             </div>
           </motion.div>
         </div>

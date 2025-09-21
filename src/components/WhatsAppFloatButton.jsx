@@ -9,6 +9,7 @@ const WhatsAppFloatButton = () => {
   const { trackEvent, trackGoal, matomoLoaded } = useAnalytics();
   const [isVisible, setIsVisible] = useState(true);
   const [debugInfo, setDebugInfo] = useState({});
+  const [forceVisible, setForceVisible] = useState(true); // DEBUG: Force visibility
 
   // Debug info para troubleshooting
   useEffect(() => {
@@ -92,8 +93,18 @@ const WhatsAppFloatButton = () => {
 
   // Debug: Log cuando el componente se renderiza
   useEffect(() => {
-    console.log('🔍 WhatsAppFloatButton mounted', { isVisible, debugInfo });
-  }, [isVisible, debugInfo]);
+    console.log('🔍 WhatsAppFloatButton mounted', { isVisible, forceVisible, debugInfo });
+  }, [isVisible, forceVisible, debugInfo]);
+
+  // DEBUG: Always show button for now
+  const shouldShow = forceVisible || isVisible;
+
+  if (!shouldShow) {
+    console.log('🚫 WhatsApp button hidden', { isVisible, forceVisible });
+    return null;
+  }
+
+  console.log('✅ WhatsApp button rendering', { shouldShow, isVisible, forceVisible });
 
   return (
     <div
