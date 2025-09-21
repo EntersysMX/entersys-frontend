@@ -43,14 +43,29 @@ export function ContactoContact06() {
     try {
       trackEvent('Form', 'Submit_Attempt', 'Contact Form');
 
-      const result = await analyticsAPI.captureL1ad({
+      const result = await analyticsAPI.captureLead({
         ...formData,
         source: 'website_contact_form'
       });
 
       if (result.success) {
+        // Tracking existente...
         trackEvent('Form', 'Submit_Success', 'Contact Form', 1);
         trackGoal(1, 50);
+
+        // *** NUEVO *** Guardar email para tracking futuro
+        localStorage.setItem('leadEmail', formData.email);
+        sessionStorage.setItem('leadEmail', formData.email);
+
+        // *** NUEVO *** Track additional lead data
+        await analyticsAPI.trackEvent({
+          category: 'Lead',
+          action: 'Profile_Created',
+          name: `Lead Profile - ${formData.interest}`,
+          value: 1,
+          url: window.location.href
+        });
+
         setShowThankYou(true);
 
         setTimeout(() => {

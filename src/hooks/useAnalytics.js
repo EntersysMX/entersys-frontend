@@ -33,7 +33,66 @@ export const useAnalytics = () => {
     }
   };
 
-  return { trackEvent, trackGoal, matomoLoaded };
+  const trackPageView = () => {
+    if (window._paq && matomoLoaded) {
+      window._paq.push(['trackPageView']);
+    }
+  };
+
+  // *** NUEVO *** Función específica para tracking de WhatsApp
+  const trackWhatsAppClick = (source = 'unknown', additionalData = {}) => {
+    // Track en Matomo frontend
+    trackEvent('WhatsApp', 'Click', source, 1);
+
+    // Track en backend API para CRM sync
+    analyticsAPI.trackEvent({
+      category: 'WhatsApp',
+      action: 'Click',
+      name: `WhatsApp Click - ${source}`,
+      value: 1,
+      url: window.location.href,
+      ...additionalData
+    });
+
+    console.log('📱 WhatsApp click tracked:', source);
+  };
+
+  // *** NUEVO *** Función para actualizar score del lead
+  const updateLeadScore = async (email, action, scoreDelta = 5) => {
+    try {
+      const response = await fetch(`https://api.dev.entersys.mx/api/v1/crm/lead/${encodeURIComponent(email)}/score`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          action: action,
+          score_delta: scoreDelta,
+          metadata: {
+            page_url: window.location.href,
+            timestamp: new Date().toISOString(),
+            user_agent: navigator.userAgent
+          }
+        })
+      });
+
+      const result = await response.json();
+      console.log('📈 Lead score updated:', result);
+      return result;
+    } catch (error) {
+      console.error('❌ Error updating lead score:', error);
+      return { success: false, error: error.message };
+    }
+  };
+
+  return {
+    trackEvent,
+    trackGoal,
+    trackPageView,
+    trackWhatsAppClick,  // NUEVO
+    updateLeadScore,     // NUEVO
+    matomoLoaded
+  };
 };
 
 export const analyticsAPI = {
@@ -46,6 +105,36 @@ export const analyticsAPI = {
       });
       return await response.json();
     } catch (error) {
+      return { success: false, error: error.message };
+    }
+  },
+
+  // *** NUEVO *** Función para tracking de eventos específicos
+  async trackEvent(eventData) {
+    try {
+      const response = await fetch('https://api.dev.entersys.mx/api/v1/analytics/track-event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(eventData)
+      });
+      return await response.json();
+    } catch (error) {
+      console.error('Error tracking event:', error);
+      return { success: false, error: error.message };
+    }
+  },
+
+  // *** NUEVO *** Función para tracking de conversiones
+  async trackConversion(conversionData) {
+    try {
+      const response = await fetch('https://api.dev.entersys.mx/api/v1/analytics/track-conversion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(conversionData)
+      });
+      return await response.json();
+    } catch (error) {
+      console.error('Error tracking conversion:', error);
       return { success: false, error: error.message };
     }
   }
