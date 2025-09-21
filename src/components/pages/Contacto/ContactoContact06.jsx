@@ -63,7 +63,7 @@ export function ContactoContact06() {
       const result = await analyticsAPI.captureLead({
         ...formData,
         source: 'website_contact_form'
-      }).catch(error => {
+      }, controller.signal).catch(error => {
         console.error('❌ API call failed:', error);
         throw new Error(`API Error: ${error.message}`);
       });
@@ -72,7 +72,8 @@ export function ContactoContact06() {
 
       console.log('✅ API Response:', result);
 
-      if (result?.success) {
+      // Check if API response indicates success
+      if (result?.success === true || result?.message?.includes('successfully')) {
         // Success tracking
         trackEvent('Form', 'Submit_Success', 'Contact Form', 1);
         trackGoal(1, 50);
@@ -86,13 +87,18 @@ export function ContactoContact06() {
         console.log('✅ Form submission successful');
 
         // *** NUEVO *** Track additional lead data
-        await analyticsAPI.trackEvent({
-          category: 'Lead',
-          action: 'Profile_Created',
-          name: `Lead Profile - ${formData.interest}`,
-          value: 1,
-          url: window.location.href
-        });
+        try {
+          await analyticsAPI.trackEvent({
+            category: 'Lead',
+            action: 'Profile_Created',
+            name: `Lead Profile - ${formData.interest}`,
+            value: 1,
+            url: window.location.href
+          });
+        } catch (trackError) {
+          console.warn('⚠️ Event tracking failed:', trackError);
+          // Don't fail form submission for tracking errors
+        }
 
         // Clear form after delay
         setTimeout(() => {
@@ -104,19 +110,35 @@ export function ContactoContact06() {
         }, 5000);
 
       } else {
-        throw new Error(result?.error || 'API returned non-success response');
+        // Log the full response for debugging
+        console.error('❌ API Response not successful:', result);
+        throw new Error(result?.error || `API Error: ${result?.message || 'Unknown error'}`);
       }
 
     } catch (error) {
       console.error('❌ Form submission error:', error);
+      console.error('❌ Error details:', {
+        message: error.message,
+        stack: error.stack,
+        name: error.name
+      });
 
       // Error tracking
       trackEvent('Form', 'Submit_Error', 'Contact Form');
 
-      // User-friendly error message
-      const errorMessage = error.message.includes('API Error')
-        ? 'Error de conexión con el servidor. Por favor intenta nuevamente.'
-        : 'Error al enviar el formulario. Verifica tu conexión e intenta nuevamente.';
+      // Detailed error messaging for better debugging
+      let errorMessage;
+      if (error.message.includes('timeout')) {
+        errorMessage = 'La solicitud tardó demasiado tiempo. Por favor intenta nuevamente.';
+      } else if (error.message.includes('API Error')) {
+        errorMessage = 'Error de conexión con el servidor. Verifica tu conexión e intenta nuevamente.';
+      } else if (error.message.includes('Failed to fetch')) {
+        errorMessage = 'No se puede conectar al servidor. Verifica tu conexión a internet.';
+      } else if (error.message.includes('NetworkError')) {
+        errorMessage = 'Error de red. Por favor verifica tu conexión e intenta nuevamente.';
+      } else {
+        errorMessage = `Error: ${error.message}. Si el problema persiste, contacta al soporte.`;
+      }
 
       alert(errorMessage);
 

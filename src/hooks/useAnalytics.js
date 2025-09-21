@@ -96,20 +96,34 @@ export const useAnalytics = () => {
 };
 
 export const analyticsAPI = {
-  async captureLead(leadData) {
+  async captureLead(leadData, signal = null) {
     try {
       console.log('🔄 Sending lead to API:', leadData);
 
-      const response = await fetch('https://api.dev.entersys.mx/api/v1/analytics/lead-capture', {
+      // Create timeout promise for older browsers
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Request timeout after 15 seconds')), 15000);
+      });
+
+      // Create fetch promise
+      const fetchOptions = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify(leadData),
-        // Timeout handling
-        signal: AbortSignal.timeout(15000) // 15 seconds
-      });
+        body: JSON.stringify(leadData)
+      };
+
+      // Add signal if supported and provided
+      if (signal) {
+        fetchOptions.signal = signal;
+      }
+
+      const fetchPromise = fetch('https://api.dev.entersys.mx/api/v1/analytics/lead-capture', fetchOptions);
+
+      // Race between fetch and timeout
+      const response = await Promise.race([fetchPromise, timeoutPromise]);
 
       console.log('📡 API Response status:', response.status);
 
@@ -122,7 +136,10 @@ export const analyticsAPI = {
       const result = await response.json();
       console.log('✅ API Success Response:', result);
 
-      return result;
+      return {
+        ...result,
+        success: result.success !== false // Ensure success is boolean
+      };
 
     } catch (error) {
       console.error('❌ captureLead error:', error);
