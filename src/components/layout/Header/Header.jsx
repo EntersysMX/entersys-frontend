@@ -267,9 +267,11 @@ const Header = ({ colorScheme = 1, ...props }) => {
               </a>
             </nav>
             <div className="mt-6 flex flex-col gap-4 lg:mt-0 lg:ml-4 lg:flex-row lg:items-center">
-              <Button title="Contacto" size="sm">
-                Contacto
-              </Button>
+              <a href="/contacto">
+                <Button title="Contacto" size="sm">
+                  Contacto
+                </Button>
+              </a>
             </div>
           </motion.div>
         </div>
