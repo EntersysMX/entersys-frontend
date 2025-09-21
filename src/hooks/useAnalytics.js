@@ -98,28 +98,70 @@ export const useAnalytics = () => {
 export const analyticsAPI = {
   async captureLead(leadData) {
     try {
+      console.log('🔄 Sending lead to API:', leadData);
+
       const response = await fetch('https://api.dev.entersys.mx/api/v1/analytics/lead-capture', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(leadData)
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(leadData),
+        // Timeout handling
+        signal: AbortSignal.timeout(15000) // 15 seconds
       });
-      return await response.json();
+
+      console.log('📡 API Response status:', response.status);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('❌ API Error Response:', errorText);
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
+      }
+
+      const result = await response.json();
+      console.log('✅ API Success Response:', result);
+
+      return result;
+
     } catch (error) {
-      return { success: false, error: error.message };
+      console.error('❌ captureLead error:', error);
+
+      // Return consistent error format
+      return {
+        success: false,
+        error: error.message || 'Network error occurred',
+        timestamp: new Date().toISOString()
+      };
     }
   },
 
   // *** NUEVO *** Función para tracking de eventos específicos
   async trackEvent(eventData) {
     try {
+      console.log('📊 Tracking event:', eventData);
+
       const response = await fetch('https://api.dev.entersys.mx/api/v1/analytics/track-event', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(eventData)
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        signal: AbortSignal.timeout(10000) // 10 seconds
       });
-      return await response.json();
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('✅ Event tracked:', result);
+        return result;
+      } else {
+        console.warn('⚠️ Event tracking failed:', response.status);
+        return { success: false, error: `HTTP ${response.status}` };
+      }
+
     } catch (error) {
-      console.error('Error tracking event:', error);
+      console.error('❌ Event tracking error:', error);
       return { success: false, error: error.message };
     }
   },

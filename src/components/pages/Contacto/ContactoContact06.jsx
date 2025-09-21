@@ -38,24 +38,52 @@ export function ContactoContact06() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Logging para debug
+    console.log('🔄 Form submission started', formData);
+
     setIsSubmitting(true);
 
     try {
+      // Validación mejorada
+      if (!formData.name?.trim() || !formData.email?.trim()) {
+        console.error('❌ Validation failed: missing required fields');
+        alert('Por favor completa todos los campos requeridos');
+        return;
+      }
+
+      // Tracking de intento
       trackEvent('Form', 'Submit_Attempt', 'Contact Form');
+      console.log('📊 Event tracked: Submit_Attempt');
+
+      // API call con timeout y error handling mejorado
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 segundos timeout
 
       const result = await analyticsAPI.captureLead({
         ...formData,
         source: 'website_contact_form'
+      }).catch(error => {
+        console.error('❌ API call failed:', error);
+        throw new Error(`API Error: ${error.message}`);
       });
 
-      if (result.success) {
-        // Tracking existente...
+      clearTimeout(timeoutId);
+
+      console.log('✅ API Response:', result);
+
+      if (result?.success) {
+        // Success tracking
         trackEvent('Form', 'Submit_Success', 'Contact Form', 1);
         trackGoal(1, 50);
 
-        // *** NUEVO *** Guardar email para tracking futuro
+        // Store email for future tracking
         localStorage.setItem('leadEmail', formData.email);
         sessionStorage.setItem('leadEmail', formData.email);
+
+        setShowThankYou(true);
+
+        console.log('✅ Form submission successful');
 
         // *** NUEVO *** Track additional lead data
         await analyticsAPI.trackEvent({
@@ -66,27 +94,32 @@ export function ContactoContact06() {
           url: window.location.href
         });
 
-        setShowThankYou(true);
-
+        // Clear form after delay
         setTimeout(() => {
-          setShowThankYou(false);
           setFormData({
-            name: '',
-            email: '',
-            company: '',
-            phone: '',
-            interest: 'general',
-            message: '',
-            source: ''
+            name: '', email: '', company: '', phone: '',
+            interest: 'general', message: '', source: ''
           });
+          setShowThankYou(false);
         }, 5000);
+
       } else {
-        trackEvent('Form', 'Submit_Error', 'Contact Form');
-        alert('Error al enviar el formulario');
+        throw new Error(result?.error || 'API returned non-success response');
       }
+
     } catch (error) {
+      console.error('❌ Form submission error:', error);
+
+      // Error tracking
       trackEvent('Form', 'Submit_Error', 'Contact Form');
-      alert('Error al enviar el formulario');
+
+      // User-friendly error message
+      const errorMessage = error.message.includes('API Error')
+        ? 'Error de conexión con el servidor. Por favor intenta nuevamente.'
+        : 'Error al enviar el formulario. Verifica tu conexión e intenta nuevamente.';
+
+      alert(errorMessage);
+
     } finally {
       setIsSubmitting(false);
     }
