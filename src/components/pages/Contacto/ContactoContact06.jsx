@@ -14,10 +14,80 @@ import {
   SelectValue,
   Textarea,
 } from "@relume_io/relume-ui";
-import React from "react";
+import React, { useState } from "react";
 import { BiEnvelope, BiMap, BiPhone } from "react-icons/bi";
+import { useAnalytics, analyticsAPI } from '../../../hooks/useAnalytics';
 
 export function ContactoContact06() {
+  const { trackEvent, trackGoal } = useAnalytics();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
+    interest: 'general',
+    message: '',
+    source: ''
+  });
+
+  const handleChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      trackEvent('Form', 'Submit_Attempt', 'Contact Form');
+
+      const result = await analyticsAPI.captureL1ad({
+        ...formData,
+        source: 'website_contact_form'
+      });
+
+      if (result.success) {
+        trackEvent('Form', 'Submit_Success', 'Contact Form', 1);
+        trackGoal(1, 50);
+        setShowThankYou(true);
+
+        setTimeout(() => {
+          setShowThankYou(false);
+          setFormData({
+            name: '',
+            email: '',
+            company: '',
+            phone: '',
+            interest: 'general',
+            message: '',
+            source: ''
+          });
+        }, 5000);
+      } else {
+        trackEvent('Form', 'Submit_Error', 'Contact Form');
+        alert('Error al enviar el formulario');
+      }
+    } catch (error) {
+      trackEvent('Form', 'Submit_Error', 'Contact Form');
+      alert('Error al enviar el formulario');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (showThankYou) {
+    return (
+      <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+        <div className="container text-center">
+          <h2 className="mb-6 text-5xl font-bold text-green-600">¡Gracias!</h2>
+          <p className="text-lg">Hemos recibido tu mensaje. Nos pondremos en contacto contigo pronto.</p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container grid grid-cols-1 items-start gap-y-12 md:grid-flow-row md:grid-cols-2 md:gap-x-12 lg:grid-flow-col lg:gap-x-20 lg:gap-y-16">
@@ -46,19 +116,30 @@ export function ContactoContact06() {
             </div>
           </div>
         </div>
-        <form className="grid max-w-lg grid-cols-1 grid-rows-[auto_auto] gap-6">
+        <form onSubmit={handleSubmit} className="grid max-w-lg grid-cols-1 grid-rows-[auto_auto] gap-6">
           <div className="grid grid-cols-2 gap-6">
             <div className="grid w-full items-center">
-              <Label htmlFor="firstName" className="mb-2">
-                Nombre
+              <Label htmlFor="name" className="mb-2">
+                Nombre completo
               </Label>
-              <Input type="text" id="firstName" />
+              <Input
+                type="text"
+                id="name"
+                value={formData.name}
+                onChange={(e) => handleChange('name', e.target.value)}
+                required
+              />
             </div>
             <div className="grid w-full items-center">
-              <Label htmlFor="lastName" className="mb-2">
-                Apellido
+              <Label htmlFor="company" className="mb-2">
+                Empresa
               </Label>
-              <Input type="text" id="lastName" />
+              <Input
+                type="text"
+                id="company"
+                value={formData.company}
+                onChange={(e) => handleChange('company', e.target.value)}
+              />
             </div>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -66,54 +147,71 @@ export function ContactoContact06() {
               <Label htmlFor="email" className="mb-2">
                 Correo
               </Label>
-              <Input type="email" id="email" />
+              <Input
+                type="email"
+                id="email"
+                value={formData.email}
+                onChange={(e) => handleChange('email', e.target.value)}
+                required
+              />
             </div>
             <div className="grid w-full items-center">
               <Label htmlFor="phone" className="mb-2">
                 Teléfono
               </Label>
-              <Input type="text" id="phone" />
+              <Input
+                type="text"
+                id="phone"
+                value={formData.phone}
+                onChange={(e) => handleChange('phone', e.target.value)}
+              />
             </div>
           </div>
           <div className="grid w-full items-center">
-            <Label className="mb-2">Selecciona un tema</Label>
-            <Select>
+            <Label className="mb-2">¿En qué te podemos ayudar?</Label>
+            <Select value={formData.interest} onValueChange={(value) => handleChange('interest', value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Elige una opción" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="first-choice">First Choice</SelectItem>
-                <SelectItem value="second-choice">Second Choice</SelectItem>
-                <SelectItem value="third-choice">Third Choice</SelectItem>
+                <SelectItem value="automation">Automatización de procesos</SelectItem>
+                <SelectItem value="integration">Integración de sistemas</SelectItem>
+                <SelectItem value="consulting">Consultoría tecnológica</SelectItem>
+                <SelectItem value="development">Desarrollo de software</SelectItem>
+                <SelectItem value="other">Otro</SelectItem>
               </SelectContent>
             </Select>
           </div>
           <div className="grid w-full items-center py-3 md:py-4">
             <Label className="mb-3 md:mb-4">¿Cómo nos conociste?</Label>
-            <RadioGroup className="grid grid-cols-2 gap-x-6 gap-y-3.5">
+            <RadioGroup
+              value={formData.source}
+              onValueChange={(value) => handleChange('source', value)}
+              className="grid grid-cols-2 gap-x-6 gap-y-3.5"
+            >
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="Referido" id="#first_choice" />
-                <Label htmlFor="#first_choice">Referido</Label>
+                <RadioGroupItem value="referral" id="referral" />
+                <Label htmlFor="referral">Referido</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="First choice" id="#second_choice" />
-                <Label htmlFor="#second_choice">Redes sociales</Label>
+                <RadioGroupItem value="social_media" id="social_media" />
+                <Label htmlFor="social_media">Redes sociales</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="First choice" id="#third_choice" />
-                <Label htmlFor="#third_choice">Evento</Label>
+                <RadioGroupItem value="event" id="event" />
+                <Label htmlFor="event">Evento</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="First choice" id="#fourth_choice" />
-                <Label htmlFor="#fourth_choice">Búsqueda web</Label>
+                <RadioGroupItem value="web_search" id="web_search" />
+                <Label htmlFor="web_search">Búsqueda web</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="First choice" id="#fifth_choice" />
-                <Label htmlFor="#fifth_choice">Recomendación</Label>
+                <RadioGroupItem value="recommendation" id="recommendation" />
+                <Label htmlFor="recommendation">Recomendación</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="First choice" id="#other" />
-                <Label htmlFor="#other">Otro</Label>
+                <RadioGroupItem value="other" id="other" />
+                <Label htmlFor="other">Otro</Label>
               </div>
             </RadioGroup>
           </div>
@@ -124,6 +222,8 @@ export function ContactoContact06() {
             <Textarea
               id="message"
               placeholder="Escribe tu mensaje"
+              value={formData.message}
+              onChange={(e) => handleChange('message', e.target.value)}
               className="min-h-[11.25rem] overflow-auto"
             />
           </div>
@@ -134,7 +234,15 @@ export function ContactoContact06() {
             </Label>
           </div>
           <div>
-            <Button title="Enviar">Enviar</Button>
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className={`block w-full rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm ${
+                isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-500'
+              }`}
+            >
+              {isSubmitting ? 'Enviando mensaje...' : 'Enviar mensaje'}
+            </Button>
           </div>
         </form>
       </div>
