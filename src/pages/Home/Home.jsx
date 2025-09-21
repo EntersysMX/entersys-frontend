@@ -18,7 +18,7 @@ const Home = () => {
       <Value colorScheme={2} />
       <Technology colorScheme={4} />
       <FAQ colorScheme={1} />
-      <Footer colorScheme={4} />
+      <Footer colorScheme={1} />
     </div>
   );
 };

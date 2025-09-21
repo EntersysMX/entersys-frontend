@@ -10,7 +10,7 @@ import {
 } from "react-icons/bi";
 import { FaXTwitter } from "react-icons/fa6";
 
-const Footer = ({ colorScheme = 5, ...props }) => {
+const Footer = ({ colorScheme = 1, ...props }) => {
   return (
     <footer
       className={`color-scheme-${colorScheme}`}
@@ -21,11 +21,11 @@ const Footer = ({ colorScheme = 5, ...props }) => {
           <Card className="grid grid-cols-1 gap-x-[4vw] gap-y-12 p-8 md:gap-y-16 md:p-12 lg:grid-cols-[1fr_0.5fr] lg:gap-y-4">
             <div>
               <div className="mb-6 md:mb-8">
-                <a href="#">
+                <a href="/">
                   <img
-                    src="https://d22po4pjz3o32e.cloudfront.net/logo-image.svg"
-                    alt="Logo image"
-                    className="inline-block"
+                    src="/src/assets/entersys_logo.png"
+                    alt="Entersys Logo"
+                    className="inline-block h-8"
                   />
                 </a>
               </div>
@@ -69,30 +69,30 @@ const Footer = ({ colorScheme = 5, ...props }) => {
             <div className="grid grid-cols-1 items-start gap-x-6 gap-y-10 sm:grid-cols-2 md:gap-x-8 md:gap-y-4">
               <ul>
                 <li className="py-2 text-sm font-semibold">
-                  <a href="#">Inicio</a>
+                  <a href="/">Inicio</a>
                 </li>
                 <li className="py-2 text-sm font-semibold">
-                  <a href="#">Servicios</a>
+                  <a href="/servicios">Servicios</a>
                 </li>
                 <li className="py-2 text-sm font-semibold">
-                  <a href="#">Worksys</a>
+                  <a href="/worksys">Worksys</a>
                 </li>
                 <li className="py-2 text-sm font-semibold">
-                  <a href="#">Expersys</a>
+                  <a href="/expersys">Expersys</a>
                 </li>
               </ul>
               <ul>
                 <li className="py-2 text-sm font-semibold">
-                  <a href="#">Nosotros</a>
+                  <a href="/sobre-nosotros">Nosotros</a>
                 </li>
                 <li className="py-2 text-sm font-semibold">
-                  <a href="#">Clientes</a>
+                  <a href="/clientes">Clientes</a>
                 </li>
                 <li className="py-2 text-sm font-semibold">
-                  <a href="#">Blog</a>
+                  <a href="/blog">Blog</a>
                 </li>
                 <li className="py-2 text-sm font-semibold">
-                  <a href="#">Contacto</a>
+                  <a href="/contacto">Contacto</a>
                 </li>
               </ul>
             </div>

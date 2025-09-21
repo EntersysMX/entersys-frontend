@@ -78,7 +78,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
       >
         <div className="mx-auto size-full items-center justify-between lg:flex">
           <div className="grid min-h-16 grid-cols-2 items-center justify-between px-[5%] md:min-h-18 lg:min-h-full lg:px-0">
-            <a href="#">
+            <a href="/">
               <img
                 src="/src/assets/entersys_logo.png"
                 alt="Entersys Logo"
@@ -109,13 +109,13 @@ const Header = ({ colorScheme = 1, ...props }) => {
           >
             <nav className="lg:flex lg:items-center">
               <a
-                href="#"
+                href="/"
                 className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 text-black"
               >
                 Inicio
               </a>
               <a
-                href="#"
+                href="/sobre-nosotros"
                 className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 text-black"
               >
                 Nosotros
@@ -166,7 +166,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
                   >
                     <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-2 py-3 md:py-3 lg:gap-y-4 lg:py-0">
                       <a
-                        href="#"
+                        href="/worksys"
                         className="block py-2 lg:py-1 text-black"
                       >
                         <div className="flex flex-col items-start justify-center">
@@ -180,7 +180,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
                         </div>
                       </a>
                       <a
-                        href="#"
+                        href="/expersys"
                         className="block py-2 lg:py-1 text-black"
                       >
                         <div className="flex flex-col items-start justify-center">
@@ -243,7 +243,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
                   >
                     <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-2 py-3 md:py-3 lg:gap-y-4 lg:py-0">
                       <a
-                        href="#"
+                        href="/awalab"
                         className="block py-2 lg:py-1 text-black"
                       >
                         <div className="flex flex-col items-start justify-center">
@@ -260,7 +260,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
                 </AnimatePresence>
               </div>
               <a
-                href="#"
+                href="/blog"
                 className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 text-black"
               >
                 Blog
