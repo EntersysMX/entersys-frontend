@@ -23,7 +23,7 @@ const Footer = ({ colorScheme = 1, ...props }) => {
               <div className="mb-6 md:mb-8">
                 <a href="/">
                   <img
-                    src="/src/assets/entersys_logo.png"
+                    src="/entersys_logo.png"
                     alt="Entersys Logo"
                     className="inline-block h-8"
                   />

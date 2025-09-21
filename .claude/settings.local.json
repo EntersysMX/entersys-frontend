@@ -8,7 +8,9 @@
       "Bash(cp:*)",
       "Bash(rm:*)",
       "Bash(curl:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Read(//c/Users/Usuario/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/**)",
+      "Bash(powershell:*)"
     ],
     "deny": [],
     "ask": []

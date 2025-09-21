@@ -80,7 +80,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
           <div className="grid min-h-16 grid-cols-2 items-center justify-between px-[5%] md:min-h-18 lg:min-h-full lg:px-0">
             <a href="/">
               <img
-                src="/src/assets/entersys_logo.png"
+                src="/entersys_logo.png"
                 alt="Entersys Logo"
                 className="h-8"
               />
