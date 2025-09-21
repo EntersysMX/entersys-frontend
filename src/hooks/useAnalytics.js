@@ -37,7 +37,7 @@ export const useAnalytics = () => {
 };
 
 export const analyticsAPI = {
-  async captureL1ad(leadData) {
+  async captureLead(leadData) {
     try {
       const response = await fetch('https://api.dev.entersys.mx/api/v1/analytics/lead-capture', {
         method: 'POST',
