@@ -66,6 +66,7 @@ export const useAnalytics = () => {
 // Mantener el analyticsAPI solo para compatibilidad hacia atrás
 // Pero deprecado - usar mauticService en su lugar
 export const analyticsAPI = {
+<<<<<<< Updated upstream
   async captureLead(leadData) {
     console.warn('⚠️ analyticsAPI.captureLead is deprecated. Use mauticService.captureLead instead');
     // Fallback básico por si algo aún lo usa
@@ -74,5 +75,107 @@ export const analyticsAPI = {
       error: 'Deprecated - use mauticService instead',
       deprecated: true
     };
+=======
+  async captureLead(leadData, signal = null) {
+    try {
+      console.log('🔄 Sending lead to API:', leadData);
+
+      // Create timeout promise for older browsers
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Request timeout after 15 seconds')), 15000);
+      });
+
+      // Create fetch promise - Use JSON with CORS headers
+      const fetchOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(leadData)
+      };
+
+      // Add signal if supported and provided
+      if (signal) {
+        fetchOptions.signal = signal;
+      }
+
+      const fetchPromise = fetch('https://api.dev.entersys.mx/api/v1/analytics/lead-capture', fetchOptions);
+
+      // Race between fetch and timeout
+      const response = await Promise.race([fetchPromise, timeoutPromise]);
+
+      console.log('📡 API Response status:', response.status);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('❌ API Error Response:', errorText);
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
+      }
+
+      const result = await response.json();
+      console.log('✅ API Success Response:', result);
+
+      return {
+        ...result,
+        success: result.success !== false // Ensure success is boolean
+      };
+
+    } catch (error) {
+      console.error('❌ captureLead error:', error);
+
+      // Return consistent error format
+      return {
+        success: false,
+        error: error.message || 'Network error occurred',
+        timestamp: new Date().toISOString()
+      };
+    }
+  },
+
+  // *** NUEVO *** Función para tracking de eventos específicos
+  async trackEvent(eventData) {
+    try {
+      console.log('📊 Tracking event:', eventData);
+
+      const response = await fetch('https://api.dev.entersys.mx/api/v1/analytics/track-event', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        signal: AbortSignal.timeout(10000) // 10 seconds
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('✅ Event tracked:', result);
+        return result;
+      } else {
+        console.warn('⚠️ Event tracking failed:', response.status);
+        return { success: false, error: `HTTP ${response.status}` };
+      }
+
+    } catch (error) {
+      console.error('❌ Event tracking error:', error);
+      return { success: false, error: error.message };
+    }
+  },
+
+  // *** NUEVO *** Función para tracking de conversiones
+  async trackConversion(conversionData) {
+    try {
+      const response = await fetch('https://api.dev.entersys.mx/api/v1/analytics/track-conversion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(conversionData)
+      });
+      return await response.json();
+    } catch (error) {
+      console.error('Error tracking conversion:', error);
+      return { success: false, error: error.message };
+    }
+>>>>>>> Stashed changes
   }
 };
