@@ -14,12 +14,11 @@ import {
   SelectValue,
   Textarea,
 } from "@relume_io/relume-ui";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BiEnvelope, BiMap, BiPhone } from "react-icons/bi";
-import { useAnalytics, analyticsAPI } from '../../../hooks/useAnalytics';
+import { mauticService } from '../../../services/mautic';
 
 export function ContactoContact06() {
-  const { trackEvent, trackGoal } = useAnalytics();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
   const [formData, setFormData] = useState({
@@ -27,10 +26,15 @@ export function ContactoContact06() {
     email: '',
     company: '',
     phone: '',
-    interest: 'general',
+    interest: 'automation',
     message: '',
     source: ''
   });
+
+  // Inicializar Mautic tracking
+  useEffect(() => {
+    mauticService.initializeTracking();
+  }, []);
 
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -38,106 +42,56 @@ export function ContactoContact06() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Logging para debug
-    console.log('🔄 Form submission started', formData);
+    console.log('🔄 Formulario de contacto enviado', formData);
 
     setIsSubmitting(true);
 
     try {
-      // Validación mejorada
+      // Validación
       if (!formData.name?.trim() || !formData.email?.trim()) {
-        console.error('❌ Validation failed: missing required fields');
-        alert('Por favor completa todos los campos requeridos');
+        alert('Por favor completa nombre y correo electrónico');
         return;
       }
 
-      // Tracking de intento
-      trackEvent('Form', 'Submit_Attempt', 'Contact Form');
-      console.log('📊 Event tracked: Submit_Attempt');
-
-      // API call con timeout y error handling mejorado
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 segundos timeout
-
-      const result = await analyticsAPI.captureLead({
+      // Capturar lead en Mautic
+      const result = await mauticService.captureLead({
         ...formData,
-        source: 'website_contact_form'
-      }, controller.signal).catch(error => {
-        console.error('❌ API call failed:', error);
-        throw new Error(`API Error: ${error.message}`);
+        source: formData.source || 'website_contact_form'
       });
 
-      clearTimeout(timeoutId);
-
-      console.log('✅ API Response:', result);
-
-      // Check if API response indicates success
-      if (result?.success === true || result?.message?.includes('successfully')) {
-        // Success tracking
-        trackEvent('Form', 'Submit_Success', 'Contact Form', 1);
-        trackGoal(1, 50);
-
-        // Store email for future tracking
+      if (result.success) {
+        // Guardar email para tracking futuro
         localStorage.setItem('leadEmail', formData.email);
         sessionStorage.setItem('leadEmail', formData.email);
 
+        // Tracking de conversión
+        await mauticService.trackConversion(formData.email, 'form_submit', 50);
+
+        // Mostrar mensaje de éxito
         setShowThankYou(true);
+        console.log('✅ Lead capturado exitosamente en Mautic');
 
-        console.log('✅ Form submission successful');
-
-        // *** NUEVO *** Track additional lead data
-        try {
-          await analyticsAPI.trackEvent({
-            category: 'Lead',
-            action: 'Profile_Created',
-            name: `Lead Profile - ${formData.interest}`,
-            value: 1,
-            url: window.location.href
-          });
-        } catch (trackError) {
-          console.warn('⚠️ Event tracking failed:', trackError);
-          // Don't fail form submission for tracking errors
-        }
-
-        // Clear form after delay
+        // Limpiar formulario después de 5 segundos
         setTimeout(() => {
           setFormData({
             name: '', email: '', company: '', phone: '',
-            interest: 'general', message: '', source: ''
+            interest: 'automation', message: '', source: ''
           });
           setShowThankYou(false);
         }, 5000);
 
       } else {
-        // Log the full response for debugging
-        console.error('❌ API Response not successful:', result);
-        throw new Error(result?.error || `API Error: ${result?.message || 'Unknown error'}`);
+        throw new Error(result.error || 'Error capturando lead en Mautic');
       }
 
     } catch (error) {
-      console.error('❌ Form submission error:', error);
-      console.error('❌ Error details:', {
-        message: error.message,
-        stack: error.stack,
-        name: error.name
-      });
+      console.error('❌ Error enviando formulario:', error);
 
-      // Error tracking
-      trackEvent('Form', 'Submit_Error', 'Contact Form');
-
-      // Detailed error messaging for better debugging
-      let errorMessage;
-      if (error.message.includes('timeout')) {
-        errorMessage = 'La solicitud tardó demasiado tiempo. Por favor intenta nuevamente.';
-      } else if (error.message.includes('API Error')) {
-        errorMessage = 'Error de conexión con el servidor. Verifica tu conexión e intenta nuevamente.';
-      } else if (error.message.includes('Failed to fetch')) {
-        errorMessage = 'No se puede conectar al servidor. Verifica tu conexión a internet.';
-      } else if (error.message.includes('NetworkError')) {
-        errorMessage = 'Error de red. Por favor verifica tu conexión e intenta nuevamente.';
+      let errorMessage = 'Hubo un error enviando el formulario. ';
+      if (error.message.includes('timeout') || error.message.includes('Network')) {
+        errorMessage += 'Verifica tu conexión a internet e intenta nuevamente.';
       } else {
-        errorMessage = `Error: ${error.message}. Si el problema persiste, contacta al soporte.`;
+        errorMessage += 'Por favor intenta nuevamente o contacta al soporte.';
       }
 
       alert(errorMessage);

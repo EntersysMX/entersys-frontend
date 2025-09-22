@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useAnalytics, analyticsAPI } from '../hooks/useAnalytics';
+import { mauticService } from '../services/mautic';
 
 /**
  * WhatsApp Float Button - Versión Corregida para Producción
  * Debugging habilitado para identificar problemas
  */
 const WhatsAppFloatButton = () => {
-  const { trackEvent, trackGoal, matomoLoaded } = useAnalytics();
   const [isVisible, setIsVisible] = useState(true);
   const [debugInfo, setDebugInfo] = useState({});
-  const [forceVisible, setForceVisible] = useState(true); // DEBUG: Force visibility
+
+  // Inicializar Mautic tracking
+  useEffect(() => {
+    mauticService.initializeTracking();
+  }, []);
 
   // Debug info para troubleshooting
   useEffect(() => {
@@ -17,12 +20,11 @@ const WhatsAppFloatButton = () => {
       windowWidth: window.innerWidth,
       windowHeight: window.innerHeight,
       userAgent: navigator.userAgent,
-      matomoLoaded: matomoLoaded,
       timestamp: new Date().toISOString()
     };
     setDebugInfo(info);
     console.log('🔍 WhatsApp Button Debug Info:', info);
-  }, [matomoLoaded]);
+  }, []);
 
   // Configuración WhatsApp
   const WHATSAPP_CONFIG = {
@@ -34,52 +36,46 @@ const WhatsAppFloatButton = () => {
     try {
       console.log('📱 WhatsApp button clicked');
 
-      // 1. Tracking inmediato
-      if (window._paq) {
-        window._paq.push(['trackEvent', 'WhatsApp', 'Click', 'Float Button', 1]);
-        console.log('✅ Matomo event tracked');
-      } else {
-        console.warn('⚠️ Matomo not loaded');
-      }
-
-      // 2. Tracking en backend
-      const trackResult = await analyticsAPI.trackEvent({
-        category: 'WhatsApp',
-        action: 'Float_Button_Click',
-        name: 'WhatsApp Float Button',
-        value: 1,
-        url: window.location.href
-      });
-      console.log('📊 Backend tracking result:', trackResult);
-
-      // 3. Update lead score si existe email
+      // 1. Obtener información del usuario si existe
       const userEmail = localStorage.getItem('leadEmail') || sessionStorage.getItem('leadEmail');
-      if (userEmail) {
-        try {
-          const scoreResponse = await fetch(`https://api.dev.entersys.mx/api/v1/crm/lead/${encodeURIComponent(userEmail)}/score`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              action: 'whatsapp_click',
-              score_delta: 5,
-              metadata: { source: 'float_button', page: window.location.pathname }
-            })
-          });
+      const currentPage = window.location.pathname;
+      const source = 'whatsapp_float_button';
 
-          if (scoreResponse.ok) {
-            console.log('📈 Lead score updated');
-          }
-        } catch (scoreError) {
-          console.warn('Score update failed:', scoreError);
+      // 2. Tracking en Mautic
+      await mauticService.trackWhatsAppClick(userEmail, source);
+
+      // 3. Si no hay email registrado, crear un lead anónimo para tracking
+      if (!userEmail) {
+        const anonymousLead = {
+          name: 'WhatsApp Lead',
+          email: `whatsapp_${Date.now()}@anonymous.lead`,
+          company: '',
+          phone: '',
+          interest: 'whatsapp_contact',
+          message: `Click en WhatsApp desde ${currentPage}`,
+          source: source
+        };
+
+        // Capturar lead anónimo para tracking
+        try {
+          await mauticService.captureLead(anonymousLead);
+          console.log('📝 Anonymous WhatsApp lead captured');
+        } catch (leadError) {
+          console.warn('⚠️ Anonymous lead capture failed:', leadError);
         }
       }
 
-      // 4. Abrir WhatsApp
+      // 4. Tracking de conversión si hay email
+      if (userEmail) {
+        await mauticService.trackConversion(userEmail, 'whatsapp_click', 10);
+      }
+
+      // 5. Abrir WhatsApp
       const encodedMessage = encodeURIComponent(WHATSAPP_CONFIG.message);
       const whatsappUrl = `https://wa.me/${WHATSAPP_CONFIG.number}?text=${encodedMessage}`;
 
       window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-      console.log('✅ WhatsApp opened');
+      console.log('✅ WhatsApp opened successfully');
 
     } catch (error) {
       console.error('❌ WhatsApp click error:', error);
@@ -88,23 +84,21 @@ const WhatsAppFloatButton = () => {
       const encodedMessage = encodeURIComponent(WHATSAPP_CONFIG.message);
       const whatsappUrl = `https://wa.me/${WHATSAPP_CONFIG.number}?text=${encodedMessage}`;
       window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      console.log('✅ WhatsApp opened (fallback)');
     }
   };
 
   // Debug: Log cuando el componente se renderiza
   useEffect(() => {
-    console.log('🔍 WhatsAppFloatButton mounted', { isVisible, forceVisible, debugInfo });
-  }, [isVisible, forceVisible, debugInfo]);
+    console.log('🔍 WhatsAppFloatButton mounted', { isVisible, debugInfo });
+  }, [isVisible, debugInfo]);
 
-  // DEBUG: Always show button for now
-  const shouldShow = forceVisible || isVisible;
-
-  if (!shouldShow) {
-    console.log('🚫 WhatsApp button hidden', { isVisible, forceVisible });
+  if (!isVisible) {
+    console.log('🚫 WhatsApp button hidden');
     return null;
   }
 
-  console.log('✅ WhatsApp button rendering', { shouldShow, isVisible, forceVisible });
+  console.log('✅ WhatsApp button rendering');
 
   return (
     <div
