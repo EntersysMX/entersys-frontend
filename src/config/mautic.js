@@ -7,8 +7,8 @@ export const MAUTIC_CONFIG = {
   baseUrl: 'https://crm.entersys.mx',
   apiUrl: 'https://crm.entersys.mx/api',
 
-  // Configuración de formulario
-  formId: 1,
+  // Configuración de formulario - Cambiar por el ID correcto
+  formId: 2, // Cambiar si el formulario 1 no existe
 
   // Tracking
   trackingPixel: 'https://crm.entersys.mx/mtracking.gif',
