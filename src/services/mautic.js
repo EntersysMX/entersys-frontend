@@ -4,6 +4,7 @@
  */
 
 import { getCurrentConfig } from '../config/mautic';
+import { mauticAuth } from './mauticAuth';
 
 const config = getCurrentConfig();
 
@@ -47,40 +48,134 @@ export class MauticService {
   }
 
   /**
-   * Capturar lead en Mautic usando formulario directo (más confiable)
+   * Capturar lead en Mautic usando API OAuth2
    */
   async captureLead(leadData) {
     try {
-      console.log('📝 Capturing lead via Mautic form submission:', leadData);
+      console.log('📝 Capturing lead in Mautic via API:', leadData);
 
-      // Usar directamente el método de formulario que siempre funciona
-      return await this.fallbackFormSubmission(leadData);
+      // Preparar datos para la API de Mautic
+      const contactData = {
+        firstname: leadData.name?.split(' ')[0] || leadData.name,
+        lastname: leadData.name?.split(' ').slice(1).join(' ') || '',
+        email: leadData.email,
+        company: leadData.company || '',
+        phone: leadData.phone || '',
+        tags: this.generateTags(leadData),
+
+        // Custom fields
+        lead_source: leadData.source || 'website_form',
+        interest_area: leadData.interest || 'general',
+        message: leadData.message || '',
+        page_url: window.location.href,
+        referrer: document.referrer || '',
+        session_id: this.sessionId
+      };
+
+      if (config.debug) {
+        console.log('🔍 Contact data for Mautic:', contactData);
+      }
+
+      // Crear contacto usando API autenticada
+      const response = await mauticAuth.authenticatedRequest(
+        `${config.apiUrl}/contacts/new`,
+        {
+          method: 'POST',
+          body: JSON.stringify(contactData)
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('✅ Lead captured in Mautic via API:', result);
+
+        // Tracking adicional
+        this.trackPageAction('form_submit', leadData.email);
+
+        return {
+          success: true,
+          leadId: result.contact?.id,
+          message: 'Lead capturado exitosamente en Mautic',
+          method: 'api_oauth2'
+        };
+
+      } else {
+        const errorText = await response.text();
+        console.error('❌ Mautic API error:', response.status, errorText);
+        throw new Error(`Mautic API error: ${response.status} ${errorText}`);
+      }
 
     } catch (error) {
-      console.error('❌ Error capturing lead in Mautic:', error);
+      console.error('❌ Error with Mautic API, trying form fallback:', error);
 
-      // Si todo falla, al menos registramos localmente
-      return this.localLeadStorage(leadData);
+      // Fallback al formulario directo
+      return await this.fallbackFormSubmission(leadData);
     }
   }
 
   /**
-   * Fallback: Usar solo almacenamiento local por ahora
+   * Fallback: envío directo al formulario de Mautic
    */
   async fallbackFormSubmission(leadData) {
     try {
-      console.log('📝 Mautic form temporarily disabled, using local storage');
+      console.log('📝 Using Mautic form fallback submission');
 
-      // Por ahora, solo almacenamiento local hasta configurar Mautic correctamente
-      return await this.localLeadStorage(leadData);
+      // Crear un iframe oculto para envío sin CORS
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.name = 'mautic_submit_' + Date.now();
+      document.body.appendChild(iframe);
+
+      // Crear formulario dinámico
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = `${config.baseUrl}/form/submit`;
+      form.target = iframe.name;
+
+      // Añadir campos del formulario
+      const fields = {
+        'mauticform[firstname]': leadData.name?.split(' ')[0] || leadData.name,
+        'mauticform[lastname]': leadData.name?.split(' ').slice(1).join(' ') || '',
+        'mauticform[email]': leadData.email,
+        'mauticform[company]': leadData.company || '',
+        'mauticform[phone]': leadData.phone || '',
+        'mauticform[message]': leadData.message || '',
+        'mauticform[formId]': config.formId,
+        'mauticform[return]': window.location.href
+      };
+
+      Object.entries(fields).forEach(([name, value]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value || '';
+        form.appendChild(input);
+      });
+
+      // Enviar formulario
+      document.body.appendChild(form);
+      form.submit();
+
+      // Limpiar después de un momento
+      setTimeout(() => {
+        try {
+          if (document.body.contains(form)) document.body.removeChild(form);
+          if (document.body.contains(iframe)) document.body.removeChild(iframe);
+        } catch (cleanupError) {
+          console.warn('⚠️ Cleanup error:', cleanupError);
+        }
+      }, 3000);
+
+      console.log('✅ Lead submitted via Mautic form fallback');
+      return {
+        success: true,
+        message: 'Lead enviado a Mautic via formulario',
+        method: 'form_submission'
+      };
 
     } catch (error) {
-      console.error('❌ Fallback failed:', error);
-      return {
-        success: false,
-        error: 'All lead capture methods failed',
-        method: 'failed'
-      };
+      console.error('❌ Form submission failed, using local storage:', error);
+      return await this.localLeadStorage(leadData);
     }
   }
 
@@ -227,19 +322,52 @@ export class MauticService {
   }
 
   /**
-   * Track conversión en Mautic - Deshabilitado por problemas de CORS
+   * Track conversión en Mautic usando OAuth2
    */
   async trackConversion(email, conversionType = 'form_submit', value = 1) {
-    // Temporalmente deshabilitado por problemas de OAuth2/CORS
-    console.log('📊 Conversion tracking disabled (OAuth2 required):', {
-      email, conversionType, value
-    });
+    try {
+      if (!email) {
+        console.log('📊 No email provided for conversion tracking');
+        return { success: true, message: 'No email to track' };
+      }
 
-    return {
-      success: true,
-      message: 'Conversion tracking disabled - API requires OAuth2',
-      disabled: true
-    };
+      const conversionData = {
+        email: email,
+        conversion_type: conversionType,
+        conversion_value: value,
+        page_url: window.location.href,
+        timestamp: new Date().toISOString(),
+        session_id: this.sessionId
+      };
+
+      console.log('📊 Tracking conversion in Mautic:', conversionData);
+
+      // Usar API autenticada para tracking
+      const response = await mauticAuth.authenticatedRequest(
+        `${config.apiUrl}/contacts/events/new`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            eventName: conversionType,
+            eventData: conversionData
+          })
+        }
+      );
+
+      if (response.ok) {
+        console.log('✅ Conversion tracked in Mautic');
+        return { success: true };
+      } else {
+        const errorText = await response.text();
+        console.warn('⚠️ Conversion tracking failed:', response.status, errorText);
+        return { success: false, error: `HTTP ${response.status}` };
+      }
+
+    } catch (error) {
+      console.warn('⚠️ Conversion tracking error (non-critical):', error);
+      // No fallar el proceso principal por esto
+      return { success: false, error: error.message };
+    }
   }
 
   /**

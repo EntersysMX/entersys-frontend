@@ -7,8 +7,16 @@ export const MAUTIC_CONFIG = {
   baseUrl: 'https://crm.entersys.mx',
   apiUrl: 'https://crm.entersys.mx/api',
 
-  // Configuración de formulario - Cambiar por el ID correcto
-  formId: 2, // Cambiar si el formulario 1 no existe
+  // Configuración de formulario
+  formId: 1, // ID del formulario configurado en Mautic
+
+  // OAuth2 Credentials
+  clientId: '1_2psjjg30m7s4ogs8goswsksos0s8scgk0k8wc484gwoww8sw4c',
+  clientSecret: '3iv9w2alzdes8s8skgkg4co80gsggos8gg0co4k404cks4gosg',
+
+  // URLs OAuth2
+  authUrl: 'https://crm.entersys.mx/oauth/v2/authorize',
+  tokenUrl: 'https://crm.entersys.mx/oauth/v2/token',
 
   // Tracking
   trackingPixel: 'https://crm.entersys.mx/mtracking.gif',
@@ -21,8 +29,8 @@ export const MAUTIC_CONFIG = {
 
   // Configuración por ambiente
   development: {
-    baseUrl: 'https://crm.dev.entersys.mx',
-    apiUrl: 'https://crm.dev.entersys.mx/api',
+    baseUrl: 'https://crm.entersys.mx',
+    apiUrl: 'https://crm.entersys.mx/api',
     formId: 1,
     debug: true
   },
