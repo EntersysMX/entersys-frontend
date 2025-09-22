@@ -5,7 +5,7 @@
 
 // URL del backend - usar localStorage temporal hasta que el backend esté funcionando
 const USE_BACKEND = false; // Cambiar a true cuando el backend esté funcionando
-const API_BASE = import.meta.env.VITE_API_URL || 'https://dev.scram2k.com/backend';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://dev.entersys.mx/backend';
 const CRM_ENDPOINT = `${API_BASE}/api/v1/crm`;
 
 export class MauticService {
@@ -259,8 +259,8 @@ export class MauticService {
    * Track acción de página via Backend
    */
   async trackPageAction(action, email = null) {
-    if (!email) {
-      console.log('📊 Page action tracking skipped (no email):', action);
+    if (!email || !USE_BACKEND) {
+      console.log('📊 Page action tracking skipped (no email or backend disabled):', action);
       return Promise.resolve();
     }
 
@@ -313,8 +313,8 @@ export class MauticService {
    * Track conversión via Backend
    */
   async trackConversion(email, conversionType = 'form_submit', value = 10) {
-    if (!email) {
-      console.log('📊 Conversion tracking skipped (no email)');
+    if (!email || !USE_BACKEND) {
+      console.log('📊 Conversion tracking skipped (no email or backend disabled)');
       return { success: false, message: 'No email provided' };
     }
 
