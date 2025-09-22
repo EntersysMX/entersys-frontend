@@ -31,6 +31,15 @@ jobs:
     - name: Test build directory exists
       run: ls -la dist/
 
+    - name: Debug secrets (safe)
+      run: |
+        echo "SERVER_USER length: ${#SERVER_USER}"
+        echo "SERVER_SSH_KEY length: ${#SERVER_SSH_KEY}"
+        echo "SERVER_USER starts with: ${SERVER_USER:0:3}***"
+      env:
+        SERVER_USER: ${{ secrets.SERVER_USER }}
+        SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+
     - name: Deploy to SCRAM server
       uses: appleboy/ssh-action@v1.0.3
       with:
