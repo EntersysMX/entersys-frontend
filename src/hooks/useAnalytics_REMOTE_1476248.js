@@ -1,19 +1,9 @@
 import { useEffect, useState } from 'react';
 
-/**
- * Hook simplificado para analytics básico
- * Mantiene solo Matomo para tracking básico de páginas
- */
 export const useAnalytics = () => {
   const [matomoLoaded, setMatomoLoaded] = useState(false);
 
   useEffect(() => {
-    // Solo cargar si analytics está habilitado
-    if (process.env.REACT_APP_DISABLE_ANALYTICS === 'true') {
-      console.log('📊 Analytics disabled by env variable');
-      return;
-    }
-
     if (!window._paq && !matomoLoaded) {
       window._paq = window._paq || [];
       window._paq.push(['trackPageView']);
@@ -24,13 +14,7 @@ export const useAnalytics = () => {
       const script = document.createElement('script');
       script.async = true;
       script.src = 'https://analytics.entersys.mx/matomo.js';
-      script.onload = () => {
-        setMatomoLoaded(true);
-        console.log('✅ Matomo analytics loaded');
-      };
-      script.onerror = () => {
-        console.warn('⚠️ Matomo analytics failed to load');
-      };
+      script.onload = () => setMatomoLoaded(true);
 
       const firstScript = document.getElementsByTagName('script')[0];
       firstScript.parentNode.insertBefore(script, firstScript);
@@ -40,42 +24,78 @@ export const useAnalytics = () => {
   const trackEvent = (category, action, name = '', value = 0) => {
     if (window._paq && matomoLoaded) {
       window._paq.push(['trackEvent', category, action, name, value]);
-      console.log(`📊 Event tracked: ${category} - ${action}`);
-    } else {
-      console.log(`📊 Event not tracked (Matomo not ready): ${category} - ${action}`);
     }
   };
 
-  const trackPageView = (customTitle = null) => {
+  const trackGoal = (goalId, revenue = 0) => {
     if (window._paq && matomoLoaded) {
-      if (customTitle) {
-        window._paq.push(['setDocumentTitle', customTitle]);
-      }
+      window._paq.push(['trackGoal', goalId, revenue]);
+    }
+  };
+
+  const trackPageView = () => {
+    if (window._paq && matomoLoaded) {
       window._paq.push(['trackPageView']);
-      console.log('📊 Page view tracked');
+    }
+  };
+
+  // *** NUEVO *** Función específica para tracking de WhatsApp
+  const trackWhatsAppClick = (source = 'unknown', additionalData = {}) => {
+    // Track en Matomo frontend
+    trackEvent('WhatsApp', 'Click', source, 1);
+
+    // Track en backend API para CRM sync
+    analyticsAPI.trackEvent({
+      category: 'WhatsApp',
+      action: 'Click',
+      name: `WhatsApp Click - ${source}`,
+      value: 1,
+      url: window.location.href,
+      ...additionalData
+    });
+
+    console.log('📱 WhatsApp click tracked:', source);
+  };
+
+  // *** NUEVO *** Función para actualizar score del lead
+  const updateLeadScore = async (email, action, scoreDelta = 5) => {
+    try {
+      const response = await fetch(`https://api.dev.entersys.mx/api/v1/crm/lead/${encodeURIComponent(email)}/score`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          action: action,
+          score_delta: scoreDelta,
+          metadata: {
+            page_url: window.location.href,
+            timestamp: new Date().toISOString(),
+            user_agent: navigator.userAgent
+          }
+        })
+      });
+
+      const result = await response.json();
+      console.log('📈 Lead score updated:', result);
+      return result;
+    } catch (error) {
+      console.error('❌ Error updating lead score:', error);
+      return { success: false, error: error.message };
     }
   };
 
   return {
     trackEvent,
+    trackGoal,
     trackPageView,
+    trackWhatsAppClick,  // NUEVO
+    updateLeadScore,     // NUEVO
     matomoLoaded
   };
 };
 
-// Mantener el analyticsAPI solo para compatibilidad hacia atrás
-// Pero deprecado - usar mauticService en su lugar
 export const analyticsAPI = {
-<<<<<<< Updated upstream
-  async captureLead(leadData) {
-    console.warn('⚠️ analyticsAPI.captureLead is deprecated. Use mauticService.captureLead instead');
-    // Fallback básico por si algo aún lo usa
-    return {
-      success: false,
-      error: 'Deprecated - use mauticService instead',
-      deprecated: true
-    };
-=======
   async captureLead(leadData, signal = null) {
     try {
       console.log('🔄 Sending lead to API:', leadData);
@@ -176,6 +196,5 @@ export const analyticsAPI = {
       console.error('Error tracking conversion:', error);
       return { success: false, error: error.message };
     }
->>>>>>> Stashed changes
   }
 };
