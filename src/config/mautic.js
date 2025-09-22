@@ -14,9 +14,9 @@ export const MAUTIC_CONFIG = {
   clientId: '1_2psjjg30m7s4ogs8goswsksos0s8scgk0k8wc484gwoww8sw4c',
   clientSecret: '3iv9w2alzdes8s8skgkg4co80gsggos8gg0co4k404cks4gosg',
 
-  // URLs OAuth2
-  authUrl: 'https://crm.entersys.mx/oauth/v2/authorize',
-  tokenUrl: 'https://crm.entersys.mx/oauth/v2/token',
+  // URLs OAuth2 - Mautic v4 standard paths
+  authUrl: 'https://crm.entersys.mx/oauth/authorize',
+  tokenUrl: 'https://crm.entersys.mx/oauth/token',
 
   // Tracking
   trackingPixel: 'https://crm.entersys.mx/mtracking.gif',

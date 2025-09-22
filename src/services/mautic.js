@@ -48,13 +48,13 @@ export class MauticService {
   }
 
   /**
-   * Capturar lead en Mautic - Usando formulario directo por CORS issues
+   * Capturar lead en Mautic - API no disponible, usando formulario directo
    */
   async captureLead(leadData) {
     try {
-      console.log('📝 Capturing lead in Mautic via form (CORS workaround):', leadData);
+      console.log('📝 Capturing lead in Mautic via form (API endpoints not available):', leadData);
 
-      // Usar directamente formulario hasta que CORS esté configurado
+      // API OAuth2 no está disponible (404), usar formulario directo
       return await this.fallbackFormSubmission(leadData);
 
     } catch (error) {
