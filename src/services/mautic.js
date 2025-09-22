@@ -1,12 +1,12 @@
 /**
- * Servicio Mautic - Integración directa con el CRM
- * Simplificado para mejor confiabilidad
+ * Servicio Mautic - Integración via Backend API
+ * Arquitectura escalable para futuras integraciones
  */
 
-import { getCurrentConfig } from '../config/mautic';
-import { mauticAuth } from './mauticAuth';
-
-const config = getCurrentConfig();
+// URL del backend - usar localStorage temporal hasta que el backend esté funcionando
+const USE_BACKEND = false; // Cambiar a true cuando el backend esté funcionando
+const API_BASE = import.meta.env.VITE_API_URL || 'https://dev.scram2k.com/backend';
+const CRM_ENDPOINT = `${API_BASE}/api/v1/crm`;
 
 export class MauticService {
   constructor() {
@@ -19,117 +19,101 @@ export class MauticService {
   }
 
   /**
-   * Inicializar tracking de Mautic
+   * Inicializar tracking de Mautic (sin tracking automático)
    */
   async initializeTracking() {
     if (this.initialized) return;
 
     try {
-      // Cargar script de tracking de Mautic
-      if (!window.MauticJS) {
-        const script = document.createElement('script');
-        script.src = `${config.baseUrl}/media/js/mautic-form.js`;
-        script.async = true;
-        document.head.appendChild(script);
-      }
-
-      // Pixel de tracking
-      const trackingImg = new Image();
-      trackingImg.src = `${config.trackingPixel}?d=${encodeURIComponent(document.domain)}&url=${encodeURIComponent(window.location.href)}`;
-
+      // Solo marcar como inicializado, sin tracking automático para evitar CORS
       this.initialized = true;
-
-      if (config.debug) {
-        console.log('✅ Mautic tracking initialized with config:', config);
-      }
+      console.log('✅ Mautic service initialized (tracking disabled to avoid CORS)');
     } catch (error) {
-      console.error('❌ Error initializing Mautic tracking:', error);
+      console.error('❌ Error initializing Mautic service:', error);
     }
   }
 
   /**
-   * Capturar lead en Mautic - API no disponible, usando formulario directo
+   * Capturar lead via Backend CRM API (cuando esté disponible)
    */
   async captureLead(leadData) {
     try {
-      console.log('📝 Capturing lead in Mautic via form (API endpoints not available):', leadData);
+      console.log('📝 Capturing lead:', leadData);
 
-      // API OAuth2 no está disponible (404), usar formulario directo
-      return await this.fallbackFormSubmission(leadData);
+      // Verificar si debe usar backend o localStorage
+      if (USE_BACKEND) {
+        console.log('🔗 Using backend CRM API');
+
+        // Mapear datos para el esquema del backend
+        const backendPayload = {
+          name: leadData.name,
+          email: leadData.email,
+          company: leadData.company || '',
+          phone: leadData.phone || '',
+          interest: this.mapInterestToBackend(leadData.interest || leadData.source || 'general'),
+          message: leadData.message || '',
+          source: 'website_form'
+        };
+
+        const response = await fetch(`${CRM_ENDPOINT}/sync-lead`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(backendPayload)
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          console.log('✅ Lead captured successfully via backend:', result);
+
+          return {
+            success: true,
+            message: result.message || '¡Gracias por contactarnos! Hemos recibido tu información y nos pondremos en contacto contigo muy pronto.',
+            method: 'backend_crm_api',
+            leadId: result.contact_id,
+            action: result.action,
+            nextSteps: result.next_steps || []
+          };
+        } else {
+          throw new Error(result.detail || `HTTP ${response.status}`);
+        }
+      } else {
+        // Usar localStorage mientras el backend se configura
+        console.log('📦 Using localStorage (backend not configured yet)');
+        return await this.localLeadStorage(leadData);
+      }
 
     } catch (error) {
-      console.error('❌ Error capturing lead in Mautic:', error);
+      console.error('❌ Error capturing lead:', error);
 
-      // Si todo falla, almacenamiento local
+      // Si falla el backend, usar almacenamiento local como fallback
+      console.log('📦 Fallback: usando localStorage mientras se resuelve la conexión');
       return await this.localLeadStorage(leadData);
     }
   }
 
   /**
-   * Fallback: envío directo al formulario de Mautic
+   * Mapear interesse del frontend al formato esperado por el backend
    */
-  async fallbackFormSubmission(leadData) {
-    try {
-      console.log('📝 Using Mautic form fallback submission');
+  mapInterestToBackend(interest) {
+    const interestMap = {
+      'general': 'general',
+      'worksys': 'worksys',
+      'expersys': 'expersys',
+      'demo': 'demo',
+      'partnership': 'partnership',
+      'website': 'general',
+      'contact': 'general',
+      'pricing': 'demo',
+      'solutions': 'general'
+    };
 
-      // Crear un iframe oculto para envío sin CORS
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.name = 'mautic_submit_' + Date.now();
-      document.body.appendChild(iframe);
-
-      // Crear formulario dinámico
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = `${config.baseUrl}/form/submit`;
-      form.target = iframe.name;
-
-      // Añadir campos del formulario
-      const fields = {
-        'mauticform[firstname]': leadData.name?.split(' ')[0] || leadData.name,
-        'mauticform[lastname]': leadData.name?.split(' ').slice(1).join(' ') || '',
-        'mauticform[email]': leadData.email,
-        'mauticform[company]': leadData.company || '',
-        'mauticform[phone]': leadData.phone || '',
-        'mauticform[message]': leadData.message || '',
-        'mauticform[formId]': config.formId,
-        'mauticform[return]': window.location.href
-      };
-
-      Object.entries(fields).forEach(([name, value]) => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = name;
-        input.value = value || '';
-        form.appendChild(input);
-      });
-
-      // Enviar formulario
-      document.body.appendChild(form);
-      form.submit();
-
-      // Limpiar después de un momento
-      setTimeout(() => {
-        try {
-          if (document.body.contains(form)) document.body.removeChild(form);
-          if (document.body.contains(iframe)) document.body.removeChild(iframe);
-        } catch (cleanupError) {
-          console.warn('⚠️ Cleanup error:', cleanupError);
-        }
-      }, 3000);
-
-      console.log('✅ Lead submitted via Mautic form fallback');
-      return {
-        success: true,
-        message: 'Lead enviado a Mautic via formulario',
-        method: 'form_submission'
-      };
-
-    } catch (error) {
-      console.error('❌ Form submission failed, using local storage:', error);
-      return await this.localLeadStorage(leadData);
-    }
+    return interestMap[interest.toLowerCase()] || 'general';
   }
+
 
   /**
    * Almacenamiento local de emergencia
@@ -154,7 +138,7 @@ export class MauticService {
 
       return {
         success: true,
-        message: 'Información recibida correctamente. Nos pondremos en contacto contigo pronto.',
+        message: '✅ ¡Gracias por contactarnos! Hemos recibido tu información y nos pondremos en contacto contigo muy pronto.',
         method: 'local_storage',
         leadId: newLead.id,
         totalLeads: leads.length
@@ -176,10 +160,37 @@ export class MauticService {
   getStoredLeads() {
     try {
       const leads = JSON.parse(localStorage.getItem('entersys_leads') || '[]');
+      console.log('📋 Leads almacenados localmente:', leads.length);
       console.table(leads);
       return leads;
     } catch (error) {
       console.error('Error retrieving stored leads:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Obtener leads en formato para envío manual a Mautic
+   */
+  getLeadsForManualSync() {
+    try {
+      const leads = this.getStoredLeads();
+      const formatted = leads.map(lead => ({
+        firstname: lead.name?.split(' ')[0] || lead.name || '',
+        lastname: lead.name?.split(' ').slice(1).join(' ') || '',
+        email: lead.email || '',
+        company: lead.company || '',
+        phone: lead.phone || '',
+        message: lead.message || '',
+        date_captured: lead.timestamp || '',
+        source: 'website_local_storage',
+        page_url: lead.page_url || ''
+      }));
+
+      console.log('📤 Leads formateados para Mautic:', formatted);
+      return formatted;
+    } catch (error) {
+      console.error('Error formatting leads:', error);
       return [];
     }
   }
@@ -245,48 +256,106 @@ export class MauticService {
   }
 
   /**
-   * Track acción de página en Mautic
+   * Track acción de página via Backend
    */
-  trackPageAction(action, email = null) {
+  async trackPageAction(action, email = null) {
+    if (!email) {
+      console.log('📊 Page action tracking skipped (no email):', action);
+      return Promise.resolve();
+    }
+
     try {
-      const trackingData = {
-        action: action,
-        page_url: window.location.href,
-        timestamp: new Date().toISOString(),
-        session_id: this.sessionId
+      // Mapear acción a score
+      const scoreMapping = {
+        'page_view': 2,
+        'solutions_page_visit': 3,
+        'pricing_page_visit': 8,
+        'contact_page_visit': 5,
+        'whatsapp_click': 5,
+        'phone_click': 3,
+        'email_click': 4
       };
 
-      if (email) {
-        trackingData.email = email;
+      const scoreValue = scoreMapping[action] || 1;
+
+      const response = await fetch(`${CRM_ENDPOINT}/lead/${email}/score`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          action: action,
+          score_delta: scoreValue,
+          metadata: {
+            page_url: window.location.href,
+            timestamp: new Date().toISOString(),
+            session_id: this.sessionId
+          }
+        })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log(`📊 Score updated for ${email}: ${action} (+${scoreValue})`, result.score_change);
+        return result;
+      } else {
+        console.warn(`⚠️ Score update failed for ${email}:`, response.status);
       }
 
-      // Enviar via pixel tracking
-      const trackingImg = new Image();
-      const params = new URLSearchParams(trackingData);
-      trackingImg.src = `${config.trackingPixel}?${params.toString()}`;
-
-      if (config.debug) {
-        console.log('📊 Mautic page action tracked:', action);
-      }
     } catch (error) {
-      console.error('❌ Error tracking page action:', error);
+      console.warn('⚠️ Page action tracking failed (non-critical):', error);
     }
+
+    return Promise.resolve();
   }
 
   /**
-   * Track conversión en Mautic - Deshabilitado por CORS
+   * Track conversión via Backend
    */
-  async trackConversion(email, conversionType = 'form_submit', value = 1) {
-    // Deshabilitado temporalmente por CORS issues
-    console.log('📊 Conversion tracking disabled due to CORS (will work after server config):', {
-      email, conversionType, value
-    });
+  async trackConversion(email, conversionType = 'form_submit', value = 10) {
+    if (!email) {
+      console.log('📊 Conversion tracking skipped (no email)');
+      return { success: false, message: 'No email provided' };
+    }
 
-    return {
-      success: true,
-      message: 'Conversion tracking disabled - CORS configuration needed',
-      disabled: true
-    };
+    try {
+      // Usar el endpoint de score con valores altos para conversiones
+      const response = await fetch(`${CRM_ENDPOINT}/lead/${email}/score`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          action: `conversion_${conversionType}`,
+          score_delta: value,
+          metadata: {
+            conversion_type: conversionType,
+            page_url: window.location.href,
+            timestamp: new Date().toISOString(),
+            session_id: this.sessionId
+          }
+        })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log(`📊 Conversion tracked for ${email}: ${conversionType} (+${value})`, result.score_change);
+
+        return {
+          success: true,
+          message: 'Conversion tracked successfully',
+          method: 'backend_crm_api',
+          score_change: result.score_change
+        };
+      } else {
+        console.warn(`⚠️ Conversion tracking failed for ${email}:`, response.status);
+        return { success: false, message: `HTTP ${response.status}` };
+      }
+
+    } catch (error) {
+      console.error('❌ Error tracking conversion:', error);
+      return { success: false, error: error.message };
+    }
   }
 
   /**
@@ -315,4 +384,26 @@ if (typeof window !== 'undefined') {
   window.addEventListener('load', () => {
     mauticService.initializeTracking();
   });
+
+  // Exponer funciones útiles para debug/administración
+  window.entersysLeads = {
+    getAll: () => mauticService.getStoredLeads(),
+    export: () => mauticService.exportLeadsToCSV(),
+    forSync: () => mauticService.getLeadsForManualSync(),
+    count: () => {
+      const leads = mauticService.getStoredLeads();
+      console.log(`📊 Total leads almacenados: ${leads.length}`);
+      return leads.length;
+    },
+    clear: () => {
+      if (confirm('¿Estás seguro de que quieres eliminar todos los leads almacenados localmente?')) {
+        localStorage.removeItem('entersys_leads');
+        console.log('🗑️ Leads eliminados');
+        return true;
+      }
+      return false;
+    }
+  };
+
+  console.log('🔧 Funciones de administración disponibles en window.entersysLeads');
 }

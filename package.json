@@ -1,6 +1,6 @@
 {
   "name": "entersys-frontend",
-  "version": "1.0.0",
+  "version": "2025.09.22-1421-c4efe9a",
   "description": "Frontend web application for Entersys.mx project",
   "private": true,
   "type": "module",
@@ -8,7 +8,12 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "deploy:local": "node scripts/deploy.js local",
+    "deploy:server": "node scripts/deploy.js server",
+    "deploy:help": "node scripts/deploy.js help",
+    "version:bump": "node scripts/deploy.js version",
+    "clean": "rm -rf dist node_modules/.vite src/version.json src/deploy-info.json"
   },
   "repository": {
     "type": "git",
