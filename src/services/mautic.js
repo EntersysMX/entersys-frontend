@@ -48,68 +48,20 @@ export class MauticService {
   }
 
   /**
-   * Capturar lead en Mautic usando API OAuth2
+   * Capturar lead en Mautic - Usando formulario directo por CORS issues
    */
   async captureLead(leadData) {
     try {
-      console.log('📝 Capturing lead in Mautic via API:', leadData);
+      console.log('📝 Capturing lead in Mautic via form (CORS workaround):', leadData);
 
-      // Preparar datos para la API de Mautic
-      const contactData = {
-        firstname: leadData.name?.split(' ')[0] || leadData.name,
-        lastname: leadData.name?.split(' ').slice(1).join(' ') || '',
-        email: leadData.email,
-        company: leadData.company || '',
-        phone: leadData.phone || '',
-        tags: this.generateTags(leadData),
-
-        // Custom fields
-        lead_source: leadData.source || 'website_form',
-        interest_area: leadData.interest || 'general',
-        message: leadData.message || '',
-        page_url: window.location.href,
-        referrer: document.referrer || '',
-        session_id: this.sessionId
-      };
-
-      if (config.debug) {
-        console.log('🔍 Contact data for Mautic:', contactData);
-      }
-
-      // Crear contacto usando API autenticada
-      const response = await mauticAuth.authenticatedRequest(
-        `${config.apiUrl}/contacts/new`,
-        {
-          method: 'POST',
-          body: JSON.stringify(contactData)
-        }
-      );
-
-      if (response.ok) {
-        const result = await response.json();
-        console.log('✅ Lead captured in Mautic via API:', result);
-
-        // Tracking adicional
-        this.trackPageAction('form_submit', leadData.email);
-
-        return {
-          success: true,
-          leadId: result.contact?.id,
-          message: 'Lead capturado exitosamente en Mautic',
-          method: 'api_oauth2'
-        };
-
-      } else {
-        const errorText = await response.text();
-        console.error('❌ Mautic API error:', response.status, errorText);
-        throw new Error(`Mautic API error: ${response.status} ${errorText}`);
-      }
+      // Usar directamente formulario hasta que CORS esté configurado
+      return await this.fallbackFormSubmission(leadData);
 
     } catch (error) {
-      console.error('❌ Error with Mautic API, trying form fallback:', error);
+      console.error('❌ Error capturing lead in Mautic:', error);
 
-      // Fallback al formulario directo
-      return await this.fallbackFormSubmission(leadData);
+      // Si todo falla, almacenamiento local
+      return await this.localLeadStorage(leadData);
     }
   }
 
@@ -322,52 +274,19 @@ export class MauticService {
   }
 
   /**
-   * Track conversión en Mautic usando OAuth2
+   * Track conversión en Mautic - Deshabilitado por CORS
    */
   async trackConversion(email, conversionType = 'form_submit', value = 1) {
-    try {
-      if (!email) {
-        console.log('📊 No email provided for conversion tracking');
-        return { success: true, message: 'No email to track' };
-      }
+    // Deshabilitado temporalmente por CORS issues
+    console.log('📊 Conversion tracking disabled due to CORS (will work after server config):', {
+      email, conversionType, value
+    });
 
-      const conversionData = {
-        email: email,
-        conversion_type: conversionType,
-        conversion_value: value,
-        page_url: window.location.href,
-        timestamp: new Date().toISOString(),
-        session_id: this.sessionId
-      };
-
-      console.log('📊 Tracking conversion in Mautic:', conversionData);
-
-      // Usar API autenticada para tracking
-      const response = await mauticAuth.authenticatedRequest(
-        `${config.apiUrl}/contacts/events/new`,
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            eventName: conversionType,
-            eventData: conversionData
-          })
-        }
-      );
-
-      if (response.ok) {
-        console.log('✅ Conversion tracked in Mautic');
-        return { success: true };
-      } else {
-        const errorText = await response.text();
-        console.warn('⚠️ Conversion tracking failed:', response.status, errorText);
-        return { success: false, error: `HTTP ${response.status}` };
-      }
-
-    } catch (error) {
-      console.warn('⚠️ Conversion tracking error (non-critical):', error);
-      // No fallar el proceso principal por esto
-      return { success: false, error: error.message };
-    }
+    return {
+      success: true,
+      message: 'Conversion tracking disabled - CORS configuration needed',
+      disabled: true
+    };
   }
 
   /**
