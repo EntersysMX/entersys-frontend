@@ -58,14 +58,20 @@ export class MauticService {
           source: 'website_form'
         };
 
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 segundo timeout
+
         const response = await fetch(`${CRM_ENDPOINT}/sync-lead`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify(backendPayload)
+          body: JSON.stringify(backendPayload),
+          signal: controller.signal
         });
+
+        clearTimeout(timeoutId);
 
         const result = await response.json();
 
