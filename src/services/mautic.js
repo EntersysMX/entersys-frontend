@@ -4,8 +4,8 @@
  */
 
 // URL del backend - usar localStorage temporal hasta que el backend esté funcionando
-const USE_BACKEND = false; // Cambiar a true cuando el backend esté funcionando
-const API_BASE = import.meta.env.VITE_API_URL || 'https://dev.entersys.mx/backend';
+const USE_BACKEND = true; // Cambiar a true cuando el backend esté funcionando
+const API_BASE = import.meta.env.VITE_API_URL || 'https://api.dev.entersys.mx';
 const CRM_ENDPOINT = `${API_BASE}/api/v1/crm`;
 
 export class MauticService {
@@ -108,7 +108,8 @@ export class MauticService {
       'website': 'general',
       'contact': 'general',
       'pricing': 'demo',
-      'solutions': 'general'
+      'solutions': 'general',
+      'automation': 'automation',
     };
 
     return interestMap[interest.toLowerCase()] || 'general';
