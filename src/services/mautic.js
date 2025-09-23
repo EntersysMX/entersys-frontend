@@ -5,7 +5,7 @@
 
 // URL del backend - FORZAR CACHE BUST v2
 const USE_BACKEND = true; // BACKEND ESTÁ FUNCIONANDO - v2.0
-const API_BASE = import.meta.env.VITE_API_URL || 'https://api.dev.entersys.mx';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://34.134.14.202:8000';
 const CRM_ENDPOINT = `${API_BASE}/api/v1/crm`;
 
 export class MauticService {
