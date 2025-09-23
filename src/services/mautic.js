@@ -3,8 +3,8 @@
  * Arquitectura escalable para futuras integraciones
  */
 
-// URL del backend - usar localStorage temporal hasta que el backend esté funcionando
-const USE_BACKEND = true; // Cambiar a true cuando el backend esté funcionando
+// URL del backend - FORZAR CACHE BUST v2
+const USE_BACKEND = true; // BACKEND ESTÁ FUNCIONANDO - v2.0
 const API_BASE = import.meta.env.VITE_API_URL || 'https://api.dev.entersys.mx';
 const CRM_ENDPOINT = `${API_BASE}/api/v1/crm`;
 
