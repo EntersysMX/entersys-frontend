@@ -39,6 +39,9 @@ export class MauticService {
   async captureLead(leadData) {
     try {
       console.log('📝 Capturing lead:', leadData);
+      console.log('🔧 DEBUG: USE_BACKEND =', USE_BACKEND);
+      console.log('🔧 DEBUG: API_BASE =', API_BASE);
+      console.log('🔧 DEBUG: CRM_ENDPOINT =', CRM_ENDPOINT);
 
       // Verificar si debe usar backend o localStorage
       if (USE_BACKEND) {
@@ -88,6 +91,12 @@ export class MauticService {
 
     } catch (error) {
       console.error('❌ Error capturing lead:', error);
+      console.error('🔧 DEBUG Error details:', {
+        name: error.name,
+        message: error.message,
+        stack: error.stack,
+        cause: error.cause
+      });
 
       // Si falla el backend, usar almacenamiento local como fallback
       console.log('📦 Fallback: usando localStorage mientras se resuelve la conexión');
