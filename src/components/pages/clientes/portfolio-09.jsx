@@ -5,9 +5,9 @@ import { Card } from "../../ui/Card";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 
-export function Portfolio09() {
+export function Portfolio09({ colorScheme = 1, ...props }) {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
         <div className="mx-auto mb-12 max-w-lg text-center md:mb-18 lg:mb-20">
           <p className="mb-3 font-semibold md:mb-4">Portafolio</p>

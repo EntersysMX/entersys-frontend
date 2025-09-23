@@ -13,13 +13,13 @@ export default function SobreNosotros() {
   return (
     <div>
       <Header />
-      <Header114 />
-      <Layout93 />
-      <Layout141 />
-      <Layout213 />
-      <Timeline20 />
-      <Logo03 />
-      <Cta39 />
+      <Header114 colorScheme={4} />
+      <Layout141 colorScheme={2} />
+      <Layout93 colorScheme={2} />
+      <Timeline20 colorScheme={4} />
+      <Layout213 colorScheme={1} />
+      <Logo03 colorScheme={3} />
+      <Cta39 colorScheme={1} />
       <Footer />
     </div>
   );

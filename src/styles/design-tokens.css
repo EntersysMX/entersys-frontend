@@ -163,9 +163,123 @@
   color: var(--color-scheme-3-accent) !important;
 }
 
-.color-scheme-4 button,
+.color-scheme-4 button:not(.agendar-demo-button),
 .color-scheme-4 .button {
   color: var(--color-scheme-4-accent) !important;
+}
+
+/* Botón Agendar Demo específico - proteger de color schemes */
+.agendar-demo-button,
+.color-scheme-1 .agendar-demo-button,
+.color-scheme-2 .agendar-demo-button,
+.color-scheme-3 .agendar-demo-button,
+.color-scheme-4 .agendar-demo-button {
+  background-color: white !important;
+  color: #000000 !important;
+  border: 2px solid white !important;
+}
+
+.agendar-demo-button span,
+.color-scheme-1 .agendar-demo-button span,
+.color-scheme-2 .agendar-demo-button span,
+.color-scheme-3 .agendar-demo-button span,
+.color-scheme-4 .agendar-demo-button span {
+  color: #000000 !important;
+}
+
+/* Header dropdown buttons styling is handled in header.css */
+
+/* Global Button Improvements - Esquinas redondeadas y mejor estilo */
+section:not(.header) button:not(.contact-button-custom):not(.agendar-demo-button):not(.whatsapp-float-button):not(.header-dropdown-button),
+main button:not(.contact-button-custom):not(.agendar-demo-button):not(.whatsapp-float-button):not(.header-dropdown-button),
+.button:not(.header-dropdown-button),
+.btn:not(.header-dropdown-button),
+input[type="submit"]:not(.header-dropdown-button),
+input[type="button"]:not(.header-dropdown-button),
+[role="button"]:not(.header-dropdown-button) {
+  border-radius: 8px !important;
+  padding: 12px 24px !important;
+  font-weight: 500 !important;
+  transition: all 0.25s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  border: none !important;
+  cursor: pointer !important;
+  position: relative !important;
+}
+
+section:not(.header) button:hover:not(.contact-button-custom):not(.agendar-demo-button):not(.whatsapp-float-button):not(.header-dropdown-button),
+main button:hover:not(.contact-button-custom):not(.agendar-demo-button):not(.whatsapp-float-button):not(.header-dropdown-button),
+.button:hover:not(.header-dropdown-button),
+.btn:hover:not(.header-dropdown-button),
+input[type="submit"]:hover:not(.header-dropdown-button),
+input[type="button"]:hover:not(.header-dropdown-button),
+[role="button"]:hover:not(.header-dropdown-button) {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+section:not(.header) button:active:not(.contact-button-custom):not(.agendar-demo-button):not(.whatsapp-float-button):not(.header-dropdown-button),
+main button:active:not(.contact-button-custom):not(.agendar-demo-button):not(.whatsapp-float-button):not(.header-dropdown-button),
+.button:active:not(.header-dropdown-button),
+.btn:active:not(.header-dropdown-button),
+input[type="submit"]:active:not(.header-dropdown-button),
+input[type="button"]:active:not(.header-dropdown-button),
+[role="button"]:active:not(.header-dropdown-button) {
+  transform: translateY(0) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Elementos con ">" que deben verse como texto normal */
+button[aria-label*=">"],
+button:contains(">"),
+.button:contains(">") {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  font-weight: inherit !important;
+  color: inherit !important;
+  transition: color 0.25s ease !important;
+}
+
+button[aria-label*=">"]:hover,
+button:contains(">"):hover,
+.button:contains(">"):hover {
+  color: var(--color-scheme-1-accent) !important;
+  opacity: 0.8 !important;
+}
+
+/* Elementos de navegación/enlaces con ">" - Solo hover de color - Excluir botones del header */
+section:not(.header) button:has(svg),
+main button:has(svg),
+.button:has(svg),
+a[href]:has(svg),
+section:not(.header) button:has(.material-symbols-outlined),
+main button:has(.material-symbols-outlined),
+.button:has(.material-symbols-outlined),
+a[href]:has(.material-symbols-outlined) {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  font-weight: inherit !important;
+  color: inherit !important;
+  transition: color 0.25s ease, opacity 0.25s ease !important;
+}
+
+section:not(.header) button:has(svg):hover,
+main button:has(svg):hover,
+.button:has(svg):hover,
+a[href]:has(svg):hover,
+section:not(.header) button:has(.material-symbols-outlined):hover,
+main button:has(.material-symbols-outlined):hover,
+.button:has(.material-symbols-outlined):hover,
+a[href]:has(.material-symbols-outlined):hover {
+  opacity: 0.7 !important;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 /* Material Icons Base Styles */
@@ -214,6 +328,7 @@
 .color-scheme-4 .material-symbols-outlined:hover {
   color: var(--color-scheme-4-text);
 }
+
 
 /* Typography - Aplicación de fuentes */
 

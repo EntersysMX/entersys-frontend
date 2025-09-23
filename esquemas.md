@@ -1,0 +1,57 @@
+No.	Página	Nombre de Sección	Nombre de Componente	Esquema de Color
+1	Inicio	inicio_hero	Header 5	Scheme 4
+2	Inicio	Inicio_servicios	Layout 363	Scheme 4
+3	Inicio	inicio_diferenciadores	Layout 394	Scheme 1
+4	Inicio	inicio_valor	Layout 245	Scheme 2
+5	Inicio	inicio_tecnologia	Layout 501	Scheme 4
+6	Inicio	inicio_industrias	Layout 241	Scheme 2
+7	Inicio	inicio_faq	FAQ 4	Scheme 1
+8	Nosotros	servicios_hero	Header 114	Scheme 4
+9	Nosotros	servicios_origen	Header 141	Scheme 2
+10	Nosotros	servicios_vision	Layout 93	Scheme 2
+11	Nosotros	servicios_trayectoria	Timeline 20	Scheme 4
+12	Nosotros	servicios_voces	Layout 213	Scheme 1
+13	Nosotros	servicios_logolist	Logo 3	Scheme 3
+14	Nosotros	servicios_cde	CTA 39	Schema 1
+15	Worksys	worksys_hero	Header 30	Scheme 2
+16	Worksys	worksys_description	Layout 421	Scheme 2
+17	Worksys	worksys_resultado	Layout74	Scheme 4
+18	Worksys	worksys_empresas	Layout 243	Schema 1
+19	Worksys	worksys_industrias	Layout 109	Scheme 4
+20	Worksys	worksys_momentos	Layout 237	Scheme 2
+21	Worksys	worksys_momentos2	FAQ 3	Scheme 2
+22	Worksys	worksys_clientes	Layout 237	Scheme 4
+23	Worksys	Worksys_cta	CTA 39	Scheme 3
+24	Worksys	worksys_blog	Blog 37	Scheme 2
+25	Worksys	worksys_faq	FAQ 5	Scheme 1
+26	Expersys	expersys_hero	Header 30	Scheme 2
+27	Expersys	expersys_features	Layout 16	Scheme 2
+28	Expersys	expersys_auditoria	Layout 492 	Scheme 4
+29	Expersys	expersys_stack	Layout 121	Scheme 2
+30	Expersys	expersys_casos	Layout 253	Scheme 1
+31	Expersys	expersys_exito	Layout 239	Scheme 4
+32	Expersys	worksys_blog	Blog 37	Scheme 2
+33	Expersys	expersys_cta	CTA 39	Scheme 3
+34	Expersys	expersys_faq	FAQ 5	Scheme 1
+35	Clientes	clientes_hero	Header 64	Scheme 2
+36	Clientes	clientes_portfolio	Portfolio 9	Scheme 1
+37	Clientes	expersys_cta	CTA 39	Scheme 3
+38	Clientes	clientes_blueprints	Event 23	Scheme 1
+39	Client-entry	awalab_inicio	Blog post Header 1	Scheme 1
+40	Client-entry	awalab_indice	Content 27	Scheme 1
+41	Client-entry	awalab_datos	Stats 30	Schema 2
+42	Client-entry	awalab_testimonio	Testimonial 17	Scheme 1
+43	Client-entry	awalab_galeria	Gallery 1	Scheme 4
+44	Client-entry	awalab_cta	CTA 39	Scheme 3
+45	Blog	blog_galeria	Blog 30	Schema 2
+46	Blog	blog_documentos	Blog 68	Scheme 4
+47	Blog	blog_contacto	Contact 13	Schema 2
+48	Blog	expersys_faq	FAQ 5	Schema 2
+49	Blog-entry	blog_entry_portada	Blog Post Header 4	Schema 2
+50	Blog-entry	blog_entry_desarrollo	Content 27	Scheme 1
+51	Blog-entry	blog_entry_galeria	Blog 30	Schema 2
+52	Blog-entry	blog_entry_documentos	Blog 68	Scheme 4
+53	Contacto	contacto_hero	Header 64	Schema 2
+54	Contacto	contacto_form	Contact 6	Scheme 1
+55	Contacto	contacto_informacion	Contact 13	Scheme 1
+56	Contacto	contacto_sedes	Contact 26	Schema 2

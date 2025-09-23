@@ -9,9 +9,9 @@ import {
 import { Card } from "../../ui/Card";
 import React, { Fragment } from "react";
 
-export function Content27() {
+export function Content27({ colorScheme = 1, ...props }) {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
         <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-[20rem_1fr] lg:gap-x-16 xxl:gap-x-48">
           <div>

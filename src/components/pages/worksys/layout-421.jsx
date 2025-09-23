@@ -59,10 +59,10 @@ const useRelume = () => {
   };
 };
 
-export function Layout421() {
+export function Layout421({ colorScheme = 1, ...props }) {
   const useActive = useRelume();
   return (
-    <section id="relume" className="relative flex flex-col">
+    <section id="relume" className="relative flex flex-col" {...props}>
       <motion.div
         className="sticky top-0 z-0 mx-auto flex min-h-0 items-center justify-center md:min-h-[auto]"
         style={useActive.containerMotion}

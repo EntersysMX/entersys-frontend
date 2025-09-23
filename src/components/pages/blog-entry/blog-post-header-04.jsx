@@ -5,9 +5,9 @@ import { Card } from "../../ui/Card";
 import React from "react";
 import { RxChevronLeft } from "react-icons/rx";
 
-export function BlogPostHeader04() {
+export function BlogPostHeader04({ colorScheme = 1, ...props }) {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
         <div className="grid gap-x-20 gap-y-12 md:grid-cols-[.5fr_1fr]">
           <div className="mx-auto flex size-full max-w-lg flex-col items-start justify-start">

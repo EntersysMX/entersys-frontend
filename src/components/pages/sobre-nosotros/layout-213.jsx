@@ -5,9 +5,9 @@ import { Card } from "../../ui/Card";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 
-export function Layout213() {
+export function Layout213({ colorScheme = 1, ...props }) {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28 scheme-1">
+    <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-x-20">
           <div className="order-2 md:order-1">

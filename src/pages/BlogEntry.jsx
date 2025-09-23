@@ -9,9 +9,9 @@ export default function BlogEntry() {
   return (
     <div>
       <Header />
-      <BlogPostHeader04 />
-      <Content27 />
-      <Blog30 />
+      <BlogPostHeader04 colorScheme={2} />
+      <Content27 colorScheme={1} />
+      <Blog30 colorScheme={2} />
       <Footer />
     </div>
   );

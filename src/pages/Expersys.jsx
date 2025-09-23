@@ -13,13 +13,13 @@ export default function Expersys() {
   return (
     <div>
       <Header />
-      <Header30 />
-      <Layout16 />
-      <Layout239 />
-      <Layout253 />
-      <Layout492 />
-      <Faq05 />
-      <Cta39 />
+      <Header30 colorScheme={2} />
+      <Layout16 colorScheme={2} />
+      <Layout239 colorScheme={4} />
+      <Layout253 colorScheme={1} />
+      <Layout492 colorScheme={4} />
+      <Faq05 colorScheme={1} />
+      <Cta39 colorScheme={3} />
       <Footer />
     </div>
   );

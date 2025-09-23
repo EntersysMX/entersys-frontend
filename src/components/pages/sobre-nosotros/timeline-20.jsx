@@ -5,11 +5,12 @@ import { Card } from "../../ui/Card";
 import React, { Fragment } from "react";
 import { RxChevronRight } from "react-icons/rx";
 
-export function Timeline20() {
+export function Timeline20({ colorScheme = 4, ...props }) {
   return (
     <section
       id="relume"
-      className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28 scheme-4"
+      className={`overflow-hidden px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`}
+      {...props}
     >
       <div className="container">
         <div className="mb-12 md:mb-18 lg:mb-20">

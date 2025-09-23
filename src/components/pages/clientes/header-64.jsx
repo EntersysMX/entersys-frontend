@@ -2,9 +2,9 @@
 
 import React from "react";
 
-export function Header64() {
+export function Header64({ colorScheme = 1, ...props }) {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container max-w-lg text-center">
         <h1 className="mb-5 text-6xl font-bold md:mb-6 md:text-9xl lg:text-10xl">
           Transformamos operaciones

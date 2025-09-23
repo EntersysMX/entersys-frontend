@@ -21,7 +21,7 @@ const useRelume = ({ defaultValue, selects }) => {
   return { activeSelect, setActiveSelect, currentSelect };
 };
 
-export function Blog30() {
+export function Blog30({ colorScheme = 1, ...props }) {
   const useActive = useRelume({
     defaultValue: "all-posts",
     selects: [
@@ -328,7 +328,7 @@ export function Blog30() {
     ],
   });
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container flex max-w-lg flex-col">
         <div className="mb-12 text-center md:mb-18 lg:mb-20">
           <div className="w-full max-w-lg">

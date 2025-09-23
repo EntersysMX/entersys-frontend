@@ -10,10 +10,10 @@ export default function Clientes() {
   return (
     <div>
       <Header />
-      <Header64 />
-      <Portfolio09 />
-      <Event23 />
-      <Cta39 />
+      <Header64 colorScheme={2} />
+      <Portfolio09 colorScheme={1} />
+      <Event23 colorScheme={1} />
+      <Cta39 colorScheme={3} />
       <Footer />
     </div>
   );

@@ -44,18 +44,15 @@ const PageTransition = ({ children, className = "" }) => {
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.div
-        key={location.pathname}
-        className={className}
-        initial="initial"
-        animate="in"
-        exit="out"
-        variants={pageTransitionVariants}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <motion.div
+      key={location.pathname}
+      className={className}
+      initial="initial"
+      animate="in"
+      variants={pageTransitionVariants}
+    >
+      {children}
+    </motion.div>
   );
 };
 

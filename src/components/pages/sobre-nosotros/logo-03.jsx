@@ -2,9 +2,9 @@
 
 import React from "react";
 
-export function Logo03() {
+export function Logo03({ colorScheme = 3, ...props }) {
   return (
-    <section id="relume" className="overflow-hidden py-12 md:py-16 lg:py-20 scheme-3">
+    <section id="relume" className={`overflow-hidden py-12 md:py-16 lg:py-20 color-scheme-${colorScheme}`} {...props}>
       <div className="container mb-8 w-full max-w-lg px-[5%] md:mb-10 lg:mb-12">
         <h1 className="text-center text-base leading-[1.2] font-bold md:text-md md:leading-[1.2]">
           Empresas que confían en nuestra transformación

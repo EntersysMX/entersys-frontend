@@ -111,17 +111,11 @@ const WhatsAppFloatButton = () => {
         pointerEvents: 'auto'
       }}
     >
-      {/* Debug info - solo visible en desarrollo */}
-      {process.env.NODE_ENV === 'development' && (
-        <div className="mb-2 p-2 bg-black text-white text-xs rounded">
-          Debug: {JSON.stringify(debugInfo, null, 2)}
-        </div>
-      )}
 
       {/* Botón principal */}
       <button
         onClick={handleWhatsAppClick}
-        className="w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50"
+        className="whatsapp-float-button w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50"
         aria-label="Contactar por WhatsApp"
         title="¿Tienes preguntas? Chatea con nosotros en WhatsApp"
         style={{

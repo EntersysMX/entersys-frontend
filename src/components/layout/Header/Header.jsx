@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import { RxChevronDown } from "react-icons/rx";
 import { Link } from "react-router-dom";
+import "../../../styles/header.css";
 
 const useRelume = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -70,7 +71,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
 
   return (
     <header
-      className={`bg-white text-black border-b border-gray-200 color-scheme-${colorScheme}`}
+      className={`header bg-white text-black border-b border-gray-200 color-scheme-${colorScheme}`}
       {...props}
     >
       <section
@@ -126,7 +127,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
                 onMouseLeave={useActive.closeOnDesktopServicesDropdownMenu}
               >
                 <button
-                  className="flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base text-black"
+                  className="header-dropdown-button flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base text-black"
                   onClick={useActive.openOnMobileServicesDropdownMenu}
                 >
                   <span className="text-black">Servicios</span>
@@ -203,7 +204,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
                 onMouseLeave={useActive.closeOnDesktopClientsDropdownMenu}
               >
                 <button
-                  className="flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base text-black"
+                  className="header-dropdown-button flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base text-black"
                   onClick={useActive.openOnMobileClientsDropdownMenu}
                 >
                   <span className="text-black">Clientes</span>
@@ -244,6 +245,19 @@ const Header = ({ colorScheme = 1, ...props }) => {
                   >
                     <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-2 py-3 md:py-3 lg:gap-y-4 lg:py-0">
                       <Link
+                        to="/clientes"
+                        className="block py-2 lg:py-1 text-black"
+                      >
+                        <div className="flex flex-col items-start justify-center">
+                          <p className="text-md font-semibold lg:text-base text-black">
+                            Nuestros Clientes
+                          </p>
+                          <p className="hidden text-sm md:block text-gray-600">
+                            Conoce nuestros casos de éxito y testimonios
+                          </p>
+                        </div>
+                      </Link>
+                      <Link
                         to="/awalab"
                         className="block py-2 lg:py-1 text-black"
                       >
@@ -269,9 +283,43 @@ const Header = ({ colorScheme = 1, ...props }) => {
             </nav>
             <div className="mt-6 flex flex-col gap-4 lg:mt-0 lg:ml-4 lg:flex-row lg:items-center">
               <Link to="/contacto">
-                <Button title="Contacto" size="sm">
+                <button
+                  className="contact-button-custom px-4 py-2 font-medium text-sm rounded-md transition-all duration-200 transform hover:scale-[1.05] active:scale-[0.95]"
+                  style={{
+                    backgroundColor: '#009CA6',
+                    color: 'white',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 8px rgba(0, 156, 166, 0.3), 0 1px 3px rgba(0, 0, 0, 0.1)',
+                    border: 'none',
+                    cursor: 'pointer',
+                    background: 'linear-gradient(135deg, #009CA6 0%, #008A94 100%)',
+                    position: 'relative',
+                    zIndex: 1000,
+                    minWidth: '80px',
+                    whiteSpace: 'nowrap'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.background = 'linear-gradient(135deg, #008A94 0%, #007A82 100%)';
+                    e.target.style.boxShadow = '0 6px 12px rgba(0, 156, 166, 0.4), 0 2px 6px rgba(0, 0, 0, 0.15)';
+                    e.target.style.transform = 'translateY(-1px) scale(1.05)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.background = 'linear-gradient(135deg, #009CA6 0%, #008A94 100%)';
+                    e.target.style.boxShadow = '0 4px 8px rgba(0, 156, 166, 0.3), 0 1px 3px rgba(0, 0, 0, 0.1)';
+                    e.target.style.transform = 'translateY(0) scale(1)';
+                  }}
+                  onMouseDown={(e) => {
+                    e.target.style.transform = 'translateY(1px) scale(0.95)';
+                    e.target.style.boxShadow = '0 2px 4px rgba(0, 156, 166, 0.2), inset 0 1px 2px rgba(0, 0, 0, 0.1)';
+                  }}
+                  onMouseUp={(e) => {
+                    e.target.style.transform = 'translateY(-1px) scale(1.05)';
+                    e.target.style.boxShadow = '0 6px 12px rgba(0, 156, 166, 0.4), 0 2px 6px rgba(0, 0, 0, 0.15)';
+                  }}
+                  title="Contacto"
+                >
                   Contacto
-                </Button>
+                </button>
               </Link>
             </div>
           </motion.div>

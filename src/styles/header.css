@@ -1,0 +1,143 @@
+/* Header Custom Styles - Override color schemes */
+.header {
+    --annotation: "CTA";
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.85714;
+    font-weight: 400;
+    letter-spacing: .25px;
+    background: #fff !important;
+    box-shadow: 0 2px 6px #0000001f, inset 0 -1px #dadce0;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1020;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Override color scheme backgrounds for header */
+.header.scheme-1,
+.header.scheme-2,
+.header.scheme-3,
+.header.scheme-4,
+.header.color-scheme-1,
+.header.color-scheme-2,
+.header.color-scheme-3,
+.header.color-scheme-4 {
+    background: #fff !important;
+    box-shadow: 0 2px 6px #0000001f, inset 0 -1px #dadce0 !important;
+}
+
+/* Ensure all text in header and submenus is black */
+.header * {
+    color: #000 !important;
+}
+
+/* Specific submenu text styling */
+.header nav a,
+.header nav button,
+.header nav span,
+.header nav p {
+    color: #000 !important;
+}
+
+/* Gray text for descriptions should remain gray but readable */
+.header .text-gray-600 {
+    color: #6b7280 !important;
+}
+
+/* Contact button protection from color schemes */
+.contact-button-custom,
+.contact-button-custom *,
+.header .contact-button-custom,
+.header .contact-button-custom * {
+    background: linear-gradient(135deg, #009CA6 0%, #008A94 100%) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.contact-button-custom:hover,
+.header .contact-button-custom:hover {
+    background: linear-gradient(135deg, #008A94 0%, #007A82 100%) !important;
+    color: white !important;
+}
+
+/* Ensure contact button container has enough space for transform effects */
+.header .contact-button-custom {
+    margin: 4px !important; /* Give space for scale and translateY effects */
+}
+
+/* Ensure the link container doesn't clip the button */
+.header a:has(.contact-button-custom) {
+    display: inline-block !important;
+    padding: 4px !important; /* Match the button margin */
+}
+
+/* Override any color scheme that might affect the button */
+.color-scheme-1 .contact-button-custom,
+.color-scheme-2 .contact-button-custom,
+.color-scheme-3 .contact-button-custom,
+.color-scheme-4 .contact-button-custom,
+.color-scheme-1 .contact-button-custom *,
+.color-scheme-2 .contact-button-custom *,
+.color-scheme-3 .contact-button-custom *,
+.color-scheme-4 .contact-button-custom * {
+    background: linear-gradient(135deg, #009CA6 0%, #008A94 100%) !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Header dropdown buttons - match nav links exactly */
+.header-dropdown-button {
+    all: unset !important;
+    display: block !important;
+    width: 100% !important;
+    padding: 0.75rem 0 !important;
+    padding-top: 1.75rem !important;
+    text-align: left !important;
+    font-size: 1rem !important;
+    color: black !important;
+    cursor: pointer !important;
+}
+
+.header-dropdown-button:not(:first-child) {
+    padding-top: 0.75rem !important;
+}
+
+/* Desktop styles with proper spacing */
+@media (min-width: 1024px) {
+    .header-dropdown-button {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        flex: none !important;
+        width: auto !important;
+        padding: 0.5rem 1rem !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .header-dropdown-button:not(:first-child) {
+        padding-top: 0.5rem !important;
+    }
+
+    /* Make text and icon very close together, but separate from next menu item */
+    .header-dropdown-button {
+        gap: 0.125rem !important;
+        margin-right: 1rem !important; /* Separate from next menu item */
+    }
+
+    /* Remove the specific margin we added earlier since it was wrong */
+    .header-dropdown-button > div {
+        margin-left: 0 !important;
+        flex-shrink: 0 !important;
+    }
+
+    .header-dropdown-button motion\\.div,
+    .header-dropdown-button [data-framer-name] {
+        margin-left: 0 !important;
+    }
+}

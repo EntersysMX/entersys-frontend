@@ -6,9 +6,9 @@ import React from "react";
 import { BiCalendarAlt, BiMap } from "react-icons/bi";
 import { RxChevronRight } from "react-icons/rx";
 
-export function Event23() {
+export function Event23({ colorScheme = 1, ...props }) {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
         <div className="mb-12 grid auto-cols-fr grid-cols-1 items-end gap-12 md:mb-18 md:grid-cols-[1fr_max-content] lg:mb-20 lg:gap-20">
           <div className="max-w-lg">

@@ -25,19 +25,47 @@ const Hero = ({ colorScheme = 4, ...props }) => {
             </AnimatedSection>
             <AnimatedSection animation="fadeInUp" delay={0.6}>
               <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
+                <motion.button
+                  className="rounded-lg transition-all duration-300 agendar-demo-button"
+                  style={{
+                    backgroundColor: 'white',
+                    color: '#000000 !important',
+                    border: '2px solid white',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+                    cursor: 'pointer',
+                    padding: '0.625rem 1.5rem',
+                    fontSize: '1rem',
+                    fontWeight: '500'
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = '#f8f9fa';
+                    e.target.style.color = '#000000';
+                    e.target.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = 'white';
+                    e.target.style.color = '#000000';
+                    e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                  }}
+                  title="Agendar demo"
+                >
+                  <span style={{ color: '#000000 !important' }}>Agendar demo</span>
+                </motion.button>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Button title="Agendar demo" className="rounded-lg">Agendar demo</Button>
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Button title="Conocer más" variant="secondary-alt" className="rounded-lg">
+                  <Button
+                    title="Conocer más"
+                    variant="secondary-alt"
+                    className="rounded-md"
+                    style={{ color: 'black', borderRadius: '8px' }}
+                  >
                     Conocer más
                   </Button>
                 </motion.div>

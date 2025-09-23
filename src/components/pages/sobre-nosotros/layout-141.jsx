@@ -5,9 +5,9 @@ import { Card } from "../../ui/Card";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 
-export function Layout141() {
+export function Layout141({ colorScheme = 2, ...props }) {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28 scheme-2">
+    <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
         <div className="flex flex-col items-center">
           <div className="mb-12 md:mb-18 lg:mb-20">

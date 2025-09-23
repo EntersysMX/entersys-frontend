@@ -13,13 +13,13 @@ export default function Awalab() {
   return (
     <div>
       <Header />
-      <BlogPostHeader01 />
-      <Content27 />
-      <Content271 />
-      <Stats30 />
-      <Testimonial17 />
-      <Gallery01 />
-      <Cta39 />
+      <BlogPostHeader01 colorScheme={1} />
+      <Content27 colorScheme={1} />
+      <Content271 colorScheme={1} />
+      <Stats30 colorScheme={2} />
+      <Testimonial17 colorScheme={1} />
+      <Gallery01 colorScheme={4} />
+      <Cta39 colorScheme={3} />
       <Footer />
     </div>
   );

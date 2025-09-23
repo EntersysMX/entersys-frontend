@@ -13,13 +13,13 @@ export default function Worksys() {
   return (
     <div>
       <Header colorScheme={2} />
-      <Header30 />
-      <Layout237 />
-      <Layout2371 />
-      <Layout243 />
-      <Layout421 />
-      <Faq05 />
-      <Cta39 />
+      <Header30 colorScheme={2} />
+      <Layout237 colorScheme={2} />
+      <Layout2371 colorScheme={4} />
+      <Layout243 colorScheme={1} />
+      <Layout421 colorScheme={2} />
+      <Faq05 colorScheme={1} />
+      <Cta39 colorScheme={3} />
       <Footer />
     </div>
   );

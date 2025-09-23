@@ -9,9 +9,9 @@ export default function Blog() {
   return (
     <div>
       <Header />
-      <Blog30 />
-      <Contact13 />
-      <Faq05 />
+      <Blog30 colorScheme={2} />
+      <Contact13 colorScheme={2} />
+      <Faq05 colorScheme={2} />
       <Footer />
     </div>
   );
