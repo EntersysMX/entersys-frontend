@@ -1,25 +1,25 @@
 import React from "react";
 import Header from "../components/layout/Header";
-import { SobreNosotrosHeader64 } from "../components/pages/SobreNosotros/SobreNosotrosHeader64";
-import { SobreNosotrosLayout93 } from "../components/pages/SobreNosotros/SobreNosotrosLayout93";
-import { SobreNosotrosLayout149 } from "../components/pages/SobreNosotros/SobreNosotrosLayout149";
-import { SobreNosotrosLayout213 } from "../components/pages/SobreNosotros/SobreNosotrosLayout213";
-import { SobreNosotrosTimeline20 } from "../components/pages/SobreNosotros/SobreNosotrosTimeline20";
-import { SobreNosotrosLogo03 } from "../components/pages/SobreNosotros/SobreNosotrosLogo03";
-import { SobreNosotrosCta39 } from "../components/pages/SobreNosotros/SobreNosotrosCta39";
+import { Header114 } from "../components/pages/sobre-nosotros/header-114";
+import { Layout93 } from "../components/pages/sobre-nosotros/layout-93";
+import { Layout141 } from "../components/pages/sobre-nosotros/layout-141";
+import { Layout213 } from "../components/pages/sobre-nosotros/layout-213";
+import { Timeline20 } from "../components/pages/sobre-nosotros/timeline-20";
+import { Logo03 } from "../components/pages/sobre-nosotros/logo-03";
+import { Cta39 } from "../components/pages/sobre-nosotros/cta-39";
 import Footer from "../components/layout/Footer";
 
 export default function SobreNosotros() {
   return (
     <div>
       <Header />
-      <SobreNosotrosHeader64 />
-      <SobreNosotrosLayout93 />
-      <SobreNosotrosLayout149 />
-      <SobreNosotrosLayout213 />
-      <SobreNosotrosTimeline20 />
-      <SobreNosotrosLogo03 />
-      <SobreNosotrosCta39 />
+      <Header114 />
+      <Layout93 />
+      <Layout141 />
+      <Layout213 />
+      <Timeline20 />
+      <Logo03 />
+      <Cta39 />
       <Footer />
     </div>
   );

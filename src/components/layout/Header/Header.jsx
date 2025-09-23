@@ -70,7 +70,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
 
   return (
     <header
-      className="bg-white text-black border-b border-gray-200"
+      className={`bg-white text-black border-b border-gray-200 color-scheme-${colorScheme}`}
       {...props}
     >
       <section

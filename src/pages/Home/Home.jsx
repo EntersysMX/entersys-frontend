@@ -13,8 +13,8 @@ const Home = () => {
     <div className="home-page">
       <Header colorScheme={4} />
       <Hero colorScheme={4} />
-      <Services colorScheme={4} />
-      <Differentiators colorScheme={1} />
+      <Services colorScheme={1} />
+      <Differentiators colorScheme={2} />
       <Value colorScheme={2} />
       <Technology colorScheme={4} />
       <FAQ colorScheme={1} />
