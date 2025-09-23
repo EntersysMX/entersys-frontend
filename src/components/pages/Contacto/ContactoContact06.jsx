@@ -103,7 +103,7 @@ export function ContactoContact06() {
 
   if (showThankYou) {
     return (
-      <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+      <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28 scheme-1">
         <div className="container text-center">
           <h2 className="mb-6 text-5xl font-bold text-green-600">¡Gracias!</h2>
           <p className="text-lg">Hemos recibido tu mensaje. Nos pondremos en contacto contigo pronto.</p>
@@ -113,7 +113,7 @@ export function ContactoContact06() {
   }
 
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28 scheme-1">
       <div className="container grid grid-cols-1 items-start gap-y-12 md:grid-flow-row md:grid-cols-2 md:gap-x-12 lg:grid-flow-col lg:gap-x-20 lg:gap-y-16">
         <div>
           <div className="mb-6 md:mb-8">
