@@ -4,9 +4,9 @@ import React from "react";
 
 export function Logo3() {
   return (
-    <section id="relume" className="overflow-hidden py-12 md:py-16 lg:py-20">
-      <div className="container mb-8 w-full max-w-lg px-[5%] md:mb-10 lg:mb-12">
-        <h1 className="text-center text-base leading-[1.2] font-bold md:text-md md:leading-[1.2]">
+    <section className="overflow-hidden py-12 md:py-16 lg:py-20">
+      <div className="container mb-8 max-w-lg px-[5%] md:mb-10 lg:mb-12">
+        <h1 className="heading-h6 text-center font-bold">
           Empresas que confían en nuestra transformación
         </h1>
       </div>

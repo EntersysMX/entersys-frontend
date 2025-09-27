@@ -5,19 +5,19 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  Button,
-} from "@relume_io/relume-ui";
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import React from "react";
 
 export function Faq3() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-12 lg:grid-cols-[.75fr,1fr] lg:gap-x-20">
         <div>
-          <h2 className="rb-5 mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+          <h2 className="heading-h2 mb-5 font-bold md:mb-6">
             Casos de uso comunes
           </h2>
-          <p className="md:text-md">
+          <p className="text-medium">
             Estos son algunos ejemplos de cómo es que Worksys puede contribuir
             hacia la transformación de tu negocio.
           </p>
@@ -29,7 +29,7 @@ export function Faq3() {
         </div>
         <Accordion type="multiple">
           <AccordionItem value="item-0">
-            <AccordionTrigger className="md:py-5 md:text-md">
+            <AccordionTrigger className="text-medium md:py-5">
               Inventario y activos
             </AccordionTrigger>
             <AccordionContent className="md:pb-6">
@@ -38,7 +38,7 @@ export function Faq3() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-1">
-            <AccordionTrigger className="md:py-5 md:text-md">
+            <AccordionTrigger className="text-medium md:py-5">
               Producción
             </AccordionTrigger>
             <AccordionContent className="md:pb-6">
@@ -48,7 +48,7 @@ export function Faq3() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
-            <AccordionTrigger className="md:py-5 md:text-md">
+            <AccordionTrigger className="text-medium md:py-5">
               Logística
             </AccordionTrigger>
             <AccordionContent className="md:pb-6">
@@ -57,7 +57,7 @@ export function Faq3() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3">
-            <AccordionTrigger className="md:py-5 md:text-md">
+            <AccordionTrigger className="text-medium md:py-5">
               Compliance
             </AccordionTrigger>
             <AccordionContent className="md:pb-6">
@@ -67,7 +67,7 @@ export function Faq3() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-4">
-            <AccordionTrigger className="md:py-5 md:text-md">
+            <AccordionTrigger className="text-medium md:py-5">
               Mantenimiento técnico
             </AccordionTrigger>
             <AccordionContent className="md:pb-6">
@@ -76,7 +76,7 @@ export function Faq3() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-4">
-            <AccordionTrigger className="md:py-5 md:text-md">
+            <AccordionTrigger className="text-medium md:py-5">
               Franquicias
             </AccordionTrigger>
             <AccordionContent className="md:pb-6">

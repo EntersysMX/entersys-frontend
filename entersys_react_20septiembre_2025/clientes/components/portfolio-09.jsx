@@ -1,19 +1,21 @@
 "use client";
 
-import { Badge, Button, Card } from "@relume_io/relume-ui";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 
 export function Portfolio9() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="mx-auto mb-12 max-w-lg text-center md:mb-18 lg:mb-20">
           <p className="mb-3 font-semibold md:mb-4">Portafolio</p>
-          <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+          <h2 className="heading-h2 mb-5 font-bold md:mb-6">
             Nuestros casos de éxito
           </h2>
-          <p className="md:text-md">
+          <p className="text-medium">
             Proyectos que demuestran nuestra capacidad de transformación
           </p>
         </div>
@@ -29,7 +31,7 @@ export function Portfolio9() {
               </a>
             </div>
             <div className="px-5 py-6 sm:px-6">
-              <h3 className="mb-2 text-xl font-bold md:text-2xl">
+              <h3 className="heading-h5 mb-2 font-bold">
                 <a href="#">Manufactura automotriz</a>
               </h3>
               <p>
@@ -69,7 +71,7 @@ export function Portfolio9() {
               </a>
             </div>
             <div className="px-5 py-6 sm:px-6">
-              <h3 className="mb-2 text-xl font-bold md:text-2xl">
+              <h3 className="heading-h5 mb-2 font-bold">
                 <a href="#">Retail tecnológico</a>
               </h3>
               <p>
@@ -109,7 +111,7 @@ export function Portfolio9() {
               </a>
             </div>
             <div className="px-5 py-6 sm:px-6">
-              <h3 className="mb-2 text-xl font-bold md:text-2xl">
+              <h3 className="heading-h5 mb-2 font-bold">
                 <a href="#">Servicios financieros</a>
               </h3>
               <p>
@@ -149,7 +151,7 @@ export function Portfolio9() {
               </a>
             </div>
             <div className="px-5 py-6 sm:px-6">
-              <h3 className="mb-2 text-xl font-bold md:text-2xl">
+              <h3 className="heading-h5 mb-2 font-bold">
                 <a href="#">Project name here</a>
               </h3>
               <p>
@@ -180,7 +182,7 @@ export function Portfolio9() {
           </Card>
         </div>
         <div className="mt-6 flex justify-center md:mt-8">
-          <Button title="Ver más" variant="secondary" size="primary">
+          <Button title="Ver más" variant="secondary">
             Ver más
           </Button>
         </div>

@@ -1,33 +1,30 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
-  Button,
-  Checkbox,
-  Input,
-  Label,
-  RadioGroup,
-  RadioGroupItem,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Textarea,
-} from "@relume_io/relume-ui";
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import React from "react";
 import { BiEnvelope, BiMap, BiPhone } from "react-icons/bi";
 
 export function Contact6() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container grid grid-cols-1 items-start gap-y-12 md:grid-flow-row md:grid-cols-2 md:gap-x-12 lg:grid-flow-col lg:gap-x-20 lg:gap-y-16">
         <div>
           <div className="mb-6 md:mb-8">
             <p className="mb-3 font-semibold md:mb-4">Contacto</p>
-            <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
-              Contáctanos
-            </h2>
-            <p className="md:text-md">
+            <h2 className="heading-h2 mb-5 font-bold md:mb-6">Contáctanos</h2>
+            <p className="text-medium">
               Estamos listos para transformar tu operación
             </p>
           </div>
@@ -127,7 +124,7 @@ export function Contact6() {
               className="min-h-[11.25rem] overflow-auto"
             />
           </div>
-          <div className="mb-3 flex items-center space-x-2 text-sm md:mb-4">
+          <div className="text-small mb-3 flex items-center space-x-2 md:mb-4">
             <Checkbox id="terms" />
             <Label htmlFor="terms" className="cursor-pointer">
               Acepto términos y condiciones

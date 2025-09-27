@@ -1,15 +1,15 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import {
-  Badge,
-  Button,
-  Card,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from "@relume_io/relume-ui";
-import { AnimatePresence, motion } from "framer-motion";
+} from "@/components/ui/select";
+import { AnimatePresence, motion } from "motion/react";
 import React, { useState } from "react";
 import { RxChevronRight } from "react-icons/rx";
 
@@ -328,15 +328,15 @@ export function Blog30() {
     ],
   });
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container flex max-w-lg flex-col">
         <div className="mb-12 text-center md:mb-18 lg:mb-20">
           <div className="w-full max-w-lg">
             <p className="mb-3 font-semibold md:mb-4">Blog</p>
-            <h1 className="mb-5 text-6xl font-bold md:mb-6 md:text-9xl lg:text-10xl">
+            <h1 className="heading-h1 mb-5 font-bold md:mb-6">
               Artículos que te pueden interesar
             </h1>
-            <p className="md:text-md">
+            <p className="text-medium">
               Explora contenido relacionado con transformación digital
             </p>
           </div>
@@ -344,6 +344,7 @@ export function Blog30() {
         <div className="flex flex-col justify-start">
           <div className="md:min-w- mb-10">
             <Select
+              defaultValue="all-posts"
               value={useActive.activeSelect}
               onValueChange={useActive.setActiveSelect}
             >
@@ -381,14 +382,14 @@ export function Blog30() {
                     </div>
                   </a>
                   <div className="px-5 py-6 md:px-6">
-                    <div className="rb-4 mb-4 flex w-full items-center justify-start">
+                    <div className="mb-4 flex w-full items-center justify-start">
                       <Badge className="mr-4">Transformación</Badge>
-                      <p className="inline text-sm font-semibold">
+                      <p className="text-small inline font-semibold">
                         Lectura de 5 min
                       </p>
                     </div>
                     <a href="#" className="mb-2 block max-w-full">
-                      <h5 className="text-2xl font-bold md:text-4xl">
+                      <h5 className="heading-h4 font-bold">
                         Estrategias de digitalización para pequeñas empresas
                       </h5>
                     </a>
@@ -420,14 +421,14 @@ export function Blog30() {
                     </div>
                   </a>
                   <div className="px-5 py-6 md:px-6">
-                    <div className="rb-4 mb-4 flex w-full items-center justify-start">
+                    <div className="mb-4 flex w-full items-center justify-start">
                       <Badge className="mr-4">Innovación</Badge>
-                      <p className="inline text-sm font-semibold">
+                      <p className="text-small inline font-semibold">
                         Lectura de 7 min
                       </p>
                     </div>
                     <a href="#" className="mb-2 block max-w-full">
-                      <h5 className="text-2xl font-bold md:text-4xl">
+                      <h5 className="heading-h4 font-bold">
                         Inteligencia artificial en procesos de negocio
                       </h5>
                     </a>
@@ -459,14 +460,14 @@ export function Blog30() {
                     </div>
                   </a>
                   <div className="px-5 py-6 md:px-6">
-                    <div className="rb-4 mb-4 flex w-full items-center justify-start">
+                    <div className="mb-4 flex w-full items-center justify-start">
                       <Badge className="mr-4">Gestión</Badge>
-                      <p className="inline text-sm font-semibold">
+                      <p className="text-small inline font-semibold">
                         Lectura de 6 min
                       </p>
                     </div>
                     <a href="#" className="mb-2 block max-w-full">
-                      <h5 className="text-2xl font-bold md:text-4xl">
+                      <h5 className="heading-h4 font-bold">
                         Metodologías ágiles para transformación digital
                       </h5>
                     </a>

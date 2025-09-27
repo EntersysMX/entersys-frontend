@@ -5,21 +5,21 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  Button,
-  Card,
-} from "@relume_io/relume-ui";
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import React from "react";
 import { RxPlus } from "react-icons/rx";
 
 export function Faq4() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container max-w-lg">
-        <div className="rb-12 mb-12 text-center md:mb-18 lg:mb-20">
-          <h2 className="rb-5 mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+        <div className="mb-12 text-center md:mb-18 lg:mb-20">
+          <h2 className="heading-h2 mb-5 font-bold md:mb-6">
             Preguntas más frecuentes
           </h2>
-          <p className="md:text-md">
+          <p className="text-medium">
             Resolvemos tus dudas sobre transformación digital y nuestros
             servicios
           </p>
@@ -32,9 +32,9 @@ export function Faq4() {
             <AccordionItem value="item-0" className="border-none px-5 md:px-6">
               <AccordionTrigger
                 icon={
-                  <RxPlus className="size-7 shrink-0 text-text-primary transition-transform duration-300 md:size-8" />
+                  <RxPlus className="size-7 shrink-0 text-scheme-text transition-transform duration-300 md:size-8" />
                 }
-                className="md:py-5 md:text-md [&[data-state=open]>svg]:rotate-45"
+                className="text-medium md:py-5 [&[data-state=open]>svg]:rotate-45"
               >
                 ¿Qué es Entersys?
               </AccordionTrigger>
@@ -49,9 +49,9 @@ export function Faq4() {
             <AccordionItem value="item-1" className="border-none px-5 md:px-6">
               <AccordionTrigger
                 icon={
-                  <RxPlus className="size-7 shrink-0 text-text-primary transition-transform duration-300 md:size-8" />
+                  <RxPlus className="size-7 shrink-0 text-scheme-text transition-transform duration-300 md:size-8" />
                 }
-                className="md:py-5 md:text-md [&[data-state=open]>svg]:rotate-45"
+                className="text-medium md:py-5 [&[data-state=open]>svg]:rotate-45"
               >
                 ¿Cómo funcionan sus metodologías?
               </AccordionTrigger>
@@ -65,9 +65,9 @@ export function Faq4() {
             <AccordionItem value="item-2" className="border-none px-5 md:px-6">
               <AccordionTrigger
                 icon={
-                  <RxPlus className="size-7 shrink-0 text-text-primary transition-transform duration-300 md:size-8" />
+                  <RxPlus className="size-7 shrink-0 text-scheme-text transition-transform duration-300 md:size-8" />
                 }
-                className="md:py-5 md:text-md [&[data-state=open]>svg]:rotate-45"
+                className="text-medium md:py-5 [&[data-state=open]>svg]:rotate-45"
               >
                 ¿Cuánto tiempo toma un proyecto?
               </AccordionTrigger>
@@ -81,9 +81,9 @@ export function Faq4() {
             <AccordionItem value="item-3" className="border-none px-5 md:px-6">
               <AccordionTrigger
                 icon={
-                  <RxPlus className="size-7 shrink-0 text-text-primary transition-transform duration-300 md:size-8" />
+                  <RxPlus className="size-7 shrink-0 text-scheme-text transition-transform duration-300 md:size-8" />
                 }
-                className="md:py-5 md:text-md [&[data-state=open]>svg]:rotate-45"
+                className="text-medium md:py-5 [&[data-state=open]>svg]:rotate-45"
               >
                 ¿Trabajan con empresas de todos los tamaños?
               </AccordionTrigger>
@@ -97,9 +97,9 @@ export function Faq4() {
             <AccordionItem value="item-4" className="border-none px-5 md:px-6">
               <AccordionTrigger
                 icon={
-                  <RxPlus className="size-7 shrink-0 text-text-primary transition-transform duration-300 md:size-8" />
+                  <RxPlus className="size-7 shrink-0 text-scheme-text transition-transform duration-300 md:size-8" />
                 }
-                className="md:py-5 md:text-md [&[data-state=open]>svg]:rotate-45"
+                className="text-medium md:py-5 [&[data-state=open]>svg]:rotate-45"
               >
                 ¿Ofrecen soporte después de la implementación?
               </AccordionTrigger>
@@ -111,10 +111,10 @@ export function Faq4() {
           </Card>
         </Accordion>
         <div className="mx-auto mt-12 max-w-md text-center md:mt-18 lg:mt-20">
-          <h4 className="mb-3 text-2xl font-bold md:mb-4 md:text-3xl md:leading-[1.3] lg:text-4xl">
+          <h4 className="heading-h4 mb-3 font-bold md:mb-4">
             ¿Necesitas más información?
           </h4>
-          <p className="md:text-md">
+          <p className="text-medium">
             Nuestro equipo está listo para resolver todas tus dudas
           </p>
           <div className="mt-6 md:mt-8">

@@ -6,7 +6,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from "@relume_io/relume-ui";
+} from "@/components/ui/breadcrumb";
 import React from "react";
 import {
   BiLinkAlt,
@@ -17,7 +17,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 export function BlogPostHeader1() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="mx-auto mb-12 flex w-full max-w-lg flex-col items-start justify-start md:mb-16 lg:mb-20">
           <Breadcrumb className="mb-6 flex w-full items-center">
@@ -31,11 +31,11 @@ export function BlogPostHeader1() {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <h1 className="mb-8 text-5xl font-bold md:mb-10 md:text-7xl lg:mb-12 lg:text-8xl">
+          <h1 className="heading-h2 mb-8 font-bold md:mb-10 lg:mb-12">
             Transformación digital en manufactura con Worksys
           </h1>
           <div className="flex w-full flex-col items-start justify-between sm:flex-row sm:items-end">
-            <div className="rb-4 mb-4 flex items-center sm:mb-0">
+            <div className="mb-4 flex items-center sm:mb-0">
               <div className="mr-4 shrink-0">
                 <img
                   src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
@@ -46,34 +46,34 @@ export function BlogPostHeader1() {
               <div>
                 <h6 className="font-semibold">Grupo industrial nexus</h6>
                 <div className="mt-1 flex">
-                  <p className="text-sm">Enero 2023</p>
+                  <p className="text-small">Enero 2023</p>
                   <span className="mx-2">•</span>
-                  <p className="text-sm">10 min lectura</p>
+                  <p className="text-small">10 min lectura</p>
                 </div>
               </div>
             </div>
-            <div className="rt-4 mt-4 grid grid-flow-col grid-cols-[max-content] items-start gap-2">
+            <div className="mt-4 grid grid-flow-col grid-cols-[max-content] items-start gap-2">
               <a
                 href="#"
-                className="rounded-[1.25rem] bg-background-secondary p-1"
+                className="rounded-[1.25rem] bg-scheme-foreground p-1"
               >
                 <BiLinkAlt className="size-6" />
               </a>
               <a
                 href="#"
-                className="rounded-[1.25rem] bg-background-secondary p-1"
+                className="rounded-[1.25rem] bg-scheme-foreground p-1"
               >
                 <BiLogoLinkedinSquare className="size-6" />
               </a>
               <a
                 href="#"
-                className="rounded-[1.25rem] bg-background-secondary p-1"
+                className="rounded-[1.25rem] bg-scheme-foreground p-1"
               >
                 <FaXTwitter className="size-6 p-0.5" />
               </a>
               <a
                 href="#"
-                className="rounded-[1.25rem] bg-background-secondary p-1"
+                className="rounded-[1.25rem] bg-scheme-foreground p-1"
               >
                 <BiLogoFacebookCircle className="size-6" />
               </a>

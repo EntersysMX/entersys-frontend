@@ -1,19 +1,19 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
+import { Button } from "@/components/ui/button";
 import React from "react";
 
 export function Blog37() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="mb-12 md:mb-18 lg:mb-20">
           <div className="w-full max-w-lg">
             <p className="mb-3 font-semibold md:mb-4">Blog</p>
-            <h2 className="rb-5 mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+            <h2 className="heading-h2 mb-5 font-bold md:mb-6">
               Aprende más en nuestro blog
             </h2>
-            <p className="md:text-md">
+            <p className="text-medium">
               Explora artículos prácticos que muestran cómo Worksys se aplica en
               distintos contextos:
             </p>
@@ -32,12 +32,12 @@ export function Blog37() {
             </a>
             <a
               href="#"
-              className="mr-4 mb-2 inline-block max-w-full text-sm font-semibold"
+              className="text-small mr-4 mb-2 inline-block max-w-full font-semibold"
             >
               Worksys
             </a>
             <a href="#" className="mb-2 block max-w-full">
-              <h5 className="text-xl font-bold md:text-2xl">
+              <h5 className="heading-h5 font-bold">
                 “Cómo saber si tu operación gana o pierde en 3 segundos.”
               </h5>
             </a>
@@ -55,11 +55,11 @@ export function Blog37() {
                 />
               </div>
               <div>
-                <h6 className="text-sm font-semibold">Juan Pérez</h6>
+                <h6 className="text-small font-semibold">Juan Pérez</h6>
                 <div className="flex items-center">
-                  <p className="text-sm">11 Ene 2022</p>
+                  <p className="text-small">11 Ene 2022</p>
                   <span className="mx-2">•</span>
-                  <p className="text-sm">5 min lectura</p>
+                  <p className="text-small">5 min lectura</p>
                 </div>
               </div>
             </div>
@@ -76,12 +76,12 @@ export function Blog37() {
             </a>
             <a
               href="#"
-              className="mr-4 mb-2 inline-block max-w-full text-sm font-semibold"
+              className="text-small mr-4 mb-2 inline-block max-w-full font-semibold"
             >
               Worksys
             </a>
             <a href="#" className="mb-2 block max-w-full">
-              <h5 className="text-xl font-bold md:text-2xl">
+              <h5 className="heading-h5 font-bold">
                 Del Excel al sistema: el paso a paso hacia la entersyzación
               </h5>
             </a>
@@ -99,11 +99,11 @@ export function Blog37() {
                 />
               </div>
               <div>
-                <h6 className="text-sm font-semibold">Ana Gómez</h6>
+                <h6 className="text-small font-semibold">Ana Gómez</h6>
                 <div className="flex items-center">
-                  <p className="text-sm">12 Ene 2022</p>
+                  <p className="text-small">12 Ene 2022</p>
                   <span className="mx-2">•</span>
-                  <p className="text-sm">6 min lectura</p>
+                  <p className="text-small">6 min lectura</p>
                 </div>
               </div>
             </div>
@@ -120,12 +120,12 @@ export function Blog37() {
             </a>
             <a
               href="#"
-              className="mr-4 mb-2 inline-block max-w-full text-sm font-semibold"
+              className="text-small mr-4 mb-2 inline-block max-w-full font-semibold"
             >
               Worksys
             </a>
             <a href="#" className="mb-2 block max-w-full">
-              <h5 className="text-xl font-bold md:text-2xl">
+              <h5 className="heading-h5 font-bold">
                 Visual management: lo que no te enseñan sobre analítica
               </h5>
             </a>
@@ -143,11 +143,11 @@ export function Blog37() {
                 />
               </div>
               <div>
-                <h6 className="text-sm font-semibold">Luis Martínez</h6>
+                <h6 className="text-small font-semibold">Luis Martínez</h6>
                 <div className="flex items-center">
-                  <p className="text-sm">13 Ene 2022</p>
+                  <p className="text-small">13 Ene 2022</p>
                   <span className="mx-2">•</span>
-                  <p className="text-sm">4 min lectura</p>
+                  <p className="text-small">4 min lectura</p>
                 </div>
               </div>
             </div>

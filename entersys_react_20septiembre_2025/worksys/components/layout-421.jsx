@@ -1,7 +1,7 @@
 "use client";
 
-import { useMediaQuery } from "@relume_io/relume-ui";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { motion, useScroll, useTransform } from "motion/react";
 import React from "react";
 
 const useRelume = () => {
@@ -61,7 +61,7 @@ const useRelume = () => {
 export function Layout421() {
   const useActive = useRelume();
   return (
-    <section id="relume" className="relative flex flex-col">
+    <section className="relative flex flex-col">
       <motion.div
         className="sticky top-0 z-0 mx-auto flex min-h-0 items-center justify-center md:min-h-[auto]"
         style={useActive.containerMotion}
@@ -71,11 +71,11 @@ export function Layout421() {
             <p className="mb-3 font-semibold md:mb-4">
               De procesos manuales a flujos estandarizados y digitales
             </p>
-            <h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+            <h1 className="heading-h2 mb-5 font-bold md:mb-6">
               Una metodología que convierte tu operación en un sistema
               inteligente
             </h1>
-            <p className="relative z-20 md:text-md">
+            <p className="text-medium relative z-20">
               Worksys es un servicio consultivo que transforma la manera en que
               gestionas tu operación. Iniciamos con una planeación estratégica
               clara, documentamos procesos críticos y los digitalizamos en

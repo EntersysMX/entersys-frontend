@@ -1,18 +1,18 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
+import { Button } from "@/components/ui/button";
 import React from "react";
 
 export function Header5() {
   return (
-    <section id="relume" className="relative px-[5%]">
+    <section className="relative px-[5%]">
       <div className="relative z-10 container">
         <div className="flex max-h-[60rem] min-h-svh items-center py-16 md:py-24 lg:py-28">
           <div className="max-w-md">
-            <h1 className="mb-5 text-6xl font-bold text-text-alternative md:mb-6 md:text-9xl lg:text-10xl">
+            <h1 className="heading-h1 mb-5 font-bold text-white md:mb-6">
               Simplificamos la complejidad operativa con inteligencia digital
             </h1>
-            <p className="text-text-alternative md:text-md">
+            <p className="text-medium text-white">
               Convertimos procesos manuales en sistemas inteligentes que
               optimizan tu operación. Resultados visibles en semanas, no en
               meses.
@@ -32,7 +32,7 @@ export function Header5() {
           className="size-full object-cover"
           alt="Relume placeholder image"
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-neutral-darkest/50" />
       </div>
     </section>
   );

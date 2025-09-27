@@ -1,19 +1,19 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
+import { Button } from "@/components/ui/button";
 import React from "react";
 
 export function Layout16() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="grid grid-cols-1 gap-y-12 md:grid-cols-2 md:items-center md:gap-x-12 lg:gap-x-20">
           <div>
             <p className="mb-3 font-semibold md:mb-4">Características</p>
-            <h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+            <h1 className="heading-h2 mb-5 font-bold md:mb-6">
               Acreditaciones que fortalecen tu operación
             </h1>
-            <p className="mb-5 text-base md:mb-6 md:text-md">
+            <p className="text-medium mb-5 md:mb-6">
               Expersys es el servicio de Entersys diseñado para que tu empresa
               obtenga y mantenga certificaciones de calidad y cumplimiento
               normativo sin complicaciones innecesarias. Acompañamos a tus

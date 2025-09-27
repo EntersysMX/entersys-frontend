@@ -5,12 +5,66 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@relume_io/relume-ui";
-import React, { Fragment } from "react";
+} from "@/components/ui/accordion";
+import clsx from "clsx";
+import React, { Fragment, useEffect, useState } from "react";
+
+const useHash = (initialLinks) => {
+  const [currentHash, setCurrentHash] = useState(
+    window.location.hash || initialLinks[0]?.href,
+  );
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
+
+  const isActiveLink = (href) => {
+    if (!href) return false;
+
+    const hrefWithoutHash = href.replace(/^#/, "");
+    const currentHashWithoutHash = currentHash.replace(/^#/, "");
+
+    return hrefWithoutHash === currentHashWithoutHash;
+  };
+
+  const getLinkClassNames = (href) => {
+    return clsx("block px-4 py-3 text-medium", {
+      "border border-scheme-border bg-scheme-foreground font-semibold":
+        isActiveLink(href),
+    });
+  };
+
+  const getLinkStyle = (index) => {
+    return {
+      marginLeft: index === 0 ? 0 : `${Math.min(index * 16, 80)}px`,
+    };
+  };
+
+  return {
+    currentHash,
+    isActiveLink,
+    getLinkClassNames,
+    getLinkStyle,
+  };
+};
 
 export function Content27() {
+  const hashState = useHash([
+    { title: "Heading 2", href: "#heading-2" },
+    { title: "Heading 3", href: "#heading-3" },
+    { title: "Heading 4", href: "#heading-4" },
+    { title: "Heading 5", href: "#heading-5" },
+    { title: "Heading 6", href: "#heading-6" },
+  ]);
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-[20rem_1fr] lg:gap-x-16 xxl:gap-x-48">
           <div>
@@ -22,8 +76,8 @@ export function Content27() {
                 collapsible={true}
               >
                 <AccordionItem value="aside-menu" className="border-none">
-                  <AccordionTrigger className="flex cursor-pointer items-center justify-between gap-3 border border-border-primary px-4 py-3 lg:pointer-events-none lg:cursor-auto lg:border-none lg:p-0 [&_svg]:size-4 [&_svg]:lg:hidden">
-                    <h3 className="text-lg leading-[1.4] font-bold md:text-2xl">
+                  <AccordionTrigger className="flex cursor-pointer items-center justify-between gap-3 border border-scheme-border px-4 py-3 lg:pointer-events-none lg:cursor-auto lg:border-none lg:p-0 [&_svg]:size-4 [&_svg]:lg:hidden">
+                    <h3 className="heading-h5 leading-[1.4] font-bold">
                       Tabla de contenidos
                     </h3>
                   </AccordionTrigger>
@@ -31,36 +85,36 @@ export function Content27() {
                     <div className="mt-3 md:mt-4">
                       <a
                         href="#heading-2"
-                        className="block px-4 py-3 md:text-md"
-                        style={{ marginLeft: 0 }}
+                        className={hashState.getLinkClassNames("#heading-2")}
+                        style={hashState.getLinkStyle(0)}
                       >
                         Heading 2
                       </a>
                       <a
                         href="#heading-3"
-                        className="block px-4 py-3 md:text-md"
-                        style={{ marginLeft: "16px" }}
+                        className={hashState.getLinkClassNames("#heading-3")}
+                        style={hashState.getLinkStyle(1)}
                       >
                         Heading 3
                       </a>
                       <a
                         href="#heading-4"
-                        className="block px-4 py-3 md:text-md"
-                        style={{ marginLeft: "32px" }}
+                        className={hashState.getLinkClassNames("#heading-4")}
+                        style={hashState.getLinkStyle(2)}
                       >
                         Heading 4
                       </a>
                       <a
                         href="#heading-5"
-                        className="block px-4 py-3 md:text-md"
-                        style={{ marginLeft: "48px" }}
+                        className={hashState.getLinkClassNames("#heading-5")}
+                        style={hashState.getLinkStyle(3)}
                       >
                         Heading 5
                       </a>
                       <a
                         href="#heading-6"
-                        className="block px-4 py-3 md:text-md"
-                        style={{ marginLeft: "64px" }}
+                        className={hashState.getLinkClassNames("#heading-6")}
+                        style={hashState.getLinkStyle(4)}
                       >
                         Heading 6
                       </a>
@@ -71,7 +125,7 @@ export function Content27() {
             </div>
           </div>
           <div className="max-w-lg">
-            <div className="md:prose-md prose lg:prose-lg">
+            <div className="prose-figcaption:border-l-border prose-base prose-headings:font-bold prose-h2:mt-6 prose-h2:mb-4 prose-h2:text-[2.25rem] prose-h2:md:text-[2.75rem] prose-h2:lg:text-[3rem] prose-h3:my-6 prose-h3:text-[2rem] prose-h3:md:text-[2.25rem] prose-h3:lg:text-[2.5rem] prose-h4:mt-6 prose-h4:mb-5 prose-h4:text-[1.5rem] prose-h4:md:text-[1.75rem] prose-h4:md:leading-[1.3] prose-h4:lg:text-[2rem] prose-h4:lg:leading-[1.3] prose-h5:mt-5 prose-h5:mb-4 prose-h5:text-[1.25rem] prose-h5:leading-[1.4] prose-h5:md:text-[1.5rem] prose-h6:mt-5 prose-h6:mb-4 prose-h6:text-[1.125rem] prose-h6:leading-[1.4] md:prose-h6:text-[1.25rem] prose-p:m-0 prose-p:mb-4 prose-p:leading-[1.5] prose-blockquote:my-6 prose-blockquote:border-l-[.1875rem] prose-blockquote:border-l-scheme-border prose-blockquote:px-5 prose-blockquote:py-3 prose-blockquote:text-[1.25rem] prose-blockquote:italic prose-figure:my-10 prose-figure:md:my-12 prose-figcaption:mt-2 prose-figcaption:border-l-2 prose-figcaption:pl-2 prose-figcaption:text-[0.875rem] prose-figcaption:opacity-80 prose-strong:font-bold">
               <Fragment>
                 <h2 id="heading-2">Heading 2</h2>
                 <p>

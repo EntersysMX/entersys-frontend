@@ -1,19 +1,20 @@
 "use client";
 
-import { Button, Card } from "@relume_io/relume-ui";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 
 export function Layout395() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="mx-auto mb-12 w-full max-w-lg text-center md:mb-18 lg:mb-20">
           <p className="mb-3 font-semibold md:mb-4">Beneficios</p>
-          <h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+          <h1 className="heading-h2 mb-5 font-bold md:mb-6">
             Valor agregado de nuestros servicios
           </h1>
-          <p className="md:text-md">
+          <p className="text-medium">
             Soluciones que generan impacto real en tu organización
           </p>
         </div>
@@ -28,7 +29,7 @@ export function Layout395() {
             <div className="flex flex-1 flex-col justify-center p-6 md:p-8">
               <div>
                 <p className="mb-2 font-semibold">Eficiencia</p>
-                <h2 className="mb-3 text-2xl font-bold md:mb-4 md:text-3xl md:leading-[1.3] lg:text-4xl">
+                <h2 className="heading-h4 mb-3 font-bold md:mb-4">
                   Optimización de procesos y reducción de tiempos
                 </h2>
                 <p>Aumenta la productividad hasta un 50%</p>
@@ -55,7 +56,7 @@ export function Layout395() {
             <div className="flex flex-1 flex-col justify-center p-6 md:p-8">
               <div>
                 <p className="mb-2 font-semibold">Escalabilidad</p>
-                <h2 className="mb-3 text-2xl font-bold md:mb-4 md:text-3xl md:leading-[1.3] lg:text-4xl">
+                <h2 className="heading-h4 mb-3 font-bold md:mb-4">
                   Sistemas adaptables al crecimiento de tu empresa
                 </h2>
                 <p>Tecnología flexible y modular</p>
@@ -82,7 +83,7 @@ export function Layout395() {
             <div className="flex flex-1 flex-col justify-center p-6 md:p-8">
               <div>
                 <p className="mb-2 font-semibold">Cumplimiento</p>
-                <h2 className="mb-3 text-2xl font-bold md:mb-4 md:text-3xl md:leading-[1.3] lg:text-4xl">
+                <h2 className="heading-h4 mb-3 font-bold md:mb-4">
                   Garantía de conformidad con estándares internacionales
                 </h2>
                 <p>Minimiza riesgos regulatorios y legales</p>

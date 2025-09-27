@@ -1,82 +1,39 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { VideoIframe } from "@/components/ui/video-iframe";
+import { AnimatePresence, motion } from "motion/react";
 import React, { useState } from "react";
+import { FaCirclePlay } from "react-icons/fa6";
 
-const TabItem = () => {
-  if (index !== activeTab) {
-    return null;
-  }
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.2 }}
-      exit={{ opacity: 0 }}
-    >
-      {tabItem.image && (
-        <img
-          src={tabItem.image.src}
-          alt={tabItem.image.alt}
-          className="rounded-image object-cover"
-        />
-      )}
-      {tabItem.video && (
-        <Dialog>
-          <DialogTrigger className="relative flex items-center justify-center w-full">
-            <img
-              src={tabItem.video.image.src}
-              alt={tabItem.video.image.alt}
-              className="object-cover size-full"
-            />
-            <span className="absolute inset-0 z-10 bg-black/50" />
-            <FaCirclePlay className="absolute z-20 text-white size-16" />
-          </DialogTrigger>
-          <DialogContent>
-            <VideoIframe video={tabItem.video.url} />
-          </DialogContent>
-        </Dialog>
-      )}
-    </motion.div>
-  );
-};
-
-const useRelume = () => {
-  const [activeTab, setActiveTab] = useState(0);
-  const setActiveTabSetter = (index) => () => setActiveTab(index);
-  const getActiveTabButtonStyles = (index) => {
-    return clsx("cursor-pointer border-b border-border-primary py-6", {
-      "opacity-100": activeTab === index,
-      "opacity-25": activeTab !== index,
-    });
-  };
-  const getActiveTabButtonContentStyles = (index) => {
+const useActiveValue = (initialValue) => {
+  const [activeValue, setActiveValue] = useState(initialValue);
+  const getActiveValue = (tabValue) => {
     return {
-      height: activeTab === index ? "auto" : 0,
-      opacity: activeTab === index ? 1 : 0,
+      height: activeValue === tabValue ? "auto" : 0,
+      opacity: activeValue === tabValue ? 1 : 0,
     };
   };
   return {
-    setActiveTabSetter,
-    getActiveTabButtonStyles,
-    getActiveTabButtonContentStyles,
-    activeTab,
+    setActiveValue,
+    getActiveValue,
   };
 };
 
 export function Layout492() {
-  const useActive = useRelume();
+  const activeValueState = useActiveValue("tab-one");
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="mx-auto mb-12 max-w-lg text-center md:mb-18 lg:mb-20">
           <p className="mb-3 font-semibold md:mb-4">
             Auditoría con respaldo real
           </p>
-          <h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+          <h1 className="heading-h2 mb-5 font-bold md:mb-6">
             Expertos que garantizan confianza
           </h1>
-          <p className="md:text-md">
+          <p className="text-medium">
             La implementación de Expersys está liderada por auditores
             certificados Six Sigma Green Belt, con experiencia comprobada en
             gestión de calidad. Su rol es asegurar que cada proceso cumpla con
@@ -84,113 +41,141 @@ export function Layout492() {
             práctica de tu operación.
           </p>
         </div>
-        <div className="grid grid-cols-1 items-center gap-x-12 md:grid-cols-2 lg:gap-x-20">
-          <div className="mb-6 flex max-h-full w-full items-center justify-center overflow-hidden md:mb-0">
-            <AnimatePresence initial={false}>
-              <TabItem
-                tabItem={{
-                  heading: "Short heading goes here",
-                  description:
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
-                  image: {
-                    src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
-                    alt: "Relume placeholder image 1",
-                  },
-                }}
-                index={0}
-                activeTab={useActive.activeTab}
-              />
-              <TabItem
-                tabItem={{
-                  heading: "Short heading goes here",
-                  description:
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
-                  video: {
-                    image: {
-                      src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-video-thumbnail.svg",
-                      alt: "Relume placeholder image 2",
-                    },
-                    url: "https://www.youtube.com/embed/8DKLYsikxTs?si=Ch9W0KrDWWUiCMMW",
-                  },
-                }}
-                index={1}
-                activeTab={useActive.activeTab}
-              />
-              <TabItem
-                tabItem={{
-                  heading: "Short heading goes here",
-                  description:
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
-                  image: {
-                    src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
-                    alt: "Relume placeholder image 3",
-                  },
-                }}
-                index={2}
-                activeTab={useActive.activeTab}
-              />
-            </AnimatePresence>
+        <Tabs
+          defaultValue="tab-one"
+          onValueChange={activeValueState.setActiveValue}
+        >
+          <div className="grid grid-cols-1 items-center gap-x-12 md:grid-cols-2 lg:gap-x-20">
+            <div className="mb-6 flex max-h-full w-full items-center justify-center overflow-hidden md:mb-0">
+              <TabsContent
+                value="tab-one"
+                className="w-full data-[state=active]:animate-tabs"
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <img
+                      src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+                      alt="Relume placeholder image 1"
+                      className="size-full rounded-image object-cover"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </TabsContent>
+              <TabsContent
+                value="tab-two"
+                className="w-full data-[state=active]:animate-tabs"
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <Dialog>
+                      <DialogTrigger className="relative flex w-full items-center justify-center overflow-hidden rounded-image">
+                        <img
+                          src="https://d22po4pjz3o32e.cloudfront.net/placeholder-video-thumbnail.svg"
+                          alt="Relume placeholder image 2"
+                          className="size-full object-cover"
+                        />
+                        <span className="absolute inset-0 z-10 bg-neutral-darkest/50" />
+                        <FaCirclePlay className="absolute z-20 size-16 text-white" />
+                      </DialogTrigger>
+                      <DialogContent>
+                        <VideoIframe video="https://www.youtube.com/embed/8DKLYsikxTs?si=Ch9W0KrDWWUiCMMW" />
+                      </DialogContent>
+                    </Dialog>
+                  </motion.div>
+                </AnimatePresence>
+              </TabsContent>
+              <TabsContent
+                value="tab-three"
+                className="w-full data-[state=active]:animate-tabs"
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <img
+                      src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+                      alt="Relume placeholder image 3"
+                      className="size-full rounded-image object-cover"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </TabsContent>
+            </div>
+            <TabsList className="relative grid auto-cols-fr grid-cols-1 grid-rows-[auto_auto] items-start md:items-stretch">
+              <TabsTrigger
+                value="tab-one"
+                className="flex-col items-start justify-start rounded-none border-0 border-b px-0 py-6 text-left whitespace-normal data-[state=active]:bg-transparent data-[state=inactive]:border-scheme-border data-[state=inactive]:opacity-25"
+              >
+                <h2 className="heading-h4 font-bold">
+                  Experiencia en auditoría y mejora continua
+                </h2>
+                <motion.div
+                  initial={false}
+                  animate={activeValueState.getActiveValue("tab-one")}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <p className="mt-3 md:mt-4">
+                    Auditores con trayectoria práctica que convierten los
+                    requisitos de la norma en ventajas reales para tu operación.
+                  </p>
+                </motion.div>
+              </TabsTrigger>
+              <TabsTrigger
+                value="tab-two"
+                className="flex-col items-start justify-start border-0 border-b px-0 py-6 text-left whitespace-normal data-[state=active]:bg-transparent data-[state=inactive]:border-scheme-border data-[state=inactive]:opacity-25"
+              >
+                <h2 className="heading-h4 font-bold">
+                  Coaching directo a líderes y equipos clave
+                </h2>
+                <motion.div
+                  initial={false}
+                  animate={activeValueState.getActiveValue("tab-two")}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <p className="mt-3 md:mt-4">
+                    Acompañamos a gerentes y colaboradores clave para que
+                    adopten y mantengan el sistema como parte de su cultura
+                    diaria.
+                  </p>
+                </motion.div>
+              </TabsTrigger>
+              <TabsTrigger
+                value="tab-three"
+                className="flex-col items-start justify-start border-0 border-b px-0 py-6 text-left whitespace-normal data-[state=active]:bg-transparent data-[state=inactive]:border-scheme-border data-[state=inactive]:opacity-25"
+              >
+                <h2 className="heading-h4 font-bold">
+                  Respaldo técnico durante todo el proceso
+                </h2>
+                <motion.div
+                  initial={false}
+                  animate={activeValueState.getActiveValue("tab-three")}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <p className="mt-3 md:mt-4">
+                    Soporte integral que asegura tanto el cumplimiento normativo
+                    como la mejora productiva de tu empresa.
+                  </p>
+                </motion.div>
+              </TabsTrigger>
+            </TabsList>
           </div>
-          <div className="relative grid auto-cols-fr grid-cols-1 grid-rows-[auto_auto] items-start md:items-stretch">
-            <div
-              onClick={useActive.setActiveTabSetter(0)}
-              className={useActive.getActiveTabButtonStyles(0)}
-            >
-              <h2 className="text-2xl font-bold md:text-3xl md:leading-[1.3] lg:text-4xl">
-                Experiencia en auditoría y mejora continua
-              </h2>
-              <motion.div
-                initial={false}
-                animate={useActive.getActiveTabButtonContentStyles(0)}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="overflow-hidden"
-              >
-                <p className="mt-3 md:mt-4">
-                  Auditores con trayectoria práctica que convierten los
-                  requisitos de la norma en ventajas reales para tu operación.
-                </p>
-              </motion.div>
-            </div>
-            <div
-              onClick={useActive.setActiveTabSetter(1)}
-              className={useActive.getActiveTabButtonStyles(1)}
-            >
-              <h2 className="text-2xl font-bold md:text-3xl md:leading-[1.3] lg:text-4xl">
-                Experiencia en auditoría y mejora continua
-              </h2>
-              <motion.div
-                initial={false}
-                animate={useActive.getActiveTabButtonContentStyles(1)}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="overflow-hidden"
-              >
-                <p className="mt-3 md:mt-4">
-                  Auditores con trayectoria práctica que convierten los
-                  requisitos de la norma en ventajas reales para tu operación.
-                </p>
-              </motion.div>
-            </div>
-            <div
-              onClick={useActive.setActiveTabSetter(2)}
-              className={useActive.getActiveTabButtonStyles(2)}
-            >
-              <h2 className="text-2xl font-bold md:text-3xl md:leading-[1.3] lg:text-4xl">
-                Experiencia en auditoría y mejora continua
-              </h2>
-              <motion.div
-                initial={false}
-                animate={useActive.getActiveTabButtonContentStyles(2)}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="overflow-hidden"
-              >
-                <p className="mt-3 md:mt-4">
-                  Auditores con trayectoria práctica que convierten los
-                  requisitos de la norma en ventajas reales para tu operación.
-                </p>
-              </motion.div>
-            </div>
-          </div>
-        </div>
+        </Tabs>
       </div>
     </section>
   );

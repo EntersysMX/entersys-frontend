@@ -1,24 +1,24 @@
 "use client";
 
-import { Card } from "@relume_io/relume-ui";
+import { Card } from "@/components/ui/card";
 import React from "react";
 import { BiSolidStar } from "react-icons/bi";
 
 export function Testimonial17() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="mx-auto mb-12 w-full max-w-lg text-center md:mb-18 lg:mb-20">
-          <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+          <h2 className="heading-h2 mb-5 font-bold md:mb-6">
             Lo que dicen nuestros clientes
           </h2>
-          <p className="md:text-md">
+          <p className="text-medium">
             Experiencias reales de transformación empresarial
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           <Card className="flex w-full flex-col items-start justify-between p-6 md:p-8">
-            <div className="rb-5 mb-5 md:mb-6">
+            <div className="mb-5 md:mb-6">
               <div className="mb-5 flex md:mb-6">
                 <BiSolidStar className="mr-1 size-6" />
                 <BiSolidStar className="mr-1 size-6" />
@@ -26,7 +26,7 @@ export function Testimonial17() {
                 <BiSolidStar className="mr-1 size-6" />
                 <BiSolidStar className="mr-1 size-6" />
               </div>
-              <blockquote className="md:text-md">
+              <blockquote className="text-medium">
                 Entersys nos ayudó a digitalizar completamente nuestros procesos
                 en solo 4 semanas.
               </blockquote>
@@ -44,7 +44,7 @@ export function Testimonial17() {
             </div>
           </Card>
           <Card className="flex w-full flex-col items-start justify-between p-6 md:p-8">
-            <div className="rb-5 mb-5 md:mb-6">
+            <div className="mb-5 md:mb-6">
               <div className="mb-5 flex md:mb-6">
                 <BiSolidStar className="mr-1 size-6" />
                 <BiSolidStar className="mr-1 size-6" />
@@ -52,7 +52,7 @@ export function Testimonial17() {
                 <BiSolidStar className="mr-1 size-6" />
                 <BiSolidStar className="mr-1 size-6" />
               </div>
-              <blockquote className="md:text-md">
+              <blockquote className="text-medium">
                 La implementación de sus sistemas nos permitió reducir costos
                 operativos significativamente.
               </blockquote>
@@ -70,7 +70,7 @@ export function Testimonial17() {
             </div>
           </Card>
           <Card className="flex w-full flex-col items-start justify-between p-6 md:p-8">
-            <div className="rb-5 mb-5 md:mb-6">
+            <div className="mb-5 md:mb-6">
               <div className="mb-5 flex md:mb-6">
                 <BiSolidStar className="mr-1 size-6" />
                 <BiSolidStar className="mr-1 size-6" />
@@ -78,7 +78,7 @@ export function Testimonial17() {
                 <BiSolidStar className="mr-1 size-6" />
                 <BiSolidStar className="mr-1 size-6" />
               </div>
-              <blockquote className="md:text-md">
+              <blockquote className="text-medium">
                 Un acompañamiento profesional que realmente entiende las
                 necesidades de las empresas.
               </blockquote>

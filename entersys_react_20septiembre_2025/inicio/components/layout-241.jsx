@@ -1,21 +1,21 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
+import { Button } from "@/components/ui/button";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 
 export function Layout241() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="flex flex-col">
-          <div className="rb-12 mb-12 md:mb-18 lg:mb-20">
+          <div className="mb-12 md:mb-18 lg:mb-20">
             <div className="w-full max-w-lg">
               <p className="mb-3 font-semibold md:mb-4">Industrias</p>
-              <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+              <h2 className="heading-h2 mb-5 font-bold md:mb-6">
                 Experiencia por industrias
               </h2>
-              <p className="md:text-md">
+              <p className="text-medium">
                 Entersys ofrece soluciones para diversos sectores, optimizando
                 procesos y mejorando la eficiencia. Transformamos la operación
                 de tu negocio.
@@ -31,13 +31,13 @@ export function Layout241() {
                   alt="Relume logo"
                 />
               </div>
-              <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
-                Medium length section heading goes here
+              <h3 className="heading-h4 mb-5 font-bold md:mb-6">
+                Experiencia en Manufactura
               </h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique. Duis
-                cursus, mi quis viverra ornare, eros dolor interdum nulla.
+                Empleamos la metodología Visual Management para detectar en qué
+                parte de la línea productiva se generan mermas y cómo
+                corregirlas mediante pautas técnicas.
               </p>
             </div>
             <div className="flex w-full flex-col">
@@ -48,13 +48,13 @@ export function Layout241() {
                   alt="Relume logo"
                 />
               </div>
-              <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
-                Medium length section heading goes here
+              <h3 className="heading-h4 mb-5 font-bold md:mb-6">
+                Tratamiento de agua
               </h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique. Duis
-                cursus, mi quis viverra ornare, eros dolor interdum nulla.
+                Implementamos un sistema de gestión de calidad para obtener la
+                acreditación ISO 9001-2015 en un ingenio dedicado al tratamiento
+                de agua.
               </p>
             </div>
             <div className="flex w-full flex-col">
@@ -65,13 +65,13 @@ export function Layout241() {
                   alt="Relume logo"
                 />
               </div>
-              <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
-                Medium length section heading goes here
+              <h3 className="heading-h4 mb-5 font-bold md:mb-6">
+                Mantenimiento en flotillas
               </h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique. Duis
-                cursus, mi quis viverra ornare, eros dolor interdum nulla.
+                Digitalizamos un portal digital capaz de brindar visibilidad
+                completa del ciclo de mantenimiento en una empresa dedicada al
+                aprovisionamiento y arrendamiento de equipos automotrices.
               </p>
             </div>
           </div>

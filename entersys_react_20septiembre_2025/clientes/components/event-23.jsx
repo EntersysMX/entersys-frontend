@@ -1,23 +1,24 @@
 "use client";
 
-import { Badge, Button } from "@relume_io/relume-ui";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import React from "react";
 import { BiCalendarAlt, BiMap } from "react-icons/bi";
 import { RxChevronRight } from "react-icons/rx";
 
 export function Event23() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="mb-12 grid auto-cols-fr grid-cols-1 items-end gap-12 md:mb-18 md:grid-cols-[1fr_max-content] lg:mb-20 lg:gap-20">
           <div className="max-w-lg">
             <p className="mb-3 font-semibold md:mb-4">
               Biblioteca de blueprints
             </p>
-            <h1 className="mb-3 text-5xl font-bold md:mb-4 md:text-7xl lg:text-8xl">
+            <h1 className="heading-h2 mb-3 font-bold md:mb-4">
               Casos de uso desarrollados
             </h1>
-            <p className="md:text-md">
+            <p className="text-medium">
               Nuestro modelo 'Try and Buy' nos ha permito extraer casos de
               estudio interesantes, que aunque no se pusieron en marcha,
               quedaron listos para ser implementados.
@@ -25,7 +26,6 @@ export function Event23() {
           </div>
           <Button
             variant="secondary"
-            size="primary"
             title="Ver todos"
             className="hidden md:flex"
           >
@@ -43,7 +43,7 @@ export function Event23() {
               <Badge className="absolute top-4 right-4">Worksys</Badge>
             </a>
             <div className="mt-5 flex flex-col items-start md:mt-6">
-              <div className="mb-3 flex flex-wrap gap-4 text-sm md:mb-4">
+              <div className="text-small mb-3 flex flex-wrap gap-4 md:mb-4">
                 <div className="flex items-center gap-2">
                   <BiCalendarAlt className="size-6 flex-none" />
                   10 Feb 2024
@@ -55,7 +55,7 @@ export function Event23() {
               </div>
             </div>
             <a href="#" className="mb-2">
-              <h2 className="text-xl font-bold md:text-2xl">
+              <h2 className="heading-h5 font-bold">
                 Transformación en manufactura
               </h2>
             </a>
@@ -83,7 +83,7 @@ export function Event23() {
               <Badge className="absolute top-4 right-4">Category</Badge>
             </a>
             <div className="mt-5 flex flex-col items-start md:mt-6">
-              <div className="mb-3 flex flex-wrap gap-4 text-sm md:mb-4">
+              <div className="text-small mb-3 flex flex-wrap gap-4 md:mb-4">
                 <div className="flex items-center gap-2">
                   <BiCalendarAlt className="size-6 flex-none" />
                   Sat 10 Feb 2024
@@ -95,9 +95,7 @@ export function Event23() {
               </div>
             </div>
             <a href="#" className="mb-2">
-              <h2 className="text-xl font-bold md:text-2xl">
-                Event title heading
-              </h2>
+              <h2 className="heading-h5 font-bold">Event title heading</h2>
             </a>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -123,7 +121,7 @@ export function Event23() {
               <Badge className="absolute top-4 right-4">Category</Badge>
             </a>
             <div className="mt-5 flex flex-col items-start md:mt-6">
-              <div className="mb-3 flex flex-wrap gap-4 text-sm md:mb-4">
+              <div className="text-small mb-3 flex flex-wrap gap-4 md:mb-4">
                 <div className="flex items-center gap-2">
                   <BiCalendarAlt className="size-6 flex-none" />
                   Sat 10 Feb 2024
@@ -135,9 +133,7 @@ export function Event23() {
               </div>
             </div>
             <a href="#" className="mb-2">
-              <h2 className="text-xl font-bold md:text-2xl">
-                Event title heading
-              </h2>
+              <h2 className="heading-h5 font-bold">Event title heading</h2>
             </a>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -163,7 +159,7 @@ export function Event23() {
               <Badge className="absolute top-4 right-4">Expersys</Badge>
             </a>
             <div className="mt-5 flex flex-col items-start md:mt-6">
-              <div className="mb-3 flex flex-wrap gap-4 text-sm md:mb-4">
+              <div className="text-small mb-3 flex flex-wrap gap-4 md:mb-4">
                 <div className="flex items-center gap-2">
                   <BiCalendarAlt className="size-6 flex-none" />
                   11 Feb 2024
@@ -175,7 +171,7 @@ export function Event23() {
               </div>
             </div>
             <a href="#" className="mb-2">
-              <h2 className="text-xl font-bold md:text-2xl">
+              <h2 className="heading-h5 font-bold">
                 Optimización de cumplimiento normativo
               </h2>
             </a>

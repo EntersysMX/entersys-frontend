@@ -4,19 +4,19 @@ import React from "react";
 
 export function Layout109() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="mb-12 grid grid-cols-1 items-start justify-between gap-x-12 gap-y-5 md:mb-18 md:grid-cols-2 md:gap-x-12 md:gap-y-8 lg:mb-20 lg:gap-x-20">
           <div>
             <p className="mb-3 font-semibold md:mb-4">
               Inteligencia de negocios para cualquier industria
             </p>
-            <h3 className="text-5xl leading-[1.2] font-bold md:text-7xl lg:text-8xl">
+            <h3 className="heading-h2 font-bold">
               Worksys es para empresas que requieren precisión
             </h3>
           </div>
           <div>
-            <p className="mb-5 md:mb-6 md:text-md">
+            <p className="text-medium mb-5 md:mb-6">
               Hemos consolidado experiencia importante en diversas verticales de
               negocio y estamos orgullosos de poder llevar una solución a la
               medida en cada una

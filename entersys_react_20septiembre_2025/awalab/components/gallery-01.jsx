@@ -4,13 +4,13 @@ import React from "react";
 
 export function Gallery1() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="mb-12 text-center md:mb-18 lg:mb-20">
-          <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+          <h2 className="heading-h2 mb-5 font-bold md:mb-6">
             Galería multimedia
           </h2>
-          <p className="md:text-md">
+          <p className="text-medium">
             Descubre más sobre nuestra implementación en Grupo industrial Nexus
           </p>
         </div>

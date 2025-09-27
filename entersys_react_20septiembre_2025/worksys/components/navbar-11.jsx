@@ -1,7 +1,8 @@
 "use client";
 
-import { Button, useMediaQuery } from "@relume_io/relume-ui";
-import { AnimatePresence, motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { AnimatePresence, motion } from "motion/react";
 import React, { useState } from "react";
 import { RxChevronDown } from "react-icons/rx";
 
@@ -40,10 +41,7 @@ const useRelume = () => {
 export function Navbar11() {
   const useActive = useRelume();
   return (
-    <section
-      id="relume"
-      className="z-[999] flex w-full items-center border-b border-border-primary bg-background-primary md:min-h-18 lg:px-[5%]"
-    >
+    <section className="z-[999] flex w-full items-center border-b border-scheme-border bg-scheme-background md:min-h-18 lg:px-[5%]">
       <div className="mx-auto size-full items-center justify-between lg:flex">
         <div className="grid min-h-16 grid-cols-2 items-center justify-between px-[5%] md:min-h-18 lg:min-h-full lg:px-0">
           <a href="#">
@@ -57,7 +55,7 @@ export function Navbar11() {
             onClick={useActive.toggleMobileMenu}
           >
             <motion.span
-              className="my-[3px] h-0.5 w-6 bg-black"
+              className="my-[3px] h-0.5 w-6 bg-neutral-darkest"
               animate={useActive.animateMobileMenuButtonSpan}
               variants={{
                 open: { translateY: 8, transition: { delay: 0.1 } },
@@ -70,7 +68,7 @@ export function Navbar11() {
               }}
             />
             <motion.span
-              className="my-[3px] h-0.5 w-6 bg-black"
+              className="my-[3px] h-0.5 w-6 bg-neutral-darkest"
               animate={useActive.animateMobileMenu}
               variants={{
                 open: { width: 0, transition: { duration: 0.1 } },
@@ -81,7 +79,7 @@ export function Navbar11() {
               }}
             />
             <motion.span
-              className="my-[3px] h-0.5 w-6 bg-black"
+              className="my-[3px] h-0.5 w-6 bg-neutral-darkest"
               animate={useActive.animateMobileMenuButtonSpan}
               variants={{
                 open: { translateY: -8, transition: { delay: 0.1 } },
@@ -109,13 +107,13 @@ export function Navbar11() {
           <nav className="lg:flex lg:items-center">
             <a
               href="#"
-              className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2"
+              className="text-regular block py-3 text-left first:pt-7 lg:px-4 lg:py-2 lg:first:pt-2"
             >
               Inicio
             </a>
             <a
               href="#"
-              className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2"
+              className="text-regular block py-3 text-left first:pt-7 lg:px-4 lg:py-2 lg:first:pt-2"
             >
               Nosotros
             </a>
@@ -124,7 +122,7 @@ export function Navbar11() {
               onMouseLeave={useActive.closeOnDesktopDropdownMenu}
             >
               <button
-                className="flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base"
+                className="text-regular flex w-full items-center justify-between gap-2 py-3 text-left lg:flex-none lg:justify-start lg:px-4 lg:py-2"
                 onClick={useActive.openOnMobileDropdownMenu}
               >
                 <span>Servicios</span>
@@ -161,7 +159,7 @@ export function Navbar11() {
                     },
                   }}
                   transition={{ duration: 0.3 }}
-                  className="z-50 bg-background-primary lg:absolute lg:w-80 lg:border lg:border-border-primary lg:p-6 lg:[--y-close:25%]"
+                  className="z-50 bg-scheme-background lg:absolute lg:w-80 lg:border lg:border-scheme-border lg:p-6 lg:[--y-close:25%]"
                 >
                   <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-2 py-3 md:py-3 lg:gap-y-4 lg:py-0">
                     <a
@@ -176,10 +174,8 @@ export function Navbar11() {
                         />
                       </div>
                       <div className="flex flex-col items-start justify-center">
-                        <p className="text-md font-semibold lg:text-base">
-                          Worksys
-                        </p>
-                        <p className="hidden text-sm md:block">
+                        <p className="text-regular font-semibold">Worksys</p>
+                        <p className="text-small hidden md:block">
                           Implementación y digitalización de procesos
                           empresariales
                         </p>
@@ -197,10 +193,8 @@ export function Navbar11() {
                         />
                       </div>
                       <div className="flex flex-col items-start justify-center">
-                        <p className="text-md font-semibold lg:text-base">
-                          Expersys
-                        </p>
-                        <p className="hidden text-sm md:block">
+                        <p className="text-regular font-semibold">Expersys</p>
+                        <p className="text-small hidden md:block">
                           Implementación y acreditación de sistemas de gestión
                           de calidad
                         </p>
@@ -212,13 +206,13 @@ export function Navbar11() {
             </div>
             <a
               href="#"
-              className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2"
+              className="text-regular block py-3 text-left first:pt-7 lg:px-4 lg:py-2 lg:first:pt-2"
             >
               Clientes
             </a>
             <a
               href="#"
-              className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2"
+              className="text-regular block py-3 text-left first:pt-7 lg:px-4 lg:py-2 lg:first:pt-2"
             >
               Blog
             </a>

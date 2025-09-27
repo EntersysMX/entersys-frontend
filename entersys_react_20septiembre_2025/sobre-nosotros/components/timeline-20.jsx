@@ -4,18 +4,15 @@ import React, { Fragment } from "react";
 
 export function Timeline20() {
   return (
-    <section
-      id="relume"
-      className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28"
-    >
+    <section className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="mb-12 md:mb-18 lg:mb-20">
           <div className="w-full max-w-lg">
             <p className="mb-3 font-semibold md:mb-4">Trayectoria</p>
-            <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+            <h2 className="heading-h2 mb-5 font-bold md:mb-6">
               Nuestros principales logros y momentos destacados
             </h2>
-            <p className="md:text-md">
+            <p className="text-medium">
               Cada hito representa un paso más en nuestra misión de transformar
               operaciones empresariales. Cada paso es un líder de negocio más
               que se 'jubila' de la operación para expandir sus horizontes.
@@ -25,18 +22,18 @@ export function Timeline20() {
         <div className="relative grid auto-cols-fr grid-flow-row grid-cols-1 items-center justify-center md:grid-flow-col md:grid-cols-[max-content_1fr] md:justify-normal">
           <div className="relative hidden md:grid md:grid-cols-1 md:gap-4">
             <div className="flex flex-col items-center md:w-full md:flex-row">
-              <div className="h-full w-[3px] bg-black md:h-[3px] md:w-full" />
+              <div className="h-full w-[3px] bg-scheme-text md:h-[3px] md:w-full" />
             </div>
           </div>
           <div className="relative grid auto-cols-fr grid-cols-[max-content_1fr] gap-4 md:grid-cols-1 md:grid-rows-[1fr_max-content_1fr]">
             <Fragment>
               <div className="hidden md:block" />
               <div className="flex flex-col items-center md:w-full md:flex-row">
-                <div className="z-20 size-[0.9375rem] flex-none rounded-full bg-black shadow-[0_0_0_8px_white]" />
-                <div className="h-full w-[3px] bg-black md:h-[3px] md:w-full" />
+                <div className="z-20 size-[0.9375rem] flex-none rounded-full bg-scheme-text shadow-[0_0_0_8px_white]" />
+                <div className="h-full w-[3px] bg-scheme-text md:h-[3px] md:w-full" />
               </div>
               <div className="mb-8 flex flex-col items-start md:mr-4 md:mb-0">
-                <h3 className="mb-2 text-xl font-bold md:text-2xl">2019</h3>
+                <h3 className="heading-h5 mb-2 font-bold">2019</h3>
                 <p>Fundamos Consultoría en Gestión de Negocios.</p>
               </div>
             </Fragment>
@@ -44,12 +41,12 @@ export function Timeline20() {
           <div className="relative grid auto-cols-fr grid-cols-[max-content_1fr] gap-4 md:grid-cols-1 md:grid-rows-[1fr_max-content_1fr]">
             <Fragment>
               <div className="order-last mb-8 flex flex-col items-start md:order-none md:mr-4 md:mb-0">
-                <h3 className="mb-2 text-xl font-bold md:text-2xl">2020</h3>
+                <h3 className="heading-h5 mb-2 font-bold">2020</h3>
                 <p>Nos convertimos en Partners en México de Smartsheets.</p>
               </div>
               <div className="flex flex-col items-center md:w-full md:flex-row">
-                <div className="z-20 size-[0.9375rem] flex-none rounded-full bg-black shadow-[0_0_0_8px_white]" />
-                <div className="h-full w-[3px] bg-black md:h-[3px] md:w-full" />
+                <div className="z-20 size-[0.9375rem] flex-none rounded-full bg-scheme-text shadow-[0_0_0_8px_white]" />
+                <div className="h-full w-[3px] bg-scheme-text md:h-[3px] md:w-full" />
               </div>
               <div className="hidden md:block" />
             </Fragment>
@@ -58,13 +55,11 @@ export function Timeline20() {
             <Fragment>
               <div className="hidden md:block" />
               <div className="flex flex-col items-center md:w-full md:flex-row">
-                <div className="z-20 size-[0.9375rem] flex-none rounded-full bg-black shadow-[0_0_0_8px_white]" />
-                <div className="h-full w-[3px] bg-black md:h-[3px] md:w-full" />
+                <div className="z-20 size-[0.9375rem] flex-none rounded-full bg-scheme-text shadow-[0_0_0_8px_white]" />
+                <div className="h-full w-[3px] bg-scheme-text md:h-[3px] md:w-full" />
               </div>
               <div className="mb-8 flex flex-col items-start md:mr-4 md:mb-0">
-                <h3 className="mb-2 text-xl font-bold md:text-2xl">
-                  2021-2022
-                </h3>
+                <h3 className="heading-h5 mb-2 font-bold">2021-2022</h3>
                 <p>
                   Implementación: Módulos de Control de Calidad en Alimentos y
                   Sistema de gestión de calidad en empresa de Suplementos
@@ -75,7 +70,7 @@ export function Timeline20() {
           <div className="relative grid auto-cols-fr grid-cols-[max-content_1fr] gap-4 md:grid-cols-1 md:grid-rows-[1fr_max-content_1fr]">
             <Fragment>
               <div className="order-last mb-8 flex flex-col items-start md:order-none md:mr-4 md:mb-0">
-                <h3 className="mb-2 text-xl font-bold md:text-2xl">2023</h3>
+                <h3 className="heading-h5 mb-2 font-bold">2023</h3>
                 <p>
                   Incorporación Auditor Líder Internacional Lean Six Sigma Green
                   Belt, Sistema de Gestión Integral: ISO9001:2015,
@@ -83,8 +78,8 @@ export function Timeline20() {
                 </p>
               </div>
               <div className="flex flex-col items-center md:w-full md:flex-row">
-                <div className="z-20 size-[0.9375rem] flex-none rounded-full bg-black shadow-[0_0_0_8px_white]" />
-                <div className="h-full w-[3px] bg-black md:h-[3px] md:w-full" />
+                <div className="z-20 size-[0.9375rem] flex-none rounded-full bg-scheme-text shadow-[0_0_0_8px_white]" />
+                <div className="h-full w-[3px] bg-scheme-text md:h-[3px] md:w-full" />
               </div>
               <div className="hidden md:block" />
             </Fragment>
@@ -93,11 +88,11 @@ export function Timeline20() {
             <Fragment>
               <div className="hidden md:block" />
               <div className="flex flex-col items-center md:w-full md:flex-row">
-                <div className="z-20 size-[0.9375rem] flex-none rounded-full bg-black shadow-[0_0_0_8px_white]" />
-                <div className="h-full w-[3px] bg-black md:h-[3px] md:w-full hidden md:block" />
+                <div className="z-20 size-[0.9375rem] flex-none rounded-full bg-scheme-text shadow-[0_0_0_8px_white]" />
+                <div className="h-full w-[3px] bg-scheme-text md:h-[3px] md:w-full hidden md:block" />
               </div>
               <div className="mb-8 flex flex-col items-start md:mr-4 md:mb-0">
-                <h3 className="mb-2 text-xl font-bold md:text-2xl">2024</h3>
+                <h3 className="heading-h5 mb-2 font-bold">2024</h3>
                 <p>Alcanzamos una comunidad que asciende a los 500 usuarios.</p>
               </div>
             </Fragment>

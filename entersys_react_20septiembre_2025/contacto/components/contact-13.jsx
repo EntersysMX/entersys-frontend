@@ -1,20 +1,20 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
+import { Button } from "@/components/ui/button";
 import React from "react";
 import { BiEnvelope, BiMap, BiPhone } from "react-icons/bi";
 import { RxChevronRight } from "react-icons/rx";
 
 export function Contact13() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
-        <div className="rb-12 mb-12 max-w-lg md:mb-18 lg:mb-20">
+        <div className="mb-12 max-w-lg md:mb-18 lg:mb-20">
           <p className="mb-3 font-semibold md:mb-4">Información</p>
-          <h2 className="rb-5 mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+          <h2 className="heading-h2 mb-5 font-bold md:mb-6">
             Datos de contacto
           </h2>
-          <p className="md:text-md">
+          <p className="text-medium">
             Estamos disponibles para ayudarte en cualquier momento
           </p>
         </div>
@@ -24,9 +24,7 @@ export function Contact13() {
               <div className="mb-3 md:mb-4">
                 <BiEnvelope className="size-8" />
               </div>
-              <h3 className="mb-2 text-md leading-[1.4] font-bold md:text-xl">
-                Correo
-              </h3>
+              <h3 className="heading-h6 mb-2 font-bold">Correo</h3>
               <p className="mb-2">Contáctanos para más información</p>
               <a className="underline" href="#">
                 hello@relume.io
@@ -36,9 +34,7 @@ export function Contact13() {
               <div className="mb-3 md:mb-4">
                 <BiPhone className="size-8" />
               </div>
-              <h3 className="mb-2 text-md leading-[1.4] font-bold md:text-xl">
-                Teléfono
-              </h3>
+              <h3 className="heading-h6 mb-2 font-bold">Teléfono</h3>
               <p className="mb-2">Comunícate con nuestro equipo</p>
               <a className="underline" href="#">
                 +52 55 1234 5678
@@ -48,9 +44,7 @@ export function Contact13() {
               <div className="mb-3 md:mb-4">
                 <BiMap className="size-8" />
               </div>
-              <h3 className="mb-2 text-md leading-[1.4] font-bold md:text-xl">
-                Oficina
-              </h3>
+              <h3 className="heading-h6 mb-2 font-bold">Oficina</h3>
               <p className="mb-2">Ubicación principal en Ciudad de México</p>
               <div className="mt-5 md:mt-6">
                 <Button

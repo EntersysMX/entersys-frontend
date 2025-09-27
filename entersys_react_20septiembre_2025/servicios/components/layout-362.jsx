@@ -1,20 +1,21 @@
 "use client";
 
-import { Button, Card } from "@relume_io/relume-ui";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 
 export function Layout362() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
-        <div className="rb-12 mb-12 md:mb-18 lg:mb-20">
+        <div className="mb-12 md:mb-18 lg:mb-20">
           <div className="mx-auto max-w-lg text-center">
             <p className="mb-3 font-semibold md:mb-4">Metodología</p>
-            <h2 className="rb-5 mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+            <h2 className="heading-h2 mb-5 font-bold md:mb-6">
               Cómo trabajamos en Entersys
             </h2>
-            <p className="md:text-md">
+            <p className="text-medium">
               Un enfoque integral para transformar tu operación empresarial
             </p>
           </div>
@@ -22,8 +23,8 @@ export function Layout362() {
         <div className="grid grid-cols-1 items-start gap-6 md:gap-8 lg:grid-cols-2">
           <Card className="grid grid-cols-1 items-start sm:grid-cols-2">
             <div className="flex h-full flex-col justify-center p-6">
-              <p className="mb-2 text-sm font-semibold">Worksys</p>
-              <h3 className="mb-2 text-xl font-bold md:text-2xl">
+              <p className="text-small mb-2 font-semibold">Worksys</p>
+              <h3 className="heading-h5 mb-2 font-bold">
                 Digitalización de procesos con tecnología inteligente
               </h3>
               <p>Automatización de tareas repetitivas</p>
@@ -48,8 +49,8 @@ export function Layout362() {
           </Card>
           <Card className="grid grid-cols-1 items-start sm:grid-cols-2">
             <div className="flex h-full flex-col justify-center p-6">
-              <p className="mb-2 text-sm font-semibold">Expersys</p>
-              <h3 className="mb-2 text-xl font-bold md:text-2xl">
+              <p className="text-small mb-2 font-semibold">Expersys</p>
+              <h3 className="heading-h5 mb-2 font-bold">
                 Implementación de sistemas de gestión certificados
               </h3>
               <p>Acompañamiento en acreditaciones internacionales</p>

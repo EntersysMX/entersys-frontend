@@ -1,19 +1,20 @@
 "use client";
 
-import { Button, Card } from "@relume_io/relume-ui";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 
 export function Layout394() {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="mx-auto mb-12 w-full max-w-lg text-center md:mb-18 lg:mb-20">
           <p className="mb-3 font-semibold md:mb-4">Diferenciadores clave</p>
-          <h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+          <h1 className="heading-h2 mb-5 font-bold md:mb-6">
             Por qué elegir Entersys
           </h1>
-          <p className="md:text-md">
+          <p className="text-medium">
             Transformamos la complejidad operativa en oportunidades de
             crecimiento
           </p>
@@ -23,7 +24,7 @@ export function Layout394() {
             <div className="flex flex-1 flex-col justify-center p-6 md:p-8">
               <div>
                 <p className="mb-2 font-semibold">Eficiencia</p>
-                <h2 className="mb-3 text-2xl font-bold md:mb-4 md:text-3xl md:leading-[1.3] lg:text-4xl">
+                <h2 className="heading-h4 mb-3 font-bold md:mb-4">
                   Resultados medibles en semanas
                 </h2>
                 <p>
@@ -52,7 +53,7 @@ export function Layout394() {
             <div className="flex flex-1 flex-col justify-center p-6 md:p-8">
               <div>
                 <p className="mb-2 font-semibold">Escalabilidad</p>
-                <h2 className="mb-3 text-2xl font-bold md:mb-4 md:text-3xl md:leading-[1.3] lg:text-4xl">
+                <h2 className="heading-h4 mb-3 font-bold md:mb-4">
                   Sistemas que crecen con tu empresa
                 </h2>
                 <p>Soluciones flexibles y adaptables a tu crecimiento</p>
@@ -79,11 +80,12 @@ export function Layout394() {
             <div className="flex flex-1 flex-col justify-center p-6 md:p-8">
               <div>
                 <p className="mb-2 font-semibold">Cumplimiento</p>
-                <h2 className="mb-3 text-2xl font-bold md:mb-4 md:text-3xl md:leading-[1.3] lg:text-4xl">
+                <h2 className="heading-h4 mb-3 font-bold md:mb-4">
                   Protección normativa integral
                 </h2>
                 <p>
-                  Garantizamos el cumplimiento de estándares internacionales
+                  Sistemas de gestión de calidad que garantizan acreditaciones
+                  normativas.
                 </p>
               </div>
               <div className="mt-5 md:mt-6">
