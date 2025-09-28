@@ -6,7 +6,7 @@ import { RxChevronRight } from "react-icons/rx";
 import AnimatedSection, { AnimatedStaggerList, AnimatedStaggerItem } from "../../../AnimatedSection";
 import { motion } from "framer-motion";
 
-const Value = ({ colorScheme = 2, ...props }) => {
+export function Layout363({ colorScheme = 2, ...props }) {
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -122,4 +122,3 @@ const Value = ({ colorScheme = 2, ...props }) => {
   );
 };
 
-export default Value;

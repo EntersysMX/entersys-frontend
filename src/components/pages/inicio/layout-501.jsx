@@ -4,7 +4,7 @@ import { Button } from "@relume_io/relume-ui";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 
-const Industries = ({ colorScheme = 2, ...props }) => {
+export function Layout501({ colorScheme = 2, ...props }) {
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -84,4 +84,3 @@ const Industries = ({ colorScheme = 2, ...props }) => {
   );
 };
 
-export default Industries;

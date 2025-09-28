@@ -7,7 +7,7 @@ import AnimatedSection, { AnimatedStaggerList, AnimatedStaggerItem } from "../..
 import AnimatedCounter from "../../../AnimatedCounter";
 import { motion } from "framer-motion";
 
-const Technology = ({ colorScheme = 4, ...props }) => {
+export function Layout394({ colorScheme = 4, ...props }) {
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -129,4 +129,3 @@ const Technology = ({ colorScheme = 4, ...props }) => {
   );
 };
 
-export default Technology;

@@ -11,7 +11,7 @@ import { Card } from "../../../ui/Card";
 import React from "react";
 import { RxPlus } from "react-icons/rx";
 
-const FAQ = ({ colorScheme = 1, ...props }) => {
+export function Faq04({ colorScheme = 1, ...props }) {
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container max-w-lg">
@@ -128,4 +128,3 @@ const FAQ = ({ colorScheme = 1, ...props }) => {
   );
 };
 
-export default FAQ;

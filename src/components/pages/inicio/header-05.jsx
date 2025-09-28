@@ -5,7 +5,7 @@ import React from "react";
 import AnimatedSection from "../../../AnimatedSection";
 import { motion } from "framer-motion";
 
-const Hero = ({ colorScheme = 4, ...props }) => {
+export function Header5({ colorScheme = 4, ...props }) {
   return (
     <section id="relume" className={`relative px-[5%] color-scheme-${colorScheme}`} {...props}>
       <div className="relative z-10 container">
@@ -91,4 +91,3 @@ const Hero = ({ colorScheme = 4, ...props }) => {
   );
 };
 
-export default Hero;
