@@ -2,6 +2,8 @@
 
 Frontend web application for the Entersys.mx project.
 
+<!-- Deployment test with SSH key configuration -->
+
 ## Project Structure
 
 ```
