@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
   Button,
 } from "@relume_io/relume-ui";
-import { Card } from "../../../ui/Card";
+import { Card } from "../../ui/Card";
 import React from "react";
 import { RxPlus } from "react-icons/rx";
 

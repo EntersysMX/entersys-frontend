@@ -17,9 +17,10 @@ export function Layout141({ colorScheme = 2, ...props }) {
                 Nuestra historia de innovación y transformación
               </h2>
               <p className="mb-5 md:mb-6 md:text-md">
-                Fundamos Entersys con la convicción de que cada empresa merece
-                sistemas que simplifiquen su operación. Nuestro objetivo es
-                'Entrar al sistema' para liberar el potencial de los negocios.
+                Fundamos Entersys con la convicción de que cada empresa puede
+                automatizar su operación, consolidando metodologías de gestión
+                eficientes y con tecnología de vanguardia. Se 'afinan' para
+                funcionar como un reloj suizo.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 py-2">
                 <img

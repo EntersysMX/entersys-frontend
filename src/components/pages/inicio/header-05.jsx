@@ -2,7 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import React from "react";
-import AnimatedSection from "../../../AnimatedSection";
+import AnimatedSection from "../../AnimatedSection";
 import { motion } from "framer-motion";
 
 export function Header5({ colorScheme = 4, ...props }) {

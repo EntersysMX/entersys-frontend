@@ -1,6 +1,6 @@
 {
   "name": "entersys-frontend",
-  "version": "2025.09.27-0939-7c5916a",
+  "version": "2025.09.28-0956-bd6cb78",
   "description": "Frontend web application for Entersys.mx project",
   "private": true,
   "type": "module",
