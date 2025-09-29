@@ -2,7 +2,7 @@
 
 Frontend web application for the Entersys.mx project.
 
-<!-- Deployment test with SSH key configuration -->
+<!-- Deployment verification and manual deployment test -->
 
 ## Project Structure
 
