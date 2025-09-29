@@ -2,7 +2,7 @@
 
 Frontend web application for the Entersys.mx project.
 
-<!-- Deployment verification and manual deployment test -->
+<!-- WhatsAppFloatButton updates and deployment verification -->
 
 ## Project Structure
 
