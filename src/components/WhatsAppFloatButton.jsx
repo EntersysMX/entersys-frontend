@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { mauticService } from '../services/mautic';
+import { analyticsService } from '../services/analytics';
 
 /**
  * WhatsApp Float Button - Versión Corregida para Producción
@@ -41,8 +42,9 @@ const WhatsAppFloatButton = () => {
       const currentPage = window.location.pathname;
       const source = 'whatsapp_float_button';
 
-      // 2. Tracking en Mautic
+      // 2. Tracking en Mautic y Matomo
       await mauticService.trackWhatsAppClick(userEmail, source);
+      analyticsService.trackWhatsAppClick(source);
 
       // 3. Si no hay email registrado, crear un lead anónimo para tracking
       if (!userEmail) {

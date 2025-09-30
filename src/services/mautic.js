@@ -34,78 +34,54 @@ export class MauticService {
   }
 
   /**
-   * Capturar lead via Backend CRM API (cuando esté disponible)
+   * Capturar lead via formulario directo de Mautic
    */
   async captureLead(leadData) {
     try {
-      console.log('📝 Capturing lead:', leadData);
-      console.log('🔧 DEBUG: USE_BACKEND =', USE_BACKEND);
-      console.log('🔧 DEBUG: API_BASE =', API_BASE);
-      console.log('🔧 DEBUG: CRM_ENDPOINT =', CRM_ENDPOINT);
+      console.log('📝 Capturing lead via Mautic form:', leadData);
 
-      // Verificar si debe usar backend o localStorage
-      if (USE_BACKEND) {
-        console.log('🔗 Using backend CRM API');
+      // Intentar envío directo al formulario de Mautic
+      const mauticFormData = new FormData();
 
-        // Mapear datos para el esquema del backend
-        const backendPayload = {
-          name: leadData.name,
-          email: leadData.email,
-          company: leadData.company || '',
-          phone: leadData.phone || '',
-          interest: this.mapInterestToBackend(leadData.interest || leadData.source || 'general'),
-          message: leadData.message || '',
-          source: 'website_form'
-        };
+      // Mapear campos a los nombres exactos de Mautic (con guiones bajos)
+      if (leadData.firstName) mauticFormData.append('mauticform[first_name]', leadData.firstName);
+      if (leadData.lastName) mauticFormData.append('mauticform[last_name]', leadData.lastName);
+      if (leadData.email) mauticFormData.append('mauticform[email]', leadData.email);
+      if (leadData.company) mauticFormData.append('mauticform[company]', leadData.company);
+      if (leadData.phone) mauticFormData.append('mauticform[phone]', leadData.phone);
+      if (leadData.message) mauticFormData.append('mauticform[message]', leadData.message);
 
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 segundo timeout
+      // Campos del sistema de Mautic
+      mauticFormData.append('mauticform[formId]', '1');
+      mauticFormData.append('mauticform[return]', '');
+      mauticFormData.append('mauticform[messenger]', '1');
 
-        const response = await fetch(`${CRM_ENDPOINT}/sync-lead`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(backendPayload),
-          signal: controller.signal
-        });
+      console.log('🔗 Submitting to Mautic form endpoint...');
 
-        clearTimeout(timeoutId);
-
-        const result = await response.json();
-
-        if (response.ok && result.success) {
-          console.log('✅ Lead captured successfully via backend:', result);
-
-          return {
-            success: true,
-            message: result.message || '¡Gracias por contactarnos! Hemos recibido tu información y nos pondremos en contacto contigo muy pronto.',
-            method: 'backend_crm_api',
-            leadId: result.contact_id,
-            action: result.action,
-            nextSteps: result.next_steps || []
-          };
-        } else {
-          throw new Error(result.detail || `HTTP ${response.status}`);
-        }
-      } else {
-        // Usar localStorage mientras el backend se configura
-        console.log('📦 Using localStorage (backend not configured yet)');
-        return await this.localLeadStorage(leadData);
-      }
-
-    } catch (error) {
-      console.error('❌ Error capturing lead:', error);
-      console.error('🔧 DEBUG Error details:', {
-        name: error.name,
-        message: error.message,
-        stack: error.stack,
-        cause: error.cause
+      const response = await fetch('https://crm.entersys.mx/form/submit', {
+        method: 'POST',
+        body: mauticFormData,
+        mode: 'no-cors' // Para evitar problemas de CORS
       });
 
-      // Si falla el backend, usar almacenamiento local como fallback
-      console.log('📦 Fallback: usando localStorage mientras se resuelve la conexión');
+      console.log('✅ Form submitted to Mautic (no-cors mode)');
+
+      // También almacenar localmente para backup
+      const localResult = await this.localLeadStorage(leadData);
+
+      return {
+        success: true,
+        message: '¡Gracias por contactarnos! Hemos recibido tu información y nos pondremos en contacto contigo muy pronto.',
+        method: 'mautic_form_direct',
+        leadId: localResult.leadId,
+        backup: 'stored_locally'
+      };
+
+    } catch (error) {
+      console.error('❌ Error submitting to Mautic form:', error);
+
+      // Fallback a localStorage
+      console.log('📦 Fallback: usando localStorage');
       return await this.localLeadStorage(leadData);
     }
   }

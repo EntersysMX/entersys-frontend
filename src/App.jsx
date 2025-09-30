@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import PageTransition from './components/PageTransition'
 import Home from './pages/Home'
@@ -11,8 +11,15 @@ import Awalab from './pages/Awalab'
 import Expersys from './pages/Expersys'
 import Worksys from './pages/Worksys'
 import WhatsAppFloatButton from './components/WhatsAppFloatButton'
+import { analyticsService } from './services/analytics'
 
 function App() {
+  // Inicializar analytics cuando la app se carga
+  useEffect(() => {
+    console.log('🚀 App mounted - initializing analytics');
+    analyticsService.initialize();
+  }, []);
+
   return (
     <div className="App">
       <PageTransition>
