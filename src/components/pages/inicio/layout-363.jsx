@@ -33,7 +33,7 @@ export function Layout363({ colorScheme = 2, ...props }) {
               whileHover={{ y: -8, scale: 1.02 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              <div className="grid grid-cols-1 items-start sm:grid-cols-2 overflow-hidden bg-background-alternative rounded-lg shadow-lg">
+              <div className="grid grid-cols-1 items-start sm:grid-cols-2 overflow-hidden bg-transparent border border-border-primary/20 rounded-lg shadow-sm">
                 <div className="flex size-full items-center justify-center">
                   <motion.img
                     src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
@@ -73,7 +73,7 @@ export function Layout363({ colorScheme = 2, ...props }) {
               whileHover={{ y: -8, scale: 1.02 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              <div className="grid grid-cols-1 items-start sm:grid-cols-2 overflow-hidden bg-background-alternative rounded-lg shadow-lg">
+              <div className="grid grid-cols-1 items-start sm:grid-cols-2 overflow-hidden bg-transparent border border-border-primary/20 rounded-lg shadow-sm">
                 <div className="flex size-full items-center justify-center">
                   <motion.img
                     src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"

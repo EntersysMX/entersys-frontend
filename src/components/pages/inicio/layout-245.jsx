@@ -30,11 +30,9 @@ export function Layout245({ colorScheme = 1, ...props }) {
           <div className="grid grid-cols-1 items-start gap-y-12 md:grid-cols-3 md:gap-x-8 md:gap-y-16 lg:gap-x-12">
             <div className="group cursor-pointer">
               <div className="rb-5 mb-5 md:mb-6">
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
-                  alt="Relume logo"
-                  className="size-12"
-                />
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
+                  <span className="material-symbols-outlined text-primary text-2xl">analytics</span>
+                </div>
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl group-hover:text-primary transition-colors">
                 Resultados visibles en semanas, no en meses
@@ -43,11 +41,9 @@ export function Layout245({ colorScheme = 1, ...props }) {
             </div>
             <div className="group cursor-pointer">
               <div className="rb-5 mb-5 md:mb-6">
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
-                  alt="Relume logo"
-                  className="size-12"
-                />
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
+                  <span className="material-symbols-outlined text-primary text-2xl">support_agent</span>
+                </div>
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl group-hover:text-primary transition-colors">
                 Soporte personalizado durante todo el proceso
@@ -56,11 +52,9 @@ export function Layout245({ colorScheme = 1, ...props }) {
             </div>
             <div className="group cursor-pointer">
               <div className="rb-5 mb-5 md:mb-6">
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
-                  alt="Relume logo"
-                  className="size-12"
-                />
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
+                  <span className="material-symbols-outlined text-primary text-2xl">groups</span>
+                </div>
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl group-hover:text-primary transition-colors">
                 Equipo funcional que comprende tus operaciones

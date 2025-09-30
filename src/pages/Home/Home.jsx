@@ -15,10 +15,10 @@ const Home = () => {
       <Header />
       <Header5 colorScheme={4} />
       <Layout363 colorScheme={4} />
-      <Layout241 colorScheme={2} />
-      <Layout501 colorScheme={4} />
-      <Layout245 colorScheme={2} />
       <Layout394 colorScheme={1} />
+      <Layout245 colorScheme={2} />
+      <Layout501 colorScheme={4} />
+      <Layout241 colorScheme={2} />
       <Faq04 colorScheme={1} />
       <Footer />
     </div>
