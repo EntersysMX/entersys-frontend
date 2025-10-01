@@ -22,28 +22,6 @@ export function Layout141({ colorScheme = 2, ...props }) {
                 eficientes y con tecnología de vanguardia. Se 'afinan' para
                 funcionar como un reloj suizo.
               </p>
-              <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 py-2">
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/webflow-logo.svg"
-                  alt="Webflow logo 1"
-                  className="max-h-14"
-                />
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/relume-logo.svg"
-                  alt="Relume logo 1"
-                  className="max-h-14"
-                />
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/webflow-logo.svg"
-                  alt="Webflow logo 2"
-                  className="max-h-14"
-                />
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/relume-logo.svg"
-                  alt="Relume logo 2"
-                  className="max-h-14"
-                />
-              </div>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-4 md:mt-8">
                 <Button title="Conocer" variant="secondary">
                   Conocer

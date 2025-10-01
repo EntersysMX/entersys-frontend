@@ -124,10 +124,9 @@
         padding-top: 0.5rem !important;
     }
 
-    /* Make text and icon very close together, but separate from next menu item */
+    /* Make text and icon very close together */
     .header-dropdown-button {
         gap: 0.125rem !important;
-        margin-right: 1rem !important; /* Separate from next menu item */
     }
 
     /* Remove the specific margin we added earlier since it was wrong */

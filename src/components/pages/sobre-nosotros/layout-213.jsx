@@ -4,6 +4,7 @@ import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
+import { MdRecordVoiceOver } from 'react-icons/md';
 
 export function Layout213({ colorScheme = 1, ...props }) {
   return (
@@ -19,22 +20,19 @@ export function Layout213({ colorScheme = 1, ...props }) {
           </div>
           <div className="order-1 md:order-2">
             <div className="mb-5 md:mb-6">
-              <img
-                src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
-                className="size-20"
-                alt="Relume logo"
-              />
+              <MdRecordVoiceOver className="text-primary text-8xl" />
             </div>
             <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
               Voces de nuestros líderes
             </h2>
             <p className="md:text-md">
               Conoce la visión y pasión detrás de Entersys directamente de sus
-              fundadores.
+              fundadores. Esto es lo que Rodrigo Lay ha conversado por años a
+              líderes de empresas en diferentes sectores e industrias.
             </p>
             <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
-              <Button title="Ver videos" variant="secondary">
-                Ver videos
+              <Button title="Quiero conocerlo" variant="secondary">
+                Quiero conocerlo
               </Button>
               <Button
                 title="Explorar"

@@ -10,10 +10,10 @@ export default function Contacto() {
   return (
     <div>
       <Header />
-      <Header64 />
-      <Contact06 />
-      <Contact13 />
-      <Contact26 />
+      <Header64 colorScheme={4} />
+      <Contact06 colorScheme={2} />
+      <Contact13 colorScheme={3} />
+      <Contact26 colorScheme={1} />
       <Footer />
     </div>
   );

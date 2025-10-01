@@ -4,6 +4,7 @@ import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
+import { MdBusinessCenter, MdStar } from 'react-icons/md';
 
 export function Layout93({ colorScheme = 2, ...props }) {
   return (
@@ -20,10 +21,11 @@ export function Layout93({ colorScheme = 2, ...props }) {
             <p className="mb-6 md:mb-8 md:text-md">
               Desarrollamos nuestra visión con la metodología Hoshin Kanri,
               enfocándonos en transformar digitalmente las operaciones
-              empresariales.
+              empresariales para llevar a Entersys a un nivel de estado ideal.
             </p>
             <div className="grid grid-cols-1 gap-6 py-2 lg:grid-cols-2">
-              <div className="flex">
+              <div className="flex gap-4">
+                <MdBusinessCenter className="text-primary flex-shrink-0 text-5xl" />
                 <div>
                   <h6 className="mb-3 text-md leading-[1.4] font-bold md:mb-4 md:text-xl">
                     Misión
@@ -34,7 +36,8 @@ export function Layout93({ colorScheme = 2, ...props }) {
                   </p>
                 </div>
               </div>
-              <div className="flex">
+              <div className="flex gap-4">
+                <MdStar className="text-primary flex-shrink-0 text-5xl" />
                 <div>
                   <h6 className="mb-3 text-md leading-[1.4] font-bold md:mb-4 md:text-xl">
                     Valores

@@ -10,7 +10,6 @@ import "../../../styles/header.css";
 const useRelume = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
-  const [isClientsDropdownOpen, setIsClientsDropdownOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width: 991px)");
 
   const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
@@ -26,25 +25,12 @@ const useRelume = () => {
     !isMobile && setIsServicesDropdownOpen(false);
   };
 
-  // Clients dropdown handlers
-  const openOnMobileClientsDropdownMenu = () => {
-    setIsClientsDropdownOpen((prev) => !prev);
-  };
-  const openOnDesktopClientsDropdownMenu = () => {
-    !isMobile && setIsClientsDropdownOpen(true);
-  };
-  const closeOnDesktopClientsDropdownMenu = () => {
-    !isMobile && setIsClientsDropdownOpen(false);
-  };
-
   const animateMobileMenu = isMobileMenuOpen ? "open" : "close";
   const animateMobileMenuButtonSpan = isMobileMenuOpen
     ? ["open", "rotatePhase"]
     : "closed";
   const animateServicesDropdownMenu = isServicesDropdownOpen ? "open" : "close";
   const animateServicesDropdownMenuIcon = isServicesDropdownOpen ? "rotated" : "initial";
-  const animateClientsDropdownMenu = isClientsDropdownOpen ? "open" : "close";
-  const animateClientsDropdownMenuIcon = isClientsDropdownOpen ? "rotated" : "initial";
 
   return {
     toggleMobileMenu,
@@ -54,12 +40,6 @@ const useRelume = () => {
     openOnMobileServicesDropdownMenu,
     animateServicesDropdownMenu,
     animateServicesDropdownMenuIcon,
-    // Clients dropdown
-    openOnDesktopClientsDropdownMenu,
-    closeOnDesktopClientsDropdownMenu,
-    openOnMobileClientsDropdownMenu,
-    animateClientsDropdownMenu,
-    animateClientsDropdownMenuIcon,
     // Mobile menu
     animateMobileMenu,
     animateMobileMenuButtonSpan,
@@ -126,24 +106,42 @@ const Header = ({ colorScheme = 1, ...props }) => {
                 onMouseEnter={useActive.openOnDesktopServicesDropdownMenu}
                 onMouseLeave={useActive.closeOnDesktopServicesDropdownMenu}
               >
-                <button
-                  className="header-dropdown-button flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base text-black"
-                  onClick={useActive.openOnMobileServicesDropdownMenu}
-                >
-                  <span className="text-black">Servicios</span>
-                  <AnimatePresence>
-                    <motion.div
-                      animate={useActive.animateServicesDropdownMenuIcon}
-                      variants={{
-                        rotated: { rotate: 180 },
-                        initial: { rotate: 0 },
-                      }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <RxChevronDown />
-                    </motion.div>
-                  </AnimatePresence>
-                </button>
+                <div className="header-dropdown-button flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base text-black">
+                  <Link to="/servicios" className="text-black flex-1">
+                    Servicios
+                  </Link>
+                  <button
+                    onClick={useActive.openOnMobileServicesDropdownMenu}
+                    className="lg:hidden"
+                  >
+                    <AnimatePresence>
+                      <motion.div
+                        animate={useActive.animateServicesDropdownMenuIcon}
+                        variants={{
+                          rotated: { rotate: 180 },
+                          initial: { rotate: 0 },
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <RxChevronDown />
+                      </motion.div>
+                    </AnimatePresence>
+                  </button>
+                  <div className="hidden lg:block">
+                    <AnimatePresence>
+                      <motion.div
+                        animate={useActive.animateServicesDropdownMenuIcon}
+                        variants={{
+                          rotated: { rotate: 180 },
+                          initial: { rotate: 0 },
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <RxChevronDown />
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                </div>
                 <AnimatePresence>
                   <motion.nav
                     animate={useActive.animateServicesDropdownMenu}
@@ -199,86 +197,11 @@ const Header = ({ colorScheme = 1, ...props }) => {
                   </motion.nav>
                 </AnimatePresence>
               </div>
-              <div
-                onMouseEnter={useActive.openOnDesktopClientsDropdownMenu}
-                onMouseLeave={useActive.closeOnDesktopClientsDropdownMenu}
-              >
-                <button
-                  className="header-dropdown-button flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base text-black"
-                  onClick={useActive.openOnMobileClientsDropdownMenu}
-                >
-                  <span className="text-black">Clientes</span>
-                  <AnimatePresence>
-                    <motion.div
-                      animate={useActive.animateClientsDropdownMenuIcon}
-                      variants={{
-                        rotated: { rotate: 180 },
-                        initial: { rotate: 0 },
-                      }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <RxChevronDown />
-                    </motion.div>
-                  </AnimatePresence>
-                </button>
-                <AnimatePresence>
-                  <motion.nav
-                    animate={useActive.animateClientsDropdownMenu}
-                    initial="close"
-                    exit="close"
-                    variants={{
-                      open: {
-                        visibility: "visible",
-                        opacity: "var(--opacity-open, 100%)",
-                        y: 0,
-                        display: "block",
-                      },
-                      close: {
-                        visibility: "hidden",
-                        opacity: "var(--opacity-close, 0)",
-                        y: "var(--y-close, 0%)",
-                        display: "none",
-                      },
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="z-50 bg-white lg:absolute lg:w-80 lg:border lg:border-neutral-300 lg:p-6 lg:[--y-close:25%]"
-                  >
-                    <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-2 py-3 md:py-3 lg:gap-y-4 lg:py-0">
-                      <Link
-                        to="/clientes"
-                        className="block py-2 lg:py-1 text-black"
-                      >
-                        <div className="flex flex-col items-start justify-center">
-                          <p className="text-md font-semibold lg:text-base text-black">
-                            Nuestros Clientes
-                          </p>
-                          <p className="hidden text-sm md:block text-gray-600">
-                            Conoce nuestros casos de éxito y testimonios
-                          </p>
-                        </div>
-                      </Link>
-                      <Link
-                        to="/awalab"
-                        className="block py-2 lg:py-1 text-black"
-                      >
-                        <div className="flex flex-col items-start justify-center">
-                          <p className="text-md font-semibold lg:text-base text-black">
-                            AQUALAB
-                          </p>
-                          <p className="hidden text-sm md:block text-gray-600">
-                            Centro de investigación e innovación tecnológica
-                          </p>
-                        </div>
-                      </Link>
-                    </div>
-                  </motion.nav>
-                </AnimatePresence>
-              </div>
               <Link
-                to="/blog"
+                to="/clientes"
                 className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 text-black"
               >
-                Blog
+                Clientes
               </Link>
             </nav>
             <div className="mt-6 flex flex-col gap-4 lg:mt-0 lg:ml-4 lg:flex-row lg:items-center">

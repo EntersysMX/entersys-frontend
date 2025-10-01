@@ -187,11 +187,85 @@
   color: #000000 !important;
 }
 
+/* Botón blanco con texto negro - proteger de color schemes */
+.white-button-custom,
+.color-scheme-1 .white-button-custom,
+.color-scheme-2 .white-button-custom,
+.color-scheme-3 .white-button-custom,
+.color-scheme-4 .white-button-custom {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+  border: none !important;
+  padding: 12px 24px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.white-button-custom:hover,
+.color-scheme-1 .white-button-custom:hover,
+.color-scheme-2 .white-button-custom:hover,
+.color-scheme-3 .white-button-custom:hover,
+.color-scheme-4 .white-button-custom:hover {
+  background-color: #F2F2F2 !important;
+  color: #000000 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.white-button-custom span,
+.color-scheme-1 .white-button-custom span,
+.color-scheme-2 .white-button-custom span,
+.color-scheme-3 .white-button-custom span,
+.color-scheme-4 .white-button-custom span {
+  color: #000000 !important;
+}
+
+/* Botón con fondo #D9E9E9 y texto negro - proteger de color schemes */
+.light-teal-button-custom,
+.color-scheme-1 .light-teal-button-custom,
+.color-scheme-2 .light-teal-button-custom,
+.color-scheme-3 .light-teal-button-custom,
+.color-scheme-4 .light-teal-button-custom {
+  background-color: #D9E9E9 !important;
+  color: #000000 !important;
+  border: none !important;
+  padding: 12px 24px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.light-teal-button-custom:hover,
+.color-scheme-1 .light-teal-button-custom:hover,
+.color-scheme-2 .light-teal-button-custom:hover,
+.color-scheme-3 .light-teal-button-custom:hover,
+.color-scheme-4 .light-teal-button-custom:hover {
+  background-color: #C5DADA !important;
+  color: #000000 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.light-teal-button-custom span,
+.color-scheme-1 .light-teal-button-custom span,
+.color-scheme-2 .light-teal-button-custom span,
+.color-scheme-3 .light-teal-button-custom span,
+.color-scheme-4 .light-teal-button-custom span {
+  color: #000000 !important;
+}
+
 /* Header dropdown buttons styling is handled in header.css */
 
 /* Global Button Improvements - Esquinas redondeadas y mejor estilo */
-section:not(.header) button:not(.contact-button-custom):not(.agendar-demo-button):not(.whatsapp-float-button):not(.header-dropdown-button),
-main button:not(.contact-button-custom):not(.agendar-demo-button):not(.whatsapp-float-button):not(.header-dropdown-button),
+section:not(.header) button:not(.contact-button-custom):not(.agendar-demo-button):not(.white-button-custom):not(.light-teal-button-custom):not(.whatsapp-float-button):not(.header-dropdown-button),
+main button:not(.contact-button-custom):not(.agendar-demo-button):not(.white-button-custom):not(.light-teal-button-custom):not(.whatsapp-float-button):not(.header-dropdown-button),
 .button:not(.header-dropdown-button),
 .btn:not(.header-dropdown-button),
 input[type="submit"]:not(.header-dropdown-button),
@@ -207,8 +281,8 @@ input[type="button"]:not(.header-dropdown-button),
   position: relative !important;
 }
 
-section:not(.header) button:hover:not(.contact-button-custom):not(.agendar-demo-button):not(.whatsapp-float-button):not(.header-dropdown-button),
-main button:hover:not(.contact-button-custom):not(.agendar-demo-button):not(.whatsapp-float-button):not(.header-dropdown-button),
+section:not(.header) button:hover:not(.contact-button-custom):not(.agendar-demo-button):not(.white-button-custom):not(.light-teal-button-custom):not(.whatsapp-float-button):not(.header-dropdown-button),
+main button:hover:not(.contact-button-custom):not(.agendar-demo-button):not(.white-button-custom):not(.light-teal-button-custom):not(.whatsapp-float-button):not(.header-dropdown-button),
 .button:hover:not(.header-dropdown-button),
 .btn:hover:not(.header-dropdown-button),
 input[type="submit"]:hover:not(.header-dropdown-button),
@@ -218,8 +292,8 @@ input[type="button"]:hover:not(.header-dropdown-button),
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
 }
 
-section:not(.header) button:active:not(.contact-button-custom):not(.agendar-demo-button):not(.whatsapp-float-button):not(.header-dropdown-button),
-main button:active:not(.contact-button-custom):not(.agendar-demo-button):not(.whatsapp-float-button):not(.header-dropdown-button),
+section:not(.header) button:active:not(.contact-button-custom):not(.agendar-demo-button):not(.white-button-custom):not(.light-teal-button-custom):not(.whatsapp-float-button):not(.header-dropdown-button),
+main button:active:not(.contact-button-custom):not(.agendar-demo-button):not(.white-button-custom):not(.light-teal-button-custom):not(.whatsapp-float-button):not(.header-dropdown-button),
 .button:active:not(.header-dropdown-button),
 .btn:active:not(.header-dropdown-button),
 input[type="submit"]:active:not(.header-dropdown-button),
@@ -416,4 +490,52 @@ p {
   h6 {
     font-size: 1.125rem;
   }
+}
+
+/* Custom Radio Button Styles - Circular with teal accent */
+[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #D1D5DB;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+[type="radio"]:hover {
+  border-color: #009CA6;
+  box-shadow: 0 0 0 4px rgba(0, 156, 166, 0.1);
+}
+
+[type="radio"]:checked {
+  background-color: white;
+  border-color: #009CA6;
+  border-width: 2px;
+}
+
+[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: #009CA6;
+  border-radius: 50%;
+}
+
+[type="radio"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 156, 166, 0.2);
+}
+
+[type="radio"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

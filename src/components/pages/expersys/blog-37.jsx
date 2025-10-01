@@ -4,9 +4,9 @@ import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
 
-export function Blog37() {
+export function Blog37({ colorScheme = 1, ...props }) {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
         <div className="mb-12 md:mb-18 lg:mb-20">
           <div className="w-full max-w-lg">

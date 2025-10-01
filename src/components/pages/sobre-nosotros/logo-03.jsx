@@ -10,6 +10,13 @@ export function Logo03({ colorScheme = 3, ...props }) {
           Empresas que confían en nuestra transformación
         </h1>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .animate-loop-horizontally {
+            animation-duration: 60s !important;
+          }
+        }
+      `}</style>
       <div className="flex items-center pt-7 md:pt-0">
         <div className="flex shrink-0 animate-loop-horizontally items-center">
           <img

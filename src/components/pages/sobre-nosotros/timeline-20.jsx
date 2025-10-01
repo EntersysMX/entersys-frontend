@@ -21,7 +21,8 @@ export function Timeline20({ colorScheme = 4, ...props }) {
             </h2>
             <p className="md:text-md">
               Cada hito representa un paso más en nuestra misión de transformar
-              operaciones empresariales.
+              operaciones empresariales. Cada paso es un líder de negocio más que se 'jubila' de la operación para
+              expandir sus horizontes.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
               <Button title="Conocer" variant="secondary">
@@ -52,10 +53,9 @@ export function Timeline20({ colorScheme = 4, ...props }) {
                 <div className="h-full w-[3px] bg-black md:h-[3px] md:w-full" />
               </div>
               <div className="mb-8 flex flex-col items-start md:mr-4 md:mb-0">
-                <h3 className="mb-2 text-xl font-bold md:text-2xl">2018</h3>
+                <h3 className="mb-2 text-xl font-bold md:text-2xl">2019</h3>
                 <p>
-                  Fundación de Entersys con el objetivo de revolucionar la
-                  consultoría tecnológica para empresas.
+                  Fundamos Consultoría en Gestión de Negocios.
                 </p>
               </div>
             </Fragment>
@@ -65,8 +65,7 @@ export function Timeline20({ colorScheme = 4, ...props }) {
               <div className="order-last mb-8 flex flex-col items-start md:order-none md:mr-4 md:mb-0">
                 <h3 className="mb-2 text-xl font-bold md:text-2xl">2020</h3>
                 <p>
-                  Desarrollo de la metodología Worksys, que integra
-                  digitalización inteligente con herramientas no-code.
+                  Nos convertimos en Partners en México de Smartsheets.
                 </p>
               </div>
               <div className="flex flex-col items-center md:w-full md:flex-row">
@@ -84,10 +83,10 @@ export function Timeline20({ colorScheme = 4, ...props }) {
                 <div className="h-full w-[3px] bg-black md:h-[3px] md:w-full" />
               </div>
               <div className="mb-8 flex flex-col items-start md:mr-4 md:mb-0">
-                <h3 className="mb-2 text-xl font-bold md:text-2xl">2021</h3>
+                <h3 className="mb-2 text-xl font-bold md:text-2xl">2021-2022</h3>
                 <p>
-                  Implementación de primera solución de IA para optimización de
-                  procesos en empresas medianas.
+                  Implementación: Módulos de Control de Calidad en Alimentos y
+                  Sistema de gestión de calidad en empresa de Suplementos
                 </p>
               </div>
             </Fragment>
@@ -95,10 +94,9 @@ export function Timeline20({ colorScheme = 4, ...props }) {
           <div className="relative grid auto-cols-fr grid-cols-[max-content_1fr] gap-4 md:grid-cols-1 md:grid-rows-[1fr_max-content_1fr]">
             <Fragment>
               <div className="order-last mb-8 flex flex-col items-start md:order-none md:mr-4 md:mb-0">
-                <h3 className="mb-2 text-xl font-bold md:text-2xl">2022</h3>
+                <h3 className="mb-2 text-xl font-bold md:text-2xl">2023</h3>
                 <p>
-                  Expansión nacional con más de 50 clientes y reconocimiento
-                  como consultora líder en transformación digital.
+                  Incorporación Auditor Líder Internacional Lean Six Sigma Green Belt, Sistema de Gestión Integral: ISO9001:2015, ISO14001:2015, ISO45001:2018, CER2022-01/FPMX/18895 APPLUS
                 </p>
               </div>
               <div className="flex flex-col items-center md:w-full md:flex-row">
@@ -116,10 +114,9 @@ export function Timeline20({ colorScheme = 4, ...props }) {
                 <div className="h-full w-[3px] bg-black md:h-[3px] md:w-full hidden md:block" />
               </div>
               <div className="mb-8 flex flex-col items-start md:mr-4 md:mb-0">
-                <h3 className="mb-2 text-xl font-bold md:text-2xl">2023</h3>
+                <h3 className="mb-2 text-xl font-bold md:text-2xl">2024</h3>
                 <p>
-                  Lanzamiento de plataforma Expersys para gestión integral de
-                  certificaciones y cumplimiento normativo.
+                  Alcanzamos una comunidad que asciende a los 500 usuarios.
                 </p>
               </div>
             </Fragment>

@@ -20,9 +20,12 @@ export function Cta39({ colorScheme = 1, ...props }) {
               </p>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <Button title="Contactar a un agente" variant="primary">
+              <button
+                type="button"
+                className="white-button-custom"
+              >
                 Contactar a un agente
-              </Button>
+              </button>
             </div>
           </div>
           <div className="flex items-center justify-center">

@@ -3,6 +3,7 @@
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
+import { MdFactory, MdStorefront, MdRestaurant, MdLocalShipping } from 'react-icons/md';
 
 export function Layout253({ colorScheme = 1, ...props }) {
   return (
@@ -19,17 +20,15 @@ export function Layout253({ colorScheme = 1, ...props }) {
               función de diversos casos de trabajo.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <Button variant="secondary">Contactar un agente</Button>
+              <button type="button" className="light-teal-button-custom">
+                Contactar un agente
+              </button>
             </div>
           </div>
           <div className="grid w-full auto-cols-fr grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 md:gap-y-16 lg:gap-x-12">
             <div>
               <div className="rb-5 mb-5 md:mb-6">
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
-                  className="size-12"
-                  alt="Relume logo"
-                />
+                <MdFactory className="size-12 text-primary" />
               </div>
               <h1 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 Manufactura
@@ -40,11 +39,7 @@ export function Layout253({ colorScheme = 1, ...props }) {
             </div>
             <div>
               <div className="rb-5 mb-5 md:mb-6">
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
-                  className="size-12"
-                  alt="Relume logo"
-                />
+                <MdStorefront className="size-12 text-primary" />
               </div>
               <h1 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 Retail y franquicias
@@ -56,11 +51,7 @@ export function Layout253({ colorScheme = 1, ...props }) {
             </div>
             <div>
               <div className="rb-5 mb-5 md:mb-6">
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
-                  className="size-12"
-                  alt="Relume logo"
-                />
+                <MdRestaurant className="size-12 text-primary" />
               </div>
               <h1 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 Alimentos y bebidas
@@ -72,11 +63,7 @@ export function Layout253({ colorScheme = 1, ...props }) {
             </div>
             <div>
               <div className="rb-5 mb-5 md:mb-6">
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
-                  className="size-12"
-                  alt="Relume logo"
-                />
+                <MdLocalShipping className="size-12 text-primary" />
               </div>
               <h1 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 Logística y distribución

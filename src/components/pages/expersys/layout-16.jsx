@@ -3,6 +3,7 @@
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
+import { MdStar, MdTrendingUp, MdDescription } from 'react-icons/md';
 
 export function Layout16({ colorScheme = 1, ...props }) {
   return (
@@ -25,21 +26,13 @@ export function Layout16({ colorScheme = 1, ...props }) {
             <ul className="grid grid-cols-1 gap-4 py-2">
               <li className="flex self-start">
                 <div className="mr-4 flex-none self-start">
-                  <img
-                    src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
-                    alt="Relume logo 1"
-                    className="size-6"
-                  />
+                  <MdStar className="size-6 text-primary" />
                 </div>
                 <span>Cumplimiento normativo sin estrés ni burocracia.</span>
               </li>
               <li className="flex self-start">
                 <div className="mr-4 flex-none self-start">
-                  <img
-                    src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
-                    alt="Relume logo 1"
-                    className="size-6"
-                  />
+                  <MdTrendingUp className="size-6 text-primary" />
                 </div>
                 <span>
                   Procesos listos para competir en mercados más exigentes.
@@ -47,11 +40,7 @@ export function Layout16({ colorScheme = 1, ...props }) {
               </li>
               <li className="flex self-start">
                 <div className="mr-4 flex-none self-start">
-                  <img
-                    src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
-                    alt="Relume logo 1"
-                    className="size-6"
-                  />
+                  <MdDescription className="size-6 text-primary" />
                 </div>
                 <span>
                   Documentación completa y funcional para el día a día.
@@ -59,9 +48,9 @@ export function Layout16({ colorScheme = 1, ...props }) {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <Button title="Me interesa" variant="secondary">
+              <button type="button" className="light-teal-button-custom">
                 Me interesa
-              </Button>
+              </button>
             </div>
           </div>
           <div>

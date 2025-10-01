@@ -7,6 +7,7 @@ import BlogEntry from './pages/BlogEntry'
 import Clientes from './pages/Clientes'
 import Contacto from './pages/Contacto'
 import SobreNosotros from './pages/SobreNosotros'
+import Servicios from './pages/Servicios'
 import Awalab from './pages/Awalab'
 import Expersys from './pages/Expersys'
 import Worksys from './pages/Worksys'
@@ -31,6 +32,7 @@ function App() {
           <Route path="/clientes" element={<Clientes />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/sobre-nosotros" element={<SobreNosotros />} />
+          <Route path="/servicios" element={<Servicios />} />
           <Route path="/awalab" element={<Awalab />} />
           <Route path="/expersys" element={<Expersys />} />
           <Route path="/worksys" element={<Worksys />} />

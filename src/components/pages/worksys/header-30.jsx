@@ -19,7 +19,9 @@ export function Header30({ colorScheme = 1, ...props }) {
               software code, no-code e IA.
             </p>
             <div className="mt-6 flex items-center justify-center gap-x-4 md:mt-8">
-              <Button title="Ver más">Ver más</Button>
+              <button type="button" className="white-button-custom">
+                Ver más
+              </button>
             </div>
           </div>
         </div>

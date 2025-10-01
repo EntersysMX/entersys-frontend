@@ -16,11 +16,11 @@ import {
 } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React, { useState, useEffect } from "react";
-import { BiEnvelope, BiMap, BiPhone } from "react-icons/bi";
+import { MdEmail, MdLocationOn, MdPhone } from 'react-icons/md';
 import { mauticService } from '../../../services/mautic';
 import { analyticsService } from '../../../services/analytics';
 
-export function Contact06() {
+export function Contact06({ colorScheme = 2, ...props }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
   const [formData, setFormData] = useState({
@@ -127,7 +127,7 @@ export function Contact06() {
   }
 
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container grid grid-cols-1 items-start gap-y-12 md:grid-flow-row md:grid-cols-2 md:gap-x-12 lg:grid-flow-col lg:gap-x-20 lg:gap-y-16">
         <div>
           <div className="mb-6 md:mb-8">
@@ -141,15 +141,15 @@ export function Contact06() {
           </div>
           <div className="grid grid-cols-1 gap-4 py-2">
             <div className="flex items-center gap-4">
-              <BiEnvelope className="size-6 flex-none" />
-              <p>hello@relume.io</p>
+              <MdEmail className="size-6 flex-none" />
+              <p>contacto@entersys.com</p>
             </div>
             <div className="flex items-center gap-4">
-              <BiPhone className="size-6 flex-none" />
+              <MdPhone className="size-6 flex-none" />
               <p>+52 55 1234 5678</p>
             </div>
             <div className="flex items-center gap-4">
-              <BiMap className="size-6 flex-none" />
+              <MdLocationOn className="size-6 flex-none" />
               <p>Ciudad de México, México</p>
             </div>
           </div>
@@ -238,29 +238,29 @@ export function Contact06() {
               onValueChange={(value) => handleChange('source', value)}
               className="grid grid-cols-2 gap-x-6 gap-y-3.5"
             >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="referral" id="referral" />
-                <Label htmlFor="referral">Referido</Label>
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="referral" id="referral" className="w-4 h-4" />
+                <Label htmlFor="referral" className="cursor-pointer text-sm">Referido</Label>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="social_media" id="social_media" />
-                <Label htmlFor="social_media">Redes sociales</Label>
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="social_media" id="social_media" className="w-4 h-4" />
+                <Label htmlFor="social_media" className="cursor-pointer text-sm">Redes sociales</Label>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="event" id="event" />
-                <Label htmlFor="event">Evento</Label>
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="event" id="event" className="w-4 h-4" />
+                <Label htmlFor="event" className="cursor-pointer text-sm">Evento</Label>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="web_search" id="web_search" />
-                <Label htmlFor="web_search">Búsqueda web</Label>
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="web_search" id="web_search" className="w-4 h-4" />
+                <Label htmlFor="web_search" className="cursor-pointer text-sm">Búsqueda web</Label>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="recommendation" id="recommendation" />
-                <Label htmlFor="recommendation">Recomendación</Label>
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="recommendation" id="recommendation" className="w-4 h-4" />
+                <Label htmlFor="recommendation" className="cursor-pointer text-sm">Recomendación</Label>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="other" id="other" />
-                <Label htmlFor="other">Otro</Label>
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="other" id="other" className="w-4 h-4" />
+                <Label htmlFor="other" className="cursor-pointer text-sm">Otro</Label>
               </div>
             </RadioGroup>
           </div>
@@ -283,15 +283,13 @@ export function Contact06() {
             </Label>
           </div>
           <div>
-            <Button
+            <button
               type="submit"
               disabled={isSubmitting}
-              className={`block w-full rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm ${
-                isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-500'
-              }`}
+              className="contact-button-custom w-full px-6 py-3 rounded-md font-semibold text-base"
             >
-              {isSubmitting ? 'Enviando mensaje...' : 'Enviar mensaje'}
-            </Button>
+              {isSubmitting ? 'Enviando...' : 'Enviar'}
+            </button>
           </div>
         </form>
       </div>

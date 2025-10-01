@@ -1,74 +1,34 @@
 "use client";
 
-import { useMediaQuery } from "@relume_io/relume-ui";
-import { Card } from "../../ui/Card";
+import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import React from "react";
-
-const useRelume = () => {
-  const { scrollY, scrollYProgress } = useScroll();
-  const isMobile = useMediaQuery("(max-width: 479px)");
-  const halfViewportHeight =
-    typeof window !== "undefined" ? window.innerHeight * 0.5 : 100;
-  const containerMotion = {
-    opacity: useTransform(scrollY, [0, halfViewportHeight], [1, 0]),
-    scale: useTransform(scrollY, [0, halfViewportHeight], [1, 0.95]),
-  };
-  const createTransform = (x, y, rotate) => ({
-    translateX: useTransform(scrollYProgress, [0, 1], x),
-    translateY: useTransform(scrollYProgress, [0, 1], y),
-    rotateZ: useTransform(scrollYProgress, [0, 1], rotate),
-  });
-  const imageTransforms = (index) => {
-    switch (index) {
-      case 1:
-        return isMobile
-          ? createTransform(["13%", "90%"], ["12%", "80%"], ["0.6deg", "4deg"])
-          : createTransform(["0%", "100%"], ["0%", "60%"], ["0deg", "-4deg"]);
-      case 2:
-        return isMobile
-          ? createTransform(
-              ["-12%", "-80%"],
-              ["-12%", "-80%"],
-              ["-3deg", "4deg"],
-            )
-          : createTransform(["0%", "-50%"], ["0%", "-90%"], ["4deg", "4deg"]);
-      case 3:
-        return isMobile
-          ? createTransform(
-              ["17.5%", "120%"],
-              ["-6%", "-40%"],
-              ["-0.6deg", "-6deg"],
-            )
-          : createTransform(["0%", "140%"], ["0%", "-40%"], ["0deg", "-12deg"]);
-      case 4:
-        return isMobile
-          ? createTransform(
-              ["-17.5%", "-120%"],
-              ["9%", "60%"],
-              ["4.6deg", "8deg"],
-            )
-          : createTransform(["0%", "-140%"], ["0%", "60%"], ["8deg", "8deg"]);
-      default:
-        return {};
-    }
-  };
-  return {
-    containerMotion,
-    imageTransforms,
-  };
-};
 
 export function Layout421({ colorScheme = 1, ...props }) {
-  const useActive = useRelume();
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Transformaciones suaves para las imágenes
+  const image1Y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const image2Y = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
+  const image3Y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+
+  const image1Rotate = useTransform(scrollYProgress, [0, 1], [0, -5]);
+  const image2Rotate = useTransform(scrollYProgress, [0, 1], [0, 3]);
+  const image3Rotate = useTransform(scrollYProgress, [0, 1], [0, -3]);
+
   return (
-    <section id="relume" className="relative flex flex-col" {...props}>
-      <motion.div
-        className="sticky top-0 z-0 mx-auto flex min-h-0 items-center justify-center md:min-h-[auto]"
-        style={useActive.containerMotion}
-      >
-        <div className="py-16 text-center md:py-24 lg:py-28">
-          <div className="mx-auto w-full max-w-lg px-[5%]">
+    <section
+      ref={containerRef}
+      id="relume"
+      className="relative px-[5%] py-16 md:py-24 lg:py-28 overflow-hidden"
+      {...props}
+    >
+      <div className="container">
+        <div className="text-center mb-12 md:mb-16 lg:mb-20">
+          <div className="mx-auto w-full max-w-lg">
             <p className="mb-3 font-semibold md:mb-4">
               De procesos manuales a flujos estandarizados y digitales
             </p>
@@ -76,7 +36,7 @@ export function Layout421({ colorScheme = 1, ...props }) {
               Una metodología que convierte tu operación en un sistema
               inteligente
             </h1>
-            <p className="relative z-20 md:text-md">
+            <p className="md:text-md">
               Worksys es un servicio consultivo que transforma la manera en que
               gestionas tu operación. Iniciamos con una planeación estratégica
               clara, documentamos procesos críticos y los digitalizamos en
@@ -85,62 +45,70 @@ export function Layout421({ colorScheme = 1, ...props }) {
             </p>
           </div>
         </div>
-      </motion.div>
-      <div className="sticky top-0 z-10 -mt-20 flex h-[60svh] flex-col justify-center sm:mt-0 sm:h-[80svh] md:h-[70svh] lg:h-[120vh] lg:justify-normal">
-        <div className="relative flex size-full items-center justify-center overflow-hidden">
+
+        {/* Collage de imágenes superpuestas - Todas del mismo tamaño */}
+        <div className="relative h-[450px] md:h-[500px] lg:h-[550px] max-w-7xl mx-auto">
+          {/* Imagen 1 - Izquierda inferior (documentos con notas) */}
           <motion.div
-            className="absolute w-full max-w-[55vw] md:max-w-[35vw] lg:max-w-[30vw]"
-            style={useActive.imageTransforms(0)}
+            className="absolute left-[2%] bottom-[12%] w-[28%] z-20"
+            style={{ y: image1Y }}
           >
             <img
               src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-              alt="Relume placeholder image 1"
-              className="size-full rounded-image"
+              alt="Worksys documentos"
+              className="w-full h-auto object-cover rounded-md shadow-2xl"
             />
           </motion.div>
+
+          {/* Imagen 2 - Centro (monitor con diagrama de flujo) */}
           <motion.div
-            className="absolute w-full max-w-[55vw] md:max-w-[35vw] lg:max-w-[30vw]"
-            style={useActive.imageTransforms(1)}
+            className="absolute left-[25%] top-[5%] w-[28%] z-40"
+            style={{ y: image2Y }}
           >
             <img
               src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-              alt="Relume placeholder image 2"
-              className="size-full rounded-image"
+              alt="Worksys diagrama"
+              className="w-full h-auto object-cover rounded-md shadow-2xl"
             />
           </motion.div>
+
+          {/* Imagen 3 - Derecha superior (red neuronal azul) */}
           <motion.div
-            className="absolute w-full max-w-[55vw] md:max-w-[35vw] lg:max-w-[30vw]"
-            style={useActive.imageTransforms(2)}
+            className="absolute right-[5%] top-[8%] w-[28%] z-50"
+            style={{ y: image3Y }}
           >
             <img
               src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-              alt="Relume placeholder image 3"
-              className="size-full rounded-image"
+              alt="Worksys red neuronal"
+              className="w-full h-auto object-cover rounded-md shadow-2xl"
             />
           </motion.div>
+
+          {/* Imagen 4 - Centro inferior (escritorio workspace) */}
           <motion.div
-            className="absolute w-full max-w-[55vw] md:max-w-[35vw] lg:max-w-[30vw]"
-            style={useActive.imageTransforms(3)}
+            className="absolute left-[32%] top-[52%] w-[28%] z-30"
+            style={{ y: image1Y }}
           >
             <img
               src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-              alt="Relume placeholder image 4"
-              className="size-full rounded-image"
+              alt="Worksys escritorio"
+              className="w-full h-auto object-cover rounded-md shadow-2xl"
             />
           </motion.div>
+
+          {/* Imagen 5 - Derecha inferior (monitor con analytics/gráficas) */}
           <motion.div
-            className="absolute w-full max-w-[55vw] md:max-w-[35vw] lg:max-w-[30vw]"
-            style={useActive.imageTransforms(4)}
+            className="absolute left-[51%] top-[44%] w-[28%] z-60"
+            style={{ y: image2Y }}
           >
             <img
               src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-              alt="Relume placeholder image 5"
-              className="size-full rounded-image"
+              alt="Worksys analytics"
+              className="w-full h-auto object-cover rounded-md shadow-2xl"
             />
           </motion.div>
         </div>
       </div>
-      <div className="absolute inset-0 -z-10 mt-[80vh] sm:mt-[100vh]" />
     </section>
   );
 }

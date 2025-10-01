@@ -23,7 +23,7 @@ export function Layout109() {
             </p>
             <ul className="my-4 list-disc pl-5">
               <li className="my-1 self-start pl-2">
-                <p>Retal</p>
+                <p>Retail</p>
               </li>
               <li className="my-1 self-start pl-2">
                 <p>Manufactura</p>
