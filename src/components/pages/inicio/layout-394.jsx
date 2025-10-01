@@ -62,7 +62,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
                 </div>
                 <div className="flex w-full flex-col items-center justify-center self-start">
                   <motion.img
-                    src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+                    src="/imagenes/inicio/diferenciadores_eficiencia_inicio.webp"
                     alt="Resultados medibles en semanas"
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
@@ -103,7 +103,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
                 </div>
                 <div className="flex w-full flex-col items-center justify-center self-start">
                   <motion.img
-                    src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+                    src="/imagenes/inicio/diferenciadores_escalabilidad_inicio.webp"
                     alt="Sistemas escalables"
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
@@ -146,7 +146,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
                 </div>
                 <div className="flex w-full flex-col items-center justify-center self-start">
                   <motion.img
-                    src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+                    src="/imagenes/inicio/diferenciadores_cumplimiento_inicio.webp"
                     alt="Protección normativa"
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}

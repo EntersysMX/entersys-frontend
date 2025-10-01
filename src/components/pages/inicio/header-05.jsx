@@ -81,9 +81,9 @@ export function Header5({ colorScheme = 4, ...props }) {
         transition={{ duration: 1.2, ease: "easeOut" }}
       >
         <img
-          src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+          src="/imagenes/inicio/hero_main_inicio.webp"
           className="size-full object-cover"
-          alt="Relume placeholder image"
+          alt="Simplificamos la complejidad operativa con inteligencia digital"
         />
         <div className="absolute inset-0 bg-black/50" />
       </motion.div>

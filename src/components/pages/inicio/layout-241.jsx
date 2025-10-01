@@ -41,7 +41,7 @@ export function Layout241({ colorScheme = 4, ...props }) {
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <span className="material-symbols-outlined text-primary text-2xl">factory</span>
+                  <img src="/imagenes/inicio/icon_factory_inicio.svg" alt="Manufactura" className="h-10 w-10" />
                 </motion.div>
                 <h3 className="mb-3 text-xl font-bold md:text-2xl">
                   Experiencia en Manufactura
@@ -76,7 +76,7 @@ export function Layout241({ colorScheme = 4, ...props }) {
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <span className="material-symbols-outlined text-primary text-2xl">balance</span>
+                  <img src="/imagenes/inicio/icon_science_inicio.svg" alt="Tratamiento de agua" className="h-10 w-10" />
                 </motion.div>
                 <h3 className="mb-3 text-xl font-bold md:text-2xl">
                   Tratamiento de agua
@@ -111,7 +111,7 @@ export function Layout241({ colorScheme = 4, ...props }) {
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <span className="material-symbols-outlined text-primary text-2xl">local_shipping</span>
+                  <img src="/imagenes/inicio/icon_car_repair_inicio.svg" alt="Mantenimiento en flotillas" className="h-10 w-10" />
                 </motion.div>
                 <h3 className="mb-3 text-xl font-bold md:text-2xl">
                   Mantenimiento en flotillas
