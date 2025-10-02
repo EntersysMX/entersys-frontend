@@ -35,12 +35,12 @@ export function Layout363({ colorScheme = 2, ...props }) {
               className="h-full"
             >
               <div className="grid grid-cols-1 items-start sm:grid-cols-2 overflow-hidden bg-transparent border border-border-primary/20 rounded-lg shadow-sm h-full">
-                <div className="flex size-full items-center justify-center">
+                <div className="flex items-center justify-center bg-[#C5F0E8] p-8 min-h-[320px] sm:min-h-[380px]">
                   <motion.img
                     src="/imagenes/inicio/servicios_insignia_inicio.webp"
-                    className="size-full object-cover"
+                    className="w-full h-auto max-w-[280px] object-contain"
                     alt="Digitalización de procesos Worksys"
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
                   />
                 </div>
@@ -76,12 +76,12 @@ export function Layout363({ colorScheme = 2, ...props }) {
               className="h-full"
             >
               <div className="grid grid-cols-1 items-start sm:grid-cols-2 overflow-hidden bg-transparent border border-border-primary/20 rounded-lg shadow-sm h-full">
-                <div className="flex size-full items-center justify-center">
+                <div className="flex items-center justify-center bg-[#C5F0E8] p-8 min-h-[320px] sm:min-h-[380px]">
                   <motion.img
                     src="/imagenes/inicio/servicios_management_inicio.webp"
-                    className="size-full object-cover"
+                    className="w-full h-auto max-w-[280px] object-contain"
                     alt="Implementación de sistemas Expersys"
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
                   />
                 </div>

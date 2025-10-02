@@ -25,8 +25,8 @@ export function Blog37({ colorScheme = 1, ...props }) {
             <a href="#" className="mb-6 inline-block w-full max-w-full">
               <div className="w-full overflow-hidden">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                  alt="Relume placeholder image"
+                  src="/imagenes/expersys/section_auditory_expersys.webp"
+                  alt="Artículo sobre auditoría"
                   className="aspect-[3/2] size-full rounded-image object-cover"
                 />
               </div>
@@ -49,8 +49,8 @@ export function Blog37({ colorScheme = 1, ...props }) {
             <div className="mt-6 flex items-center">
               <div className="mr-4 shrink-0">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-                  alt="Relume placeholder avatar"
+                  src="/imagenes/inicio/avatar_placeholder.webp"
+                  alt="Juan Pérez"
                   className="size-12 min-h-12 min-w-12 rounded-full object-cover"
                 />
               </div>
@@ -68,8 +68,8 @@ export function Blog37({ colorScheme = 1, ...props }) {
             <a href="#" className="mb-6 inline-block w-full max-w-full">
               <div className="w-full overflow-hidden">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                  alt="Relume placeholder image"
+                  src="/imagenes/expersys/servicios_insignia_inicio.webp"
+                  alt="Artículo sobre ISO"
                   className="aspect-[3/2] size-full rounded-image object-cover"
                 />
               </div>
@@ -92,8 +92,8 @@ export function Blog37({ colorScheme = 1, ...props }) {
             <div className="mt-6 flex items-center">
               <div className="mr-4 shrink-0">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-                  alt="Relume placeholder avatar"
+                  src="/imagenes/inicio/avatar_placeholder.webp"
+                  alt="Ana Gómez"
                   className="size-12 min-h-12 min-w-12 rounded-full object-cover"
                 />
               </div>
@@ -111,8 +111,8 @@ export function Blog37({ colorScheme = 1, ...props }) {
             <a href="#" className="mb-6 inline-block w-full max-w-full">
               <div className="w-full overflow-hidden">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                  alt="Relume placeholder image"
+                  src="/imagenes/expersys/banner_meeting_worksys.webp"
+                  alt="Artículo sobre certificaciones"
                   className="aspect-[3/2] size-full rounded-image object-cover"
                 />
               </div>
@@ -136,8 +136,8 @@ export function Blog37({ colorScheme = 1, ...props }) {
             <div className="mt-6 flex items-center">
               <div className="mr-4 shrink-0">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-                  alt="Relume placeholder avatar"
+                  src="/imagenes/inicio/avatar_placeholder.webp"
+                  alt="Luis Martínez"
                   className="size-12 min-h-12 min-w-12 rounded-full object-cover"
                 />
               </div>

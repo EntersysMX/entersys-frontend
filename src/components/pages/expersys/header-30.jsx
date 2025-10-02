@@ -27,9 +27,9 @@ export function Header30({ colorScheme = 1, ...props }) {
       </div>
       <div className="absolute inset-0 z-0">
         <img
-          src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+          src="/imagenes/expersys/hero_quality_expersys.webp"
           className="size-full object-cover"
-          alt="Relume placeholder image"
+          alt="Expersys: calidad operativa"
         />
         <div className="absolute inset-0 bg-black/50" />
       </div>

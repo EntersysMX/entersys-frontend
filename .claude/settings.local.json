@@ -10,7 +10,8 @@
       "Bash(curl:*)",
       "Bash(mkdir:*)",
       "Read(//c/Users/Usuario/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/**)",
-      "Bash(powershell:*)"
+      "Bash(powershell:*)",
+      "Bash(node:*)"
     ],
     "deny": [],
     "ask": []

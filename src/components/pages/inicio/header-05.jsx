@@ -9,22 +9,22 @@ export function Header5({ colorScheme = 4, ...props }) {
   return (
     <section id="relume" className={`relative px-[5%] color-scheme-${colorScheme}`} {...props}>
       <div className="relative z-10 container">
-        <div className="flex max-h-[60rem] min-h-svh items-center py-16 md:py-24 lg:py-28">
-          <div className="max-w-md">
+        <div className="flex h-screen max-h-[900px] items-center py-8">
+          <div className="max-w-xl lg:max-w-2xl">
             <AnimatedSection animation="fadeInUp" delay={0.2}>
-              <h1 className="mb-5 text-6xl font-bold text-white md:mb-6 md:text-9xl lg:text-10xl">
+              <h1 className="mb-5 text-5xl font-bold text-white md:mb-6 md:text-7xl lg:text-8xl leading-tight">
                 Simplificamos la complejidad operativa con inteligencia digital
               </h1>
             </AnimatedSection>
             <AnimatedSection animation="fadeInUp" delay={0.4}>
-              <p className="text-white md:text-md">
+              <p className="text-white md:text-lg max-w-md">
                 Convertimos procesos manuales en sistemas inteligentes que
                 optimizan tu operación. Resultados visibles en semanas, no en
                 meses.
               </p>
             </AnimatedSection>
             <AnimatedSection animation="fadeInUp" delay={0.6}>
-              <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
+              <div className="mt-8 flex flex-wrap gap-4">
                 <motion.button
                   className="rounded-lg transition-all duration-300 agendar-demo-button"
                   style={{
@@ -76,16 +76,51 @@ export function Header5({ colorScheme = 4, ...props }) {
       </div>
       <motion.div
         className="absolute inset-0 z-0"
-        initial={{ scale: 1.1, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <img
-          src="/imagenes/inicio/hero_main_inicio.webp"
-          className="size-full object-cover"
-          alt="Simplificamos la complejidad operativa con inteligencia digital"
+        {/* Mobile (<768px) */}
+        <div
+          className="block md:hidden absolute inset-0"
+          style={{
+            backgroundImage: 'url(/imagenes/inicio/hero_main_inicio-mobile.webp)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat'
+          }}
         />
-        <div className="absolute inset-0 bg-black/50" />
+        {/* Desktop (768px - 1919px) */}
+        <div
+          className="hero-desktop-bg hidden md:block absolute inset-0"
+          style={{
+            backgroundImage: 'url(/imagenes/inicio/hero_main_inicio-desktop.webp)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        />
+        {/* Large Desktop (≥1920px) - Using CSS media query for precise control */}
+        <style jsx>{`
+          @media (min-width: 1920px) {
+            .hero-large-bg {
+              display: block !important;
+            }
+            .hero-desktop-bg {
+              display: none !important;
+            }
+          }
+        `}</style>
+        <div
+          className="hero-large-bg hidden absolute inset-0"
+          style={{
+            backgroundImage: 'url(/imagenes/inicio/hero_main_inicio-desktop-2x.webp)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a1828]/95 via-[#0a1828]/60 to-transparent pointer-events-none" />
       </motion.div>
     </section>
   );

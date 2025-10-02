@@ -54,7 +54,7 @@ export function Layout421({ colorScheme = 1, ...props }) {
             style={{ y: image1Y }}
           >
             <img
-              src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+              src="/imagenes/worksys/section_documentation_worksys.webp"
               alt="Worksys documentos"
               className="w-full h-auto object-cover rounded-md shadow-2xl"
             />
@@ -66,7 +66,7 @@ export function Layout421({ colorScheme = 1, ...props }) {
             style={{ y: image2Y }}
           >
             <img
-              src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+              src="/imagenes/worksys/section_process_worksys.webp"
               alt="Worksys diagrama"
               className="w-full h-auto object-cover rounded-md shadow-2xl"
             />
@@ -78,7 +78,7 @@ export function Layout421({ colorScheme = 1, ...props }) {
             style={{ y: image3Y }}
           >
             <img
-              src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+              src="/imagenes/worksys/section_cascade_worksys.webp"
               alt="Worksys red neuronal"
               className="w-full h-auto object-cover rounded-md shadow-2xl"
             />
@@ -90,7 +90,7 @@ export function Layout421({ colorScheme = 1, ...props }) {
             style={{ y: image1Y }}
           >
             <img
-              src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+              src="/imagenes/worksys/section_manual_worksys.webp"
               alt="Worksys escritorio"
               className="w-full h-auto object-cover rounded-md shadow-2xl"
             />
@@ -102,7 +102,7 @@ export function Layout421({ colorScheme = 1, ...props }) {
             style={{ y: image2Y }}
           >
             <img
-              src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+              src="/imagenes/worksys/section_dashboard_worksys.webp"
               alt="Worksys analytics"
               className="w-full h-auto object-cover rounded-md shadow-2xl"
             />

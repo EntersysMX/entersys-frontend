@@ -26,8 +26,8 @@ export function Layout239({ colorScheme = 1, ...props }) {
             <div className="flex w-full flex-col items-center text-center">
               <div className="rb-6 mb-6 md:mb-8">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                  alt="Relume placeholder image"
+                  src="/imagenes/expersys/servicios_insignia_inicio.webp"
+                  alt="Red de franquicias retail"
                   className="rounded-image"
                 />
               </div>
@@ -42,8 +42,8 @@ export function Layout239({ colorScheme = 1, ...props }) {
             <div className="flex w-full flex-col items-center text-center">
               <div className="rb-6 mb-6 md:mb-8">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                  alt="Relume placeholder image"
+                  src="/imagenes/expersys/section_auditory_expersys.webp"
+                  alt="Grupo industrial nexus"
                   className="rounded-image"
                 />
               </div>
@@ -55,8 +55,8 @@ export function Layout239({ colorScheme = 1, ...props }) {
             <div className="flex w-full flex-col items-center text-center">
               <div className="rb-6 mb-6 md:mb-8">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                  alt="Relume placeholder image"
+                  src="/imagenes/expersys/banner_meeting_worksys.webp"
+                  alt="Empresa logística mexicana"
                   className="rounded-image"
                 />
               </div>

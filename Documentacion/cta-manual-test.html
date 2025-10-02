@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual CTA Testing - dev.entersys.mx</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .warning { background-color: #fff3cd; border-color: #ffeaa7; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .iframe-container {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background-color: #0056b3; }
+        .test-results {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist li {
+            margin: 8px 0;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        .checklist input[type="checkbox"] {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Manual Testing de CTAs - dev.entersys.mx</h1>
+
+    <div class="test-section">
+        <h2>📋 Checklist de Testing</h2>
+        <ul class="checklist">
+            <li>
+                <input type="checkbox" id="whatsapp-visible">
+                <label for="whatsapp-visible">Botón de WhatsApp visible en todas las páginas</label>
+            </li>
+            <li>
+                <input type="checkbox" id="whatsapp-click">
+                <label for="whatsapp-click">Click en WhatsApp abre correctamente</label>
+            </li>
+            <li>
+                <input type="checkbox" id="form-visible">
+                <label for="form-visible">Formulario de contacto visible</label>
+            </li>
+            <li>
+                <input type="checkbox" id="form-fields">
+                <label for="form-fields">Todos los campos del formulario funcionan</label>
+            </li>
+            <li>
+                <input type="checkbox" id="form-submit">
+                <label for="form-submit">Envío de formulario funciona</label>
+            </li>
+            <li>
+                <input type="checkbox" id="cta-buttons">
+                <label for="cta-buttons">Botones CTA presentes en cada página</label>
+            </li>
+            <li>
+                <input type="checkbox" id="console-errors">
+                <label for="console-errors">Sin errores críticos en consola</label>
+            </li>
+            <li>
+                <input type="checkbox" id="analytics-requests">
+                <label for="analytics-requests">Requests a analytics/CRM visibles</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>🏠 Página Principal</h2>
+        <button onclick="loadPage('/')">Cargar Home</button>
+        <button onclick="openDevTools()">Abrir DevTools</button>
+        <iframe id="testFrame" class="iframe-container" src="https://dev.entersys.mx/"></iframe>
+
+        <div class="test-results">
+            <h4>Elementos a verificar:</h4>
+            <ul>
+                <li>✅ Botón flotante de WhatsApp (esquina inferior derecha)</li>
+                <li>✅ Botones "Conocer" y "Explorar" en hero section</li>
+                <li>✅ CTAs en secciones de servicios</li>
+                <li>✅ Enlaces en navegación</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>📞 Página de Contacto</h2>
+        <button onclick="loadPage('/contacto')">Cargar Contacto</button>
+        <iframe id="contactFrame" class="iframe-container"></iframe>
+
+        <div class="test-results">
+            <h4>Elementos a verificar:</h4>
+            <ul>
+                <li>✅ Formulario de contacto principal</li>
+                <li>✅ Campos: Nombre, Email, Empresa, Mensaje</li>
+                <li>✅ Botón de envío</li>
+                <li>✅ Validación de campos</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔧 Página de Servicios</h2>
+        <button onclick="loadPage('/servicios')">Cargar Servicios</button>
+        <iframe id="serviciosFrame" class="iframe-container"></iframe>
+
+        <div class="test-results">
+            <h4>Elementos a verificar:</h4>
+            <ul>
+                <li>✅ CTAs en cada servicio</li>
+                <li>✅ Botones de cotización</li>
+                <li>✅ Enlaces a contacto</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>👥 Sobre Nosotros</h2>
+        <button onclick="loadPage('/sobre-nosotros')">Cargar Sobre Nosotros</button>
+        <iframe id="aboutFrame" class="iframe-container"></iframe>
+    </div>
+
+    <div class="test-section">
+        <h2>📊 Verificación de Analytics y CRM</h2>
+        <div class="test-results">
+            <h4>Pasos para verificar:</h4>
+            <ol>
+                <li>Abre DevTools (F12)</li>
+                <li>Ve a la pestaña "Network"</li>
+                <li>Recarga la página</li>
+                <li>Busca requests a:</li>
+                <ul>
+                    <li>✅ <code>crm.entersys.mx</code> (Mautic)</li>
+                    <li>✅ <code>mtracking.gif</code> (Tracking pixel)</li>
+                    <li>✅ <code>matomo</code> o analytics</li>
+                </ul>
+                <li>Click en botón WhatsApp y verifica nuevos requests</li>
+                <li>Llena el formulario y verifica requests de envío</li>
+            </ol>
+
+            <h4>Código para consola (opcional):</h4>
+            <textarea readonly style="width: 100%; height: 100px; font-family: monospace; font-size: 12px;">
+// Verificar que los servicios estén cargados
+console.log('Mautic Config:', window.MAUTIC_CONFIG);
+console.log('Analytics loaded:', typeof window._paq !== 'undefined');
+
+// Test manual de tracking
+if (window.mauticService) {
+    console.log('✅ Mautic service available');
+    // window.mauticService.trackEvent('test', 'manual-testing');
+}
+            </textarea>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>📈 Resultados del Testing</h2>
+        <div id="results" class="test-results">
+            <p>Marca los elementos del checklist conforme los vayas verificando.</p>
+            <button onclick="generateReport()">Generar Reporte</button>
+        </div>
+    </div>
+
+    <script>
+        function loadPage(path) {
+            const frames = {
+                '/': document.getElementById('testFrame'),
+                '/contacto': document.getElementById('contactFrame'),
+                '/servicios': document.getElementById('serviciosFrame'),
+                '/sobre-nosotros': document.getElementById('aboutFrame')
+            };
+
+            const frame = frames[path] || frames['/'];
+            frame.src = `https://dev.entersys.mx${path}`;
+
+            // Highlight the active section
+            document.querySelectorAll('.test-section').forEach(section => {
+                section.classList.remove('success');
+            });
+
+            setTimeout(() => {
+                frame.closest('.test-section').classList.add('success');
+            }, 1000);
+        }
+
+        function openDevTools() {
+            alert('Presiona F12 para abrir DevTools y luego ve a la pestaña Network para monitorear requests de analytics.');
+        }
+
+        function generateReport() {
+            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+            const total = checkboxes.length;
+            const checked = document.querySelectorAll('.checklist input[type="checkbox"]:checked').length;
+
+            const percentage = Math.round((checked / total) * 100);
+
+            let status = 'error';
+            let message = '';
+
+            if (percentage >= 90) {
+                status = 'success';
+                message = '¡Excelente! Todos los CTAs están funcionando correctamente.';
+            } else if (percentage >= 70) {
+                status = 'warning';
+                message = 'La mayoría de CTAs funciona, pero hay algunos elementos que revisar.';
+            } else {
+                status = 'error';
+                message = 'Se encontraron varios problemas que requieren atención.';
+            }
+
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.className = `test-results ${status}`;
+            resultsDiv.innerHTML = `
+                <h4>📊 Reporte de Testing</h4>
+                <p><strong>Elementos verificados:</strong> ${checked}/${total} (${percentage}%)</p>
+                <p><strong>Estado:</strong> ${message}</p>
+                <p><strong>Timestamp:</strong> ${new Date().toLocaleString()}</p>
+
+                <h5>Elementos faltantes:</h5>
+                <ul>
+                    ${Array.from(checkboxes)
+                        .filter(cb => !cb.checked)
+                        .map(cb => `<li>${cb.nextElementSibling.textContent}</li>`)
+                        .join('')}
+                </ul>
+
+                <h5>✅ Recomendaciones:</h5>
+                <ul>
+                    <li>Verificar que todas las páginas carguen correctamente</li>
+                    <li>Comprobar que no hay errores 404 en recursos</li>
+                    <li>Validar que los requests a CRM se ejecuten</li>
+                    <li>Probar el envío real del formulario desde otra ventana</li>
+                </ul>
+
+                <button onclick="window.print()">Imprimir Reporte</button>
+                <button onclick="copyReport()">Copiar Reporte</button>
+            `;
+        }
+
+        function copyReport() {
+            const results = document.getElementById('results').textContent;
+            navigator.clipboard.writeText(results).then(() => {
+                alert('Reporte copiado al portapapeles');
+            });
+        }
+
+        // Auto-load home page
+        window.onload = () => {
+            setTimeout(() => loadPage('/'), 1000);
+        };
+
+        // Monitor iframe loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const iframes = document.querySelectorAll('iframe');
+            iframes.forEach(iframe => {
+                iframe.addEventListener('load', () => {
+                    console.log(`✅ Loaded: ${iframe.src}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

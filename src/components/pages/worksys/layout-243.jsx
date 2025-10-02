@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { MdBusinessCenter, MdApartment, MdSignpost } from 'react-icons/md';
 
 export function Layout243({ colorScheme = 1, ...props }) {
   return (
@@ -25,7 +24,7 @@ export function Layout243({ colorScheme = 1, ...props }) {
           <div className="grid grid-cols-1 items-start justify-center gap-y-12 md:grid-cols-3 md:gap-x-8 md:gap-y-16 lg:gap-x-12">
             <div className="flex w-full gap-6">
               <div className="flex-none self-start">
-                <MdBusinessCenter className="size-12 text-primary" />
+                <img src="/imagenes/worksys/icon_enterprise_worksys.svg" alt="PYMES en expansión" className="h-12 w-12" />
               </div>
               <div>
                 <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
@@ -39,7 +38,7 @@ export function Layout243({ colorScheme = 1, ...props }) {
             </div>
             <div className="flex w-full gap-6">
               <div className="flex-none self-start">
-                <MdApartment className="size-12 text-primary" />
+                <img src="/imagenes/worksys/icon_corporate_fare_worksys.svg" alt="Corporativos" className="h-12 w-12" />
               </div>
               <div>
                 <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
@@ -53,7 +52,7 @@ export function Layout243({ colorScheme = 1, ...props }) {
             </div>
             <div className="flex w-full gap-6">
               <div className="flex-none self-start">
-                <MdSignpost className="size-12 text-primary" />
+                <img src="/imagenes/worksys/icon_tapas_worksys.svg" alt="Franquicias" className="h-12 w-12" />
               </div>
               <div>
                 <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">

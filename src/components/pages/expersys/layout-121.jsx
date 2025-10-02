@@ -2,44 +2,36 @@
 
 import { Button } from "@relume_io/relume-ui";
 import React from "react";
-import {
-  MdVerifiedUser,
-  MdBusiness,
-  MdEco,
-  MdSpeed,
-  MdNature,
-  MdSecurity
-} from 'react-icons/md';
 
 export function Layout121({ colorScheme = 1, ...props }) {
   const certifications = [
     {
-      icon: <MdVerifiedUser className="size-6" />,
+      icon: "/imagenes/expersys/icon_security_expersys.svg",
       title: "ISO-9001 Gestión de calidad",
       description: "Gestión de calidad"
     },
     {
-      icon: <MdBusiness className="size-6" />,
+      icon: "/imagenes/expersys/icon_productivity_expersys.svg",
       title: "SMETA",
       description: "Responsabilidad social y ética en la cadena de suministro."
     },
     {
-      icon: <MdEco className="size-6" />,
+      icon: "/imagenes/expersys/icon_eco_expersys.svg",
       title: "ECOVADIS",
       description: "Sustentabilidad y criterios ESG."
     },
     {
-      icon: <MdSpeed className="size-6" />,
+      icon: "/imagenes/expersys/icon_temp_preferences_eco_expersys.svg",
       title: "Resultados Rápidos",
       description: "Implementaciones que generan resultados visibles en semanas, no en meses."
     },
     {
-      icon: <MdNature className="size-6" />,
+      icon: "/imagenes/expersys/icon_source_enviroment_expersys.svg",
       title: "ISO-14001",
       description: "Medio ambiente"
     },
     {
-      icon: <MdSecurity className="size-6" />,
+      icon: "/imagenes/expersys/icon_security_expersys.svg",
       title: "ISO-45001",
       description: "Seguridad laboral"
     }
@@ -66,7 +58,7 @@ export function Layout121({ colorScheme = 1, ...props }) {
               {certifications.map((cert, index) => (
                 <div key={index} className="relative flex gap-4 pl-0">
                   <div className="relative z-10 flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-background-primary text-primary">
-                    {cert.icon}
+                    <img src={cert.icon} alt={cert.title} className="h-6 w-6" />
                   </div>
                   <div className="flex-1 pt-1">
                     <h3 className="mb-2 text-xl font-bold md:text-2xl">

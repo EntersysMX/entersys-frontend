@@ -25,8 +25,8 @@ export function Blog37() {
             <a href="#" className="mb-6 inline-block w-full max-w-full">
               <div className="w-full overflow-hidden">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                  alt="Relume placeholder image"
+                  src="/imagenes/worksys/section_dashboard_worksys.webp"
+                  alt="Tablero de control"
                   className="aspect-[3/2] size-full rounded-image object-cover"
                 />
               </div>
@@ -39,7 +39,7 @@ export function Blog37() {
             </a>
             <a href="#" className="mb-2 block max-w-full">
               <h5 className="text-xl font-bold md:text-2xl">
-                “Cómo saber si tu operación gana o pierde en 3 segundos.”
+                "Cómo saber si tu operación gana o pierde en 3 segundos."
               </h5>
             </a>
             <p>
@@ -50,8 +50,8 @@ export function Blog37() {
             <div className="mt-6 flex items-center">
               <div className="mr-4 shrink-0">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-                  alt="Relume placeholder avatar"
+                  src="/imagenes/inicio/avatar_placeholder.webp"
+                  alt="Juan Pérez"
                   className="size-12 min-h-12 min-w-12 rounded-full object-cover"
                 />
               </div>
@@ -69,8 +69,8 @@ export function Blog37() {
             <a href="#" className="mb-6 inline-block w-full max-w-full">
               <div className="w-full overflow-hidden">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                  alt="Relume placeholder image"
+                  src="/imagenes/worksys/section_process_worksys.webp"
+                  alt="Digitalización de procesos"
                   className="aspect-[3/2] size-full rounded-image object-cover"
                 />
               </div>
@@ -94,8 +94,8 @@ export function Blog37() {
             <div className="mt-6 flex items-center">
               <div className="mr-4 shrink-0">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-                  alt="Relume placeholder avatar"
+                  src="/imagenes/inicio/avatar_placeholder.webp"
+                  alt="Ana Gómez"
                   className="size-12 min-h-12 min-w-12 rounded-full object-cover"
                 />
               </div>
@@ -113,8 +113,8 @@ export function Blog37() {
             <a href="#" className="mb-6 inline-block w-full max-w-full">
               <div className="w-full overflow-hidden">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                  alt="Relume placeholder image"
+                  src="/imagenes/worksys/section_cascade_worksys.webp"
+                  alt="Visual management"
                   className="aspect-[3/2] size-full rounded-image object-cover"
                 />
               </div>
@@ -138,8 +138,8 @@ export function Blog37() {
             <div className="mt-6 flex items-center">
               <div className="mr-4 shrink-0">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-                  alt="Relume placeholder avatar"
+                  src="/imagenes/inicio/avatar_placeholder.webp"
+                  alt="Luis Martínez"
                   className="size-12 min-h-12 min-w-12 rounded-full object-cover"
                 />
               </div>

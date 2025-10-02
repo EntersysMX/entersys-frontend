@@ -16,7 +16,7 @@ export const Layout492 = ({ colorScheme = 1, ...props }) => {
       description:
         "Auditores con trayectoria práctica que convierten los requisitos de la norma en ventajas reales para tu operación.",
       image: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+        src: "/imagenes/expersys/section_auditory_expersys.webp",
         alt: "Experiencia en auditoría",
       },
     },
@@ -25,7 +25,7 @@ export const Layout492 = ({ colorScheme = 1, ...props }) => {
       description:
         "Acompañamos a gerentes y colaboradores clave para que adopten y mantengan el sistema como parte de su cultura diaria.",
       image: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+        src: "/imagenes/expersys/section_auditory_expersys.webp",
         alt: "Coaching directo",
       },
     },
@@ -34,7 +34,7 @@ export const Layout492 = ({ colorScheme = 1, ...props }) => {
       description:
         "Soporte integral que asegura tanto el cumplimiento normativo como la mejora productiva de tu empresa.",
       image: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",
+        src: "/imagenes/expersys/section_auditory_expersys.webp",
         alt: "Respaldo técnico",
       },
     },

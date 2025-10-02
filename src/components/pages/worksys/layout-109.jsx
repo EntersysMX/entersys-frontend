@@ -47,9 +47,9 @@ export function Layout109() {
           </div>
         </div>
         <img
-          src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
+          src="/imagenes/worksys/section_industries_worksys.webp"
           className="w-full rounded-image object-cover"
-          alt="Relume placeholder image"
+          alt="Worksys para diversas industrias"
         />
       </div>
     </section>
