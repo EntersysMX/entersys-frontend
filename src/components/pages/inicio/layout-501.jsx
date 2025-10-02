@@ -26,12 +26,12 @@ export function Layout501({ colorScheme = 2, ...props }) {
           </div>
         </div>
         <Tabs defaultValue={defaultTabValue}>
-          <TabsList className="mb-12 items-center gap-6 md:mb-16 md:justify-center">
+          <TabsList className="mb-12 items-center gap-2 md:gap-6 md:mb-16 justify-center w-full flex-wrap">
             {tabs.map((tab) => (
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
-                className="border-0 border-b-[1.5px] border-border-alternative px-0 py-2 duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary"
+                className="border-0 border-b-[1.5px] border-border-alternative px-3 md:px-0 py-2 duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary text-sm md:text-base"
               >
                 {tab.trigger}
               </TabsTrigger>
