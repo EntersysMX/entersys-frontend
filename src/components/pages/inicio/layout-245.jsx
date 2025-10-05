@@ -63,7 +63,7 @@ export function Layout245({ colorScheme = 1, ...props }) {
             </div>
           </div>
           <div className="mt-10 flex items-center gap-4 md:mt-14 lg:mt-16">
-            <Button variant="secondary">Solicitar</Button>
+            <Button>Solicitar</Button>
             <Button iconRight={<RxChevronRight />} variant="link" size="link">
               Ver clientes
             </Button>

@@ -91,9 +91,9 @@ const Layout501Defaults = {
           heading: "Plataforma líder en gestión de proyectos",
           description:
             "Mejoramos tu operación con Smartsheet, una plataforma que conocemos bien. Se destaca por ser flexible, permitiendo crear portales digitales y reportes sin límites. Está diseñada para adaptarse a las necesidades de tu negocio y hacer cada proceso más eficiente.",
-          buttons: [{ title: "Solicitar una demo", variant: "secondary" }],
+          buttons: [{ title: "Solicitar una demo" }],
           image: {
-            src: "/imagenes/inicio/techstack_smartsheets_inicio.webp",
+            src: "/imagenes/inicio/tecnologia_smartsheets_inicio.webp",
             alt: "Smartsheet demo",
           },
         },
@@ -108,9 +108,9 @@ const Layout501Defaults = {
           heading: "Aplicaciones sin programación",
           description:
             "Desarrollamos soluciones personalizadas y adaptadas a las necesidades específicas de nuestros clientes, especialmente aquellos sin un equipo de TI en su empresa, ya que la adopción de opciones no-code facilita su implementación y uso en el día a día de las operaciones empresariales.",
-          buttons: [{ title: "Conocer Smartsheets", variant: "secondary" }],
+          buttons: [{ title: "Conocer Smartsheets" }],
           image: {
-            src: "/imagenes/inicio/techstack_code_inicio.webp",
+            src: "/imagenes/inicio/tecnologia_sin_codigo_inicio.webp",
             alt: "Aplicaciones No Code",
           },
         },
@@ -125,9 +125,9 @@ const Layout501Defaults = {
           heading: "Automatización: la siguiente frontera",
           description:
             "Implementamos soluciones para automatizar tareas con agentes de IA y LLM para múltiples propósitos, así como el procesamiento de datos utilizando modelos entrenados, optimizando la eficiencia y mejorando la productividad en diversos sectores.",
-          buttons: [{ title: "Más información", variant: "secondary" }],
+          buttons: [{ title: "Más información" }],
           image: {
-            src: "/imagenes/inicio/techstack_ai_inicio.webp",
+            src: "/imagenes/inicio/tecnologia_ia_inicio.webp",
             alt: "Inteligencia Artificial",
           },
         },

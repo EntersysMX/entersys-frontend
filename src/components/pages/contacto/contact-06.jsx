@@ -19,6 +19,7 @@ import React, { useState, useEffect } from "react";
 import { MdEmail, MdLocationOn, MdPhone } from 'react-icons/md';
 import { mauticService } from '../../../services/mautic';
 import { analyticsService } from '../../../services/analytics';
+import './contact.css';
 
 export function Contact06({ colorScheme = 2, ...props }) {
   const [isSubmitting, setIsSubmitting] = useState(false);

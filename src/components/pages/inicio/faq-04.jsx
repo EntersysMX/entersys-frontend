@@ -118,7 +118,7 @@ export function Faq04({ colorScheme = 1, ...props }) {
             Nuestro equipo está listo para resolver todas tus dudas
           </p>
           <div className="mt-6 md:mt-8">
-            <Button title="Contactar" variant="secondary">
+            <Button title="Contactar">
               Contactar
             </Button>
           </div>

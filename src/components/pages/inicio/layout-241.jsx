@@ -41,7 +41,7 @@ export function Layout241({ colorScheme = 4, ...props }) {
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <img src="/imagenes/inicio/icon_factory_inicio.svg" alt="Manufactura" className="h-10 w-10" />
+                  <img src="/imagenes/inicio/icono_fabrica_inicio.svg" alt="Manufactura" className="h-10 w-10" />
                 </motion.div>
                 <h3 className="mb-3 text-xl font-bold md:text-2xl">
                   Experiencia en Manufactura

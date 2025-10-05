@@ -72,9 +72,6 @@ const Footer = ({ colorScheme = 1, ...props }) => {
                   <a href="/">Inicio</a>
                 </li>
                 <li className="py-2 text-sm font-semibold">
-                  <a href="/servicios">Servicios</a>
-                </li>
-                <li className="py-2 text-sm font-semibold">
                   <a href="/worksys">Worksys</a>
                 </li>
                 <li className="py-2 text-sm font-semibold">
@@ -83,7 +80,7 @@ const Footer = ({ colorScheme = 1, ...props }) => {
               </ul>
               <ul>
                 <li className="py-2 text-sm font-semibold">
-                  <a href="/sobre-nosotros">Nosotros</a>
+                  <a href="/nosotros">Nosotros</a>
                 </li>
                 <li className="py-2 text-sm font-semibold">
                   <a href="/clientes">Clientes</a>

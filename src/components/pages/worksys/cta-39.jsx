@@ -21,10 +21,10 @@ export function Cta39({ colorScheme = 1, ...props }) {
               </p>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <Button title="Quiero un diagnóstico" variant="primary">
+              <Button title="Quiero un diagnóstico">
                 Quiero un diagnóstico
               </Button>
-              <Button title="Quiero una demo" variant="secondary">
+              <Button title="Quiero una demo">
                 Quiero una demo
               </Button>
             </div>

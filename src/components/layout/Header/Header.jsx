@@ -4,7 +4,7 @@ import { Button, useMediaQuery } from "@relume_io/relume-ui";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import { RxChevronDown } from "react-icons/rx";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "../../../styles/header.css";
 
 const useRelume = () => {
@@ -48,6 +48,18 @@ const useRelume = () => {
 
 const Header = ({ colorScheme = 1, ...props }) => {
   const useActive = useRelume();
+  const location = useLocation();
+
+  const isActive = (path) => {
+    if (path === '/') {
+      return location.pathname === '/' || location.pathname === '/inicio';
+    }
+    return location.pathname === path;
+  };
+
+  const isServicesActive = () => {
+    return location.pathname === '/worksys' || location.pathname === '/expersys';
+  };
 
   return (
     <header
@@ -92,13 +104,17 @@ const Header = ({ colorScheme = 1, ...props }) => {
             <nav className="lg:flex lg:items-center">
               <Link
                 to="/"
-                className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 text-black"
+                className={`block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 transition-colors ${
+                  isActive('/') ? 'text-[#009CA6] font-semibold' : 'text-black hover:text-[#009CA6]'
+                }`}
               >
                 Inicio
               </Link>
               <Link
-                to="/sobre-nosotros"
-                className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 text-black"
+                to="/nosotros"
+                className={`block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 transition-colors ${
+                  isActive('/nosotros') ? 'text-[#009CA6] font-semibold' : 'text-black hover:text-[#009CA6]'
+                }`}
               >
                 Nosotros
               </Link>
@@ -106,10 +122,10 @@ const Header = ({ colorScheme = 1, ...props }) => {
                 onMouseEnter={useActive.openOnDesktopServicesDropdownMenu}
                 onMouseLeave={useActive.closeOnDesktopServicesDropdownMenu}
               >
-                <div className="header-dropdown-button flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base text-black">
-                  <Link to="/servicios" className="text-black flex-1">
-                    Servicios
-                  </Link>
+                <div className={`header-dropdown-button flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base transition-colors ${
+                  isServicesActive() ? 'text-[#009CA6] font-semibold' : 'text-black hover:text-[#009CA6]'
+                }`}>
+                  <span className="flex-1">Servicios</span>
                   <button
                     onClick={useActive.openOnMobileServicesDropdownMenu}
                     className="lg:hidden"
@@ -167,10 +183,14 @@ const Header = ({ colorScheme = 1, ...props }) => {
                     <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-2 py-3 md:py-3 lg:gap-y-4 lg:py-0">
                       <Link
                         to="/worksys"
-                        className="block py-2 lg:py-1 text-black"
+                        className={`block py-2 lg:py-1 transition-colors ${
+                          isActive('/worksys') ? 'text-[#009CA6]' : 'text-black hover:text-[#009CA6]'
+                        }`}
                       >
                         <div className="flex flex-col items-start justify-center">
-                          <p className="text-md font-semibold lg:text-base text-black">
+                          <p className={`text-md font-semibold lg:text-base ${
+                            isActive('/worksys') ? 'text-[#009CA6]' : 'text-black'
+                          }`}>
                             Worksys
                           </p>
                           <p className="hidden text-sm md:block text-gray-600">
@@ -181,10 +201,14 @@ const Header = ({ colorScheme = 1, ...props }) => {
                       </Link>
                       <Link
                         to="/expersys"
-                        className="block py-2 lg:py-1 text-black"
+                        className={`block py-2 lg:py-1 transition-colors ${
+                          isActive('/expersys') ? 'text-[#009CA6]' : 'text-black hover:text-[#009CA6]'
+                        }`}
                       >
                         <div className="flex flex-col items-start justify-center">
-                          <p className="text-md font-semibold lg:text-base text-black">
+                          <p className={`text-md font-semibold lg:text-base ${
+                            isActive('/expersys') ? 'text-[#009CA6]' : 'text-black'
+                          }`}>
                             Expersys
                           </p>
                           <p className="hidden text-sm md:block text-gray-600">
@@ -199,7 +223,9 @@ const Header = ({ colorScheme = 1, ...props }) => {
               </div>
               <Link
                 to="/clientes"
-                className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 text-black"
+                className={`block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 transition-colors ${
+                  isActive('/clientes') ? 'text-[#009CA6] font-semibold' : 'text-black hover:text-[#009CA6]'
+                }`}
               >
                 Clientes
               </Link>

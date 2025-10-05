@@ -1,0 +1,157 @@
+/* Estilos específicos para radio buttons y checkboxes en formulario de contacto */
+
+/* Radio Buttons - Resetear TODOS los estilos y forzar circular */
+button[role="radio"],
+button[role="radio"][type="button"],
+.radio-group button[role="radio"],
+div[role="radiogroup"] button[role="radio"] {
+  /* Reset completo */
+  all: revert !important;
+
+  /* Dimensiones exactas - círculo perfecto */
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+
+  /* Apariencia circular */
+  border: 2px solid #d1d5db !important;
+  border-radius: 50% !important;
+  background-color: white !important;
+
+  /* Layout */
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  /* Posicionamiento */
+  position: relative !important;
+  flex-shrink: 0 !important;
+
+  /* Otros */
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  outline: none !important;
+
+  /* Forzar que no herede estilos de botón */
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+  font-weight: normal !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+/* Span interno del radio button */
+button[role="radio"] > span {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  background-color: transparent !important;
+  transition: background-color 0.2s ease !important;
+  display: block !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* Radio button hover */
+button[role="radio"]:hover {
+  border-color: #009CA6 !important;
+  box-shadow: 0 0 0 3px rgba(0, 156, 166, 0.1) !important;
+  transform: none !important;
+  scale: none !important;
+}
+
+/* Radio button seleccionado */
+button[role="radio"][data-state="checked"],
+button[role="radio"][aria-checked="true"],
+button[data-state="checked"][role="radio"],
+button[aria-checked="true"][role="radio"] {
+  border-color: #009CA6 !important;
+  background-color: white !important;
+  transform: none !important;
+  scale: none !important;
+}
+
+/* Punto interior cuando está seleccionado */
+button[role="radio"][data-state="checked"] > span,
+button[role="radio"][aria-checked="true"] > span,
+button[data-state="checked"][role="radio"] > span,
+button[aria-checked="true"][role="radio"] > span {
+  background-color: #009CA6 !important;
+  display: block !important;
+}
+
+/* Checkbox - Estilos cuadrados perfectos */
+button[role="checkbox"],
+button[role="checkbox"][type="button"] {
+  all: unset !important;
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  max-width: 16px !important;
+  max-height: 16px !important;
+  border: 2px solid #9ca3af !important;
+  border-radius: 4px !important;
+  background-color: white !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Ocultar cualquier contenido interno del checkbox */
+button[role="checkbox"] * {
+  display: none !important;
+}
+
+/* Checkbox hover */
+button[role="checkbox"]:hover {
+  border-color: #009CA6 !important;
+  box-shadow: 0 0 0 3px rgba(0, 156, 166, 0.1) !important;
+}
+
+/* Checkbox seleccionado */
+button[role="checkbox"][data-state="checked"],
+button[role="checkbox"][aria-checked="true"] {
+  border-color: #009CA6 !important;
+  background-color: #009CA6 !important;
+}
+
+/* Checkmark del checkbox seleccionado */
+button[role="checkbox"][data-state="checked"]::after,
+button[role="checkbox"][aria-checked="true"]::after {
+  content: '✓' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  color: white !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  line-height: 1 !important;
+  display: block !important;
+}
+
+/* Focus states */
+button[role="radio"]:focus,
+button[role="radio"]:focus-visible,
+button[role="checkbox"]:focus,
+button[role="checkbox"]:focus-visible {
+  outline: 2px solid #009CA6 !important;
+  outline-offset: 2px !important;
+}
