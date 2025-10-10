@@ -12,7 +12,7 @@ export function Cta39() {
           <div className="flex flex-col justify-center p-8 md:p-12">
             <div>
               <h2 className="heading-h2 mb-5 font-bold md:mb-6">
-                Impulsa tu transformación digital
+                Impulsa la transformación de tu negocio
               </h2>
               <p className="text-medium">
                 Descubre cómo podemos simplificar tus procesos y llevar tu

@@ -2,11 +2,24 @@
 
 import { Button } from "@relume_io/relume-ui";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { RxChevronRight } from "react-icons/rx";
 import AnimatedSection, { AnimatedStaggerList, AnimatedStaggerItem } from "../../AnimatedSection";
 import { motion } from "framer-motion";
+import { analyticsService } from "../../../services/analytics";
 
 export function Layout363({ colorScheme = 2, ...props }) {
+  const navigate = useNavigate();
+
+  const handleWorksysClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Ver Servicio Worksys', 'inicio-servicios');
+    navigate('/worksys');
+  };
+
+  const handleExpersysClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Ver Servicio Expersys', 'inicio-servicios');
+    navigate('/expersys');
+  };
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -60,6 +73,7 @@ export function Layout363({ colorScheme = 2, ...props }) {
                         variant="link"
                         size="link"
                         iconRight={<RxChevronRight />}
+                        onClick={handleWorksysClick}
                       >
                         Ver servicio
                       </Button>
@@ -101,6 +115,7 @@ export function Layout363({ colorScheme = 2, ...props }) {
                         variant="link"
                         size="link"
                         iconRight={<RxChevronRight />}
+                        onClick={handleExpersysClick}
                       >
                         Ver servicio
                       </Button>

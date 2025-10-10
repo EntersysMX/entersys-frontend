@@ -2,10 +2,27 @@
 
 import { Button } from "@relume_io/relume-ui";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import AnimatedSection from "../../AnimatedSection";
 import { motion } from "framer-motion";
+import { analyticsService } from "../../../services/analytics";
 
 export function Header5({ colorScheme = 4, ...props }) {
+  const navigate = useNavigate();
+
+  const handleAgendarDemoClick = () => {
+    // Track evento en Analytics
+    analyticsService.trackEvent('CTA', 'Button Click', 'Agendar Demo - Hero', 'inicio');
+    // Navegar
+    navigate('/contacto#formulario-contacto');
+  };
+
+  const handleConocerMasClick = () => {
+    // Track evento en Analytics
+    analyticsService.trackEvent('CTA', 'Button Click', 'Conocer Más - Hero', 'inicio');
+    // Navegar
+    navigate('/nosotros#origen');
+  };
   return (
     <section id="relume" className={`relative mt-16 md:mt-18 color-scheme-${colorScheme}`} {...props}>
       <div className="relative z-10 container px-[5%]">
@@ -31,11 +48,13 @@ export function Header5({ colorScheme = 4, ...props }) {
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.2 }}
                   title="Agendar demo"
+                  onClick={handleAgendarDemoClick}
                 >
                   Agendar demo
                 </motion.button>
                 <Button
                   title="Conocer más"
+                  onClick={handleConocerMasClick}
                 >
                   Conocer más
                 </Button>

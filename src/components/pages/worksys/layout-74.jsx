@@ -4,7 +4,7 @@ import React from "react";
 
 export function Layout74() {
   return (
-    <section id="relume" className="relative px-[5%] py-16 md:py-24 lg:py-28">
+    <section id="operacion-eficiente" className="relative px-[5%] py-16 md:py-24 lg:py-28">
       <div className="relative z-10 container">
         <div className="grid grid-cols-1 items-start gap-5 md:grid-cols-2 md:gap-x-12 lg:gap-x-20">
           <h3 className="text-4xl leading-[1.2] font-bold text-text-alternative md:text-5xl lg:text-6xl">

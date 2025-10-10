@@ -3,11 +3,29 @@
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { RxChevronRight } from "react-icons/rx";
 import AnimatedSection, { AnimatedStaggerList, AnimatedStaggerItem } from "../../AnimatedSection";
 import { motion } from "framer-motion";
+import { analyticsService } from "../../../services/analytics";
 
 export function Layout394({ colorScheme = 2, ...props }) {
+  const navigate = useNavigate();
+
+  const handleComprobarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Comprobar Eficiencia', 'inicio-diferenciadores');
+    navigate('/worksys#casos-exito');
+  };
+
+  const handleSistemasClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Quiero Estos Sistemas', 'inicio-diferenciadores');
+    navigate('/worksys#operacion-eficiente');
+  };
+
+  const handleEstandarizarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Estandarizar Empresa', 'inicio-diferenciadores');
+    navigate('/expersys#auditoria-respaldo');
+  };
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -54,6 +72,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
                         variant="link"
                         size="link"
                         iconRight={<RxChevronRight />}
+                        onClick={handleComprobarClick}
                       >
                         Comprobar
                       </Button>
@@ -95,6 +114,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
                         variant="link"
                         size="link"
                         iconRight={<RxChevronRight />}
+                        onClick={handleSistemasClick}
                       >
                         Quiero estos sistemas
                       </Button>
@@ -138,6 +158,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
                         variant="link"
                         size="link"
                         iconRight={<RxChevronRight />}
+                        onClick={handleEstandarizarClick}
                       >
                         Estandarizar empresa
                       </Button>

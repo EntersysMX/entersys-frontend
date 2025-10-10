@@ -32,18 +32,21 @@ export function Portfolio9() {
             </div>
             <div className="px-5 py-6 sm:px-6">
               <h3 className="heading-h5 mb-2 font-bold">
-                <a href="#">Manufactura automotriz</a>
+                <a href="#">FEMSA</a>
               </h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros.
+                714 proyectos de alto riesgo ejecutados sin accidentes en 225
+                unidades operativas.
               </p>
               <div className="mt-3 flex flex-wrap gap-2 md:mt-4">
                 <Badge>
-                  <a href="#">Eficiencia</a>
+                  <a href="#">Worksys</a>
                 </Badge>
                 <Badge>
-                  <a href="#">Digitalización</a>
+                  <a href="#">Smartsheets</a>
+                </Badge>
+                <Badge>
+                  <a href="#">Seguridad</a>
                 </Badge>
                 <Badge>
                   <a href="#">Automatización</a>
@@ -72,21 +75,24 @@ export function Portfolio9() {
             </div>
             <div className="px-5 py-6 sm:px-6">
               <h3 className="heading-h5 mb-2 font-bold">
-                <a href="#">Retail tecnológico</a>
+                <a href="#">Productos de Maíz Ochoa</a>
               </h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros.
+                Del 56% al 95% de cumplimiento en calidad. Dashboards en tiempo
+                real que funcionan.
               </p>
               <div className="mt-3 flex flex-wrap gap-2 md:mt-4">
                 <Badge>
-                  <a href="#">Cumplimiento</a>
+                  <a href="#">Worksys</a>
                 </Badge>
                 <Badge>
-                  <a href="#">Gestión</a>
+                  <a href="#">Smartsheets</a>
                 </Badge>
                 <Badge>
-                  <a href="#">Transformación</a>
+                  <a href="#">Gestión de calidad</a>
+                </Badge>
+                <Badge>
+                  <a href="#">Dashboards</a>
                 </Badge>
               </div>
               <Button
@@ -112,21 +118,24 @@ export function Portfolio9() {
             </div>
             <div className="px-5 py-6 sm:px-6">
               <h3 className="heading-h5 mb-2 font-bold">
-                <a href="#">Servicios financieros</a>
+                <a href="#">QHSE</a>
               </h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros.
+                De 11 a 253 millones de pesos en 6 años. Crecimiento del 2,000%
+                con ISO 9001.
               </p>
               <div className="mt-3 flex flex-wrap gap-2 md:mt-4">
                 <Badge>
-                  <a href="#">Inteligencia</a>
+                  <a href="#">Worksys</a>
                 </Badge>
                 <Badge>
-                  <a href="#">Datos</a>
+                  <a href="#">Expersys</a>
                 </Badge>
                 <Badge>
-                  <a href="#">Estrategia</a>
+                  <a href="#">ISO 9001</a>
+                </Badge>
+                <Badge>
+                  <a href="#">Automatización</a>
                 </Badge>
               </div>
               <Button
@@ -152,21 +161,24 @@ export function Portfolio9() {
             </div>
             <div className="px-5 py-6 sm:px-6">
               <h3 className="heading-h5 mb-2 font-bold">
-                <a href="#">Project name here</a>
+                <a href="#">Raxya</a>
               </h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros.
+                24% de crecimiento en 3 años con plan estratégico y tableros
+                digitales.
               </p>
               <div className="mt-3 flex flex-wrap gap-2 md:mt-4">
                 <Badge>
-                  <a href="#">Tag one</a>
+                  <a href="#">Worksys</a>
                 </Badge>
                 <Badge>
-                  <a href="#">Tag two</a>
+                  <a href="#">Hoshin Kanri</a>
                 </Badge>
                 <Badge>
-                  <a href="#">Tag three</a>
+                  <a href="#">Planeación Estratégica</a>
+                </Badge>
+                <Badge>
+                  <a href="#">Dashboards</a>
                 </Badge>
               </div>
               <Button

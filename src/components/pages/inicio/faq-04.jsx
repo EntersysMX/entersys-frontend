@@ -9,9 +9,17 @@ import {
 } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { RxPlus } from "react-icons/rx";
+import { analyticsService } from "../../../services/analytics";
 
 export function Faq04({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleContactarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Contactar - FAQ', 'inicio-faq');
+    navigate('/contacto#formulario-contacto');
+  };
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container max-w-lg">
@@ -118,7 +126,7 @@ export function Faq04({ colorScheme = 1, ...props }) {
             Nuestro equipo está listo para resolver todas tus dudas
           </p>
           <div className="mt-6 md:mt-8">
-            <Button title="Contactar">
+            <Button title="Contactar" onClick={handleContactarClick}>
               Contactar
             </Button>
           </div>

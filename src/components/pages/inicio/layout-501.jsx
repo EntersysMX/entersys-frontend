@@ -2,9 +2,12 @@
 
 import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from "@relume_io/relume-ui";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { RxChevronRight } from "react-icons/rx";
+import { analyticsService } from "../../../services/analytics";
 
 export function Layout501({ colorScheme = 2, ...props }) {
+  const navigate = useNavigate();
   const { tagline, heading, description, buttons, defaultTabValue, tabs } = {
     ...Layout501Defaults,
     ...props,
@@ -51,6 +54,19 @@ export function Layout501({ colorScheme = 2, ...props }) {
 }
 
 const Feature = (feature) => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = (button) => {
+    // Track evento en Analytics
+    if (button.analyticsLabel) {
+      analyticsService.trackEvent('CTA', 'Button Click', button.analyticsLabel, 'inicio-tecnologias');
+    }
+    // Ejecutar función onClick si existe
+    if (button.onClick) {
+      button.onClick(navigate);
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 gap-y-12 md:grid-cols-2 md:items-center md:gap-x-12 lg:gap-x-20">
       <div>
@@ -61,7 +77,7 @@ const Feature = (feature) => {
         <p>{feature.description}</p>
         <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
           {feature.buttons.map((button, index) => (
-            <Button key={index} {...button}>
+            <Button key={index} {...button} onClick={() => handleButtonClick(button)}>
               {button.title}
             </Button>
           ))}
@@ -91,7 +107,11 @@ const Layout501Defaults = {
           heading: "Plataforma líder en gestión de proyectos",
           description:
             "Mejoramos tu operación con Smartsheet, una plataforma que conocemos bien. Se destaca por ser flexible, permitiendo crear portales digitales y reportes sin límites. Está diseñada para adaptarse a las necesidades de tu negocio y hacer cada proceso más eficiente.",
-          buttons: [{ title: "Solicitar una demo" }],
+          buttons: [{
+            title: "Solicitar una demo",
+            analyticsLabel: "Solicitar Demo - Smartsheet",
+            onClick: (navigate) => navigate('/worksys#procesos-manuales')
+          }],
           image: {
             src: "/imagenes/inicio/tecnologia_smartsheets_inicio.webp",
             alt: "Smartsheet demo",
@@ -125,7 +145,11 @@ const Layout501Defaults = {
           heading: "Automatización: la siguiente frontera",
           description:
             "Implementamos soluciones para automatizar tareas con agentes de IA y LLM para múltiples propósitos, así como el procesamiento de datos utilizando modelos entrenados, optimizando la eficiencia y mejorando la productividad en diversos sectores.",
-          buttons: [{ title: "Más información" }],
+          buttons: [{
+            title: "Más información",
+            analyticsLabel: "Más Información - IA",
+            onClick: (navigate) => navigate('/worksys#procesos-manuales')
+          }],
           image: {
             src: "/imagenes/inicio/tecnologia_ia_inicio.webp",
             alt: "Inteligencia Artificial",

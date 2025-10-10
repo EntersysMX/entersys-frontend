@@ -12,13 +12,13 @@ export function Cta39() {
           <div className="flex flex-col justify-center p-8 md:p-12">
             <div>
               <h2 className="heading-h2 mb-5 font-bold md:mb-6">
-                ¿Tu empresa necesita crecer sin perder el control?
+                ¿Tu operación maneja riesgos sin control total?
               </h2>
               <p className="text-medium">
-                En semanas, no en meses, construimos el sistema operativo que tu
-                negocio necesita para escalar. Automatizamos lo que ya haces
-                bien y lo convertimos en un proceso replicable que funciona sin
-                ti.
+                En semanas, no en meses, digitalizamos lo complejo y lo
+                convertimos en un sistema que funciona sin excepciones.
+                Automatizamos lo que ya haces bien y eliminamos el margen de
+                error.
               </p>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">

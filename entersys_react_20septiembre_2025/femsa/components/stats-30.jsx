@@ -10,14 +10,14 @@ export function Stats30() {
         <div className="mb-12 grid grid-cols-1 gap-y-5 md:mb-18 md:grid-cols-2 md:gap-x-12 lg:mb-20 lg:gap-x-20">
           <div>
             <h3 className="heading-h3 font-bold">
-              Crecimiento exponencial con operación bajo control
+              Cero accidentes a escala nacional
             </h3>
           </div>
           <div>
             <p className="text-medium">
-              La estandarización operativa no solo eliminó el caos interno,
-              convirtió a QHSE en una empresa escalable capaz de multiplicar su
-              facturación sin multiplicar la complejidad.
+              La estandarización operativa no solo eliminó el riesgo
+              administrativo, convirtió la seguridad industrial en un proceso
+              medible, trazable y replicable en toda la operación de FEMSA.
             </p>
           </div>
         </div>
@@ -25,12 +25,14 @@ export function Stats30() {
           <Fragment>
             <Card className="p-8 first:flex first:flex-col first:md:col-span-2 first:md:row-span-1 first:lg:col-span-1 first:lg:row-span-2">
               <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
-                2000%
+                714 proyectos
               </p>
               <h3 className="heading-h6 font-bold mt-auto">
-                Incremento en facturación
+                Proyectos ejecutados
               </h3>
-              <p className="mt-2">Crecimiento en facturación durante 6 años</p>
+              <p className="mt-2">
+                Ejecutados sin ningún indicador de accidentes
+              </p>
             </Card>
           </Fragment>
           <Fragment>
@@ -45,23 +47,23 @@ export function Stats30() {
           <Fragment>
             <Card className="p-8">
               <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
-                2000%
+                714 proyectos
               </p>
-              <h3 className="heading-h6 font-bold">
-                Incremento en facturación
-              </h3>
-              <p className="mt-2">Crecimiento en facturación durante 6 años</p>
+              <h3 className="heading-h6 font-bold">Proyectos ejecutados</h3>
+              <p className="mt-2">
+                Ejecutados sin ningún indicador de accidentes
+              </p>
             </Card>
           </Fragment>
           <Fragment>
             <Card className="p-8 [&:nth-last-child(2)]:order-last [&:nth-last-child(2)]:md:order-none">
               <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
-                2000%
+                714 proyectos
               </p>
-              <h3 className="heading-h6 font-bold">
-                Incremento en facturación
-              </h3>
-              <p className="mt-2">Crecimiento en facturación durante 6 años</p>
+              <h3 className="heading-h6 font-bold">Proyectos ejecutados</h3>
+              <p className="mt-2">
+                Ejecutados sin ningún indicador de accidentes
+              </p>
             </Card>
           </Fragment>
           <Fragment>

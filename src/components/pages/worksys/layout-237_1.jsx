@@ -7,7 +7,7 @@ import { MdAssessment, MdScience, MdInventory } from 'react-icons/md';
 
 export function Layout2371({ colorScheme = 1, ...props }) {
   return (
-    <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
+    <section id="casos-exito" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
         <div className="flex flex-col items-center">
           <div className="rb-12 mb-12 w-full max-w-lg text-center md:mb-18 lg:mb-20">

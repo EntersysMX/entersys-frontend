@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from "@relume_io/relume-ui";
 import type { ButtonProps } from "@relume_io/relume-ui";
 import { RxChevronRight } from "react-icons/rx";
