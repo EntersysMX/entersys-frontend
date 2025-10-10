@@ -10,6 +10,7 @@ import "../../../styles/header.css";
 const useRelume = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const [isClientesDropdownOpen, setIsClientesDropdownOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width: 991px)");
 
   const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
@@ -25,12 +26,25 @@ const useRelume = () => {
     !isMobile && setIsServicesDropdownOpen(false);
   };
 
+  // Clientes dropdown handlers
+  const openOnMobileClientesDropdownMenu = () => {
+    setIsClientesDropdownOpen((prev) => !prev);
+  };
+  const openOnDesktopClientesDropdownMenu = () => {
+    !isMobile && setIsClientesDropdownOpen(true);
+  };
+  const closeOnDesktopClientesDropdownMenu = () => {
+    !isMobile && setIsClientesDropdownOpen(false);
+  };
+
   const animateMobileMenu = isMobileMenuOpen ? "open" : "close";
   const animateMobileMenuButtonSpan = isMobileMenuOpen
     ? ["open", "rotatePhase"]
     : "closed";
   const animateServicesDropdownMenu = isServicesDropdownOpen ? "open" : "close";
   const animateServicesDropdownMenuIcon = isServicesDropdownOpen ? "rotated" : "initial";
+  const animateClientesDropdownMenu = isClientesDropdownOpen ? "open" : "close";
+  const animateClientesDropdownMenuIcon = isClientesDropdownOpen ? "rotated" : "initial";
 
   return {
     toggleMobileMenu,
@@ -40,6 +54,12 @@ const useRelume = () => {
     openOnMobileServicesDropdownMenu,
     animateServicesDropdownMenu,
     animateServicesDropdownMenuIcon,
+    // Clientes dropdown
+    openOnDesktopClientesDropdownMenu,
+    closeOnDesktopClientesDropdownMenu,
+    openOnMobileClientesDropdownMenu,
+    animateClientesDropdownMenu,
+    animateClientesDropdownMenuIcon,
     // Mobile menu
     animateMobileMenu,
     animateMobileMenuButtonSpan,
@@ -59,6 +79,10 @@ const Header = ({ colorScheme = 1, ...props }) => {
 
   const isServicesActive = () => {
     return location.pathname === '/worksys' || location.pathname === '/expersys';
+  };
+
+  const isClientesActive = () => {
+    return location.pathname === '/clientes' || location.pathname.startsWith('/clientes/');
   };
 
   return (
@@ -221,14 +245,124 @@ const Header = ({ colorScheme = 1, ...props }) => {
                   </motion.nav>
                 </AnimatePresence>
               </div>
-              <Link
-                to="/clientes"
-                className={`block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 transition-colors ${
-                  isActive('/clientes') ? 'text-[#009CA6] font-semibold' : 'text-black hover:text-[#009CA6]'
-                }`}
+              <div
+                onMouseEnter={useActive.openOnDesktopClientesDropdownMenu}
+                onMouseLeave={useActive.closeOnDesktopClientesDropdownMenu}
               >
-                Clientes
-              </Link>
+                <div className={`header-dropdown-button flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base transition-colors ${
+                  isClientesActive() ? 'text-[#009CA6] font-semibold' : 'text-black hover:text-[#009CA6]'
+                }`}>
+                  <span className="flex-1">Clientes</span>
+                  <button
+                    onClick={useActive.openOnMobileClientesDropdownMenu}
+                    className="lg:hidden"
+                  >
+                    <AnimatePresence>
+                      <motion.div
+                        animate={useActive.animateClientesDropdownMenuIcon}
+                        variants={{
+                          rotated: { rotate: 180 },
+                          initial: { rotate: 0 },
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <RxChevronDown />
+                      </motion.div>
+                    </AnimatePresence>
+                  </button>
+                  <div className="hidden lg:block">
+                    <AnimatePresence>
+                      <motion.div
+                        animate={useActive.animateClientesDropdownMenuIcon}
+                        variants={{
+                          rotated: { rotate: 180 },
+                          initial: { rotate: 0 },
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <RxChevronDown />
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                </div>
+                <AnimatePresence>
+                  <motion.nav
+                    animate={useActive.animateClientesDropdownMenu}
+                    initial="close"
+                    exit="close"
+                    variants={{
+                      open: {
+                        visibility: "visible",
+                        opacity: "var(--opacity-open, 100%)",
+                        y: 0,
+                        display: "block",
+                      },
+                      close: {
+                        visibility: "hidden",
+                        opacity: "var(--opacity-close, 0)",
+                        y: "var(--y-close, 0%)",
+                        display: "none",
+                      },
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="z-50 bg-white lg:absolute lg:w-80 lg:border lg:border-neutral-300 lg:p-6 lg:[--y-close:25%]"
+                  >
+                    <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-2 py-3 md:py-3 lg:gap-y-4 lg:py-0">
+                      <Link
+                        to="/clientes/qhse"
+                        className={`block py-2 lg:py-1 transition-colors ${
+                          location.pathname === '/clientes/qhse' ? 'text-[#009CA6]' : 'text-black hover:text-[#009CA6]'
+                        }`}
+                      >
+                        <div className="flex flex-col items-start justify-center">
+                          <p className={`text-md font-semibold lg:text-base ${
+                            location.pathname === '/clientes/qhse' ? 'text-[#009CA6]' : 'text-black'
+                          }`}>
+                            QHSE
+                          </p>
+                          <p className="hidden text-sm md:block text-gray-600">
+                            De 11 a 253 millones. Crecimiento 2,000% con ISO 9001
+                          </p>
+                        </div>
+                      </Link>
+                      <Link
+                        to="/clientes/femsa"
+                        className={`block py-2 lg:py-1 transition-colors ${
+                          location.pathname === '/clientes/femsa' ? 'text-[#009CA6]' : 'text-black hover:text-[#009CA6]'
+                        }`}
+                      >
+                        <div className="flex flex-col items-start justify-center">
+                          <p className={`text-md font-semibold lg:text-base ${
+                            location.pathname === '/clientes/femsa' ? 'text-[#009CA6]' : 'text-black'
+                          }`}>
+                            FEMSA
+                          </p>
+                          <p className="hidden text-sm md:block text-gray-600">
+                            714 proyectos sin accidentes en 225 unidades
+                          </p>
+                        </div>
+                      </Link>
+                      <Link
+                        to="/clientes/ochoa"
+                        className={`block py-2 lg:py-1 transition-colors ${
+                          location.pathname === '/clientes/ochoa' ? 'text-[#009CA6]' : 'text-black hover:text-[#009CA6]'
+                        }`}
+                      >
+                        <div className="flex flex-col items-start justify-center">
+                          <p className={`text-md font-semibold lg:text-base ${
+                            location.pathname === '/clientes/ochoa' ? 'text-[#009CA6]' : 'text-black'
+                          }`}>
+                            Productos de Maíz Ochoa
+                          </p>
+                          <p className="hidden text-sm md:block text-gray-600">
+                            Del 56% al 95% de cumplimiento en calidad
+                          </p>
+                        </div>
+                      </Link>
+                    </div>
+                  </motion.nav>
+                </AnimatePresence>
+              </div>
             </nav>
             <div className="mt-6 flex flex-col gap-4 lg:mt-0 lg:ml-4 lg:flex-row lg:items-center">
               <Link to="/contacto">

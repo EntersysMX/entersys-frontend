@@ -10,6 +10,8 @@ import Nosotros from './pages/Nosotros'
 import Awalab from './pages/Awalab'
 import Expersys from './pages/Expersys'
 import Worksys from './pages/Worksys'
+import Qhse from './pages/Qhse'
+import Femsa from './pages/Femsa'
 import WhatsAppFloatButton from './components/WhatsAppFloatButton'
 import { analyticsService } from './services/analytics'
 
@@ -34,6 +36,8 @@ function App() {
           <Route path="/awalab" element={<Awalab />} />
           <Route path="/expersys" element={<Expersys />} />
           <Route path="/worksys" element={<Worksys />} />
+          <Route path="/clientes/qhse" element={<Qhse />} />
+          <Route path="/clientes/femsa" element={<Femsa />} />
         </Routes>
       </PageTransition>
 
