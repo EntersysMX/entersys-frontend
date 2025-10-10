@@ -252,7 +252,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
                 <div className={`header-dropdown-button flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base transition-colors ${
                   isClientesActive() ? 'text-[#009CA6] font-semibold' : 'text-black hover:text-[#009CA6]'
                 }`}>
-                  <span className="flex-1">Clientes</span>
+                  <Link to="/clientes" className="flex-1">Clientes</Link>
                   <button
                     onClick={useActive.openOnMobileClientesDropdownMenu}
                     className="lg:hidden"

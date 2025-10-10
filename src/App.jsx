@@ -12,6 +12,7 @@ import Expersys from './pages/Expersys'
 import Worksys from './pages/Worksys'
 import Qhse from './pages/Qhse'
 import Femsa from './pages/Femsa'
+import Ochoa from './pages/Ochoa'
 import WhatsAppFloatButton from './components/WhatsAppFloatButton'
 import { analyticsService } from './services/analytics'
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/worksys" element={<Worksys />} />
           <Route path="/clientes/qhse" element={<Qhse />} />
           <Route path="/clientes/femsa" element={<Femsa />} />
+          <Route path="/clientes/ochoa" element={<Ochoa />} />
         </Routes>
       </PageTransition>
 
