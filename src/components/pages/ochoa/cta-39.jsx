@@ -27,7 +27,7 @@ export function Cta39() {
           </div>
           <div className="flex items-center justify-center">
             <img
-              src="/images/ochoa/banner_meeting_worksys.webp"
+              src="/imagenes/ochoa/banner_meeting_worksys.webp"
               className="w-full object-cover"
               alt="Digitaliza tu producción con Worksys"
             />

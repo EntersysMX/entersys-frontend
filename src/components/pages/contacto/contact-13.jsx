@@ -73,7 +73,7 @@ export function Contact13({ colorScheme = 3, ...props }) {
           </div>
           <div>
             <img
-              src="/images/contacto/modern_office_workspace.webp"
+              src="/imagenes/contacto/modern_office_workspace.webp"
               alt="Oficina moderna Entersys - Espacio de trabajo profesional"
               className="size-full rounded-image object-cover"
             />

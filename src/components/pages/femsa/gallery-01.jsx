@@ -18,14 +18,14 @@ export function Gallery1() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="/images/femsa/SP_DASH1_FEMSA.webp"
+                src="/imagenes/femsa/SP_DASH1_FEMSA.webp"
                 alt="Dashboard de seguridad FEMSA"
                 className="size-full object-cover"
               />
             </div>
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="/images/femsa/SP_DASH2_FEMSA.webp"
+                src="/imagenes/femsa/SP_DASH2_FEMSA.webp"
                 alt="Gestión de contratistas FEMSA"
                 className="size-full object-cover"
               />
@@ -33,7 +33,7 @@ export function Gallery1() {
           </div>
           <div className="aspect-[21/9] overflow-hidden rounded-lg">
             <img
-              src="/images/femsa/SP_DASH3_FEMSA.webp"
+              src="/imagenes/femsa/SP_DASH3_FEMSA.webp"
               alt="Vista general del sistema FEMSA"
               className="size-full object-cover"
             />
@@ -41,14 +41,14 @@ export function Gallery1() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="/images/femsa/SP_DASH4_FEMSA.webp"
+                src="/imagenes/femsa/SP_DASH4_FEMSA.webp"
                 alt="Análisis de riesgos FEMSA"
                 className="size-full object-cover"
               />
             </div>
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="/images/femsa/SP_DASH5_FEMSA.webp"
+                src="/imagenes/femsa/SP_DASH5_FEMSA.webp"
                 alt="Certificaciones y cumplimiento FEMSA"
                 className="size-full object-cover"
               />

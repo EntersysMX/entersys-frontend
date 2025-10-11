@@ -39,7 +39,7 @@ export function Stats30() {
             <Card className="p-8">
               <div className="mb-4 overflow-hidden rounded-lg">
                 <img
-                  src="/images/femsa/STATS_COVERAGE_FEMSA.webp"
+                  src="/imagenes/femsa/STATS_COVERAGE_FEMSA.webp"
                   alt="Cobertura nacional FEMSA"
                   className="w-full h-auto object-cover"
                 />
@@ -74,7 +74,7 @@ export function Stats30() {
             <Card className="p-8 last:order-first last:md:order-none">
               <div className="mb-4 overflow-hidden rounded-lg">
                 <img
-                  src="/images/femsa/STATS_DIGITAL_FEMSA.webp"
+                  src="/imagenes/femsa/STATS_DIGITAL_FEMSA.webp"
                   alt="Digitalización FEMSA"
                   className="w-full h-auto object-cover"
                 />

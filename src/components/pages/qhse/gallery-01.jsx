@@ -18,14 +18,14 @@ export function Gallery1() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="/images/qhse/sp_dashboard_qhse.webp"
+                src="/imagenes/qhse/sp_dashboard_qhse.webp"
                 alt="Dashboard operativo QHSE"
                 className="size-full object-cover"
               />
             </div>
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="/images/qhse/sp_control_qhse.webp"
+                src="/imagenes/qhse/sp_control_qhse.webp"
                 alt="Control de procesos"
                 className="size-full object-cover"
               />
@@ -33,7 +33,7 @@ export function Gallery1() {
           </div>
           <div className="aspect-[21/9] overflow-hidden rounded-lg">
             <img
-              src="/images/qhse/sp_smartsheets_qhse.webp"
+              src="/imagenes/qhse/sp_smartsheets_qhse.webp"
               alt="Sistema Smartsheets QHSE"
               className="size-full object-cover"
             />
@@ -41,14 +41,14 @@ export function Gallery1() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="/images/qhse/sp_ISO9001_qhse.webp"
+                src="/imagenes/qhse/sp_ISO9001_qhse.webp"
                 alt="Certificación ISO 9001"
                 className="size-full object-cover"
               />
             </div>
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="/images/qhse/sp_dashboard_qhse.webp"
+                src="/imagenes/qhse/sp_dashboard_qhse.webp"
                 alt="Dashboard de seguimiento"
                 className="size-full object-cover"
               />

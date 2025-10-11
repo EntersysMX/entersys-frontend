@@ -20,7 +20,7 @@ export function Contact26() {
           <div className="flex flex-col items-center justify-start text-center">
             <div className="mb-6 aspect-[3/2] md:mb-8">
               <img
-                src="/images/contacto/cdmx.jpg"
+                src="/imagenes/contacto/cdmx.jpg"
                 className="h-full w-full rounded-image object-cover"
                 alt="Ciudad de México - Oficina Entersys CDMX | Skyline Paseo de la Reforma"
               />
@@ -51,7 +51,7 @@ export function Contact26() {
           <div className="flex flex-col items-center justify-start text-center">
             <div className="mb-6 aspect-[3/2] md:mb-8">
               <img
-                src="/images/contacto/monterrey_skyline.webp"
+                src="/imagenes/contacto/monterrey_skyline.webp"
                 className="h-full w-full rounded-image object-cover"
                 alt="Monterrey - Oficina Entersys MTY | Skyline Cerro de la Silla"
               />

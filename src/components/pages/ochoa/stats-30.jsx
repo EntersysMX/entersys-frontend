@@ -37,7 +37,7 @@ export function Stats30() {
             <Card className="p-8">
               <div className="mb-4 overflow-hidden rounded-lg">
                 <img
-                  src="/images/ochoa/stats_format_ochoa.webp"
+                  src="/imagenes/ochoa/stats_format_ochoa.webp"
                   alt="Formatos digitales Ochoa"
                   className="w-full h-auto object-cover"
                 />
@@ -72,7 +72,7 @@ export function Stats30() {
             <Card className="p-8 last:order-first last:md:order-none">
               <div className="mb-4 overflow-hidden rounded-lg">
                 <img
-                  src="/images/ochoa/stats_growth_ochoa.webp"
+                  src="/imagenes/ochoa/stats_growth_ochoa.webp"
                   alt="Crecimiento Ochoa"
                   className="w-full h-auto object-cover"
                 />

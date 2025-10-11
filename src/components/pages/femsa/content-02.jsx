@@ -9,7 +9,7 @@ export function Content2() {
         <div className="grid grid-cols-1 items-center gap-12 md:gap-16 lg:grid-cols-2 lg:gap-20">
           <div>
             <img
-              src="/images/femsa/case_image_femsa.webp"
+              src="/imagenes/femsa/case_image_femsa.webp"
               alt="Solución FEMSA implementada"
               className="w-full rounded-lg object-cover"
             />

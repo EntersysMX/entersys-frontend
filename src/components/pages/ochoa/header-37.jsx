@@ -8,7 +8,7 @@ export function Header37() {
     <section className="grid grid-cols-1 items-center gap-y-16 pt-16 md:pt-24 lg:grid-cols-2 lg:pt-0 color-scheme-2">
       <div className="order-2 lg:order-1">
         <img
-          src="/images/ochoa/banner_qa_ochoa.webp"
+          src="/imagenes/ochoa/banner_qa_ochoa.webp"
           alt="Ochoa - Control de calidad en producción de alimentos"
           className="w-full object-cover lg:h-screen lg:max-h-[60rem]"
         />
