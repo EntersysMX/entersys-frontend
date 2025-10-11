@@ -3,9 +3,27 @@
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { RxChevronRight } from "react-icons/rx";
+import { analyticsService } from "../../../services/analytics";
 
 export function Layout141({ colorScheme = 2, ...props }) {
+  const navigate = useNavigate();
+
+  const handleConocerClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Conocer - Nosotros Origen', 'nosotros');
+    navigate('/nosotros#origen');
+    // Scroll suave a la sección
+    setTimeout(() => {
+      document.getElementById('origen')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
+  const handleExplorarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Explorar - Nosotros', 'nosotros');
+    navigate('/worksys');
+  };
+
   return (
     <section id="origen" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -23,7 +41,7 @@ export function Layout141({ colorScheme = 2, ...props }) {
                 funcionar como un reloj suizo.
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-4 md:mt-8">
-                <Button title="Conocer">
+                <Button title="Conocer" onClick={handleConocerClick}>
                   Conocer
                 </Button>
                 <Button
@@ -31,6 +49,7 @@ export function Layout141({ colorScheme = 2, ...props }) {
                   variant="link"
                   size="link"
                   iconRight={<RxChevronRight />}
+                  onClick={handleExplorarClick}
                 >
                   Explorar
                 </Button>
@@ -38,10 +57,10 @@ export function Layout141({ colorScheme = 2, ...props }) {
             </div>
           </div>
         </div>
-        <div>
+        <div className="w-full mx-auto max-w-5xl">
           <img
             src="/imagenes/nosotros/banner_leaders_entersys_nosotros.webp"
-            className="size-full rounded-image object-cover"
+            className="w-full rounded-image object-cover"
             alt="Entersys equipo de liderazgo"
           />
         </div>

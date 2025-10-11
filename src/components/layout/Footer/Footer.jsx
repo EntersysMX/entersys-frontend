@@ -49,19 +49,34 @@ const Footer = ({ colorScheme = 1, ...props }) => {
                 </a>
               </div>
               <div className="grid grid-flow-col grid-cols-[max-content] items-start justify-start gap-x-3">
-                <a href="#">
+                <a
+                  href="https://www.facebook.com/entersysmx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                >
                   <BiLogoFacebookCircle className="size-6" />
                 </a>
-                <a href="#">
+                <a href="#" aria-label="Instagram">
                   <BiLogoInstagram className="size-6" />
                 </a>
-                <a href="#">
+                <a href="#" aria-label="X (Twitter)">
                   <FaXTwitter className="size-6 p-0.5" />
                 </a>
-                <a href="#">
+                <a
+                  href="https://www.linkedin.com/company/entersysmx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                >
                   <BiLogoLinkedinSquare className="size-6" />
                 </a>
-                <a href="#">
+                <a
+                  href="https://www.youtube.com/@EntersysMX"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="YouTube"
+                >
                   <BiLogoYoutube className="size-6" />
                 </a>
               </div>

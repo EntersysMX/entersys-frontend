@@ -46,8 +46,59 @@ export function Layout421({ colorScheme = 1, ...props }) {
           </div>
         </div>
 
-        {/* Collage de imágenes superpuestas - Todas del mismo tamaño */}
-        <div className="relative h-[450px] md:h-[500px] lg:h-[550px] max-w-7xl mx-auto">
+        {/* Mobile: Collage adaptado similar a desktop */}
+        <div className="md:hidden relative h-[550px] max-w-md mx-auto">
+          {/* Imagen 1 - Izquierda superior (Procesos) */}
+          <motion.div
+            className="absolute left-[5%] top-[8%] w-[42%] z-30"
+            style={{ y: image1Y }}
+          >
+            <img
+              src="/imagenes/worksys/section_process_worksys.webp"
+              alt="Digitalización de procesos"
+              className="w-full h-auto object-cover rounded-md shadow-2xl"
+            />
+          </motion.div>
+
+          {/* Imagen 2 - Derecha superior (Cascade/IA) */}
+          <motion.div
+            className="absolute right-[3%] top-[12%] w-[45%] z-50"
+            style={{ y: image3Y }}
+          >
+            <img
+              src="/imagenes/worksys/section_cascade_worksys.webp"
+              alt="Inteligencia artificial"
+              className="w-full h-auto object-cover rounded-md shadow-2xl"
+            />
+          </motion.div>
+
+          {/* Imagen 3 - Centro (Dashboard) */}
+          <motion.div
+            className="absolute left-[15%] top-[38%] w-[48%] z-40"
+            style={{ y: image2Y }}
+          >
+            <img
+              src="/imagenes/worksys/section_dashboard_worksys.webp"
+              alt="Dashboards y analytics"
+              className="w-full h-auto object-cover rounded-md shadow-2xl"
+            />
+          </motion.div>
+
+          {/* Imagen 4 - Derecha inferior (Manual/Workspace) */}
+          <motion.div
+            className="absolute right-[8%] bottom-[5%] w-[40%] z-20"
+            style={{ y: image1Y }}
+          >
+            <img
+              src="/imagenes/worksys/section_manual_worksys.webp"
+              alt="Workspace digital"
+              className="w-full h-auto object-cover rounded-md shadow-2xl"
+            />
+          </motion.div>
+        </div>
+
+        {/* Desktop: Collage de imágenes superpuestas - Todas del mismo tamaño */}
+        <div className="hidden md:block relative h-[500px] lg:h-[550px] max-w-7xl mx-auto">
           {/* Imagen 1 - Izquierda inferior (documentos con notas) */}
           <motion.div
             className="absolute left-[2%] bottom-[12%] w-[28%] z-20"

@@ -21,11 +21,15 @@ export function Layout501({ colorScheme = 2, ...props }) {
           <h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">{heading}</h1>
           <p className="md:text-md">{description}</p>
           <div className="mt-6 flex items-center justify-center gap-x-4 md:mt-8">
-            {buttons.map((button, index) => (
-              <Button key={index} {...button}>
-                {button.title}
-              </Button>
-            ))}
+            {buttons.map((button, index) => {
+              // Extraer props personalizados que no deben pasarse al DOM
+              const { analyticsLabel, onClick: buttonOnClick, ...buttonProps } = button;
+              return (
+                <Button key={index} {...buttonProps} onClick={buttonOnClick}>
+                  {button.title}
+                </Button>
+              );
+            })}
           </div>
         </div>
         <Tabs defaultValue={defaultTabValue}>
@@ -76,11 +80,15 @@ const Feature = (feature) => {
         </h2>
         <p>{feature.description}</p>
         <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-          {feature.buttons.map((button, index) => (
-            <Button key={index} {...button} onClick={() => handleButtonClick(button)}>
-              {button.title}
-            </Button>
-          ))}
+          {feature.buttons.map((button, index) => {
+            // Extraer props personalizados que no deben pasarse al DOM
+            const { analyticsLabel, onClick: buttonOnClick, ...buttonProps } = button;
+            return (
+              <Button key={index} {...buttonProps} onClick={() => handleButtonClick(button)}>
+                {button.title}
+              </Button>
+            );
+          })}
         </div>
       </div>
       <div>
@@ -128,7 +136,11 @@ const Layout501Defaults = {
           heading: "Aplicaciones sin programación",
           description:
             "Desarrollamos soluciones personalizadas y adaptadas a las necesidades específicas de nuestros clientes, especialmente aquellos sin un equipo de TI en su empresa, ya que la adopción de opciones no-code facilita su implementación y uso en el día a día de las operaciones empresariales.",
-          buttons: [{ title: "Conocer Smartsheets" }],
+          buttons: [{
+            title: "Conocer Smartsheets",
+            analyticsLabel: "Conocer Smartsheets - No Code",
+            onClick: (navigate) => navigate('/worksys#herramientas')
+          }],
           image: {
             src: "/imagenes/inicio/tecnologia_sin_codigo_inicio.webp",
             alt: "Aplicaciones No Code",

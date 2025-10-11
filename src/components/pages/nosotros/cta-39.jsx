@@ -2,10 +2,23 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
-
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Cta39({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleCasosClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Ver Casos - Nosotros CTA', 'nosotros-cta');
+    navigate('/clientes');
+  };
+
+  const handleContactarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Contactar - Nosotros CTA', 'nosotros-cta');
+    navigate('/contacto#formulario-contacto');
+  };
+
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -21,19 +34,19 @@ export function Cta39({ colorScheme = 1, ...props }) {
               </p>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <Button title="Casos">
+              <Button title="Casos" onClick={handleCasosClick}>
                 Casos
               </Button>
-              <Button title="Contactar">
+              <Button title="Contactar" onClick={handleContactarClick}>
                 Contactar
               </Button>
             </div>
           </div>
           <div className="flex items-center justify-center">
             <img
-              src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape4x3.svg"
-              className="w-full object-cover"
-              alt="Relume placeholder image"
+              src="/imagenes/nosotros/casos_exitio_Entersys.webp"
+              className="w-full object-cover rounded-r-image"
+              alt="Casos de éxito Entersys"
             />
           </div>
         </Card>

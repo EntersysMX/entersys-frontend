@@ -90,7 +90,7 @@ export function Header5({ colorScheme = 4, ...props }) {
           }}
         />
         {/* Large Desktop (≥1920px) - Using CSS media query for precise control */}
-        <style jsx>{`
+        <style>{`
           @media (min-width: 1920px) {
             .hero-large-bg {
               display: block !important;

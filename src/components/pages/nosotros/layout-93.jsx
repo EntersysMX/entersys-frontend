@@ -67,21 +67,18 @@ export function Layout93({ colorScheme = 2, ...props }) {
             </div>
           </div>
         </div>
-        <video
-          className="w-full rounded-image object-cover"
-          controls
-          playsInline
-        >
-          <source src="/imagenes/nosotros/nosotros_entersys_intro.mp4" type="video/mp4" />
-          <track
-            kind="subtitles"
-            src="/imagenes/nosotros/nosotros_entersys_intro.vtt"
-            srcLang="es"
-            label="Español"
-            default
-          />
-          Tu navegador no soporta el elemento de video.
-        </video>
+        <div className="w-full mx-auto max-w-5xl">
+          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+            <iframe
+              className="absolute top-0 left-0 w-full h-full rounded-image"
+              src="https://www.youtube.com/embed/IgAEUzW6Yis?cc_load_policy=1&cc_lang_pref=es-MX&hl=es-MX"
+              title="Video Entersys - Nuestra Historia"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
       </div>
     </section>
   );
