@@ -29,7 +29,7 @@ const WhatsAppFloatButton = () => {
 
   // Configuración WhatsApp
   const WHATSAPP_CONFIG = {
-    number: '5219841372369',
+    number: '5256256883662',
     message: 'Hola! Me interesa conocer más sobre EnterSys y cómo pueden ayudar a optimizar los procesos de mi empresa. ¿Podrían brindarme más información? Gracias!'
   };
 
