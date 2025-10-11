@@ -8,7 +8,6 @@ import {
   BiLogoLinkedinSquare,
   BiLogoYoutube,
 } from "react-icons/bi";
-import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = ({ colorScheme = 1, ...props }) => {
   return (
@@ -57,11 +56,13 @@ const Footer = ({ colorScheme = 1, ...props }) => {
                 >
                   <BiLogoFacebookCircle className="size-6" />
                 </a>
-                <a href="#" aria-label="Instagram">
+                <a
+                  href="https://www.instagram.com/entersysmx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                >
                   <BiLogoInstagram className="size-6" />
-                </a>
-                <a href="#" aria-label="X (Twitter)">
-                  <FaXTwitter className="size-6 p-0.5" />
                 </a>
                 <a
                   href="https://www.linkedin.com/company/entersysmx"
