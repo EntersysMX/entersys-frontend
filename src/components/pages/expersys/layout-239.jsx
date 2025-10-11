@@ -43,29 +43,43 @@ export function Layout239({ colorScheme = 1, ...props }) {
               <div className="rb-6 mb-6 md:mb-8">
                 <img
                   src="/imagenes/expersys/section_auditory_expersys.webp"
-                  alt="Grupo industrial nexus"
+                  alt="QHSE"
                   className="rounded-image"
                 />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
-                Grupo industrial nexus
+                QHSE
               </h3>
-              <p>Certificación ISO con procesos digitalizados y claros.</p>
+              <p>El caso más completo; desde adopción de metodologías, hasta la digitalización de procesos.</p>
             </div>
             <div className="flex w-full flex-col items-center text-center">
               <div className="rb-6 mb-6 md:mb-8">
                 <img
                   src="/imagenes/expersys/banner_meeting_worksys.webp"
-                  alt="Empresa logística mexicana"
+                  alt="FEMSA"
                   className="rounded-image"
                 />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
-                Empresa logística mexicana
+                FEMSA
               </h3>
               <p>
-                Cumplimiento normativo documentado que redujo riesgos en
-                auditorías externas.
+                Digitalización de gestión y documentación de contratistas para trabajos de alto riesgo
+              </p>
+            </div>
+             <div className="flex w-full flex-col items-center text-center">
+              <div className="rb-6 mb-6 md:mb-8">
+                <img
+                  src="/imagenes/expersys/banner_meeting_worksys.webp"
+                  alt="FEMSA"
+                  className="rounded-image"
+                />
+              </div>
+              <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
+                Productos de Maíz Ochoa
+              </h3>
+              <p>
+                Implementación de sistema de gestión de calidad en líneas productivas de alimentos.
               </p>
             </div>
           </div>

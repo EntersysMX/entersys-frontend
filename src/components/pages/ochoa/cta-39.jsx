@@ -12,12 +12,10 @@ export function Cta39() {
           <div className="flex flex-col justify-center p-8 md:p-12">
             <div>
               <h2 className="heading-h2 mb-5 font-bold md:mb-6">
-                ¿Operas a escala nacional sin estándares unificados?
+                ¿Tu producción opera sin control en tiempo real?
               </h2>
               <p className="text-medium">
-                Construimos sistemas operativos que garantizan cumplimiento al
-                100% en todas tus unidades. Digitaliza, estandariza y obtén
-                visibilidad total de tu operación en tiempo real.
+                En semanas, no en meses, digitalizamos lo que ya haces bien y lo convertimos en información que funciona. Automatizamos controles manuales y los transformamos en dashboards que responden en 3 segundos.
               </p>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">

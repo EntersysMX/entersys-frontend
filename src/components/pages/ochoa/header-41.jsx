@@ -23,17 +23,17 @@ export function Header41() {
               </button>
               <img
                 src="https://d22po4pjz3o32e.cloudfront.net/placeholder-video-thumbnail-landscape.svg"
-                alt="Video FEMSA"
+                alt="Video Productos de Maíz Ochoa"
                 className="size-full object-cover opacity-70"
               />
             </div>
           </div>
           <div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl mb-5 font-bold md:mb-6 leading-tight">
-              714 proyectos de alto riesgo ejecutados sin accidentes en 225 unidades operativas
+              Del 56% al 95% de cumplimiento en calidad: dashboards en tiempo real que funcionan
             </h1>
             <p className="text-lg md:text-xl mb-6 md:mb-8 leading-relaxed">
-              Implementación de Worksys para digitalización y estandarización de gestión de contratistas en trabajos de alto riesgo. Automatización de procesos de seguridad industrial con Smartsheets en toda la operación nacional de FEMSA.
+              Implementación de Worksys y Expersys para digitalización de análisis de calidad en líneas de producción de alimentos. Control de estándares en tiempo real con Smartsheets y metodología Daily Management.
             </p>
             <Button className="btn-primary">Entersyzar empresa</Button>
           </div>

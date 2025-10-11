@@ -9,6 +9,7 @@ import { RxChevronDown } from "react-icons/rx";
 const useRelume = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isClientesDropdownOpen, setIsClientesDropdownOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width: 991px)");
   const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
   const openOnMobileDropdownMenu = () => {
@@ -20,21 +21,37 @@ const useRelume = () => {
   const closeOnDesktopDropdownMenu = () => {
     !isMobile && setIsDropdownOpen(false);
   };
+  const openOnMobileClientesDropdownMenu = () => {
+    setIsClientesDropdownOpen((prev) => !prev);
+  };
+  const openOnDesktopClientesDropdownMenu = () => {
+    !isMobile && setIsClientesDropdownOpen(true);
+  };
+  const closeOnDesktopClientesDropdownMenu = () => {
+    !isMobile && setIsClientesDropdownOpen(false);
+  };
   const animateMobileMenu = isMobileMenuOpen ? "open" : "close";
   const animateMobileMenuButtonSpan = isMobileMenuOpen
     ? ["open", "rotatePhase"]
     : "closed";
   const animateDropdownMenu = isDropdownOpen ? "open" : "close";
   const animateDropdownMenuIcon = isDropdownOpen ? "rotated" : "initial";
+  const animateClientesDropdownMenu = isClientesDropdownOpen ? "open" : "close";
+  const animateClientesDropdownMenuIcon = isClientesDropdownOpen ? "rotated" : "initial";
   return {
     toggleMobileMenu,
     openOnDesktopDropdownMenu,
     closeOnDesktopDropdownMenu,
     openOnMobileDropdownMenu,
+    openOnDesktopClientesDropdownMenu,
+    closeOnDesktopClientesDropdownMenu,
+    openOnMobileClientesDropdownMenu,
     animateMobileMenu,
     animateMobileMenuButtonSpan,
     animateDropdownMenu,
     animateDropdownMenuIcon,
+    animateClientesDropdownMenu,
+    animateClientesDropdownMenuIcon,
   };
 };
 
@@ -211,12 +228,115 @@ export function Navbar11() {
                 </motion.nav>
               </AnimatePresence>
             </div>
-            <a
-              href="#"
-              className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2"
+            <div
+              onMouseEnter={useActive.openOnDesktopClientesDropdownMenu}
+              onMouseLeave={useActive.closeOnDesktopClientesDropdownMenu}
             >
-              Clientes
-            </a>
+              <button
+                className="flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base"
+                onClick={useActive.openOnMobileClientesDropdownMenu}
+              >
+                <span>Clientes</span>
+                <AnimatePresence>
+                  <motion.div
+                    animate={useActive.animateClientesDropdownMenuIcon}
+                    variants={{
+                      rotated: { rotate: 180 },
+                      initial: { rotate: 0 },
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <RxChevronDown />
+                  </motion.div>
+                </AnimatePresence>
+              </button>
+              <AnimatePresence>
+                <motion.nav
+                  animate={useActive.animateClientesDropdownMenu}
+                  initial="close"
+                  exit="close"
+                  variants={{
+                    open: {
+                      visibility: "visible",
+                      opacity: "var(--opacity-open, 100%)",
+                      y: 0,
+                      display: "block",
+                    },
+                    close: {
+                      visibility: "hidden",
+                      opacity: "var(--opacity-close, 0)",
+                      y: "var(--y-close, 0%)",
+                      display: "none",
+                    },
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="z-50 bg-background-primary lg:absolute lg:w-80 lg:border lg:border-border-primary lg:p-6 lg:[--y-close:25%]"
+                >
+                  <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-2 py-3 md:py-3 lg:gap-y-4 lg:py-0">
+                    <a
+                      href="/clientes/qhse"
+                      className="grid auto-cols-fr grid-cols-[max-content_1fr] items-start gap-x-3 py-2 lg:py-1"
+                    >
+                      <div>
+                        <img
+                          className="size-6"
+                          src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
+                          alt="QHSE"
+                        />
+                      </div>
+                      <div className="flex flex-col items-start justify-center">
+                        <p className="text-md font-semibold lg:text-base">
+                          QHSE
+                        </p>
+                        <p className="hidden text-sm md:block">
+                          De 11 a 253 millones. Crecimiento 2,000% con ISO 9001
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href="/clientes/femsa"
+                      className="grid auto-cols-fr grid-cols-[max-content_1fr] items-start gap-x-3 py-2 lg:py-1"
+                    >
+                      <div>
+                        <img
+                          className="size-6"
+                          src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
+                          alt="FEMSA"
+                        />
+                      </div>
+                      <div className="flex flex-col items-start justify-center">
+                        <p className="text-md font-semibold lg:text-base">
+                          FEMSA
+                        </p>
+                        <p className="hidden text-sm md:block">
+                          714 proyectos sin accidentes en 225 unidades
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href="/clientes/ochoa"
+                      className="grid auto-cols-fr grid-cols-[max-content_1fr] items-start gap-x-3 py-2 lg:py-1"
+                    >
+                      <div>
+                        <img
+                          className="size-6"
+                          src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
+                          alt="Ochoa"
+                        />
+                      </div>
+                      <div className="flex flex-col items-start justify-center">
+                        <p className="text-md font-semibold lg:text-base">
+                          Productos de Maíz Ochoa
+                        </p>
+                        <p className="hidden text-sm md:block">
+                          Del 56% al 95% de cumplimiento en calidad
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+                </motion.nav>
+              </AnimatePresence>
+            </div>
             <a
               href="#"
               className="block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2"

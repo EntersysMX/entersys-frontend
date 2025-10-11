@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flujo de Gestión de Trabajos de Alto Riesgo - Entersys</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #F40009 0%, #B40004 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(244, 0, 9, 0.3);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 60px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            width: 70px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .header-title {
+            flex: 1;
+        }
+
+        .header-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header-title p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #F40009;
+        }
+
+        .btn-primary:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        .process-flow {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px 30px;
+            margin-bottom: 40px;
+        }
+
+        .process-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+            min-height: 200px;
+        }
+
+        .process-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(244, 0, 9, 0.2);
+            border-color: #F40009;
+        }
+
+        .process-card.active {
+            border-color: #F40009;
+            background: linear-gradient(135deg, #fff 0%, #fff5f5 100%);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(244, 0, 9, 0.3);
+        }
+
+        .process-card.has-dependency {
+            border: 3px dashed #F40009;
+        }
+
+        .process-card.has-dependency::before {
+            content: "⚠️ Requiere Procedimiento Operativo";
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: #F40009;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            background: linear-gradient(135deg, #F40009 0%, #B40004 100%);
+            box-shadow: 0 4px 16px rgba(244, 0, 9, 0.3);
+        }
+
+        .card-number {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #7A0002 0%, #B40004 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(122, 0, 2, 0.4);
+        }
+
+        .card-title {
+            flex: 1;
+        }
+
+        .card-title h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .card-title p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .card-content {
+            margin-top: 15px;
+        }
+
+        .card-actions {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card-actions li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .card-actions li::before {
+            content: "•";
+            color: #F40009;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .required-field {
+            color: #F40009;
+            font-weight: bold;
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #28a745;
+        }
+
+        .status-pending { background: #ffc107; }
+        .status-review { background: #17a2b8; }
+        .status-completed { background: #28a745; }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 350px;
+            background-color: #333;
+            color: #fff;
+            text-align: left;
+            border-radius: 8px;
+            padding: 15px;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -175px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+            line-height: 1.4;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tooltip-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+        }
+
+        .tooltip-list li {
+            padding: 3px 0;
+            border-left: 3px solid #F40009;
+            padding-left: 10px;
+            margin: 5px 0;
+        }
+
+        .flow-connector {
+            position: absolute;
+            z-index: 1;
+        }
+
+        .connector-h-1-2 {
+            top: 50%;
+            left: calc(33.33% - 15px);
+            width: 30px;
+            height: 3px;
+            background: #F40009;
+            transform: translateY(-50%);
+        }
+
+        .connector-h-1-2::after {
+            content: "";
+            position: absolute;
+            right: -8px;
+            top: -5px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid #F40009;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        .connector-h-2-3 {
+            top: 50%;
+            left: calc(66.66% - 15px);
+            width: 30px;
+            height: 3px;
+            background: #F40009;
+            transform: translateY(-50%);
+        }
+
+        .connector-h-2-3::after {
+            content: "";
+            position: absolute;
+            right: -8px;
+            top: -5px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid #F40009;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        .connector-v-3-4 {
+            top: calc(100% + 20px);
+            left: calc(83.33% + 15px);
+            width: 3px;
+            height: 40px;
+            background: #F40009;
+            transform: translateX(-50%);
+        }
+
+        .connector-v-3-4::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-top: 12px solid #F40009;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+        }
+
+        .connector-h-4-5 {
+            top: 50%;
+            left: calc(33.33% - 15px);
+            width: 30px;
+            height: 3px;
+            background: #F40009;
+            transform: translateY(-50%);
+        }
+
+        .connector-h-4-5::after {
+            content: "";
+            position: absolute;
+            right: -8px;
+            top: -5px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid #F40009;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        .connector-h-5-6 {
+            top: 50%;
+            left: calc(66.66% - 15px);
+            width: 30px;
+            height: 3px;
+            background: #F40009;
+            transform: translateY(-50%);
+        }
+
+        .connector-h-5-6::after {
+            content: "";
+            position: absolute;
+            right: -8px;
+            top: -5px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid #F40009;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        .connector-v-6-7 {
+            top: calc(100% + 20px);
+            left: calc(83.33% + 15px);
+            width: 3px;
+            height: 40px;
+            background: #F40009;
+            transform: translateX(-50%);
+        }
+
+        .connector-v-6-7::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-top: 12px solid #F40009;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+        }
+
+        .connector-h-7-8 {
+            top: 50%;
+            left: calc(33.33% - 15px);
+            width: 30px;
+            height: 3px;
+            background: #F40009;
+            transform: translateY(-50%);
+        }
+
+        .connector-h-7-8::after {
+            content: "";
+            position: absolute;
+            right: -8px;
+            top: -5px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid #F40009;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        .connector-h-8-9 {
+            top: 50%;
+            left: calc(66.66% - 15px);
+            width: 30px;
+            height: 3px;
+            background: #F40009;
+            transform: translateY(-50%);
+        }
+
+        .connector-h-8-9::after {
+            content: "";
+            position: absolute;
+            right: -8px;
+            top: -5px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid #F40009;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        .connector-v-9-10 {
+            top: calc(100% + 20px);
+            left: calc(83.33% + 15px);
+            width: 3px;
+            height: 40px;
+            background: #F40009;
+            transform: translateX(-50%);
+        }
+
+        .connector-v-9-10::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-top: 12px solid #F40009;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+        }
+
+        .connector-v-10-11 {
+            top: calc(100% + 20px);
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background: #F40009;
+            transform: translateX(-50%);
+        }
+
+        .connector-v-10-11::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-top: 12px solid #F40009;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+        }
+
+        .dependency-connector {
+            position: absolute;
+            top: calc(100% + 20px);
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background: #F40009;
+            transform: translateX(-50%);
+            animation: pulse-dependency 2s infinite;
+        }
+
+        .dependency-connector::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-top: 12px solid #F40009;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+        }
+
+        @keyframes pulse-dependency {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .evaluation-criteria {
+            background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+            border: 2px solid #F40009;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 11px;
+        }
+
+        .criteria-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 3px 0;
+        }
+
+        .criteria-approved { color: #28a745; }
+        .criteria-conditional { color: #ffc107; }
+        .criteria-rejected { color: #dc3545; }
+
+        @media (max-width: 1024px) {
+            .process-flow {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px 20px;
+            }
+            
+            .flow-connector {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .process-flow {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .controls {
+                justify-content: center;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(244, 0, 9, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(244, 0, 9, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(244, 0, 9, 0);
+            }
+        }
+
+        .row-1 { grid-row: 1; }
+        .row-2 { grid-row: 2; }
+        .row-3 { grid-row: 3; }
+        .row-4 { grid-row: 4; }
+        .row-5 { grid-row: 5; }
+
+        .col-1 { grid-column: 1; }
+        .col-2 { grid-column: 2; }
+        .col-3 { grid-column: 3; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/coca-cola-femsa.jpg-cksRLbN6rKNPtIv0fyMMX0a44OVlrG.jpeg" alt="Entersys Logo">
+                </div>
+                <div class="header-title">
+                    <h1>Flujo de Gestión de Trabajos de Alto Riesgo</h1>
+                    <p>Sistema de Control para Contratistas Externos</p>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="playFlow()">
+                    ▶ Reproducir Flujo
+                </button>
+                <button class="btn btn-secondary" onclick="resetFlow()">
+                    ↻ Reiniciar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="process-flow" id="processFlow">
+            <div class="process-card fade-in row-1 col-1" data-step="1">
+                <div class="card-number">1</div>
+                <div class="status-indicator status-completed"></div>
+                <div class="card-header">
+                    <div class="card-icon">📋</div>
+                    <div class="card-title">
+                        <h3>Alta del Proyecto</h3>
+                        <p>Inicio y Registro</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="card-actions">
+                        <li>Adjudicación por Abastecimientos</li>
+                        <li class="required-field">Número de Orden de Compra (Obligatorio)</li>
+                        <li class="required-field">RFC (Obligatorio)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="process-card fade-in row-1 col-2 tooltip" data-step="2">
+                <div class="card-number">2</div>
+                <div class="status-indicator status-completed"></div>
+                <div class="card-header">
+                    <div class="card-icon">📄</div>
+                    <div class="card-title">
+                        <h3>Documentación General</h3>
+                        <p>Contratista</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="card-actions">
+                        <li>Declaración jurada de cumplimiento</li>
+                        <li>Documentos legales empresariales</li>
+                    </ul>
+                </div>
+                <span class="tooltiptext">
+                    <strong>Requisitos Documentación Tercero Especializado / Contratista</strong><br>
+                    <strong>Adjuntar:</strong>
+                    <ul class="tooltip-list">
+                        <li>REPSE</li>
+                        <li>Pago del SUA</li>
+                        <li>Identificación del Representante Legal</li>
+                        <li>SISUBIC</li>
+                        <li>SOE</li>
+                        <li>Opinión de cumplimiento IMSS</li>
+                        <li>Opinión de cumplimiento SAT</li>
+                        <li>Última declaración de Grado de Riesgo</li>
+                    </ul>
+                </span>
+            </div>
+
+            <div class="process-card fade-in row-1 col-3 tooltip" data-step="3">
+                <div class="card-number">3</div>
+                <div class="status-indicator status-review"></div>
+                <div class="card-header">
+                    <div class="card-icon">👥</div>
+                    <div class="card-title">
+                        <h3>Documentación Personal</h3>
+                        <p>Certificaciones</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="card-actions">
+                        <li>Identificación oficial del personal</li>
+                        <li>Certificados de competencia y vigencia</li>
+                    </ul>
+                </div>
+                <span class="tooltiptext">
+                    <strong>Carga de Evidencias</strong><br>
+                    <strong>Carga las constancias de los cursos registrados:</strong>
+                    <ul class="tooltip-list">
+                        <li>1) DC-3</li>
+                        <li>2) DC-5</li>
+                    </ul>
+                    <strong>Carga Documentación Oficial de cada Contratista / Subcontratista (al menos):</strong>
+                    <ul class="tooltip-list">
+                        <li>1) Pago de Seguridad Social</li>
+                        <li>2) Comprobante de domicilio</li>
+                        <li>3) Credencial empresa contratista</li>
+                        <li>4) Certificado médico / Estudios clínicos</li>
+                        <li>5) Antidoping</li>
+                    </ul>
+                </span>
+            </div>
+
+            <div class="process-card fade-in row-2 col-1" data-step="4">
+                <div class="card-number">4</div>
+                <div class="status-indicator status-pending"></div>
+                <div class="card-header">
+                    <div class="card-icon">📋</div>
+                    <div class="card-title">
+                        <h3>Documentos del Proyecto</h3>
+                        <p>Planes Específicos</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="card-actions">
+                        <li class="required-field">Plan de Rescate (Contratista debe cargar)</li>
+                        <li class="required-field">Alcance, Desarrollo y Procedimiento Operativo (Contratista debe cargar)</li>
+                    </ul>
+                </div>
+                <div class="dependency-connector"></div>
+            </div>
+
+            <div class="process-card fade-in row-2 col-2 has-dependency" data-step="5">
+                <div class="card-number">5</div>
+                <div class="status-indicator status-pending"></div>
+                <div class="card-header">
+                    <div class="card-icon">⚠️</div>
+                    <div class="card-title">
+                        <h3>Análisis IPERC</h3>
+                        <p>Matriz de Riesgos</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="card-actions">
+                        <li>Realizado por equipo multidisciplinario</li>
+                        <li>Mínimo 3 controles por riesgo</li>
+                        <li class="required-field">Requiere Procedimiento Operativo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="process-card fade-in row-2 col-3" data-step="6">
+                <div class="card-number">6</div>
+                <div class="status-indicator status-pending"></div>
+                <div class="card-header">
+                    <div class="card-icon">✅</div>
+                    <div class="card-title">
+                        <h3>Revisión y Aprobación</h3>
+                        <p>Técnico de Seguridad</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="card-actions">
+                        <li>Validación técnica de documentos</li>
+                        <li>Aprobación de procedimientos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="process-card fade-in row-3 col-1" data-step="7">
+                <div class="card-number">7</div>
+                <div class="status-indicator status-pending"></div>
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">
+                        <h3>Generación AST</h3>
+                        <p>Análisis Seguro de Trabajo</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="card-actions">
+                        <li class="required-field">Se genera automáticamente del IPERC</li>
+                        <li>Define responsables específicos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="process-card fade-in row-3 col-2" data-step="8">
+                <div class="card-number">8</div>
+                <div class="status-indicator status-pending"></div>
+                <div class="card-header">
+                    <div class="card-icon">🔍</div>
+                    <div class="card-title">
+                        <h3>Evaluación On-Site</h3>
+                        <p>Validación Previa</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="card-actions">
+                        <li>Cuestionario digital obligatorio</li>
+                    </ul>
+                    <div class="evaluation-criteria">
+                        <div class="criteria-item criteria-approved">✓ Mayor a 80%: Aprobado</div>
+                        <div class="criteria-item criteria-conditional">⚠ 70%-80%: Aprobado con carta excepción</div>
+                        <div class="criteria-item criteria-rejected">✗ Menor a 70%: Reprobado - Se prohíbe inicio</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-card fade-in row-3 col-3" data-step="9">
+                <div class="card-number">9</div>
+                <div class="status-indicator status-pending"></div>
+                <div class="card-header">
+                    <div class="card-icon">🛡️</div>
+                    <div class="card-title">
+                        <h3>Permisos de Trabajo</h3>
+                        <p>Autorización Diaria</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="card-actions">
+                        <li>Permisos específicos por proyecto</li>
+                        <li>Renovación diaria obligatoria</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="process-card fade-in row-4 col-2" data-step="10">
+                <div class="card-number">10</div>
+                <div class="status-indicator status-pending"></div>
+                <div class="card-header">
+                    <div class="card-icon">⚒️</div>
+                    <div class="card-title">
+                        <h3>Ejecución del Trabajo</h3>
+                        <p>Supervisión Continua</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="card-actions">
+                        <li>Desarrollo de trabajos planificados</li>
+                        <li>Evaluación diaria del contratista</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="process-card fade-in row-5 col-2" data-step="11">
+                <div class="card-number">11</div>
+                <div class="status-indicator status-pending"></div>
+                <div class="card-header">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-title">
+                        <h3>Evaluación Final</h3>
+                        <p>Cierre del Proyecto</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="card-actions">
+                        <li>Validación del cumplimiento global</li>
+                        <li>Retroalimentación y mejoras</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flow-connector connector-h-1-2"></div>
+            <div class="flow-connector connector-h-2-3"></div>
+            <div class="flow-connector connector-v-3-4"></div>
+            <div class="flow-connector connector-h-4-5"></div>
+            <div class="flow-connector connector-h-5-6"></div>
+            <div class="flow-connector connector-v-6-7"></div>
+            <div class="flow-connector connector-h-7-8"></div>
+            <div class="flow-connector connector-h-8-9"></div>
+            <div class="flow-connector connector-v-9-10"></div>
+            <div class="flow-connector connector-v-10-11"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        let isPlaying = false;
+        let playInterval;
+
+        function playFlow() {
+            if (isPlaying) {
+                stopFlow();
+                return;
+            }
+
+            isPlaying = true;
+            currentStep = 0;
+            
+            document.querySelectorAll('.process-card').forEach(card => {
+                card.classList.remove('active', 'pulse');
+            });
+
+            document.querySelector('.btn-primary').innerHTML = '⏸ Pausar Flujo';
+
+            playInterval = setInterval(() => {
+                currentStep++;
+                
+                if (currentStep > 1) {
+                    const prevCard = document.querySelector(`[data-step="${currentStep - 1}"]`);
+                    if (prevCard) {
+                        prevCard.classList.remove('active', 'pulse');
+                    }
+                }
+
+                const currentCard = document.querySelector(`[data-step="${currentStep}"]`);
+                if (currentCard) {
+                    currentCard.classList.add('active', 'pulse');
+                    currentCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+
+                if (currentStep >= 11) {
+                    setTimeout(() => {
+                        stopFlow();
+                    }, 2000);
+                }
+            }, 1500);
+        }
+
+        function stopFlow() {
+            isPlaying = false;
+            clearInterval(playInterval);
+            
+            document.querySelector('.btn-primary').innerHTML = '▶ Reproducir Flujo';
+            
+            setTimeout(() => {
+                document.querySelectorAll('.process-card').forEach(card => {
+                    card.classList.remove('pulse');
+                });
+            }, 1000);
+        }
+
+        function resetFlow() {
+            stopFlow();
+            currentStep = 0;
+            
+            document.querySelectorAll('.process-card').forEach(card => {
+                card.classList.remove('active', 'pulse');
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.querySelectorAll('.process-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.process-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.process-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    card.style.transition = 'all 0.6s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -27,28 +27,55 @@ export function Layout2371({ colorScheme = 1, ...props }) {
                 <MdAssessment className="size-12 text-primary" />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
-                FEMSA
+                Productos de Maíz Ochoa
               </h3>
-              <p>Tableros ejecutivos que muestran riesgos en segundos.</p>
+              <p>Elaboración de productos de maíz con calidad e higiene ubicada en el bajío Querétaro.</p>
             </div>
             <div className="flex w-full flex-col items-center text-center">
               <div className="rb-5 mb-5 md:mb-6">
                 <MdScience className="size-12 text-primary" />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
-                Grupo industrial nexus
+                QHSE
               </h3>
-              <p>7 años de excelencia operativa sustentada en Worksys.</p>
+              <p>Líder en soluciones industriales del sector laboratorio y tratamiento de agua.</p>
             </div>
             <div className="flex w-full flex-col items-center text-center">
               <div className="rb-5 mb-5 md:mb-6">
                 <MdInventory className="size-12 text-primary" />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
-                MercadoLibre
+                SCRAM
               </h3>
-              <p>Digitalización de inventario con control estandarizado.</p>
+              <p>Integradora de soluciones tecnológicas para empresas ubicada en Cuautitlán Izcalli.</p>
+            </div>  
+            <div className="flex w-full flex-col items-center text-center">
+              <div className="rb-5 mb-5 md:mb-6">
+                <MdInventory className="size-12 text-primary" />
+              </div>
+              <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
+                Chilango Garage
+              </h3>
+              <p>Empresa de servicios mecánicos automotrices ubicado en Cuajimalpa.</p>
             </div>
+            <div className="flex w-full flex-col items-center text-center">
+              <div className="rb-5 mb-5 md:mb-6">
+                <MdInventory className="size-12 text-primary" />
+              </div>
+              <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
+                FEMSA
+              </h3>
+              <p>Digitalización de gestión y documentación de contratistas para trabajos de alto riesgo.</p>
+            </div>
+              <div className="flex w-full flex-col items-center text-center">
+              <div className="rb-5 mb-5 md:mb-6">
+                <MdInventory className="size-12 text-primary" />
+              </div>
+              <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
+                MLM
+              </h3>
+              <p>Empresa de manufactura volumétrica de materiales promocionales para marcas del país.</p>
+            </div>  
           </div>
           <div className="mt-10 flex items-center gap-4 md:mt-14 lg:mt-16">
             <Button variant="secondary">Ver casos de éxito</Button>

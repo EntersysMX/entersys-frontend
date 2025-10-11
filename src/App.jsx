@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { HelmetProvider } from 'react-helmet-async'
 import PageTransition from './components/PageTransition'
 import Home from './pages/Home'
 import Blog from './pages/Blog'
@@ -24,28 +25,30 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <PageTransition>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/inicio" element={<Home />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog-entry" element={<BlogEntry />} />
-          <Route path="/clientes" element={<Clientes />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/nosotros" element={<Nosotros />} />
-          <Route path="/awalab" element={<Awalab />} />
-          <Route path="/expersys" element={<Expersys />} />
-          <Route path="/worksys" element={<Worksys />} />
-          <Route path="/clientes/qhse" element={<Qhse />} />
-          <Route path="/clientes/femsa" element={<Femsa />} />
-          <Route path="/clientes/ochoa" element={<Ochoa />} />
-        </Routes>
-      </PageTransition>
+    <HelmetProvider>
+      <div className="App">
+        <PageTransition>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/inicio" element={<Home />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog-entry" element={<BlogEntry />} />
+            <Route path="/clientes" element={<Clientes />} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/nosotros" element={<Nosotros />} />
+            <Route path="/awalab" element={<Awalab />} />
+            <Route path="/expersys" element={<Expersys />} />
+            <Route path="/worksys" element={<Worksys />} />
+            <Route path="/clientes/qhse" element={<Qhse />} />
+            <Route path="/clientes/femsa" element={<Femsa />} />
+            <Route path="/clientes/ochoa" element={<Ochoa />} />
+          </Routes>
+        </PageTransition>
 
-      {/* NUEVO: WhatsApp Float Button - NO ALTERAR DISEÑO EXISTENTE */}
-      <WhatsAppFloatButton />
-    </div>
+        {/* NUEVO: WhatsApp Float Button - NO ALTERAR DISEÑO EXISTENTE */}
+        <WhatsAppFloatButton />
+      </div>
+    </HelmetProvider>
   )
 }
 

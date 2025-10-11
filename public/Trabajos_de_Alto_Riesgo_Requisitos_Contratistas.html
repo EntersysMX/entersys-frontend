@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Gestión de Contratistas de Alto Riesgo</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+        }
+        .container {
+            display: flex;
+            height: 100%;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #E51636;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h2 {
+            margin-bottom: 20px;
+        }
+        .sidebar button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: none;
+            border: none;
+            color: white;
+            text-align: left;
+            cursor: pointer;
+        }
+        .sidebar button:hover, .sidebar button.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .content {
+            flex-grow: 1;
+            margin-left: 250px;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .header {
+            background-color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            height: 40px;
+            margin-right: 20px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            margin-top: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+        }
+        input, textarea {
+            margin-top: 5px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button[type="submit"] {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #E51636;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #C41230;
+        }
+        .powered-by {
+            margin-top: auto;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.7em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .powered-by span {
+            margin-bottom: 5px;
+        }
+        .powered-by img {
+            width: 80px;
+        }
+        iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Portal de Contratistas</h2>
+            <button class="active" data-content="main">Página Principal</button>
+            <button data-content="form3">Plan de rescate</button>
+            <button data-content="form1">Alcance, desarrollo, Herramientas & Equipos y procedimiento operativo</button>
+            <button data-content="form7">Carga de permisos</button>
+            <div class="powered-by">
+                <span>Powered by</span>
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ENTERSYS%20logo-gIRKOTh6N2vDcwpzvrwAui0wFmRRsO.JPG" alt="Entersys Logo">
+            </div>
+        </div>
+        <div class="content">
+            <div class="header">
+                <h1>Portal de Gestión de Contratistas de Alto Riesgo</h1>
+            </div>
+            <div id="main" class="card">
+    <h2>Resumen de Requisitos de los Contratistas</h2>
+    
+    <h3>Actividades en altura</h3>
+    <ul>
+        <li>Procedimientos de Trabajos en Altura</li>
+        <li>Competencias y validación (aptitud y aptitudes médicas)
+            <ul>
+                <li>Certificado de Trabajos en Altura (Persona Competente)</li>
+                <li>Certificado de Aptitud Médica Específico para actividades en altura</li>
+            </ul>
+        </li>
+        <li>Plan de Rescate</li>
+        <li>Equipos (certificaciones y hojas de seguridad)
+            <ul>
+                <li>Andamios Multidireccional y Escaleras Certificadas</li>
+                <li>Equipos Certificados Contra Caídas</li>
+                <li>Plataformas Certificados</li>
+                <li>Certificados de Operador de Plataforma Elevadora y/o Similares</li>
+                <li>Certificación de Puntos de Anclaje y Estructuras</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Actividades con LOTO Energía Peligrosa y Maquinaria</h3>
+    <ul>
+        <li>Procedimiento de Trabajo para Energías Peligrosas y Maquinaria Segura</li>
+        <li>Competencias y validación (aptitud y aptitudes médicas)
+            <ul>
+                <li>Certificados de capacitación para trabajos con energías peligrosas y maquinaria segura</li>
+            </ul>
+        </li>
+        <li>Plan de Rescate</li>
+        <li>Equipos (certificaciones y hojas de seguridad)
+            <ul>
+                <li>Equipos de Bloqueo y Tarjeteo</li>
+                <li>Inspección de Equipos de Bloqueo</li>
+                <li>Certificado de los EPPs</li>
+                <li>En caso de ingresar Equipos o Maquinaria: dispositivos de seguridad, protecciones de maquinaria segura y aislamiento de energías</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Actividades con Materiales Peligrosos</h3>
+    <ul>
+        <li>Procedimiento de trabajo para Materiales Peligrosos</li>
+        <li>Competencias y validación (aptitud y aptitudes médicas)</li>
+        <li>Plan de Rescate</li>
+        <li>Equipos (certificaciones y hojas de seguridad)
+            <ul>
+                <li>Hojas de MSDS</li>
+                <li>Relación o Lista de Químicos</li>
+                <li>Kit anti derrames / Contenedor Secundario</li>
+                <li>Prueba hidrostática vigente para cilindros de Gas comprimido</li>
+                <li>Certificado de calibración/mantenimiento de Válvulas</li>
+                <li>Certificado de los EPPs</li>
+            </ul>
+        </li>
+        <li>Permisos</li>
+    </ul>
+
+    <h3>Actividades en Espacios Confinados</h3>
+    <ul>
+        <li>Procedimiento de trabajo en espacios confinados</li>
+        <li>Competencias y validación (aptitud y aptitudes médicas)
+            <ul>
+                <li>Certificado de capacitación de espacios confinados (Personal Competente)</li>
+                <li>Certificado de Aptitud Médica Ocupacional Espacio Confinado</li>
+            </ul>
+        </li>
+        <li>Plan de Rescate
+            <ul>
+                <li>Plan de Rescate y Equipos de Rescate</li>
+            </ul>
+        </li>
+        <li>Equipos (certificaciones y hojas de seguridad)
+            <ul>
+                <li>Medidor de Gas / Certificado de Calibración</li>
+                <li>Ventilación Forzada</li>
+                <li>EPPs certificados</li>
+            </ul>
+        </li>
+        <li>Permisos</li>
+    </ul>
+
+    <h3>Actividades con Energía eléctrica</h3>
+    <ul>
+        <li>Procedimientos de Trabajos para trabajos con energía peligrosa</li>
+        <li>Competencias y validación (aptitud y aptitudes médicas)
+            <ul>
+                <li>Certificación Técnica Electricista</li>
+                <li>Certificado capacitación de Seguridad Eléctrica</li>
+            </ul>
+        </li>
+        <li>Plan de Rescate</li>
+        <li>Equipos (certificaciones y hojas de seguridad)
+            <ul>
+                <li>Equipos Dieléctricos; herramientas dieléctricas</li>
+                <li>Equipos de Medición y Reveladores / Certificados de Calibración</li>
+                <li>Instalaciones eléctricas cumplen con los requisitos de diseño definidos en el Estándar de Seguridad Eléctrica</li>
+                <li>Revisión de extensiones o sistemas eléctricos</li>
+                <li>Los equipos móviles, portátiles o extensiones eléctricas tienen conexión RCD con protección falla a tierra</li>
+                <li>Equipos de Protección Personal acordes al nivel de tensión ver NFPA 70E</li>
+            </ul>
+        </li>
+        <li>Permisos</li>
+    </ul>
+
+    <h3>Actividades de Excavaciones y Perforaciones</h3>
+    <ul>
+        <li>Procedimientos de Trabajos para excavaciones</li>
+        <li>Competencias y validación (aptitud y aptitudes médicas)
+            <ul>
+                <li>Certificado de Capacitación en operación de Maquinaria Pesada</li>
+            </ul>
+        </li>
+        <li>Plan de Rescate</li>
+        <li>Permisos</li>
+    </ul>
+
+    <h3>Actividades con Izaje</h3>
+    <ul>
+        <li>Procedimientos de Trabajos para Izaje</li>
+        <li>Competencias y validación (aptitud y aptitudes médicas)
+            <ul>
+                <li>Certificado de Capacitación de Izajes y Montaje</li>
+                <li>Certificado de Operador de Grúa</li>
+            </ul>
+        </li>
+        <li>Plan de Rescate</li>
+        <li>Equipos (certificaciones y hojas de seguridad)
+            <ul>
+                <li>Certificado de Rigger</li>
+                <li>Certificado de Equipo y Accesorios</li>
+                <li>Plan de Izaje/Rigger (*), cuando aplicable</li>
+            </ul>
+        </li>
+        <li>Permisos</li>
+    </ul>
+</div>
+            <div id="form1" class="card" style="display: none;">
+    <h2>Alcance, desarrollo, Herramientas & Equipos y procedimiento operativo</h2>
+    <iframe src="https://app.smartsheet.com/b/form/d9123447541a4fae94812666037ac1d5" style="width: 100%; height: 800px; border: none;"></iframe>
+</div>
+<div id="form3" class="card" style="display: none;">
+    <h2>Plan de rescate</h2>
+    <iframe src="https://app.smartsheet.com/b/form/d731e77ebb204532b66354e429d7edeb" style="width: 100%; height: 800px; border: none;"></iframe>
+</div>
+<div id="form7" class="card" style="display: none;">
+    <h2>Carga de permisos</h2>
+    <iframe src="https://app.smartsheet.com/b/form/7fee51980021425fb9becd96c45dcc95" style="width: 100%; height: 800px; border: none;"></iframe>
+</div>
+
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.sidebar button');
+            const contents = document.querySelectorAll('.card');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const contentId = this.getAttribute('data-content');
+                    contents.forEach(content => {
+                        content.style.display = content.id === contentId ? 'block' : 'none';
+                    });
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

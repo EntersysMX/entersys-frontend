@@ -14,16 +14,12 @@ export function Layout245({ colorScheme = 1, ...props }) {
             <div>
               <p className="mb-3 font-semibold md:mb-4">Propuesta de valor</p>
               <h2 className="text-5xl font-bold md:text-7xl lg:text-8xl">
-                Prueba hoy, comprométete después
+                Prueba hoy, contrata después
               </h2>
             </div>
             <div>
               <p className="md:text-md">
-                En Entersys, te ofrecemos la oportunidad de probar nuestras
-                soluciones antes de comprometerte. Nuestro modelo comercial de
-                'Try and Buy' te permite experimentar los beneficios de la
-                digitalización de procesos sin riesgo. Además, garantizamos que
-                cumplas con todas las normativas necesarias desde el primer día.
+                En Entersys impulsamos decisiones informadas: por eso abrimos las puertas a que experimentes nuestras soluciones antes de escalar su implementación con nuestra política TRY&BUY.
               </p>
             </div>
           </div>

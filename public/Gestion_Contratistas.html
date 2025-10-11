@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Contratistas y Trabajos de Alto Riesgo</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            background-color: #f3f4f6;
+        }
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .card {
+            max-width: 48rem;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .header {
+            background-color: #E51636;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.125rem;
+        }
+        .main {
+            padding: 1.5rem;
+        }
+        .main h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .main p {
+            color: #4b5563;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        .section {
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .button {
+            background-color: #E51636;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+        .button:hover {
+            background-color: #C41230;
+            transform: scale(1.05);
+        }
+        .footer {
+            background-color: #e5e7eb;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: #4b5563;
+        }
+        @media (min-width: 640px) {
+            .button-container {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <header class="header">
+                <h1>Gestión de Contratistas y Trabajos de Alto Riesgo</h1>
+                <p>Bienvenidos Contratistas de KOF - FEMSA</p>
+            </header>
+            
+            <main class="main">
+                <h2>Bienvenido al Portal de Gestión de Contratistas y Trabajos de Alto Riesgo</h2>
+                
+                <div class="section">
+                    <p>
+                        Este portal está diseñado para facilitar la entrega, revisión y aprobación de documentación para garantizar el cumplimiento del Estándar Global de Seguridad para Terceros & Contratistas.
+                    </p>
+                </div>
+                
+                <div class="section">
+                    <p class="section-title">"Alta de Contratista":</p>
+                    <p>
+                        Utilízalo para cargar los documentos generales obligatorios, como pólizas de seguro, la declaración jurada de cumplimiento de requisitos de seguridad, y el listado del personal y sus competencias.
+                    </p>
+                </div>
+                
+                <div class="section">
+                    <p class="section-title">"Requisitos de Trabajos de Alto Riesgo":</p>
+                    <p>
+                        Aquí podrás registrar toda la documentación específica, los procedimientos de seguridad, los permisos requeridos y los planes de rescate necesarios para trabajos de alto riesgo.
+                    </p>
+                </div>
+                
+                <div class="section">
+                    <p class="section-title">"Ticket de ayuda a soporte Entersys":</p>
+                    <p>
+                        Si experimentas retrasos en tu proyecto debido a autorizaciones pendientes, utiliza este formulario para notificarlo. Esto nos permitirá identificar acciones que aceleren el proceso de autorización y, con ello, la ejecución de tu proyecto.
+                    </p>
+                </div>
+                
+                <div class="section">
+                    <p class="section-title">"Flujo de proceso de Trabajos de Alto Riesgo":</p>
+                    <p>
+                        Consulta el diagrama de flujo completo del proceso para trabajos de alto riesgo, donde podrás visualizar cada etapa, los responsables y los tiempos estimados para cada fase del proceso de autorización.
+                    </p>
+                </div>
+                
+                <div class="section">
+                    <p>
+                        Nuestro objetivo es asegurar que todos los trabajos cumplan con los requisitos de seguridad establecidos, protegiendo la integridad de las operaciones y promoviendo un entorno laboral seguro y eficiente.
+                    </p>
+                </div>
+                
+                <div class="button-container">
+                    <a href="https://entersys.mx/Alta_Contratista.html#" target="_blank" class="button">Alta de Contratista</a>
+                    <a href="https://entersys.mx/Trabajos_de_Alto_Riesgo_Requisitos_Contratistas.html" target="_blank" class="button">Requisitos de Trabajos de Alto Riesgo</a>
+                    <a href="https://app.smartsheet.com/b/form/823e0c2ea50044358ab576d5c74ba383" target="_blank" class="button">Ticket de ayuda a soporte Entersys</a>
+                    <a href="https://entersys.mx/flujo-proceso-entersys.html" target="_blank" class="button">Flujo de proceso de Trabajos de Alto Riesgo</a>
+                </div>
+            </main>
+            
+            <footer class="footer">
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
