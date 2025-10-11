@@ -21,7 +21,7 @@ export function Stats30() {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
           <Fragment>
             <Card className="p-8 first:flex first:flex-col first:md:col-span-2 first:md:row-span-1 first:lg:col-span-1 first:lg:row-span-2">
               <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
@@ -34,44 +34,42 @@ export function Stats30() {
             </Card>
           </Fragment>
           <Fragment>
-            <div>
-              <img
-                className="aspect-[3/2] size-full rounded-image object-cover"
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-                alt="Relume placeholder image"
-              />
-            </div>
+            <Card className="p-8">
+              <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
+                100%
+              </p>
+              <h3 className="heading-h6 font-bold">Digitalización</h3>
+              <p className="mt-2">De la operación en Smartsheets</p>
+            </Card>
           </Fragment>
           <Fragment>
             <Card className="p-8">
               <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
-                2000%
+                ISO
               </p>
-              <h3 className="heading-h6 font-bold">
-                Incremento en facturación
-              </h3>
-              <p className="mt-2">Crecimiento en facturación durante 6 años</p>
+              <h3 className="heading-h6 font-bold">Certificación 9001</h3>
+              <p className="mt-2">Calidad certificada internacionalmente</p>
             </Card>
           </Fragment>
           <Fragment>
             <Card className="p-8 [&:nth-last-child(2)]:order-last [&:nth-last-child(2)]:md:order-none">
               <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
-                2000%
+                0
               </p>
               <h3 className="heading-h6 font-bold">
-                Incremento en facturación
+                Dependencia de personas clave
               </h3>
-              <p className="mt-2">Crecimiento en facturación durante 6 años</p>
+              <p className="mt-2">Procesos documentados y replicables</p>
             </Card>
           </Fragment>
           <Fragment>
-            <div>
-              <img
-                className="aspect-[3/2] size-full rounded-image object-cover"
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-                alt="Relume placeholder image"
-              />
-            </div>
+            <Card className="p-8 last:order-first last:md:order-none">
+              <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
+                11→253
+              </p>
+              <h3 className="heading-h6 font-bold">Millones de pesos</h3>
+              <p className="mt-2">Evolución de ingresos en 6 años</p>
+            </Card>
           </Fragment>
         </div>
       </div>

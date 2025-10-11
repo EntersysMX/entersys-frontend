@@ -1,44 +1,29 @@
 "use client";
 
-import React, { Fragment } from "react";
+import React from "react";
 
 export function Content17() {
   return (
-    <section className="px-[5%] py-16 md:py-24 lg:py-28">
+    <section className="px-[5%] py-16 md:py-24 lg:py-28 bg-[#1a3d3d] text-white">
       <div className="container">
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-[1fr_1.5fr] md:gap-x-12 lg:gap-x-20">
-          <div>
-            <h3 className="heading-h3 font-bold">
-              Seguridad a escala nacional sin margen de error
-            </h3>
-          </div>
-          <div>
-            <div className="prose-base prose-p:m-0 prose-p:mb-4 prose-p:leading-[1.5]">
-              <Fragment>
-                <p>
-                  Morbi sed imperdiet in ipsum, adipiscing elit dui lectus.
-                  Tellus id scelerisque est ultricies ultricies. Duis est sit
-                  sed leo nisl, blandit elit sagittis. Quisque tristique
-                  consequat quam sed. Nisl at scelerisque amet nulla purus
-                  habitasse.
-                </p>
-                <p>
-                  Nunc sed faucibus bibendum feugiat sed interdum. Ipsum egestas
-                  condimentum mi massa. In tincidunt pharetra consectetur sed
-                  duis facilisis metus. Etiam egestas in nec sed et. Quis
-                  lobortis at sit dictum eget nibh tortor commodo cursus.
-                </p>
-                <p>
-                  Odio felis sagittis, morbi feugiat tortor vitae feugiat fusce
-                  aliquet. Nam elementum urna nisi aliquet erat dolor enim.
-                  Ornare id morbi eget ipsum. Aliquam senectus neque ut id eget
-                  consectetur dictum. Donec posuere pharetra odio consequat
-                  scelerisque et, nunc tortor. Nulla adipiscing erat a erat.
-                  Condimentum lorem posuere gravida enim posuere cursus diam.
-                </p>
-              </Fragment>
-            </div>
-          </div>
+        <div className="mx-auto max-w-4xl">
+          <h2 className="heading-h2 mb-8 font-bold md:mb-10 lg:mb-12">
+            Seguridad a escala nacional sin margen de error
+          </h2>
+          <p className="text-medium">
+            FEMSA operaba 225 unidades en todo el país, cada una ejecutando
+            proyectos de alto riesgo con contratistas externos. La gestión de
+            documentación —competencias laborales, planes de rescate, análisis
+            de riesgos, certificaciones de personas físicas y morales— se
+            llevaba en drives dispersos y archivos de Excel sin conexión entre
+            unidades. El resultado era inconsistencia operativa: cada sitio
+            aplicaba sus propios criterios, no existía trazabilidad sobre el
+            cumplimiento de protocolos de seguridad, y la visibilidad central
+            sobre el avance de los 714 proyectos en ejecución era prácticamente
+            nula. En una industria donde un accidente puede costar vidas y
+            millones en responsabilidades, operar sin estándares unificados era
+            un riesgo inaceptable.
+          </p>
         </div>
       </div>
     </section>

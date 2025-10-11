@@ -23,8 +23,8 @@ export function Cta39() {
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
               <Button title="Contactar">Contactar</Button>
-              <Button title="Más casos" variant="secondary">
-                Más casos
+              <Button title="Agendar demo" variant="secondary">
+                Agendar demo
               </Button>
             </div>
           </div>
@@ -32,7 +32,7 @@ export function Cta39() {
             <img
               src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape4x3.svg"
               className="w-full object-cover"
-              alt="Relume placeholder image"
+              alt="Transforma tu operación"
             />
           </div>
         </Card>

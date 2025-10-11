@@ -23,21 +23,21 @@ export function Header41() {
               </button>
               <img
                 src="https://d22po4pjz3o32e.cloudfront.net/placeholder-video-thumbnail-landscape.svg"
-                alt="Video FEMSA"
+                alt="Video placeholder"
                 className="size-full object-cover"
               />
             </div>
           </div>
           <div>
             <h1 className="heading-h1 mb-5 font-bold md:mb-6">
-              714 proyectos de alto riesgo ejecutados sin accidentes en 225
-              unidades operativas
+              De 11 a 253 millones en 6 años: cómo construir una operación
+              escalable desde cero
             </h1>
             <p className="text-medium mb-6 md:mb-8">
-              Implementación de Worksys para digitalización y estandarización de
-              gestión de contratistas en trabajos de alto riesgo. Automatización
-              de procesos de seguridad industrial con Smartsheets en toda la
-              operación nacional de FEMSA.
+              Implementación de Worksys y Expersys para automatización de
+              procesos operativos y certificación ISO 9001 en empresa líder en
+              soluciones industriales. Crecimiento del 2,000% con
+              estandarización y digitalización en Smartsheets.
             </p>
             <Button>Entersyzar empresa</Button>
           </div>

@@ -8,10 +8,10 @@ export function Gallery1() {
       <div className="container">
         <div className="mb-12 text-center md:mb-18 lg:mb-20">
           <h2 className="heading-h2 mb-5 font-bold md:mb-6">
-            Sistema operativo en acción
+            Así funciona hoy
           </h2>
           <p className="text-medium">
-            Así se gestionan 714 proyectos de alto riesgo sin accidentes
+            Evidencias del sistema operativo en acción
           </p>
         </div>
         <div className="grid auto-cols-fr grid-cols-1 gap-8">
@@ -19,14 +19,14 @@ export function Gallery1() {
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
                 src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                alt="Dashboard de seguridad"
+                alt="Dashboard operativo"
                 className="size-full object-cover"
               />
             </div>
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
                 src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                alt="Gestión de contratistas"
+                alt="Proceso digitalizado"
                 className="size-full object-cover"
               />
             </div>
@@ -34,7 +34,7 @@ export function Gallery1() {
           <div className="aspect-[21/9] overflow-hidden rounded-lg">
             <img
               src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-              alt="Vista general del sistema"
+              alt="Vista panorámica del sistema"
               className="size-full object-cover"
             />
           </div>
@@ -42,14 +42,14 @@ export function Gallery1() {
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
                 src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                alt="Análisis de riesgos"
+                alt="Certificación ISO"
                 className="size-full object-cover"
               />
             </div>
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
                 src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                alt="Certificaciones y cumplimiento"
+                alt="Equipo de trabajo"
                 className="size-full object-cover"
               />
             </div>

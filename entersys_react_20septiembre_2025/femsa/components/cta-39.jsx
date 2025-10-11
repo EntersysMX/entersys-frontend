@@ -12,19 +12,18 @@ export function Cta39() {
           <div className="flex flex-col justify-center p-8 md:p-12">
             <div>
               <h2 className="heading-h2 mb-5 font-bold md:mb-6">
-                ¿Tu operación maneja riesgos sin control total?
+                ¿Operas a escala nacional sin estándares unificados?
               </h2>
               <p className="text-medium">
-                En semanas, no en meses, digitalizamos lo complejo y lo
-                convertimos en un sistema que funciona sin excepciones.
-                Automatizamos lo que ya haces bien y eliminamos el margen de
-                error.
+                Construimos sistemas operativos que garantizan cumplimiento al
+                100% en todas tus unidades. Digitaliza, estandariza y obtén
+                visibilidad total de tu operación en tiempo real.
               </p>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
               <Button title="Contactar">Contactar</Button>
-              <Button title="Más casos" variant="secondary">
-                Más casos
+              <Button title="Agendar demo" variant="secondary">
+                Agendar demo
               </Button>
             </div>
           </div>
@@ -32,7 +31,7 @@ export function Cta39() {
             <img
               src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape4x3.svg"
               className="w-full object-cover"
-              alt="Relume placeholder image"
+              alt="Estandariza tu operación"
             />
           </div>
         </Card>

@@ -1,9 +1,9 @@
 import React from "react";
-import { Navbar11 } from "./components/Navbar11";
-import { Header64 } from "./components/Header64";
-import { Portfolio9 } from "./components/Portfolio9";
-import { Cta39 } from "./components/Cta39";
-import { Footer11 } from "./components/Footer11";
+import { Navbar11 } from "./components/navbar-11";
+import { Header64 } from "./components/header-64";
+import { Portfolio9 } from "./components/portfolio-09";
+import { Cta39 } from "./components/cta-39";
+import { Footer11 } from "./components/footer-11";
 
 export default function Page() {
   return (

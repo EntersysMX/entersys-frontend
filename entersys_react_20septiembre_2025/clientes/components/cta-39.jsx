@@ -30,7 +30,7 @@ export function Cta39() {
             <img
               src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape4x3.svg"
               className="w-full object-cover"
-              alt="Relume placeholder image"
+              alt="Impulsa la transformación"
             />
           </div>
         </Card>
