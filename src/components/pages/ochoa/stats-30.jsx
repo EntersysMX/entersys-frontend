@@ -22,11 +22,11 @@ export function Stats30() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
           <Fragment>
             <Card className="p-8 first:flex first:flex-col first:md:col-span-2 first:md:row-span-1 first:lg:col-span-1 first:lg:row-span-2">
-              <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
-                95% de cumplimiento
+              <p className="mb-6 text-[2.5rem] leading-[1.2] font-bold md:mb-8 md:text-[3rem] lg:mb-10 lg:text-[3.5rem]">
+                95%
               </p>
               <h3 className="heading-h6 font-bold mt-auto">
-                Incremento en calidad monitoreada
+                Cumplimiento en calidad
               </h3>
               <p className="mt-2">
                 Con información en tiempo real
@@ -35,19 +35,30 @@ export function Stats30() {
           </Fragment>
           <Fragment>
             <Card className="p-8">
-              <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
-                120 formatos digitales
+              <div className="mb-4 overflow-hidden rounded-lg">
+                <img
+                  src="/images/ochoa/stats_format_ochoa.webp"
+                  alt="Formatos digitales Ochoa"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </Card>
+          </Fragment>
+          <Fragment>
+            <Card className="p-8">
+              <p className="mb-6 text-[2.5rem] leading-[1.2] font-bold md:mb-8 md:text-[3rem] lg:mb-10 lg:text-[3.5rem]">
+                120
               </p>
-              <h3 className="heading-h6 font-bold">Mapeo de productos</h3>
+              <h3 className="heading-h6 font-bold">Formatos digitales</h3>
               <p className="mt-2">
                 Creados y personalizados por tipo de producto
               </p>
             </Card>
           </Fragment>
           <Fragment>
-            <Card className="p-8">
-              <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
-                De 56% a 95%
+            <Card className="p-8 [&:nth-last-child(2)]:order-last [&:nth-last-child(2)]:md:order-none">
+              <p className="mb-6 text-[2.5rem] leading-[1.2] font-bold md:mb-8 md:text-[3rem] lg:mb-10 lg:text-[3.5rem]">
+                56% → 95%
               </p>
               <h3 className="heading-h6 font-bold">
                 Mejora en cumplimiento
@@ -55,6 +66,17 @@ export function Stats30() {
               <p className="mt-2">
                 Tras identificar línea base y ajustar parámetros
               </p>
+            </Card>
+          </Fragment>
+          <Fragment>
+            <Card className="p-8 last:order-first last:md:order-none">
+              <div className="mb-4 overflow-hidden rounded-lg">
+                <img
+                  src="/images/ochoa/stats_growth_ochoa.webp"
+                  alt="Crecimiento Ochoa"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
             </Card>
           </Fragment>
         </div>

@@ -9,7 +9,7 @@ export function Content2() {
         <div className="grid grid-cols-1 items-center gap-12 md:gap-16 lg:grid-cols-2 lg:gap-20">
           <div>
             <img
-              src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+              src="/images/ochoa/case_image_ochoa.webp"
               alt="Solución Productos de Maíz Ochoa"
               className="w-full rounded-lg object-cover"
             />

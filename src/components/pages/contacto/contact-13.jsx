@@ -29,7 +29,7 @@ export function Contact13({ colorScheme = 3, ...props }) {
                 Correo
               </h3>
               <p className="mb-2">Contáctanos para más información</p>
-              <a className="underline" href="mailto:contacto@entersys.com">
+              <a className="underline hover:opacity-80" href="mailto:contacto@entersys.com">
                 contacto@entersys.com
               </a>
             </div>
@@ -41,7 +41,7 @@ export function Contact13({ colorScheme = 3, ...props }) {
                 Teléfono
               </h3>
               <p className="mb-2">Comunícate con nuestro equipo</p>
-              <a className="underline" href="tel:+525512345678">
+              <a className="underline hover:opacity-80" href="tel:+525512345678">
                 +52 55 1234 5678
               </a>
             </div>
@@ -54,21 +54,27 @@ export function Contact13({ colorScheme = 3, ...props }) {
               </h3>
               <p className="mb-2">Ubicación principal en Ciudad de México</p>
               <div className="mt-5 md:mt-6">
-                <Button
-                  title="Ver dirección"
-                  variant="link"
-                  size="link"
-                  iconRight={<RxChevronRight />}
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Ciudad+de+México,+México"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Ver dirección
-                </Button>
+                  <Button
+                    title="Ver dirección"
+                    variant="link"
+                    size="link"
+                    iconRight={<RxChevronRight />}
+                  >
+                    Ver dirección
+                  </Button>
+                </a>
               </div>
             </div>
           </div>
           <div>
             <img
-              src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-              alt="Relume placeholder image"
+              src="/images/contacto/modern_office_workspace.webp"
+              alt="Oficina moderna Entersys - Espacio de trabajo profesional"
               className="size-full rounded-image object-cover"
             />
           </div>

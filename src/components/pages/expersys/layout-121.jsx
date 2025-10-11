@@ -2,8 +2,17 @@
 
 import { Button } from "@relume_io/relume-ui";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Layout121({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleVerCasosClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Ver Casos Éxito - Expersys Layout121', 'expersys-certificaciones');
+    navigate('/clientes');
+  };
+
   const certifications = [
     {
       icon: "/imagenes/expersys/icon_security_expersys.svg",
@@ -47,7 +56,7 @@ export function Layout121({ colorScheme = 1, ...props }) {
               Certificaciones disponibles con Expersys
             </h1>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <button type="button" className="light-teal-button-custom">
+              <button type="button" className="light-teal-button-custom" onClick={handleVerCasosClick}>
                 Ver casos de éxito
               </button>
             </div>

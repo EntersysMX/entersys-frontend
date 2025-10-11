@@ -18,38 +18,38 @@ export function Gallery1() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                alt="Dashboard de seguridad"
+                src="/images/femsa/SP_DASH1_FEMSA.webp"
+                alt="Dashboard de seguridad FEMSA"
                 className="size-full object-cover"
               />
             </div>
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                alt="Gestión de contratistas"
+                src="/images/femsa/SP_DASH2_FEMSA.webp"
+                alt="Gestión de contratistas FEMSA"
                 className="size-full object-cover"
               />
             </div>
           </div>
           <div className="aspect-[21/9] overflow-hidden rounded-lg">
             <img
-              src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-              alt="Vista general del sistema"
+              src="/images/femsa/SP_DASH3_FEMSA.webp"
+              alt="Vista general del sistema FEMSA"
               className="size-full object-cover"
             />
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                alt="Análisis de riesgos"
+                src="/images/femsa/SP_DASH4_FEMSA.webp"
+                alt="Análisis de riesgos FEMSA"
                 className="size-full object-cover"
               />
             </div>
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                alt="Certificaciones y cumplimiento"
+                src="/images/femsa/SP_DASH5_FEMSA.webp"
+                alt="Certificaciones y cumplimiento FEMSA"
                 className="size-full object-cover"
               />
             </div>

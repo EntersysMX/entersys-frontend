@@ -1,23 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(for file in AwaFooter11.jsx AwaGallery01.jsx AwaNavbar11.jsx AwaStats30.jsx AwaTestimonial17.jsx)",
-      "Bash(do echo \"$file:\")",
-      "Bash(grep:*)",
-      "Bash(done)",
-      "Bash(cp:*)",
-      "Bash(rm:*)",
-      "Bash(curl:*)",
-      "Bash(mkdir:*)",
-      "Read(//c/Users/Usuario/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/**)",
-      "Bash(powershell:*)",
-      "Bash(node:*)",
-      "Bash(for dir in \"Hero 114\" \"Layout 141\" \"Layout 213\" \"Layout 93\")",
-      "Bash(do echo \"=== $dir ===\")",
-      "Bash(ls \"C:\\Web_Entersys\\entersys-frontend\\entersys_react_20septiembre_2025\\Imagenes\\Nosotros$dir\")",
-      "Bash(gcloud compute ssh:*)",
-      "Read(//tmp/**)",
-      "Bash(python:*)"
+      "WebFetch(domain:www.pexels.com)",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []

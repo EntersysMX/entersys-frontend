@@ -12,6 +12,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { RxPlus } from "react-icons/rx";
 import { analyticsService } from "../../../services/analytics";
+import { Helmet } from "react-helmet-async";
+import { generateFAQSchema } from "../../SEO/schemas";
 
 export function Faq04({ colorScheme = 1, ...props }) {
   const navigate = useNavigate();
@@ -20,7 +22,37 @@ export function Faq04({ colorScheme = 1, ...props }) {
     analyticsService.trackEvent('CTA', 'Button Click', 'Contactar - FAQ', 'inicio-faq');
     navigate('/contacto#formulario-contacto');
   };
+
+  const faqData = [
+    {
+      question: "¿Qué es Entersys?",
+      answer: "Somos una consultora de negocios que simplifica procesos empresariales mediante digitalización, automatización e inteligencia artificial."
+    },
+    {
+      question: "¿Cómo funcionan sus metodologías?",
+      answer: "Utilizamos Worksys para digitalizar procesos y Expersys para implementar sistemas de gestión y acreditaciones."
+    },
+    {
+      question: "¿Cuánto tiempo toma un proyecto?",
+      answer: "Garantizamos resultados visibles en semanas, no en meses, con un enfoque ágil y personalizado."
+    },
+    {
+      question: "¿Trabajan con empresas de todos los tamaños?",
+      answer: "Sí, nuestras soluciones son escalables y se adaptan a las necesidades de pequeñas, medianas y grandes empresas."
+    },
+    {
+      question: "¿Ofrecen soporte después de la implementación?",
+      answer: "Brindamos acompañamiento continuo para asegurar la óptima adopción de nuestras soluciones."
+    }
+  ];
+
   return (
+    <>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(generateFAQSchema(faqData))}
+        </script>
+      </Helmet>
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container max-w-lg">
         <div className="rb-12 mb-12 text-center md:mb-18 lg:mb-20">
@@ -133,6 +165,7 @@ export function Faq04({ colorScheme = 1, ...props }) {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

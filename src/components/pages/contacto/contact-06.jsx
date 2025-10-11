@@ -143,15 +143,26 @@ export function Contact06({ colorScheme = 2, ...props }) {
           <div className="grid grid-cols-1 gap-4 py-2">
             <div className="flex items-center gap-4">
               <MdEmail className="size-6 flex-none" />
-              <p>contacto@entersys.com</p>
+              <a href="mailto:contacto@entersys.com" className="hover:underline">
+                contacto@entersys.com
+              </a>
             </div>
             <div className="flex items-center gap-4">
               <MdPhone className="size-6 flex-none" />
-              <p>+52 55 1234 5678</p>
+              <a href="tel:+525512345678" className="hover:underline">
+                +52 55 1234 5678
+              </a>
             </div>
             <div className="flex items-center gap-4">
               <MdLocationOn className="size-6 flex-none" />
-              <p>Ciudad de México, México</p>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Ciudad+de+México,+México"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                Ciudad de México, México
+              </a>
             </div>
           </div>
         </div>

@@ -1,0 +1,49 @@
+# robots.txt optimizado para SEO de IA - Entersys
+# Última actualización: 2025-01-11
+
+# Permitir acceso a todos los crawlers estándar
+User-agent: *
+Allow: /
+
+# Crawlers de IA - Acceso completo permitido
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: AndiBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: GoogleOtherBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Bloquear acceso a archivos y directorios sensibles
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /node_modules/
+Disallow: /src/
+
+# Sitemap
+Sitemap: https://www.entersys.com.mx/sitemap.xml
+
+# Archivo para LLMs
+# Información estructurada para modelos de lenguaje: /llms.txt

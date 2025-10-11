@@ -3,8 +3,16 @@
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Layout16({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleMeInteresaClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Me Interesa - Expersys Layout16', 'expersys-caracteristicas');
+    navigate('/contacto#formulario-contacto');
+  };
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -47,7 +55,7 @@ export function Layout16({ colorScheme = 1, ...props }) {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <button type="button" className="light-teal-button-custom">
+              <button type="button" className="light-teal-button-custom" onClick={handleMeInteresaClick}>
                 Me interesa
               </button>
             </div>

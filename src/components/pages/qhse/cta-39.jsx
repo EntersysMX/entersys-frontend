@@ -30,9 +30,9 @@ export function Cta39() {
           </div>
           <div className="flex items-center justify-center">
             <img
-              src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape4x3.svg"
+              src="/images/qhse/banner_meeting_worksys.webp"
               className="w-full object-cover"
-              alt="Transforma tu operación"
+              alt="Transforma tu operación con Worksys"
             />
           </div>
         </Card>

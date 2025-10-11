@@ -24,7 +24,7 @@ export function Stats30() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
           <Fragment>
             <Card className="p-8 first:flex first:flex-col first:md:col-span-2 first:md:row-span-1 first:lg:col-span-1 first:lg:row-span-2">
-              <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
+              <p className="mb-6 text-[2.5rem] leading-[1.2] font-bold md:mb-8 md:text-[3rem] lg:mb-10 lg:text-[3.5rem]">
                 714
               </p>
               <h3 className="heading-h6 font-bold mt-auto">
@@ -37,7 +37,18 @@ export function Stats30() {
           </Fragment>
           <Fragment>
             <Card className="p-8">
-              <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
+              <div className="mb-4 overflow-hidden rounded-lg">
+                <img
+                  src="/images/femsa/STATS_COVERAGE_FEMSA.webp"
+                  alt="Cobertura nacional FEMSA"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </Card>
+          </Fragment>
+          <Fragment>
+            <Card className="p-8">
+              <p className="mb-6 text-[2.5rem] leading-[1.2] font-bold md:mb-8 md:text-[3rem] lg:mb-10 lg:text-[3.5rem]">
                 225
               </p>
               <h3 className="heading-h6 font-bold">Unidades operativas</h3>
@@ -47,8 +58,8 @@ export function Stats30() {
             </Card>
           </Fragment>
           <Fragment>
-            <Card className="p-8">
-              <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
+            <Card className="p-8 [&:nth-last-child(2)]:order-last [&:nth-last-child(2)]:md:order-none">
+              <p className="mb-6 text-[2.5rem] leading-[1.2] font-bold md:mb-8 md:text-[3rem] lg:mb-10 lg:text-[3.5rem]">
                 100%
               </p>
               <h3 className="heading-h6 font-bold">
@@ -60,27 +71,14 @@ export function Stats30() {
             </Card>
           </Fragment>
           <Fragment>
-            <Card className="p-8 [&:nth-last-child(2)]:order-last [&:nth-last-child(2)]:md:order-none">
-              <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
-                Real-time
-              </p>
-              <h3 className="heading-h6 font-bold">
-                Trazabilidad instantánea
-              </h3>
-              <p className="mt-2">
-                Seguimiento en tiempo real de todos los proyectos
-              </p>
-            </Card>
-          </Fragment>
-          <Fragment>
             <Card className="p-8 last:order-first last:md:order-none">
-              <p className="mb-8 text-[3.5rem] leading-[1.3] font-bold md:mb-10 md:text-[4rem] lg:mb-12 lg:text-[5rem]">
-                0
-              </p>
-              <h3 className="heading-h6 font-bold">Margen de error</h3>
-              <p className="mt-2">
-                Estándares unificados en toda la operación
-              </p>
+              <div className="mb-4 overflow-hidden rounded-lg">
+                <img
+                  src="/images/femsa/STATS_DIGITAL_FEMSA.webp"
+                  alt="Digitalización FEMSA"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
             </Card>
           </Fragment>
         </div>

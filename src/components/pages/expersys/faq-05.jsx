@@ -10,9 +10,49 @@ import {
 import { Card } from "../../ui/Card";
 import React from "react";
 import { RxPlus } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
+import { Helmet } from "react-helmet-async";
+import { generateFAQSchema } from "../../SEO/schemas";
 
 export function Faq05({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleContactarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Contactar - Expersys FAQ', 'expersys-faq');
+    navigate('/contacto#formulario-contacto');
+  };
+
+  const faqData = [
+    {
+      question: "¿Qué certificaciones cubrimos?",
+      answer: "Trabajamos con acreditaciones ISO, SMETA, ECOVADIS y otras normas internacionales de gestión de calidad y sostenibilidad."
+    },
+    {
+      question: "¿Cuánto tiempo toma la implementación?",
+      answer: "Nuestro proceso está diseñado para generar resultados en semanas, no en meses."
+    },
+    {
+      question: "¿Es adecuado para mi empresa?",
+      answer: "Nuestras soluciones son escalables y se adaptan a organizaciones de diferentes tamaños y sectores."
+    },
+    {
+      question: "¿Requiere conocimientos técnicos?",
+      answer: "Utilizamos herramientas no-code que no requieren conocimientos de programación avanzados."
+    },
+    {
+      question: "¿Ofrecen soporte posterior?",
+      answer: "Brindamos acompañamiento continuo para garantizar la efectividad de la implementación."
+    }
+  ];
+
   return (
+    <>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(generateFAQSchema(faqData))}
+        </script>
+      </Helmet>
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
         <div className="rb-12 mb-12 max-w-lg md:mb-18 lg:mb-20">
@@ -115,12 +155,13 @@ export function Faq05({ colorScheme = 1, ...props }) {
           </h4>
           <p className="md:text-md">Nuestro equipo está listo para ayudarte</p>
           <div className="mt-6 md:mt-8">
-            <Button title="Contactar" variant="secondary">
+            <Button title="Contactar" variant="secondary" onClick={handleContactarClick}>
               Contactar
             </Button>
           </div>
         </div>
       </div>
     </section>
+    </>
   );
 }

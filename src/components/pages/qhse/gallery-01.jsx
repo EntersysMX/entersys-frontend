@@ -18,38 +18,38 @@ export function Gallery1() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                alt="Dashboard operativo"
+                src="/images/qhse/sp_dashboard_qhse.webp"
+                alt="Dashboard operativo QHSE"
                 className="size-full object-cover"
               />
             </div>
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                alt="Proceso digitalizado"
+                src="/images/qhse/sp_control_qhse.webp"
+                alt="Control de procesos"
                 className="size-full object-cover"
               />
             </div>
           </div>
           <div className="aspect-[21/9] overflow-hidden rounded-lg">
             <img
-              src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-              alt="Vista panorámica del sistema"
+              src="/images/qhse/sp_smartsheets_qhse.webp"
+              alt="Sistema Smartsheets QHSE"
               className="size-full object-cover"
             />
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                alt="Certificación ISO"
+                src="/images/qhse/sp_ISO9001_qhse.webp"
+                alt="Certificación ISO 9001"
                 className="size-full object-cover"
               />
             </div>
             <div className="aspect-video overflow-hidden rounded-lg">
               <img
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                alt="Equipo de trabajo"
+                src="/images/qhse/sp_dashboard_qhse.webp"
+                alt="Dashboard de seguimiento"
                 className="size-full object-cover"
               />
             </div>

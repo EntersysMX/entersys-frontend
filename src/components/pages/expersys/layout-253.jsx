@@ -3,8 +3,16 @@
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Layout253({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleContactarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Contactar Agente - Expersys Layout253', 'expersys-casos-uso');
+    navigate('/contacto#formulario-contacto');
+  };
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -19,7 +27,7 @@ export function Layout253({ colorScheme = 1, ...props }) {
               función de diversos casos de trabajo.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <button type="button" className="light-teal-button-custom">
+              <button type="button" className="light-teal-button-custom" onClick={handleContactarClick}>
                 Contactar un agente
               </button>
             </div>

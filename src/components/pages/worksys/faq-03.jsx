@@ -9,10 +9,54 @@ import {
 } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
+import { Helmet } from "react-helmet-async";
+import { generateFAQSchema } from "../../SEO/schemas";
 
-export function Faq3() {
+export function Faq3({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleMeInteresaClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Me Interesa - Worksys FAQ', 'worksys-faq');
+    navigate('/contacto#formulario-contacto');
+  };
+
+  const faqData = [
+    {
+      question: "Inventario y activos",
+      answer: "Control digital en tiempo real, portales financieros para validar movimientos, integración con compras y reposiciones automáticas."
+    },
+    {
+      question: "Producción",
+      answer: "Estandarización de procesos para reducir errores y desperdicio, control de lotes y calidad, tableros de eficiencia por línea de producción."
+    },
+    {
+      question: "Logística",
+      answer: "Seguimiento de entregas en tiempo real, trazabilidad de rutas, coordinación de almacenes y transportistas."
+    },
+    {
+      question: "Compliance",
+      answer: "Reportes automáticos listos para auditoría, evidencias documentales de normativas (ISO, SMETA, ECOVADIS), gestión de políticas internas."
+    },
+    {
+      question: "Mantenimiento técnico",
+      answer: "Tableros de mantenimiento preventivo, control de tickets correctivos, registro de historial por equipo o sucursal."
+    },
+    {
+      question: "Franquicias",
+      answer: "Operación homogénea en todas las sucursales, seguimiento de ventas diarias por punto, checklist digitales de estandarización."
+    }
+  ];
+
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
+    <>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(generateFAQSchema(faqData))}
+        </script>
+      </Helmet>
+    <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-12 lg:grid-cols-[.75fr,1fr] lg:gap-x-20">
         <div>
           <h2 className="rb-5 mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
@@ -23,7 +67,7 @@ export function Faq3() {
             hacia la transformación de tu negocio.
           </p>
           <div className="mt-6 md:mt-8">
-            <Button title="Me interesa" variant="secondary">
+            <Button title="Me interesa" onClick={handleMeInteresaClick}>
               Me interesa
             </Button>
           </div>
@@ -88,5 +132,6 @@ export function Faq3() {
         </Accordion>
       </div>
     </section>
+    </>
   );
 }

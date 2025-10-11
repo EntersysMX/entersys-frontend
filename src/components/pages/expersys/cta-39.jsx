@@ -3,8 +3,16 @@
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Cta39({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleContactarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Contactar Agente - Expersys CTA', 'expersys-cta');
+    navigate('/contacto#formulario-contacto');
+  };
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -23,6 +31,7 @@ export function Cta39({ colorScheme = 1, ...props }) {
               <button
                 type="button"
                 className="white-button-custom"
+                onClick={handleContactarClick}
               >
                 Contactar a un agente
               </button>

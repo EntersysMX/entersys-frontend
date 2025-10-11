@@ -2,8 +2,21 @@
 
 import { Button } from "@relume_io/relume-ui";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Header30({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleVerMasClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Ver Más - Expersys Header', 'expersys-header');
+    // Scroll suave a la siguiente sección
+    const nextSection = document.querySelector('#relume');
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative px-[5%]" {...props}>
       <div className="relative z-10 container">
@@ -18,7 +31,7 @@ export function Header30({ colorScheme = 1, ...props }) {
               en materia de sistemas de gestión de calidad.
             </p>
             <div className="mt-6 flex items-center justify-center gap-x-4 md:mt-8">
-              <button type="button" className="white-button-custom">
+              <button type="button" className="white-button-custom" onClick={handleVerMasClick}>
                 Ver más
               </button>
             </div>

@@ -21,28 +21,30 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
         <div className="columns-1 after:block md:columns-2 md:gap-x-8 lg:gap-x-12">
           <Card className="mb-12 break-inside-avoid">
             <div>
-              <a href="#">
+              <a href="/clientes/femsa">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
+                  src="/images/clientes/peak_soda_expersys_qhse.webp"
                   className="w-full object-cover"
-                  alt="Relume placeholder image"
+                  alt="FEMSA - Seguridad Industrial"
                 />
               </a>
             </div>
             <div className="px-5 py-6 sm:px-6">
               <h3 className="mb-2 text-xl font-bold md:text-2xl">
-                <a href="#">Manufactura automotriz</a>
+                <a href="/clientes/femsa">FEMSA</a>
               </h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros.
+                714 proyectos de alto riesgo ejecutados sin accidentes en 225 unidades operativas.
               </p>
               <div className="mt-3 flex flex-wrap gap-2 md:mt-4">
                 <Badge>
-                  <a href="#">Eficiencia</a>
+                  <a href="/worksys">Worksys</a>
                 </Badge>
                 <Badge>
-                  <a href="#">Digitalización</a>
+                  <a href="#">Smartsheets</a>
+                </Badge>
+                <Badge>
+                  <a href="#">Seguridad</a>
                 </Badge>
                 <Badge>
                   <a href="#">Automatización</a>
@@ -55,37 +57,39 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
                 iconRight={<RxChevronRight />}
                 className="mt-5 md:mt-6"
               >
-                <a href="#">Ver proyecto</a>
+                <a href="/clientes/femsa">Ver proyecto</a>
               </Button>
             </div>
           </Card>
           <Card className="mb-12 break-inside-avoid">
             <div>
-              <a href="#">
+              <a href="/clientes/ochoa">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
+                  src="/images/clientes/peak_corn_expersys_PDMO.webp"
                   className="w-full object-cover"
-                  alt="Relume placeholder image"
+                  alt="Productos de Maíz Ochoa - Control de Calidad"
                 />
               </a>
             </div>
             <div className="px-5 py-6 sm:px-6">
               <h3 className="mb-2 text-xl font-bold md:text-2xl">
-                <a href="#">Retail tecnológico</a>
+                <a href="/clientes/ochoa">Productos de Maíz Ochoa</a>
               </h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros.
+                Del 56% al 95% de cumplimiento en calidad. Dashboards para el gerenciamiento visual en tiempo real.
               </p>
               <div className="mt-3 flex flex-wrap gap-2 md:mt-4">
                 <Badge>
-                  <a href="#">Cumplimiento</a>
+                  <a href="/worksys">Worksys</a>
                 </Badge>
                 <Badge>
-                  <a href="#">Gestión</a>
+                  <a href="#">Smartsheets</a>
                 </Badge>
                 <Badge>
-                  <a href="#">Transformación</a>
+                  <a href="#">Gestión de calidad</a>
+                </Badge>
+                <Badge>
+                  <a href="#">Dashboards</a>
                 </Badge>
               </div>
               <Button
@@ -95,37 +99,39 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
                 iconRight={<RxChevronRight />}
                 className="mt-5 md:mt-6"
               >
-                <a href="#">Ver proyecto</a>
+                <a href="/clientes/ochoa">Ver proyecto</a>
               </Button>
             </div>
           </Card>
           <Card className="mb-12 break-inside-avoid">
             <div>
-              <a href="#">
+              <a href="/clientes/qhse">
                 <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
+                  src="/images/clientes/peak_office_expersys.webp"
                   className="w-full object-cover"
-                  alt="Relume placeholder image"
+                  alt="QHSE - Crecimiento y ISO 9001"
                 />
               </a>
             </div>
             <div className="px-5 py-6 sm:px-6">
               <h3 className="mb-2 text-xl font-bold md:text-2xl">
-                <a href="#">Servicios financieros</a>
+                <a href="/clientes/qhse">QHSE</a>
               </h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros.
+                De 11 a 253 millones de pesos en 6 años. Crecimiento del 2,000% y consolidación de procesos bajo la norma ISO 9001.
               </p>
               <div className="mt-3 flex flex-wrap gap-2 md:mt-4">
                 <Badge>
-                  <a href="#">Inteligencia</a>
+                  <a href="/worksys">Worksys</a>
                 </Badge>
                 <Badge>
-                  <a href="#">Datos</a>
+                  <a href="/expersys">Expersys</a>
                 </Badge>
                 <Badge>
-                  <a href="#">Estrategia</a>
+                  <a href="#">ISO 9001</a>
+                </Badge>
+                <Badge>
+                  <a href="#">Automatización</a>
                 </Badge>
               </div>
               <Button
@@ -135,47 +141,7 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
                 iconRight={<RxChevronRight />}
                 className="mt-5 md:mt-6"
               >
-                <a href="#">Ver proyecto</a>
-              </Button>
-            </div>
-          </Card>
-          <Card className="mb-12 break-inside-avoid">
-            <div>
-              <a href="#">
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                  className="w-full object-cover"
-                  alt="Relume placeholder image"
-                />
-              </a>
-            </div>
-            <div className="px-5 py-6 sm:px-6">
-              <h3 className="mb-2 text-xl font-bold md:text-2xl">
-                <a href="#">Project name here</a>
-              </h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros.
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2 md:mt-4">
-                <Badge>
-                  <a href="#">Tag one</a>
-                </Badge>
-                <Badge>
-                  <a href="#">Tag two</a>
-                </Badge>
-                <Badge>
-                  <a href="#">Tag three</a>
-                </Badge>
-              </div>
-              <Button
-                title="View project"
-                variant="link"
-                size="link"
-                iconRight={<RxChevronRight />}
-                className="mt-5 md:mt-6"
-              >
-                <a href="#">View project</a>
+                <a href="/clientes/qhse">Ver proyecto</a>
               </Button>
             </div>
           </Card>

@@ -1,6 +1,6 @@
 {
   "name": "entersys-frontend",
-  "version": "2025.10.10-1000-4bede96",
+  "version": "2025.10.11-1505-5a16daa",
   "description": "Frontend web application for Entersys.mx project",
   "private": true,
   "type": "module",
@@ -13,6 +13,10 @@
     "deploy:server": "node scripts/deploy.js server",
     "deploy:help": "node scripts/deploy.js help",
     "version:bump": "node scripts/deploy.js version",
+    "pwa:icons": "node scripts/generate-pwa-icons.js",
+    "pwa:screenshots": "node scripts/generate-pwa-screenshots.js",
+    "pwa:all": "npm run pwa:icons && npm run pwa:screenshots",
+    "security:headers": "node scripts/generate-security-headers.js",
     "clean": "rm -rf dist node_modules/.vite src/version.json src/deploy-info.json"
   },
   "repository": {
@@ -56,6 +60,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "postcss": "^8.4.27",
+    "sharp": "^0.34.4",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.5"
   }

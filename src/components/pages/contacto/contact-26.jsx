@@ -20,9 +20,9 @@ export function Contact26() {
           <div className="flex flex-col items-center justify-start text-center">
             <div className="mb-6 aspect-[3/2] md:mb-8">
               <img
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
+                src="/images/contacto/cdmx.jpg"
                 className="h-full w-full rounded-image object-cover"
-                alt="Relume placeholder image"
+                alt="Ciudad de México - Oficina Entersys CDMX | Skyline Paseo de la Reforma"
               />
             </div>
             <h3 className="mb-3 text-2xl leading-[1.4] font-bold md:text-3xl lg:mb-4 lg:text-4xl">
@@ -32,22 +32,28 @@ export function Contact26() {
               Oficina principal en el corazón de la ciudad
             </p>
             <div className="mt-5 md:mt-6">
-              <Button
-                title="Ver dirección"
-                variant="link"
-                size="link"
-                iconRight={<RxChevronRight />}
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Paseo+de+la+Reforma,+Ciudad+de+México,+CDMX"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Ver dirección
-              </Button>
+                <Button
+                  title="Ver dirección"
+                  variant="link"
+                  size="link"
+                  iconRight={<RxChevronRight />}
+                >
+                  Ver dirección
+                </Button>
+              </a>
             </div>
           </div>
           <div className="flex flex-col items-center justify-start text-center">
             <div className="mb-6 aspect-[3/2] md:mb-8">
               <img
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
+                src="/images/contacto/monterrey_skyline.webp"
                 className="h-full w-full rounded-image object-cover"
-                alt="Relume placeholder image"
+                alt="Monterrey - Oficina Entersys MTY | Skyline Cerro de la Silla"
               />
             </div>
             <h3 className="mb-3 text-2xl leading-[1.4] font-bold md:text-3xl lg:mb-4 lg:text-4xl">
@@ -57,14 +63,20 @@ export function Contact26() {
               Oficina de consultoría en el norte de México
             </p>
             <div className="mt-5 md:mt-6">
-              <Button
-                title="Ver dirección"
-                variant="link"
-                size="link"
-                iconRight={<RxChevronRight />}
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Monterrey,+Nuevo+León,+México"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Ver dirección
-              </Button>
+                <Button
+                  title="Ver dirección"
+                  variant="link"
+                  size="link"
+                  iconRight={<RxChevronRight />}
+                >
+                  Ver dirección
+                </Button>
+              </a>
             </div>
           </div>
         </div>

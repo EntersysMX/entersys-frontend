@@ -1,0 +1,109 @@
+# Entersys
+
+> Entersys transforma operaciones empresariales con Worksys y Expersys. Automatización de procesos, gestión de calidad y sistemas de certificación para PYMES en México.
+
+## Páginas principales
+
+- **Inicio** (/) - Presentación de servicios Worksys y Expersys para automatización empresarial
+- **Worksys** (/worksys) - Sistema de gestión de procesos empresariales y automatización de workflows
+- **Expersys** (/expersys) - Certificaciones ISO y gestión de calidad operativa (ISO 9001, SMETA, ECOVADIS, ISO 14001, ISO 45001)
+- **Nosotros** (/nosotros) - Historia, equipo y clientes que confían en Entersys
+- **Clientes** (/clientes) - Casos de éxito y testimonios de empresas transformadas
+- **Contacto** (/contacto) - Formulario de contacto, oficinas en CDMX y Monterrey
+
+## Servicios principales
+
+### Worksys
+- Automatización de workflows empresariales
+- Dashboards ejecutivos en tiempo real
+- Centralización de tareas y procesos
+- Reducción de tareas manuales en 70-80%
+- Mejora de eficiencia operativa
+
+### Expersys
+- Certificaciones de calidad: ISO 9001, SMETA, ECOVADIS, ISO 14001, ISO 45001
+- Acompañamiento inicio a fin para acreditaciones
+- Auditoría con respaldo de expertos certificados Six Sigma Green Belt
+- Documentación y procesos para cumplimiento normativo
+
+## Casos de uso
+
+### Worksys es ideal para:
+- Inventario y activos con control digital en tiempo real
+- Producción con estandarización de procesos
+- Logística y seguimiento de entregas
+- Compliance con reportes automáticos para auditoría
+- Mantenimiento técnico preventivo
+- Franquicias con operación homogénea
+
+### Expersys es ideal para:
+- Manufactura - Certificación ISO 9001
+- Retail y franquicias - Acreditaciones SMETA
+- Alimentos y bebidas - Certificaciones ECOVADIS
+- Logística y distribución - Cumplimiento normativo
+
+## Clientes destacados
+
+- FEMSA - Digitalización de gestión y documentación de contratistas
+- Productos de Maíz Ochoa - Sistema de gestión de calidad en líneas productivas
+- QHSE - Implementación completa desde metodologías hasta digitalización
+- Chilango Garage - Servicios mecánicos automotrices
+- MLM - Manufactura volumétrica de materiales promocionales
+
+## Industrias atendidas
+
+- Manufactura
+- Tratamiento de agua
+- Mantenimiento en flotillas
+- Servicios profesionales
+- Retail y franquicias
+- Alimentos y bebidas
+- Logística y distribución
+
+## Información de contacto
+
+- **Sitio web**: https://www.entersys.com.mx
+- **WhatsApp**: +52 56 2568 3662
+- **Email**: contacto@entersys.com
+- **Teléfono**: +52 55 1234 5678
+
+### Oficinas
+
+**Ciudad de México**
+- Ubicación: Paseo de la Reforma, CDMX
+- Google Maps: https://www.google.com/maps/search/?api=1&query=Paseo+de+la+Reforma,+Ciudad+de+México,+CDMX
+
+**Monterrey**
+- Ubicación: Monterrey, Nuevo León, México
+- Google Maps: https://www.google.com/maps/search/?api=1&query=Monterrey,+Nuevo+León,+México
+
+## Redes sociales
+
+- LinkedIn: https://linkedin.com/company/entersys
+- WhatsApp: https://wa.me/5625683662
+
+## Tecnologías utilizadas
+
+- **Smartsheet** - Plataforma líder en gestión de proyectos
+- **No Code** - Aplicaciones sin programación para adopción fácil
+- **IA** - Automatización de tareas con agentes de IA y LLM
+
+## Metodologías
+
+- Visual Management para identificar cuellos de botella
+- Six Sigma Green Belt para auditorías de calidad
+- Sistemas de gestión digital y documentación clara
+- Procesos listos para competir en mercados exigentes
+
+## Propuesta de valor
+
+Entersys simplifica la complejidad operativa para capitalizar el tiempo. WorkSys y ExperSys automatizan procesos empresariales con enfoque en:
+- Reducción de 15-25 horas semanales en tareas manuales
+- ROI del 300-500% en el primer año
+- Implementaciones que generan resultados en semanas, no meses
+- Acompañamiento completo desde consultoría hasta implementación
+
+---
+
+*Última actualización: Enero 2025*
+*Para más información: https://www.entersys.com.mx/contacto*

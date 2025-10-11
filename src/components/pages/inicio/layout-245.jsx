@@ -59,10 +59,14 @@ export function Layout245({ colorScheme = 1, ...props }) {
             </div>
           </div>
           <div className="mt-10 flex items-center gap-4 md:mt-14 lg:mt-16">
-            <Button>Solicitar</Button>
-            <Button iconRight={<RxChevronRight />} variant="link" size="link">
-              Ver clientes
-            </Button>
+            <a href="https://wa.me/5625683662" target="_blank" rel="noopener noreferrer">
+              <Button>Solicitar</Button>
+            </a>
+            <a href="/clientes">
+              <Button iconRight={<RxChevronRight />} variant="link" size="link">
+                Ver clientes
+              </Button>
+            </a>
           </div>
         </div>
       </div>

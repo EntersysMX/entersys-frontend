@@ -3,11 +3,30 @@
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { RxChevronRight } from "react-icons/rx";
 import AnimatedSection, { AnimatedStaggerList, AnimatedStaggerItem } from "../../AnimatedSection";
 import { motion } from "framer-motion";
+import { analyticsService } from "../../../services/analytics";
 
 export function Layout241({ colorScheme = 4, ...props }) {
+  const navigate = useNavigate();
+
+  const handleManufacturaClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Ver Casos Éxito - Manufactura', 'inicio-industrias');
+    navigate('/clientes/ochoa');
+  };
+
+  const handleTratamientoAguaClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Auditoría - Tratamiento Agua', 'inicio-industrias');
+    navigate('/clientes/qhse');
+  };
+
+  const handleFlotillasClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Gestión Flotillas', 'inicio-industrias');
+    navigate('/clientes/femsa');
+  };
+
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -58,6 +77,7 @@ export function Layout241({ colorScheme = 4, ...props }) {
                   variant="link"
                   size="link"
                   iconRight={<RxChevronRight />}
+                  onClick={handleManufacturaClick}
                 >
                   Ver casos de éxito
                 </Button>
@@ -93,6 +113,7 @@ export function Layout241({ colorScheme = 4, ...props }) {
                   variant="link"
                   size="link"
                   iconRight={<RxChevronRight />}
+                  onClick={handleTratamientoAguaClick}
                 >
                   Auditoría
                 </Button>
@@ -128,6 +149,7 @@ export function Layout241({ colorScheme = 4, ...props }) {
                   variant="link"
                   size="link"
                   iconRight={<RxChevronRight />}
+                  onClick={handleFlotillasClick}
                 >
                   Gestión flotillas
                 </Button>

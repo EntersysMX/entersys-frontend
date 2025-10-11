@@ -3,8 +3,16 @@
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Layout239({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleVerCasosClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Ver Casos Éxito - Expersys Layout239', 'expersys-evidencias');
+    navigate('/clientes');
+  };
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -26,23 +34,7 @@ export function Layout239({ colorScheme = 1, ...props }) {
             <div className="flex w-full flex-col items-center text-center">
               <div className="rb-6 mb-6 md:mb-8">
                 <img
-                  src="/imagenes/expersys/servicios_insignia_inicio.webp"
-                  alt="Red de franquicias retail"
-                  className="rounded-image"
-                />
-              </div>
-              <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
-                Red de franquicias retail
-              </h3>
-              <p>
-                Acreditación SMETA que abrió puertas a contratos
-                internacionales.
-              </p>
-            </div>
-            <div className="flex w-full flex-col items-center text-center">
-              <div className="rb-6 mb-6 md:mb-8">
-                <img
-                  src="/imagenes/expersys/section_auditory_expersys.webp"
+                  src="/imagenes/expersys/peak_soda_expersys_qhse.webp"
                   alt="QHSE"
                   className="rounded-image"
                 />
@@ -55,7 +47,7 @@ export function Layout239({ colorScheme = 1, ...props }) {
             <div className="flex w-full flex-col items-center text-center">
               <div className="rb-6 mb-6 md:mb-8">
                 <img
-                  src="/imagenes/expersys/banner_meeting_worksys.webp"
+                  src="/imagenes/expersys/peak_office_expersys.webp"
                   alt="FEMSA"
                   className="rounded-image"
                 />
@@ -70,8 +62,8 @@ export function Layout239({ colorScheme = 1, ...props }) {
              <div className="flex w-full flex-col items-center text-center">
               <div className="rb-6 mb-6 md:mb-8">
                 <img
-                  src="/imagenes/expersys/banner_meeting_worksys.webp"
-                  alt="FEMSA"
+                  src="/imagenes/expersys/peak_corn_expersys_PDMO.webp"
+                  alt="Productos de Maíz Ochoa"
                   className="rounded-image"
                 />
               </div>
@@ -84,7 +76,7 @@ export function Layout239({ colorScheme = 1, ...props }) {
             </div>
           </div>
           <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-            <Button variant="secondary">Ver casos de éxito</Button>
+            <Button variant="secondary" onClick={handleVerCasosClick}>Ver casos de éxito</Button>
           </div>
         </div>
       </div>
