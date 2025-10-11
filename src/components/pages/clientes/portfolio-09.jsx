@@ -18,8 +18,8 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
             Proyectos que demuestran nuestra capacidad de transformación
           </p>
         </div>
-        <div className="columns-1 after:block md:columns-2 md:gap-x-8 lg:gap-x-12">
-          <Card className="mb-12 break-inside-avoid">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-8 lg:gap-x-12">
+          <Card className="mb-0">
             <div>
               <a href="/clientes/femsa">
                 <img
@@ -37,18 +37,10 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
                 714 proyectos de alto riesgo ejecutados sin accidentes en 225 unidades operativas.
               </p>
               <div className="mt-3 flex flex-wrap gap-2 md:mt-4">
-                <Badge>
-                  <a href="/worksys">Worksys</a>
-                </Badge>
-                <Badge>
-                  <a href="#">Smartsheets</a>
-                </Badge>
-                <Badge>
-                  <a href="#">Seguridad</a>
-                </Badge>
-                <Badge>
-                  <a href="#">Automatización</a>
-                </Badge>
+                <Badge className="bg-blue-100 text-blue-800">Worksys</Badge>
+                <Badge className="bg-green-100 text-green-800">Smartsheets</Badge>
+                <Badge className="bg-purple-100 text-purple-800">Seguridad</Badge>
+                <Badge className="bg-orange-100 text-orange-800">Automatización</Badge>
               </div>
               <Button
                 title="Ver proyecto"
@@ -61,7 +53,7 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
               </Button>
             </div>
           </Card>
-          <Card className="mb-12 break-inside-avoid">
+          <Card className="mb-0">
             <div>
               <a href="/clientes/ochoa">
                 <img
@@ -79,18 +71,10 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
                 Del 56% al 95% de cumplimiento en calidad. Dashboards para el gerenciamiento visual en tiempo real.
               </p>
               <div className="mt-3 flex flex-wrap gap-2 md:mt-4">
-                <Badge>
-                  <a href="/worksys">Worksys</a>
-                </Badge>
-                <Badge>
-                  <a href="#">Smartsheets</a>
-                </Badge>
-                <Badge>
-                  <a href="#">Gestión de calidad</a>
-                </Badge>
-                <Badge>
-                  <a href="#">Dashboards</a>
-                </Badge>
+                <Badge className="bg-blue-100 text-blue-800">Worksys</Badge>
+                <Badge className="bg-green-100 text-green-800">Smartsheets</Badge>
+                <Badge className="bg-purple-100 text-purple-800">Gestión de calidad</Badge>
+                <Badge className="bg-cyan-100 text-cyan-800">Dashboards</Badge>
               </div>
               <Button
                 title="Ver proyecto"
@@ -103,7 +87,7 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
               </Button>
             </div>
           </Card>
-          <Card className="mb-12 break-inside-avoid">
+          <Card className="mb-0">
             <div>
               <a href="/clientes/qhse">
                 <img
@@ -121,18 +105,10 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
                 De 11 a 253 millones de pesos en 6 años. Crecimiento del 2,000% y consolidación de procesos bajo la norma ISO 9001.
               </p>
               <div className="mt-3 flex flex-wrap gap-2 md:mt-4">
-                <Badge>
-                  <a href="/worksys">Worksys</a>
-                </Badge>
-                <Badge>
-                  <a href="/expersys">Expersys</a>
-                </Badge>
-                <Badge>
-                  <a href="#">ISO 9001</a>
-                </Badge>
-                <Badge>
-                  <a href="#">Automatización</a>
-                </Badge>
+                <Badge className="bg-blue-100 text-blue-800">Worksys</Badge>
+                <Badge className="bg-teal-100 text-teal-800">Expersys</Badge>
+                <Badge className="bg-purple-100 text-purple-800">ISO 9001</Badge>
+                <Badge className="bg-orange-100 text-orange-800">Automatización</Badge>
               </div>
               <Button
                 title="Ver proyecto"
@@ -145,11 +121,6 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
               </Button>
             </div>
           </Card>
-        </div>
-        <div className="mt-6 flex justify-center md:mt-8">
-          <Button title="Ver más" variant="secondary" size="primary">
-            Ver más
-          </Button>
         </div>
       </div>
     </section>

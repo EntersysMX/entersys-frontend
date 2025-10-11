@@ -30,9 +30,9 @@ export function Cta39({ colorScheme = 1, ...props }) {
           </div>
           <div className="flex items-center justify-center">
             <img
-              src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape4x3.svg"
-              className="w-full object-cover"
-              alt="Relume placeholder image"
+              src="/imagenes/worksys/banner_meeting_worksys.webp"
+              className="w-full object-cover rounded-r-image"
+              alt="Reunión de transformación digital con Entersys"
             />
           </div>
         </Card>
