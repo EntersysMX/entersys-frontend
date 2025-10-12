@@ -51,38 +51,9 @@ export default defineConfig({
         // Cache busting con hash en nombres de archivo
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
-        // Manual chunking para mejor caching y rendimiento
-        manualChunks: (id) => {
-          // React core libraries
-          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
-            return 'vendor-react';
-          }
-          // React Router
-          if (id.includes('node_modules/react-router-dom') || id.includes('node_modules/react-router')) {
-            return 'vendor-router';
-          }
-          // MUI (Material-UI)
-          if (id.includes('node_modules/@mui') || id.includes('node_modules/@emotion')) {
-            return 'vendor-mui';
-          }
-          // Relume UI components
-          if (id.includes('node_modules/@relume_io')) {
-            return 'vendor-relume';
-          }
-          // Icon libraries
-          if (id.includes('node_modules/react-icons')) {
-            return 'vendor-icons';
-          }
-          // Framer Motion
-          if (id.includes('node_modules/framer-motion')) {
-            return 'vendor-framer';
-          }
-          // Other large vendor libraries
-          if (id.includes('node_modules')) {
-            return 'vendor-other';
-          }
-        }
+        assetFileNames: 'assets/[name]-[hash].[ext]'
+        // Vite automáticamente hace code splitting seguro basado en imports dinámicos
+        // Sin necesidad de manualChunks que puede causar problemas de orden de carga
       }
     }
   },
