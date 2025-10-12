@@ -12,6 +12,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+    <!-- Preload de recursos críticos para mejorar LCP -->
+    <link rel="preload" as="image" href="/imagenes/inicio/hero_principal_inicio-movil.webp" media="(max-width: 767px)" />
+    <link rel="preload" as="image" href="/imagenes/inicio/hero_principal_inicio-escritorio.webp" media="(min-width: 768px) and (max-width: 1919px)" />
+    <link rel="preload" as="image" href="/imagenes/inicio/hero_principal_inicio-escritorio-2x.webp" media="(min-width: 1920px)" />
+
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#0066cc" />
     <meta name="mobile-web-app-capable" content="yes" />

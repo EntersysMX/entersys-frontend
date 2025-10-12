@@ -92,7 +92,14 @@ const Feature = (feature) => {
         </div>
       </div>
       <div>
-        <img src={feature.image.src} className="w-full object-cover" alt={feature.image.alt} />
+        <img
+          src={feature.image.src}
+          className="w-full object-cover"
+          alt={feature.image.alt}
+          loading="lazy"
+          width="800"
+          height="600"
+        />
       </div>
     </div>
   );
