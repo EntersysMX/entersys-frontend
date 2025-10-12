@@ -6,7 +6,7 @@ import React from "react";
 
 export function Cta39({ colorScheme = 1, ...props }) {
   return (
-    <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28" {...props}>
+    <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
         <Card className="grid auto-cols-fr grid-cols-1 lg:grid-cols-2">
           <div className="flex flex-col justify-center p-8 md:p-12">

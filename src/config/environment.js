@@ -45,7 +45,7 @@ export const config = {
   // Información de contacto
   contact: {
     whatsapp: import.meta.env.VITE_WHATSAPP_NUMBER || '5215625683662',
-    email: import.meta.env.VITE_CONTACT_EMAIL || 'contacto@entersys.com.mx',
+    email: import.meta.env.VITE_CONTACT_EMAIL || 'contacto@entersys.mx',
     phone: import.meta.env.VITE_CONTACT_PHONE || '+52 56 2568 3662',
   },
 

@@ -14,7 +14,7 @@ export default function Clientes() {
         title="Clientes y Casos de Éxito - Entersys"
         description="Descubre cómo empresas mexicanas han transformado sus operaciones con Worksys y Expersys. Casos de éxito reales con resultados medibles."
         keywords="casos de éxito, clientes Entersys, testimonios, resultados, transformación digital, FEMSA, QHSE, Ochoa"
-        image="https://www.entersys.com.mx/imagenes/clientes/hero_clients_clientes.webp"
+        image="https://www.entersys.mx/imagenes/clientes/hero_clients_clientes.webp"
         url="/clientes"
       />
       <Header />

@@ -3,7 +3,14 @@
     "allow": [
       "WebFetch(domain:www.pexels.com)",
       "Bash(npm install:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(git push:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(curl -s https://www.entersys.mx/sitemap.xml)",
+      "Bash(curl -s https://www.entersys.mx/)",
+      "Bash(cat:*)",
+      "Bash(taskkill:*)"
     ],
     "deny": [],
     "ask": []

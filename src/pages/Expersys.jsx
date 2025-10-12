@@ -20,7 +20,7 @@ export default function Expersys() {
         title="Expersys - Certificaciones ISO y Gestión de Calidad | Entersys"
         description="Obtén certificaciones de calidad operativa: ISO 9001, SMETA, ECOVADIS, ISO 14001, ISO 45001. Acompañamiento inicio a fin."
         keywords="Expersys, certificaciones ISO, gestión calidad, SMETA, ECOVADIS, ISO 9001, ISO 14001, auditoría"
-        image="https://www.entersys.com.mx/imagenes/expersys/hero_quality_expersys.webp"
+        image="https://www.entersys.mx/imagenes/expersys/hero_quality_expersys.webp"
         url="/expersys"
         schemaData={expersysServiceSchema}
       />

@@ -19,7 +19,7 @@ export default function Nosotros() {
         title="Nosotros - Entersys | Innovación y Transformación Digital"
         description="Conoce la historia de Entersys y nuestro equipo. Ayudamos a empresas a automatizar operaciones y obtener certificaciones de calidad."
         keywords="Entersys, nosotros, equipo, innovación, transformación digital, historia empresa"
-        image="https://www.entersys.com.mx/imagenes/nosotros/banner_leaders_entersys_nosotros.webp"
+        image="https://www.entersys.mx/imagenes/nosotros/banner_leaders_entersys_nosotros.webp"
         url="/nosotros"
       />
       <Helmet>

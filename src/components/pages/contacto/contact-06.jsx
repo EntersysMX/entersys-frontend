@@ -143,8 +143,8 @@ export function Contact06({ colorScheme = 2, ...props }) {
           <div className="grid grid-cols-1 gap-4 py-2">
             <div className="flex items-center gap-4">
               <MdEmail className="size-6 flex-none" />
-              <a href="mailto:contacto@entersys.com" className="hover:underline">
-                contacto@entersys.com
+              <a href="mailto:contacto@entersys.mx" className="hover:underline">
+                contacto@entersys.mx
               </a>
             </div>
             <div className="flex items-center gap-4">

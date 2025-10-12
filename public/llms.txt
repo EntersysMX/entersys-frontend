@@ -62,7 +62,7 @@
 
 ## Información de contacto
 
-- **Sitio web**: https://www.entersys.com.mx
+- **Sitio web**: https://www.entersys.mx
 - **WhatsApp**: +52 56 2568 3662
 - **Email**: contacto@entersys.com
 - **Teléfono**: +52 55 1234 5678
@@ -106,4 +106,4 @@ Entersys simplifica la complejidad operativa para capitalizar el tiempo. WorkSys
 ---
 
 *Última actualización: Enero 2025*
-*Para más información: https://www.entersys.com.mx/contacto*
+*Para más información: https://www.entersys.mx/contacto*

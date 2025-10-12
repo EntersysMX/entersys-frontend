@@ -23,7 +23,7 @@ const Ochoa = () => {
         <title>Caso de éxito Productos de Maíz Ochoa: 95% calidad con Worksys | Entersys</title>
         <meta name="description" content="Descubre cómo Productos de Maíz Ochoa pasó del 56% al 95% de cumplimiento en calidad mediante digitalización de análisis de producción con Smartsheets y Daily Management." />
         <meta name="keywords" content="Productos de Maíz Ochoa, Worksys, Expersys, Control de Calidad, Smartsheets, Daily Management, Industria Alimenticia, Análisis de Producción" />
-        <link rel="canonical" href="https://entersys.com.mx/casos-exito/productos-maiz-ochoa-calidad-dashboards" />
+        <link rel="canonical" href="https://entersys.mx/casos-exito/productos-maiz-ochoa-calidad-dashboards" />
       </Helmet>
       <Header />
       <div className="container mx-auto px-[5%] pt-4">

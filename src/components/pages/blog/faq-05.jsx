@@ -106,7 +106,7 @@ export function Faq05({ colorScheme = 1, ...props }) {
                 ¿Cómo me contacto con ustedes?
               </AccordionTrigger>
               <AccordionContent className="md:pb-6">
-                Puedes escribirnos a contacto@entersys.com o utilizar el
+                Puedes escribirnos a contacto@entersys.mx o utilizar el
                 formulario de contacto en nuestra página. Estamos disponibles
                 para responder tus preguntas.
               </AccordionContent>

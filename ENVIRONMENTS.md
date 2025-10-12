@@ -377,7 +377,7 @@ if (config.features.versionInfo) {
 Para obtener valores reales de variables de entorno (API keys, credentials, etc):
 
 1. **Slack**: Canal #entersys-dev
-2. **Email**: dev@entersys.com.mx
+2. **Email**: dev@entersys.mx
 3. **1Password**: Vault "Entersys Frontend"
 
 ---

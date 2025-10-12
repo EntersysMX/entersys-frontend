@@ -19,7 +19,7 @@ const Home = () => {
         title="Entersys - Automatización Empresarial Worksys & Expersys | PYMES México"
         description="Transforma tu operación empresarial con Worksys y Expersys. Automatiza procesos, mejora eficiencia y obtén certificaciones de calidad. Demo gratuita."
         keywords="automatización empresarial, Worksys, Expersys, gestión procesos, PYMES México, software empresarial, certificaciones ISO"
-        image="https://www.entersys.com.mx/imagenes/inicio/hero_office_inicio.webp"
+        image="https://www.entersys.mx/imagenes/inicio/hero_office_inicio.webp"
         url="/"
         schemaData={organizationSchema}
         additionalSchemas={[websiteSchema]}

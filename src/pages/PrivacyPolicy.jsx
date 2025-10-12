@@ -77,7 +77,7 @@ export default function PrivacyPolicy() {
                 <li><strong>Oposición:</strong> Oponerte al tratamiento de tus datos para fines específicos</li>
               </ul>
               <p className="mb-4">
-                Para ejercer estos derechos, envía un correo a: <a href="mailto:privacidad@entersys.com.mx" className="text-blue-600 hover:underline">privacidad@entersys.com.mx</a>
+                Para ejercer estos derechos, envía un correo a: <a href="mailto:privacidad@entersys.mx" className="text-blue-600 hover:underline">privacidad@entersys.mx</a>
               </p>
             </section>
 
@@ -122,7 +122,7 @@ export default function PrivacyPolicy() {
               </p>
               <div className="bg-gray-50 p-6 rounded-lg">
                 <p className="mb-2"><strong>Entersys</strong></p>
-                <p className="mb-2">Email: <a href="mailto:privacidad@entersys.com.mx" className="text-blue-600 hover:underline">privacidad@entersys.com.mx</a></p>
+                <p className="mb-2">Email: <a href="mailto:privacidad@entersys.mx" className="text-blue-600 hover:underline">privacidad@entersys.mx</a></p>
                 <p className="mb-2">Teléfono: <a href="tel:+525625683662" className="text-blue-600 hover:underline">56 2568 3662</a></p>
                 <p className="mb-2">WhatsApp: <a href="https://wa.me/525625683662" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">56 2568 3662</a></p>
                 <p>Dirección: Ciudad de México, México</p>

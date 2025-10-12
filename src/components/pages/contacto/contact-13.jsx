@@ -29,8 +29,8 @@ export function Contact13({ colorScheme = 3, ...props }) {
                 Correo
               </h3>
               <p className="mb-2">Contáctanos para más información</p>
-              <a className="underline hover:opacity-80" href="mailto:contacto@entersys.com">
-                contacto@entersys.com
+              <a className="underline hover:opacity-80" href="mailto:contacto@entersys.mx">
+                contacto@entersys.mx
               </a>
             </div>
             <div>

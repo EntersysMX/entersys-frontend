@@ -262,7 +262,7 @@ export default function CookieSettings() {
               </p>
               <div className="bg-gray-50 p-6 rounded-lg">
                 <p className="mb-2"><strong>Entersys</strong></p>
-                <p className="mb-2">Email: <a href="mailto:privacidad@entersys.com.mx" className="text-blue-600 hover:underline">privacidad@entersys.com.mx</a></p>
+                <p className="mb-2">Email: <a href="mailto:privacidad@entersys.mx" className="text-blue-600 hover:underline">privacidad@entersys.mx</a></p>
                 <p className="mb-2">Teléfono: <a href="tel:+525625683662" className="text-blue-600 hover:underline">56 2568 3662</a></p>
               </div>
             </section>

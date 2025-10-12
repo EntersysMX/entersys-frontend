@@ -23,7 +23,7 @@ export default function Worksys() {
         title="Worksys - Sistema de Gestión de Procesos Empresariales | Entersys"
         description="Automatiza workflows, centraliza tareas y obtén dashboards ejecutivos en tiempo real. Reduce tareas manuales y mejora la eficiencia operativa."
         keywords="Worksys, automatización procesos, gestión empresarial, workflows, dashboards, PYMES, productividad"
-        image="https://www.entersys.com.mx/imagenes/worksys/hero_process_worksys.webp"
+        image="https://www.entersys.mx/imagenes/worksys/hero_process_worksys.webp"
         url="/worksys"
         schemaData={worksysServiceSchema}
       />
@@ -35,16 +35,16 @@ export default function Worksys() {
       <Header />
       <main>
         <Header30 colorScheme={2} />
-        <Layout421 colorScheme={1} />
-        <Layout74 colorScheme={1} />
+        <Layout421 colorScheme={2} />
+        <Layout74 colorScheme={4} />
         <Layout243 colorScheme={1} />
-        <Layout109 colorScheme={1} />
-        <Layout237 colorScheme={1} />
-        <Faq3 colorScheme={1} />
+        <Layout109 colorScheme={4} />
+        <Layout237 colorScheme={2} />
+        <Faq3 colorScheme={2} />
         <Layout2371 colorScheme={4} />
-        {/* <Blog37 colorScheme={1} /> */}
-        <Faq05 colorScheme={1} />
         <Cta39 colorScheme={3} />
+        {/* <Blog37 colorScheme={2} /> */}
+        <Faq05 colorScheme={1} />
       </main>
       <Footer />
     </>

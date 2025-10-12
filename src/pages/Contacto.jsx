@@ -15,7 +15,7 @@ export default function Contacto() {
         title="Contacto - Entersys | Solicita tu Demo Gratuita"
         description="Contacta a Entersys para una demo gratuita de Worksys o Expersys. CDMX y Monterrey. WhatsApp: 56 2568 3662"
         keywords="contacto Entersys, demo gratuita, agendar reunión, CDMX, Monterrey, WhatsApp"
-        image="https://www.entersys.com.mx/imagenes/contacto/cdmx.jpg"
+        image="https://www.entersys.mx/imagenes/contacto/cdmx.jpg"
         url="/contacto"
         additionalSchemas={[cdmxOfficeSchema, monterreyOfficeSchema]}
       />

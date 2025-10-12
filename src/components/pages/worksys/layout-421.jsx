@@ -23,7 +23,7 @@ export function Layout421({ colorScheme = 1, ...props }) {
     <section
       ref={containerRef}
       id="procesos-manuales"
-      className="relative px-[5%] py-16 md:py-24 lg:py-28 overflow-hidden"
+      className={`relative px-[5%] py-16 md:py-24 lg:py-28 overflow-hidden color-scheme-${colorScheme}`}
       {...props}
     >
       <div className="container">
