@@ -41,25 +41,27 @@ export default defineConfig({
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]',
-        // Code splitting optimizado
+        // Code splitting optimizado - Simplificado para evitar conflictos de React
         manualChunks: (id) => {
-          // Vendor chunks
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom')) {
+            // Agrupar React y todas las librerías que dependen de React
+            if (id.includes('react') ||
+                id.includes('react-dom') ||
+                id.includes('react-router') ||
+                id.includes('@mui') ||
+                id.includes('@emotion') ||
+                id.includes('react-helmet')) {
               return 'react-vendor';
             }
+            // Relume UI en chunk separado (grande)
             if (id.includes('@relume_io')) {
               return 'relume-ui';
             }
+            // Framer Motion en chunk separado (grande)
             if (id.includes('framer-motion')) {
               return 'framer-motion';
             }
-            if (id.includes('@mui')) {
-              return 'mui';
-            }
-            if (id.includes('react-router')) {
-              return 'router';
-            }
+            // Resto de vendors
             return 'vendor';
           }
           // Agrupar componentes por página
