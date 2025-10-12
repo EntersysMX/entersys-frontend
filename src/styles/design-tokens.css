@@ -1183,8 +1183,8 @@ button[role="radio"]:disabled[data-state="checked"]::before {
 }
 
 .color-scheme-2 button[role="tab"][data-state="active"] {
-  color: #FFFFFF !important;
-  font-weight: var(--color-scheme-2-link-font-weight) !important;
+  color: var(--color-scheme-2-link-hover) !important;
+  font-weight: 700 !important;
 }
 
 .color-scheme-3 button[role="tab"],
