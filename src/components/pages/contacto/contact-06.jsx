@@ -229,9 +229,9 @@ export function Contact06({ colorScheme = 2, ...props }) {
             />
           </div>
           <div className="grid w-full items-center">
-            <Label className="mb-2">¿En qué te podemos ayudar?</Label>
+            <Label htmlFor="interest" className="mb-2">¿En qué te podemos ayudar?</Label>
             <Select value={formData.interest} onValueChange={(value) => handleChange('interest', value)}>
-              <SelectTrigger>
+              <SelectTrigger id="interest">
                 <SelectValue placeholder="Elige una opción" />
               </SelectTrigger>
               <SelectContent>
@@ -244,34 +244,35 @@ export function Contact06({ colorScheme = 2, ...props }) {
             </Select>
           </div>
           <div className="grid w-full items-center py-3 md:py-4">
-            <Label className="mb-3 md:mb-4">¿Cómo nos conociste?</Label>
+            <Label htmlFor="source" className="mb-3 md:mb-4">¿Cómo nos conociste?</Label>
             <RadioGroup
+              id="source"
               value={formData.source}
               onValueChange={(value) => handleChange('source', value)}
               className="grid grid-cols-2 gap-x-6 gap-y-3.5"
             >
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="referral" id="referral" className="w-4 h-4" />
+              <div className="flex items-center space-x-3 min-h-[48px]">
+                <RadioGroupItem value="referral" id="referral" className="w-5 h-5" />
                 <Label htmlFor="referral" className="cursor-pointer text-sm">Referido</Label>
               </div>
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="social_media" id="social_media" className="w-4 h-4" />
+              <div className="flex items-center space-x-3 min-h-[48px]">
+                <RadioGroupItem value="social_media" id="social_media" className="w-5 h-5" />
                 <Label htmlFor="social_media" className="cursor-pointer text-sm">Redes sociales</Label>
               </div>
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="event" id="event" className="w-4 h-4" />
+              <div className="flex items-center space-x-3 min-h-[48px]">
+                <RadioGroupItem value="event" id="event" className="w-5 h-5" />
                 <Label htmlFor="event" className="cursor-pointer text-sm">Evento</Label>
               </div>
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="web_search" id="web_search" className="w-4 h-4" />
+              <div className="flex items-center space-x-3 min-h-[48px]">
+                <RadioGroupItem value="web_search" id="web_search" className="w-5 h-5" />
                 <Label htmlFor="web_search" className="cursor-pointer text-sm">Búsqueda web</Label>
               </div>
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="recommendation" id="recommendation" className="w-4 h-4" />
+              <div className="flex items-center space-x-3 min-h-[48px]">
+                <RadioGroupItem value="recommendation" id="recommendation" className="w-5 h-5" />
                 <Label htmlFor="recommendation" className="cursor-pointer text-sm">Recomendación</Label>
               </div>
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="other" id="other" className="w-4 h-4" />
+              <div className="flex items-center space-x-3 min-h-[48px]">
+                <RadioGroupItem value="other" id="other" className="w-5 h-5" />
                 <Label htmlFor="other" className="cursor-pointer text-sm">Otro</Label>
               </div>
             </RadioGroup>
@@ -288,8 +289,8 @@ export function Contact06({ colorScheme = 2, ...props }) {
               className="min-h-[11.25rem] overflow-auto"
             />
           </div>
-          <div className="mb-3 flex items-center space-x-2 text-sm md:mb-4">
-            <Checkbox id="terms" />
+          <div className="mb-3 flex items-center space-x-2 text-sm md:mb-4 min-h-[48px]">
+            <Checkbox id="terms" className="w-5 h-5" />
             <Label htmlFor="terms" className="cursor-pointer">
               Acepto términos y condiciones
             </Label>

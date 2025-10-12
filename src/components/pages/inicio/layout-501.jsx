@@ -38,7 +38,7 @@ export function Layout501({ colorScheme = 2, ...props }) {
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
-                className="border-0 border-b-[1.5px] border-border-alternative px-3 md:px-0 py-2 duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary text-sm md:text-base"
+                className="border-0 border-b-[1.5px] border-border-alternative px-6 md:px-0 py-3 duration-0 data-[state=active]:border-b-[1.5px] data-[state=active]:border-border-primary data-[state=active]:bg-transparent data-[state=active]:text-text-primary text-sm md:text-base min-h-[48px]"
               >
                 {tab.trigger}
               </TabsTrigger>
