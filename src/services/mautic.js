@@ -8,7 +8,7 @@ import { config } from '../config/environment';
 // URL del backend - FORZAR CACHE BUST v2
 const USE_BACKEND = true; // BACKEND ESTÁ FUNCIONANDO - v2.0
 const API_BASE = config.urls.api || 'http://34.134.14.202:8000';
-const CRM_ENDPOINT = `${API_BASE}/api/v1/crm`;
+const CRM_ENDPOINT = `${API_BASE}/v1/crm`; // API_BASE ya incluye /api
 const MAUTIC_URL = config.analytics.mautic.url || 'https://crm.entersys.mx';
 
 export class MauticService {
