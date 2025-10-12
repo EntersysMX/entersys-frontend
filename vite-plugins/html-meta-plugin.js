@@ -6,13 +6,20 @@
  */
 
 export function htmlMetaPlugin() {
+  let viteMode = 'development';
+
   return {
     name: 'vite-plugin-html-meta',
 
-    transformIndexHtml(html, ctx) {
-      const mode = ctx.server?.config?.mode || process.env.NODE_ENV || 'development';
+    configResolved(config) {
+      viteMode = config.mode;
+      console.log(`\n🏷️  HTML Meta Plugin: Modo detectado = ${viteMode}`);
+    },
 
-      console.log(`\n🏷️  HTML Meta Plugin: Inyectando meta tags para modo = ${mode}`);
+    transformIndexHtml(html) {
+      const mode = viteMode || 'development';
+
+      console.log(`🏷️  HTML Meta Plugin: Inyectando meta tags para modo = ${mode}`);
 
       // Si NO es producción, agregar meta robots noindex
       if (mode !== 'production') {
