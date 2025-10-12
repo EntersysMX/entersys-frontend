@@ -2,9 +2,17 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { versionPlugin } from './vite-plugins/version-plugin.js'
 import { securityHeadersPlugin } from './vite-plugins/security-headers-plugin.js'
+import { robotsPlugin } from './vite-plugins/robots-plugin.js'
+import { htmlMetaPlugin } from './vite-plugins/html-meta-plugin.js'
 
 export default defineConfig({
-  plugins: [react(), versionPlugin(), securityHeadersPlugin()],
+  plugins: [
+    react(),
+    versionPlugin(),
+    securityHeadersPlugin(),
+    robotsPlugin(),
+    htmlMetaPlugin()
+  ],
   server: {
     port: 3000,
     host: true

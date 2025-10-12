@@ -398,11 +398,74 @@ cat src/version.json
 
 ---
 
+## 🔍 SEO y Indexación
+
+### Protección contra indexación en Dev/Staging
+
+Los ambientes de **desarrollo** y **staging** están protegidos contra la indexación de motores de búsqueda mediante múltiples capas:
+
+#### 1. Meta Tags en HTML
+En desarrollo y staging se inyectan automáticamente:
+```html
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="environment" content="development">
+```
+
+#### 2. Meta Tags en React (react-helmet-async)
+El componente `MetaTags.jsx` detecta automáticamente el ambiente:
+- **Production**: `<meta name="robots" content="index, follow, ...">`
+- **Dev/Staging**: `<meta name="robots" content="noindex, nofollow">`
+
+#### 3. Archivo robots.txt
+El plugin de Vite copia automáticamente el archivo correcto:
+
+**Development/Staging** (`robots.development.txt` / `robots.staging.txt`):
+```txt
+User-agent: *
+Disallow: /
+```
+
+**Production** (`robots.production.txt`):
+```txt
+User-agent: *
+Allow: /
+Sitemap: https://entersys.mx/sitemap.xml
+```
+
+### Verificar Configuración SEO
+
+```bash
+# En desarrollo
+curl -I https://dev.entersys.mx/robots.txt
+# Debe mostrar: Disallow: /
+
+# En producción
+curl -I https://entersys.mx/robots.txt
+# Debe mostrar: Allow: /
+```
+
+### Logs del Plugin
+
+Durante el build, verás mensajes como:
+```
+🤖 Robots Plugin: Modo detectado = development
+✅ Robots Plugin: robots.development.txt → robots.txt
+⚠️  Robots Plugin: INDEXACIÓN BLOQUEADA (ambiente: development)
+
+🏷️  HTML Meta Plugin: Inyectando meta tags para modo = development
+⚠️  HTML Meta Plugin: NOINDEX inyectado (ambiente: development)
+```
+
+---
+
 ## 📚 Referencias
 
 - [Vite - Env Variables](https://vitejs.dev/guide/env-and-mode.html)
 - [React - Environment Variables](https://create-react-app.dev/docs/adding-custom-environment-variables/)
 - [12 Factor App - Config](https://12factor.net/config)
+- [Google - Robots meta tag](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag)
+- [robots.txt Specifications](https://www.robotstxt.org/)
 
 ---
 

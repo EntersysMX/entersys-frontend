@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { config } from '../../config/environment';
 
 const MetaTags = ({
   title,
@@ -11,9 +12,14 @@ const MetaTags = ({
   schemaData = null,
   additionalSchemas = []
 }) => {
-  const baseUrl = 'https://www.entersys.com.mx';
+  const baseUrl = config.seo.siteUrl || 'https://www.entersys.com.mx';
   const fullUrl = url ? `${baseUrl}${url}` : baseUrl;
   const defaultImage = `${baseUrl}/imagenes/og-default.webp`;
+
+  // Bloquear indexación en desarrollo y staging
+  const robotsContent = config.app.isProd
+    ? 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'
+    : 'noindex, nofollow';
 
   return (
     <Helmet>
@@ -39,10 +45,17 @@ const MetaTags = ({
       <meta name="twitter:image" content={image || defaultImage} />
 
       {/* Additional SEO Tags */}
-      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+      <meta name="robots" content={robotsContent} />
+      <meta name="googlebot" content={robotsContent} />
+      {!config.app.isProd && <meta name="googlebot-news" content="noindex, nofollow" />}
       <meta name="author" content="Entersys" />
       <meta name="language" content="Spanish" />
       <meta name="geo.region" content="MX" />
+
+      {/* Ambiente indicator (solo visible en dev/staging) */}
+      {!config.app.isProd && (
+        <meta name="environment" content={config.app.env} />
+      )}
 
       {/* Schema Markup */}
       {schemaData && (

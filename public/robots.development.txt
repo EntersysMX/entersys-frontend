@@ -1,0 +1,58 @@
+# robots.txt para DESARROLLO - Entersys
+# Este archivo BLOQUEA todos los crawlers en desarrollo
+
+# Bloquear TODOS los robots
+User-agent: *
+Disallow: /
+
+# Bloquear explícitamente crawlers de búsqueda
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+# Bloquear crawlers de IA
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: AndiBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: GoogleOtherBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+# NO hay sitemap en desarrollo
