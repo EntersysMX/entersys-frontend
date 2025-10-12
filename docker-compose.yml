@@ -7,7 +7,7 @@ services:
       - traefik
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.entersys-frontend.rule=Host(`dev.entersys.mx`)"
+      - "traefik.http.routers.entersys-frontend.rule=Host(`www.entersys.mx`) || Host(`entersys.mx`)"
       - "traefik.http.routers.entersys-frontend.entrypoints=websecure"
       - "traefik.http.routers.entersys-frontend.tls.certresolver=letsencrypt"
       - "traefik.http.services.entersys-frontend.loadbalancer.server.port=80"
