@@ -23,6 +23,12 @@ const Worksys = lazy(() => import('./pages/Worksys'))
 const Qhse = lazy(() => import('./pages/Qhse'))
 const Femsa = lazy(() => import('./pages/Femsa'))
 const Ochoa = lazy(() => import('./pages/Ochoa'))
+
+// Páginas legales
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
+const TermsOfService = lazy(() => import('./pages/TermsOfService'))
+const CookieSettings = lazy(() => import('./pages/CookieSettings'))
+
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 // Componente de loading mientras se cargan las páginas
@@ -70,6 +76,10 @@ function App() {
                 <Route path="/clientes/qhse" element={<Qhse />} />
                 <Route path="/clientes/femsa" element={<Femsa />} />
                 <Route path="/clientes/ochoa" element={<Ochoa />} />
+                {/* Páginas legales */}
+                <Route path="/politica-de-privacidad" element={<PrivacyPolicy />} />
+                <Route path="/terminos-de-servicio" element={<TermsOfService />} />
+                <Route path="/configuracion-de-cookies" element={<CookieSettings />} />
                 {/* Ruta 404 - debe estar al final */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

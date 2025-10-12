@@ -184,8 +184,11 @@ export class VersionManager {
   initialize() {
     console.log(`🚀 Entersys App v${this.currentVersion}`);
 
+    // Guardar la versión anterior ANTES de actualizar
+    const previousVersion = this.getStoredVersion();
+
     if (this.hasNewVersion()) {
-      console.log(`📱 New version detected: ${this.currentVersion} (was: ${this.getStoredVersion()})`);
+      console.log(`📱 New version detected: ${this.currentVersion} (was: ${previousVersion || 'none'})`);
 
       // Limpiar caché anterior
       this.clearOldCache();
@@ -193,8 +196,9 @@ export class VersionManager {
       // Actualizar versión
       this.updateStoredVersion();
 
-      // Mostrar notificación si no es la primera visita
-      if (this.getStoredVersion() !== null) {
+      // Mostrar notificación SOLO si había una versión anterior diferente
+      // NO mostrar si es la primera visita (previousVersion === null)
+      if (previousVersion !== null && previousVersion !== this.currentVersion) {
         this.showUpdateNotification();
       }
     } else {

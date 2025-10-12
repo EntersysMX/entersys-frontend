@@ -103,9 +103,6 @@ const Footer = ({ colorScheme = 1, ...props }) => {
                   <a href="/clientes">Clientes</a>
                 </li>
                 <li className="py-2 text-sm font-semibold">
-                  <a href="/blog">Blog</a>
-                </li>
-                <li className="py-2 text-sm font-semibold">
                   <a href="/contacto">Contacto</a>
                 </li>
               </ul>
@@ -115,13 +112,13 @@ const Footer = ({ colorScheme = 1, ...props }) => {
             <p className="mt-8 md:mt-0">© 2024 Entersys. Todos los derechos reservados.</p>
             <ul className="grid grid-flow-row grid-cols-[max-content] justify-center gap-y-4 text-sm md:grid-flow-col md:gap-x-6 md:gap-y-0">
               <li className="underline">
-                <a href="#">Política de privacidad</a>
+                <a href="/politica-de-privacidad">Política de privacidad</a>
               </li>
               <li className="underline">
-                <a href="#">Términos de servicio</a>
+                <a href="/terminos-de-servicio">Términos de servicio</a>
               </li>
               <li className="underline">
-                <a href="#">Configuración de cookies</a>
+                <a href="/configuracion-de-cookies">Configuración de cookies</a>
               </li>
             </ul>
           </div>
