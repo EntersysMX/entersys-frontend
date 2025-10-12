@@ -10,6 +10,7 @@
 export const setupErrorSuppression = () => {
   // Suppress runtime.lastError messages (Chrome extension errors)
   const originalConsoleError = console.error;
+  const originalConsoleWarn = console.warn;
 
   console.error = (...args) => {
     const message = args.join(' ').toLowerCase();
@@ -37,6 +38,31 @@ export const setupErrorSuppression = () => {
 
     // For all other errors, use original console.error
     originalConsoleError.apply(console, args);
+  };
+
+  // Suppress React warnings from third-party libraries
+  console.warn = (...args) => {
+    const message = args.join(' ').toLowerCase();
+
+    // List of warning patterns to suppress
+    const suppressWarningPatterns = [
+      'received `true` for a non-boolean attribute `jsx`',
+      'received true for a non-boolean attribute jsx'
+    ];
+
+    // Check if this is a third-party library warning
+    const shouldSuppress = suppressWarningPatterns.some(pattern =>
+      message.includes(pattern)
+    );
+
+    if (shouldSuppress) {
+      // Suppress warning from Relume UI library
+      console.debug('🔇 Suppressed third-party library warning:', ...args);
+      return;
+    }
+
+    // For all other warnings, use original console.warn
+    originalConsoleWarn.apply(console, args);
   };
 
   // Global error handler for unhandled promise rejections

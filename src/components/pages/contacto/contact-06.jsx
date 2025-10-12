@@ -175,6 +175,7 @@ export function Contact06({ colorScheme = 2, ...props }) {
               <Input
                 type="text"
                 id="firstName"
+                name="firstName"
                 value={formData.firstName}
                 onChange={(e) => handleChange('firstName', e.target.value)}
                 required
@@ -187,6 +188,7 @@ export function Contact06({ colorScheme = 2, ...props }) {
               <Input
                 type="text"
                 id="lastName"
+                name="lastName"
                 value={formData.lastName}
                 onChange={(e) => handleChange('lastName', e.target.value)}
               />
@@ -200,6 +202,7 @@ export function Contact06({ colorScheme = 2, ...props }) {
               <Input
                 type="email"
                 id="email"
+                name="email"
                 value={formData.email}
                 onChange={(e) => handleChange('email', e.target.value)}
                 required
@@ -212,6 +215,7 @@ export function Contact06({ colorScheme = 2, ...props }) {
               <Input
                 type="text"
                 id="company"
+                name="company"
                 value={formData.company}
                 onChange={(e) => handleChange('company', e.target.value)}
               />
@@ -224,14 +228,15 @@ export function Contact06({ colorScheme = 2, ...props }) {
             <Input
               type="tel"
               id="phone"
+              name="phone"
               value={formData.phone}
               onChange={(e) => handleChange('phone', e.target.value)}
             />
           </div>
           <div className="grid w-full items-center">
-            <Label htmlFor="interest" className="mb-2">¿En qué te podemos ayudar?</Label>
-            <Select value={formData.interest} onValueChange={(value) => handleChange('interest', value)}>
-              <SelectTrigger id="interest">
+            <Label id="interest-label" htmlFor="interest" className="mb-2">¿En qué te podemos ayudar?</Label>
+            <Select name="interest" value={formData.interest} onValueChange={(value) => handleChange('interest', value)}>
+              <SelectTrigger id="interest" aria-labelledby="interest-label">
                 <SelectValue placeholder="Elige una opción" />
               </SelectTrigger>
               <SelectContent>
@@ -244,12 +249,13 @@ export function Contact06({ colorScheme = 2, ...props }) {
             </Select>
           </div>
           <div className="grid w-full items-center py-3 md:py-4">
-            <Label htmlFor="source" className="mb-3 md:mb-4">¿Cómo nos conociste?</Label>
+            <Label id="source-label" className="mb-3 md:mb-4">¿Cómo nos conociste?</Label>
             <RadioGroup
-              id="source"
+              name="source"
               value={formData.source}
               onValueChange={(value) => handleChange('source', value)}
               className="grid grid-cols-2 gap-x-6 gap-y-3.5"
+              aria-labelledby="source-label"
             >
               <div className="flex items-center space-x-3 min-h-[48px]">
                 <RadioGroupItem value="referral" id="referral" className="w-5 h-5" />
@@ -283,6 +289,7 @@ export function Contact06({ colorScheme = 2, ...props }) {
             </Label>
             <Textarea
               id="message"
+              name="message"
               placeholder="Escribe tu mensaje"
               value={formData.message}
               onChange={(e) => handleChange('message', e.target.value)}
@@ -290,7 +297,7 @@ export function Contact06({ colorScheme = 2, ...props }) {
             />
           </div>
           <div className="mb-3 flex items-center space-x-2 text-sm md:mb-4 min-h-[48px]">
-            <Checkbox id="terms" className="w-5 h-5" />
+            <Checkbox id="terms" name="terms" className="w-5 h-5" />
             <Label htmlFor="terms" className="cursor-pointer">
               Acepto términos y condiciones
             </Label>
