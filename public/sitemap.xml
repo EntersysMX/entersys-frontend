@@ -6,90 +6,112 @@
 
   <!-- Página Principal -->
   <url>
-    <loc>https://www.entersys.com.mx/</loc>
-    <lastmod>2025-01-11</lastmod>
+    <loc>https://www.entersys.mx/</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Servicios Principales -->
   <url>
-    <loc>https://www.entersys.com.mx/worksys</loc>
-    <lastmod>2025-01-11</lastmod>
+    <loc>https://www.entersys.mx/worksys</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.entersys.com.mx/expersys</loc>
-    <lastmod>2025-01-11</lastmod>
+    <loc>https://www.entersys.mx/expersys</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- Páginas Corporativas -->
   <url>
-    <loc>https://www.entersys.com.mx/nosotros</loc>
-    <lastmod>2025-01-11</lastmod>
+    <loc>https://www.entersys.mx/nosotros</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.entersys.com.mx/clientes</loc>
-    <lastmod>2025-01-11</lastmod>
+    <loc>https://www.entersys.mx/clientes</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.entersys.com.mx/contacto</loc>
-    <lastmod>2025-01-11</lastmod>
+    <loc>https://www.entersys.mx/contacto</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Casos de Éxito -->
   <url>
-    <loc>https://www.entersys.com.mx/clientes/femsa</loc>
-    <lastmod>2025-01-11</lastmod>
+    <loc>https://www.entersys.mx/clientes/femsa</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.entersys.com.mx/clientes/ochoa</loc>
-    <lastmod>2025-01-11</lastmod>
+    <loc>https://www.entersys.mx/clientes/ochoa</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.entersys.com.mx/clientes/qhse</loc>
-    <lastmod>2025-01-11</lastmod>
+    <loc>https://www.entersys.mx/clientes/qhse</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Páginas Especiales -->
   <url>
-    <loc>https://www.entersys.com.mx/awalab</loc>
-    <lastmod>2025-01-11</lastmod>
+    <loc>https://www.entersys.mx/awalab</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
+  <!-- Páginas Legales -->
+  <url>
+    <loc>https://www.entersys.mx/politica-de-privacidad</loc>
+    <lastmod>2025-10-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://www.entersys.mx/terminos-de-servicio</loc>
+    <lastmod>2025-10-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://www.entersys.mx/configuracion-de-cookies</loc>
+    <lastmod>2025-10-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
   <!-- Archivos para LLMs y Robots -->
   <url>
-    <loc>https://www.entersys.com.mx/robots.txt</loc>
-    <lastmod>2025-01-11</lastmod>
+    <loc>https://www.entersys.mx/robots.txt</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://www.entersys.com.mx/llms.txt</loc>
-    <lastmod>2025-01-11</lastmod>
+    <loc>https://www.entersys.mx/llms.txt</loc>
+    <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
