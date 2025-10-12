@@ -122,23 +122,55 @@ npm run preview
 
 ## 🌐 URLs por Ambiente
 
-### Development
+### Development (dev-server: 34.134.14.202)
 
 ```env
-VITE_APP_URL=https://dev.crm.entersys.mx
-VITE_API_URL=https://api.dev.entersys.mx
-VITE_MATOMO_URL=https://dev.analytics.entersys.mx
-VITE_MAUTIC_URL=https://dev.crm.entersys.mx
+VITE_APP_URL=https://dev.entersys.mx
+VITE_API_URL=https://dev.entersys.mx/api
+VITE_SITE_URL=https://dev.entersys.mx
+VITE_MATOMO_URL=https://dev.entersys.mx/analytics
+VITE_MAUTIC_URL=https://dev.entersys.mx/crm
 ```
 
-### Production
+### Staging (usa dev-server)
 
 ```env
-VITE_APP_URL=https://www.entersys.com.mx
-VITE_API_URL=https://api.entersys.mx
-VITE_MATOMO_URL=https://analytics.entersys.mx
-VITE_MAUTIC_URL=https://crm.entersys.mx
+VITE_APP_URL=https://dev.entersys.mx
+VITE_API_URL=https://dev.entersys.mx/api
+VITE_SITE_URL=https://dev.entersys.mx
+VITE_MATOMO_URL=https://dev.entersys.mx/analytics
+VITE_MAUTIC_URL=https://dev.entersys.mx/crm
 ```
+
+### Production (prod-server: 34.59.193.54)
+
+```env
+VITE_APP_URL=https://entersys.mx
+VITE_API_URL=https://entersys.mx/api
+VITE_SITE_URL=https://entersys.mx
+VITE_MATOMO_URL=https://entersys.mx/analytics
+VITE_MAUTIC_URL=https://entersys.mx/crm
+```
+
+## 🖥️ Servidores
+
+### Development Server (dev-server)
+- **Hostname**: dev-server
+- **Zone**: us-central1-c
+- **Machine Type**: e2-standard-2
+- **Internal IP**: 10.128.0.2
+- **External IP**: 34.134.14.202
+- **Domain**: dev.entersys.mx
+- **Status**: RUNNING
+
+### Production Server (prod-server)
+- **Hostname**: prod-server
+- **Zone**: us-central1-c
+- **Machine Type**: e2-standard-2
+- **Internal IP**: 10.128.0.4
+- **External IP**: 34.59.193.54
+- **Domain**: entersys.mx
+- **Status**: RUNNING
 
 ---
 
