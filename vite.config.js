@@ -26,23 +26,63 @@ export default defineConfig({
       compress: {
         drop_console: true, // Remover console.logs en producción
         drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug']
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
+        passes: 2 // Múltiples pasadas para mejor compresión
+      },
+      mangle: {
+        safari10: true // Compatibilidad con Safari 10
       }
     },
     // Mejorar chunk size para mejor caching
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 600,
     // Optimizar CSS
     cssCodeSplit: true,
+    cssMinify: true,
     // Source maps para debugging (desactivar en producción si no se necesita)
     sourcemap: false,
+    // Reportar tamaños de chunks comprimidos
+    reportCompressedSize: true,
+    // Module preload polyfill para mejor compatibilidad
+    modulePreload: {
+      polyfill: true
+    },
     rollupOptions: {
       output: {
         // Cache busting con hash en nombres de archivo
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
-        // Usar code splitting automático de Vite (más seguro)
-        // Evita problemas de orden de carga entre chunks
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+        // Manual chunking para mejor caching y rendimiento
+        manualChunks: (id) => {
+          // React core libraries
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+            return 'vendor-react';
+          }
+          // React Router
+          if (id.includes('node_modules/react-router-dom') || id.includes('node_modules/react-router')) {
+            return 'vendor-router';
+          }
+          // MUI (Material-UI)
+          if (id.includes('node_modules/@mui') || id.includes('node_modules/@emotion')) {
+            return 'vendor-mui';
+          }
+          // Relume UI components
+          if (id.includes('node_modules/@relume_io')) {
+            return 'vendor-relume';
+          }
+          // Icon libraries
+          if (id.includes('node_modules/react-icons')) {
+            return 'vendor-icons';
+          }
+          // Framer Motion
+          if (id.includes('node_modules/framer-motion')) {
+            return 'vendor-framer';
+          }
+          // Other large vendor libraries
+          if (id.includes('node_modules')) {
+            return 'vendor-other';
+          }
+        }
       }
     }
   },
