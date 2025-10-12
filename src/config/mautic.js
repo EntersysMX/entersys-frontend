@@ -2,10 +2,14 @@
  * Configuración de Mautic CRM
  */
 
+import { config } from './environment';
+
+const MAUTIC_BASE_URL = config.analytics.mautic.url || 'https://crm.entersys.mx';
+
 export const MAUTIC_CONFIG = {
   // URLs principales
-  baseUrl: 'https://crm.entersys.mx',
-  apiUrl: 'https://crm.entersys.mx/api',
+  baseUrl: MAUTIC_BASE_URL,
+  apiUrl: `${MAUTIC_BASE_URL}/api`,
 
   // Configuración de formulario
   formId: 1, // ID del formulario configurado en Mautic
@@ -15,29 +19,29 @@ export const MAUTIC_CONFIG = {
   clientSecret: '3iv9w2alzdes8s8skgkg4co80gsggos8gg0co4k404cks4gosg',
 
   // URLs OAuth2 - Mautic v4 standard paths
-  authUrl: 'https://crm.entersys.mx/oauth/authorize',
-  tokenUrl: 'https://crm.entersys.mx/oauth/token',
+  authUrl: `${MAUTIC_BASE_URL}/oauth/authorize`,
+  tokenUrl: `${MAUTIC_BASE_URL}/oauth/token`,
 
   // Tracking
-  trackingPixel: 'https://crm.entersys.mx/mtracking.gif',
+  trackingPixel: `${MAUTIC_BASE_URL}/mtracking.gif`,
 
   // Configuración de desarrollo/producción
-  environment: process.env.NODE_ENV || 'development',
+  environment: config.app.env || 'development',
 
   // Timeouts
   apiTimeout: 15000, // 15 segundos
 
   // Configuración por ambiente
   development: {
-    baseUrl: 'https://crm.entersys.mx',
-    apiUrl: 'https://crm.entersys.mx/api',
+    baseUrl: MAUTIC_BASE_URL,
+    apiUrl: `${MAUTIC_BASE_URL}/api`,
     formId: 1,
     debug: true
   },
 
   production: {
-    baseUrl: 'https://crm.entersys.mx',
-    apiUrl: 'https://crm.entersys.mx/api',
+    baseUrl: MAUTIC_BASE_URL,
+    apiUrl: `${MAUTIC_BASE_URL}/api`,
     formId: 1,
     debug: false
   }

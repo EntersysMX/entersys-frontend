@@ -8,6 +8,7 @@ import {
   BiLogoLinkedinSquare,
   BiLogoYoutube,
 } from "react-icons/bi";
+import { config } from "../../../config/environment";
 
 const Footer = ({ colorScheme = 1, ...props }) => {
   return (
@@ -35,21 +36,21 @@ const Footer = ({ colorScheme = 1, ...props }) => {
                 </p>
                 <p className="mb-1 text-sm font-semibold">Contacto:</p>
                 <a
-                  href="tel:+52 55 1234 5678"
+                  href={`tel:${config.contact.phone}`}
                   className="block text-sm underline decoration-black underline-offset-1"
                 >
-                  +52 55 1234 5678
+                  {config.contact.phone}
                 </a>
                 <a
-                  href="mailto:contacto@entersys.mx"
+                  href={`mailto:${config.contact.email}`}
                   className="block text-sm underline decoration-black underline-offset-1"
                 >
-                  contacto@entersys.mx
+                  {config.contact.email}
                 </a>
               </div>
               <div className="grid grid-flow-col grid-cols-[max-content] items-start justify-start gap-x-3">
                 <a
-                  href="https://www.facebook.com/entersysmx"
+                  href={config.social.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
@@ -57,7 +58,7 @@ const Footer = ({ colorScheme = 1, ...props }) => {
                   <BiLogoFacebookCircle className="size-6" />
                 </a>
                 <a
-                  href="https://www.instagram.com/entersysmx"
+                  href={config.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
@@ -65,7 +66,7 @@ const Footer = ({ colorScheme = 1, ...props }) => {
                   <BiLogoInstagram className="size-6" />
                 </a>
                 <a
-                  href="https://www.linkedin.com/company/entersysmx"
+                  href={config.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
@@ -73,7 +74,7 @@ const Footer = ({ colorScheme = 1, ...props }) => {
                   <BiLogoLinkedinSquare className="size-6" />
                 </a>
                 <a
-                  href="https://www.youtube.com/@EntersysMX"
+                  href={config.social.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="YouTube"

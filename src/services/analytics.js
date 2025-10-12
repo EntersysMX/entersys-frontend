@@ -2,11 +2,13 @@
  * Servicio de Analytics integrado con Matomo
  */
 
-// Configuración de Matomo
+import { config } from '../config/environment';
+
+// Configuración de Matomo desde variables de entorno
 const MATOMO_CONFIG = {
-  url: 'https://analytics.entersys.mx/', // Cambiar por la URL real de Matomo
-  siteId: 1,
-  enabled: true
+  url: config.analytics.matomo.url ? `${config.analytics.matomo.url}/` : 'https://analytics.entersys.mx/',
+  siteId: config.analytics.matomo.siteId || 1,
+  enabled: config.analytics.enabled
 };
 
 class AnalyticsService {

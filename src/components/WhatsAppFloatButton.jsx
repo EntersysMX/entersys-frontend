@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { mauticService } from '../services/mautic';
 import { analyticsService } from '../services/analytics';
+import { config } from '../config/environment';
 
 /**
  * WhatsApp Float Button - Versión Corregida para Producción
@@ -27,9 +28,9 @@ const WhatsAppFloatButton = () => {
     console.log('🔍 WhatsApp Button Debug Info:', info);
   }, []);
 
-  // Configuración WhatsApp
+  // Configuración WhatsApp (desde variables de entorno)
   const WHATSAPP_CONFIG = {
-    number: '5215625683662',
+    number: config.contact.whatsapp,
     message: 'Hola! Me interesa conocer más sobre EnterSys y cómo pueden ayudar a optimizar los procesos de mi empresa. ¿Podrían brindarme más información? Gracias!'
   };
 
