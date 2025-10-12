@@ -40,38 +40,9 @@ export default defineConfig({
         // Cache busting con hash en nombres de archivo
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
-        // Code splitting optimizado - Simplificado para evitar conflictos de React
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            // Agrupar React y todas las librerías que dependen de React
-            if (id.includes('react') ||
-                id.includes('react-dom') ||
-                id.includes('react-router') ||
-                id.includes('@mui') ||
-                id.includes('@emotion') ||
-                id.includes('react-helmet')) {
-              return 'react-vendor';
-            }
-            // Relume UI en chunk separado (grande)
-            if (id.includes('@relume_io')) {
-              return 'relume-ui';
-            }
-            // Framer Motion en chunk separado (grande)
-            if (id.includes('framer-motion')) {
-              return 'framer-motion';
-            }
-            // Resto de vendors
-            return 'vendor';
-          }
-          // Agrupar componentes por página
-          if (id.includes('/pages/')) {
-            const match = id.match(/pages\/([^/]+)/);
-            if (match) {
-              return `page-${match[1]}`;
-            }
-          }
-        }
+        assetFileNames: 'assets/[name]-[hash].[ext]'
+        // Usar code splitting automático de Vite (más seguro)
+        // Evita problemas de orden de carga entre chunks
       }
     }
   },
