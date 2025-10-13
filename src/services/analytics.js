@@ -15,6 +15,7 @@ class AnalyticsService {
   constructor() {
     this.initialized = false;
     this.scriptLoaded = false;
+    this.scrollTrackingEnabled = false;
     // Solo debug en development o cuando esté explícitamente habilitado
     this.debug = config.app.env === 'development' || config.app.debug === true;
   }
@@ -156,6 +157,146 @@ class AnalyticsService {
   }
 
   /**
+   * Set custom dimension
+   * @param {number} id - ID de la dimensión (1-6)
+   * @param {string} value - Valor de la dimensión
+   */
+  setCustomDimension(id, value) {
+    try {
+      if (!window._paq) {
+        this.log('⚠️ Matomo not ready for custom dimension');
+        return;
+      }
+
+      window._paq.push(['setCustomDimension', id, value]);
+      this.log(`📊 Custom dimension ${id} set to:`, value);
+    } catch (error) {
+      console.error('❌ Error setting custom dimension:', error);
+    }
+  }
+
+  /**
+   * Set multiple custom dimensions at once
+   */
+  setCustomDimensions(dimensions) {
+    Object.entries(dimensions).forEach(([id, value]) => {
+      if (value) { // Solo setear si tiene valor
+        this.setCustomDimension(parseInt(id), value);
+      }
+    });
+  }
+
+  /**
+   * Track user context with custom dimensions
+   * @param {Object} userData - User data object
+   */
+  trackUserContext(userData) {
+    const {
+      userType = 'visitor',
+      industry = null,
+      companySize = null,
+      leadSource = null,
+      mauticLeadId = null,
+      journeyStage = 'awareness'
+    } = userData;
+
+    this.setCustomDimensions({
+      1: userType,           // User Type
+      2: industry,           // Industry
+      3: companySize,        // Company Size
+      4: leadSource,         // Lead Source
+      5: mauticLeadId,       // Mautic Lead ID
+      6: journeyStage        // User Journey Stage
+    });
+
+    this.log('✅ User context tracked:', userData);
+  }
+
+  /**
+   * Track media interaction
+   */
+  trackMedia(mediaType, action, mediaName, value = null) {
+    this.trackEvent('Content', `${mediaType} ${action}`, mediaName, value);
+  }
+
+  /**
+   * Track download
+   */
+  trackDownload(fileName, fileType = 'PDF') {
+    this.trackEvent('Content', 'Download', `${fileType}: ${fileName}`);
+    this.log(`📥 Download tracked: ${fileName}`);
+  }
+
+  /**
+   * Track video interaction
+   */
+  trackVideo(action, videoName, timeInSeconds = null) {
+    this.trackMedia('Video', action, videoName, timeInSeconds);
+  }
+
+  /**
+   * Track scroll depth
+   */
+  trackScrollDepth(percentage) {
+    if ([25, 50, 75, 100].includes(percentage)) {
+      this.trackEvent('Engagement', 'Scroll Depth', `${percentage}%`);
+      this.log(`📜 Scroll depth tracked: ${percentage}%`);
+    }
+  }
+
+  /**
+   * Setup automatic scroll tracking
+   */
+  setupScrollTracking() {
+    if (this.scrollTrackingEnabled) {
+      this.log('⚠️ Scroll tracking already enabled');
+      return;
+    }
+
+    const thresholds = [25, 50, 75, 100];
+    const reached = new Set();
+
+    const checkScroll = () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+
+      const scrollPercent = Math.round((scrollTop / (documentHeight - windowHeight)) * 100);
+
+      thresholds.forEach(threshold => {
+        if (scrollPercent >= threshold && !reached.has(threshold)) {
+          reached.add(threshold);
+          this.trackScrollDepth(threshold);
+        }
+      });
+    };
+
+    // Throttle scroll events para mejor performance
+    let scrollTimeout;
+    const throttledScroll = () => {
+      if (scrollTimeout) {
+        return;
+      }
+      scrollTimeout = setTimeout(() => {
+        checkScroll();
+        scrollTimeout = null;
+      }, 200); // Check cada 200ms
+    };
+
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+    this.scrollTrackingEnabled = true;
+
+    this.log('✅ Scroll tracking enabled');
+  }
+
+  /**
+   * Track link click
+   */
+  trackLink(url, linkType = 'outbound') {
+    this.trackEvent('Navigation', 'Link Click', `${linkType}: ${url}`);
+  }
+
+  /**
    * Test Matomo connection
    */
   testConnection() {
@@ -192,11 +333,17 @@ if (typeof window !== 'undefined') {
     trackForm: (formName) => analyticsService.trackFormSubmission(formName),
     trackButton: (buttonName, section) => analyticsService.trackButtonClick(buttonName, section),
     trackPageView: (title) => analyticsService.trackPageView(title),
+    trackDownload: (fileName, fileType) => analyticsService.trackDownload(fileName, fileType),
+    trackVideo: (action, videoName, time) => analyticsService.trackVideo(action, videoName, time),
+    setCustomDimension: (id, value) => analyticsService.setCustomDimension(id, value),
+    trackUserContext: (userData) => analyticsService.trackUserContext(userData),
+    setupScrollTracking: () => analyticsService.setupScrollTracking(),
     testConnection: () => analyticsService.testConnection(),
     initialize: () => analyticsService.initialize(),
     getStatus: () => ({
       initialized: analyticsService.initialized,
       scriptLoaded: analyticsService.scriptLoaded,
+      scrollTrackingEnabled: analyticsService.scrollTrackingEnabled,
       paqAvailable: typeof window._paq !== 'undefined',
       paqLength: window._paq ? window._paq.length : 0
     })

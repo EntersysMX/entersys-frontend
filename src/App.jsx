@@ -47,6 +47,10 @@ function App() {
     // Inicializar servicios
     try {
       analyticsService.initialize();
+
+      // Habilitar scroll tracking automático (25%, 50%, 75%, 100%)
+      analyticsService.setupScrollTracking();
+
       initWebVitals();
     } catch (error) {
       // Silenciar errores en producción

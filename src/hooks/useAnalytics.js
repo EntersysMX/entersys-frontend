@@ -14,6 +14,7 @@ export const useAnalytics = () => {
   }, []);
 
   return {
+    // Métodos básicos de tracking
     trackEvent: (category, action, name = '', value = 0) => {
       analyticsService.trackEvent(category, action, name, value);
     },
@@ -29,6 +30,40 @@ export const useAnalytics = () => {
     trackButtonClick: (buttonName, section) => {
       analyticsService.trackButtonClick(buttonName, section);
     },
+
+    // NUEVO: Custom Dimensions (Fase 2)
+    setCustomDimension: (id, value) => {
+      analyticsService.setCustomDimension(id, value);
+    },
+    setCustomDimensions: (dimensions) => {
+      analyticsService.setCustomDimensions(dimensions);
+    },
+    trackUserContext: (userData) => {
+      analyticsService.trackUserContext(userData);
+    },
+
+    // NUEVO: Content Tracking (Fase 2)
+    trackDownload: (fileName, fileType = 'PDF') => {
+      analyticsService.trackDownload(fileName, fileType);
+    },
+    trackVideo: (action, videoName, timeInSeconds = null) => {
+      analyticsService.trackVideo(action, videoName, timeInSeconds);
+    },
+    trackMedia: (mediaType, action, mediaName, value = null) => {
+      analyticsService.trackMedia(mediaType, action, mediaName, value);
+    },
+
+    // NUEVO: Navigation Tracking (Fase 2)
+    trackLink: (url, linkType = 'outbound') => {
+      analyticsService.trackLink(url, linkType);
+    },
+
+    // NUEVO: Scroll Tracking (Fase 2)
+    // Nota: setupScrollTracking() se llama automáticamente en App.jsx
+    trackScrollDepth: (percentage) => {
+      analyticsService.trackScrollDepth(percentage);
+    },
+
     // Propiedad de compatibilidad
     matomoLoaded: analyticsService.scriptLoaded
   };
