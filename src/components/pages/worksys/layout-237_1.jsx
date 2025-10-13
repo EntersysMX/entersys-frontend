@@ -14,6 +14,11 @@ export function Layout2371({ colorScheme = 1, ...props }) {
     navigate(url);
   };
 
+  const handleVerCasosClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Ver Casos de Éxito - Worksys', 'worksys-casos');
+    navigate('/clientes');
+  };
+
   return (
     <section id="casos-exito" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -104,7 +109,7 @@ export function Layout2371({ colorScheme = 1, ...props }) {
             </div>  
           </div>
           <div className="mt-10 flex items-center gap-4 md:mt-14 lg:mt-16">
-            <Button variant="secondary">Ver casos de éxito</Button>
+            <Button variant="secondary" onClick={handleVerCasosClick}>Ver casos de éxito</Button>
           </div>
         </div>
       </div>

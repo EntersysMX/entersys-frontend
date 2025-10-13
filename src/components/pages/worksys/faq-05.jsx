@@ -10,8 +10,17 @@ import {
 import { Card } from "../../ui/Card";
 import React from "react";
 import { RxPlus } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Faq05({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleContactarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Contactar - Worksys FAQ 2', 'worksys-faq');
+    navigate('/contacto#formulario-contacto');
+  };
+
   return (
     <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28" {...props}>
       <div className="container">
@@ -116,7 +125,7 @@ export function Faq05({ colorScheme = 1, ...props }) {
           </h4>
           <p className="md:text-md">Nuestro equipo está listo para ayudarte</p>
           <div className="mt-6 md:mt-8">
-            <Button title="Contactar" variant="secondary">
+            <Button title="Contactar" variant="secondary" onClick={handleContactarClick}>
               Contactar
             </Button>
           </div>
