@@ -12,31 +12,29 @@ export default function ScrollToTop() {
   useEffect(() => {
     // Si hay un hash (ej: #formulario-contacto), hacer scroll a ese elemento
     if (hash) {
-      // Intentar hacer scroll con múltiples reintentos para asegurar que el elemento está en DOM
-      let attempts = 0;
-      const maxAttempts = 10;
-      const interval = 100; // Reintentar cada 100ms
-
-      const scrollToHash = () => {
-        const element = document.querySelector(hash);
-        if (element) {
-          // Elemento encontrado, hacer scroll
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          return true;
-        } else if (attempts < maxAttempts) {
-          // Elemento no encontrado, reintentar
-          attempts++;
-          setTimeout(scrollToHash, interval);
-          return false;
-        } else {
-          // Máximo de reintentos alcanzado, scroll al tope
-          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-          return false;
-        }
-      };
-
-      // Iniciar el proceso de scroll con un pequeño delay inicial
-      setTimeout(scrollToHash, 100);
+      // Intentar scroll inmediato primero (caso más común)
+      const element = document.querySelector(hash);
+      if (element) {
+        // Elemento ya disponible, scroll inmediato
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        // Elemento no disponible aún, reintentar con delays
+        let attempts = 0;
+        const maxAttempts = 8;
+        const scrollToHash = () => {
+          const el = document.querySelector(hash);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else if (attempts < maxAttempts) {
+            attempts++;
+            setTimeout(scrollToHash, 100);
+          } else {
+            // Fallback: scroll al tope
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+          }
+        };
+        setTimeout(scrollToHash, 50);
+      }
     } else {
       // Sin hash, scroll al tope inmediatamente
       window.scrollTo({
