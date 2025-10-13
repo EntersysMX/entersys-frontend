@@ -3,8 +3,22 @@
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Cta39({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleDiagnosticoClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Quiero un diagnóstico - Worksys CTA', 'worksys-cta');
+    navigate('/contacto#formulario-contacto');
+  };
+
+  const handleDemoClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Quiero una demo - Worksys CTA', 'worksys-cta');
+    navigate('/contacto#formulario-contacto');
+  };
+
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -21,10 +35,10 @@ export function Cta39({ colorScheme = 1, ...props }) {
               </p>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <Button title="Quiero un diagnóstico">
+              <Button title="Quiero un diagnóstico" onClick={handleDiagnosticoClick}>
                 Quiero un diagnóstico
               </Button>
-              <Button title="Quiero una demo">
+              <Button title="Quiero una demo" onClick={handleDemoClick}>
                 Quiero una demo
               </Button>
             </div>
