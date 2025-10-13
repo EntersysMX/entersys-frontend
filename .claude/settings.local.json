@@ -10,7 +10,8 @@
       "Bash(curl -s https://www.entersys.mx/sitemap.xml)",
       "Bash(curl -s https://www.entersys.mx/)",
       "Bash(cat:*)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(gcloud compute ssh:*)"
     ],
     "deny": [],
     "ask": []
