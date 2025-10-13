@@ -47,6 +47,20 @@ const WhatsAppFloatButton = () => {
       await mauticService.trackWhatsAppClick(userEmail, source);
       analyticsService.trackWhatsAppClick(source);
 
+      // 2.1 Track user context con Custom Dimensions
+      const mauticLeadId = localStorage.getItem('mauticLeadId');
+      const userType = userEmail ? 'lead' : 'visitor';
+
+      analyticsService.trackUserContext({
+        userType: userType,
+        leadSource: 'whatsapp',
+        mauticLeadId: mauticLeadId || null,
+        journeyStage: userEmail ? 'decision' : 'consideration'
+      });
+
+      // Track como conversión de alta intención
+      analyticsService.trackConversion('WhatsApp Click', 1);
+
       // 3. Si no hay email registrado, crear un lead anónimo para tracking
       if (!userEmail) {
         const anonymousLead = {

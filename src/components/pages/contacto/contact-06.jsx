@@ -24,6 +24,7 @@ import './contact.css';
 export function Contact06({ colorScheme = 2, ...props }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
+  const [formStarted, setFormStarted] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -40,10 +41,23 @@ export function Contact06({ colorScheme = 2, ...props }) {
     mauticService.initializeTracking();
     analyticsService.initialize();
     analyticsService.trackPageView('Contact Page');
+
+    // Track user context inicial como visitor
+    analyticsService.trackUserContext({
+      userType: 'visitor',
+      leadSource: 'direct',
+      journeyStage: 'consideration'
+    });
   }, []);
 
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+
+    // Track cuando el usuario empieza a llenar el formulario
+    if (!formStarted && value.trim()) {
+      setFormStarted(true);
+      analyticsService.trackEvent('Form', 'Form Start', 'contact_form');
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -75,16 +89,35 @@ export function Contact06({ colorScheme = 2, ...props }) {
         localStorage.setItem('leadEmail', formData.email);
         sessionStorage.setItem('leadEmail', formData.email);
 
+        // Guardar Mautic Lead ID si está disponible
+        if (result.leadId) {
+          localStorage.setItem('mauticLeadId', result.leadId);
+        }
+
         // Tracking de conversión en Mautic
         await mauticService.trackConversion(formData.email, 'form_submit', 50);
 
-        // Tracking en Matomo
+        // NUEVO: Track user context con Custom Dimensions
+        const leadSource = formData.source || 'website_contact_form';
+        analyticsService.trackUserContext({
+          userType: 'lead',
+          industry: formData.interest || 'unknown', // Usar el campo interest como industry
+          companySize: formData.company ? 'unknown' : null, // Si tiene company, es empresa
+          leadSource: leadSource,
+          mauticLeadId: result.leadId || null,
+          journeyStage: 'decision'
+        });
+
+        // Tracking en Matomo con eventos estructurados
         analyticsService.trackFormSubmission('contact_form');
         analyticsService.trackConversion('Contact Form Submission', 1);
 
+        // Track el origen del lead
+        analyticsService.trackEvent('Lead Generation', 'Lead Source', leadSource);
+
         // Mostrar mensaje de éxito
         setShowThankYou(true);
-        console.log('✅ Lead capturado exitosamente en Mautic y tracked en Matomo');
+        console.log('✅ Lead capturado exitosamente en Mautic y tracked en Matomo con Custom Dimensions');
 
         // Limpiar formulario después de 5 segundos
         setTimeout(() => {
@@ -102,11 +135,16 @@ export function Contact06({ colorScheme = 2, ...props }) {
     } catch (error) {
       console.error('❌ Error enviando formulario:', error);
 
+      // Track error en Matomo
+      analyticsService.trackEvent('Form', 'Form Error', 'contact_form', error.message);
+
       let errorMessage = 'Hubo un error enviando el formulario. ';
       if (error.message.includes('timeout') || error.message.includes('Network')) {
         errorMessage += 'Verifica tu conexión a internet e intenta nuevamente.';
+        analyticsService.trackEvent('Error', 'Network Error', 'contact_form_submit');
       } else {
         errorMessage += 'Por favor intenta nuevamente o contacta al soporte.';
+        analyticsService.trackEvent('Error', 'Form Submission Error', error.message);
       }
 
       alert(errorMessage);
