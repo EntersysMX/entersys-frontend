@@ -52,6 +52,12 @@ export const config = {
   // Analytics y tracking
   analytics: {
     enabled: import.meta.env.VITE_ENABLE_ANALYTICS === 'true',
+    gtm: {
+      id: import.meta.env.VITE_GTM_ID || '',
+    },
+    ga4: {
+      measurementId: import.meta.env.VITE_GA4_MEASUREMENT_ID || '',
+    },
     matomo: {
       url: import.meta.env.VITE_MATOMO_URL || '',
       siteId: import.meta.env.VITE_MATOMO_SITE_ID || '',

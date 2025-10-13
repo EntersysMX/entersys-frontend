@@ -4,6 +4,7 @@ import { versionPlugin } from './vite-plugins/version-plugin.js'
 import { securityHeadersPlugin } from './vite-plugins/security-headers-plugin.js'
 import { robotsPlugin } from './vite-plugins/robots-plugin.js'
 import { htmlMetaPlugin } from './vite-plugins/html-meta-plugin.js'
+import { gtmPlugin } from './vite-plugins/gtm-plugin.js'
 
 export default defineConfig({
   plugins: [
@@ -11,7 +12,8 @@ export default defineConfig({
     versionPlugin(),
     securityHeadersPlugin(),
     robotsPlugin(),
-    htmlMetaPlugin()
+    htmlMetaPlugin(),
+    gtmPlugin()
   ],
   server: {
     port: 3000,
