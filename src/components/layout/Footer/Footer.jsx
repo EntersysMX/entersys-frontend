@@ -9,6 +9,7 @@ import {
   BiLogoYoutube,
 } from "react-icons/bi";
 import { config } from "../../../config/environment";
+import { TrackedLink } from "../../TrackedLink";
 
 const Footer = ({ colorScheme = 1, ...props }) => {
   return (
@@ -49,38 +50,38 @@ const Footer = ({ colorScheme = 1, ...props }) => {
                 </a>
               </div>
               <div className="grid grid-flow-col grid-cols-[max-content] items-start justify-start gap-x-3">
-                <a
+                <TrackedLink
                   href={config.social.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  type="social"
+                  socialNetwork="facebook"
                   aria-label="Facebook"
                 >
                   <BiLogoFacebookCircle className="size-6" />
-                </a>
-                <a
+                </TrackedLink>
+                <TrackedLink
                   href={config.social.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  type="social"
+                  socialNetwork="instagram"
                   aria-label="Instagram"
                 >
                   <BiLogoInstagram className="size-6" />
-                </a>
-                <a
+                </TrackedLink>
+                <TrackedLink
                   href={config.social.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  type="social"
+                  socialNetwork="linkedin"
                   aria-label="LinkedIn"
                 >
                   <BiLogoLinkedinSquare className="size-6" />
-                </a>
-                <a
+                </TrackedLink>
+                <TrackedLink
                   href={config.social.youtube}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  type="social"
+                  socialNetwork="youtube"
                   aria-label="YouTube"
                 >
                   <BiLogoYoutube className="size-6" />
-                </a>
+                </TrackedLink>
               </div>
             </div>
             <div className="grid grid-cols-1 items-start gap-x-6 gap-y-10 sm:grid-cols-2 md:gap-x-8 md:gap-y-4">

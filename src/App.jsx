@@ -6,6 +6,7 @@ import ErrorBoundary from './components/ui/ErrorBoundary'
 import WhatsAppFloatButton from './components/WhatsAppFloatButton'
 import { analyticsService } from './services/analytics'
 import { initWebVitals } from './utils/webVitals'
+import './utils/testAnalytics' // Auto-expose test suite in development
 
 // Lazy loading de páginas para mejor performance
 // Home se carga inmediatamente por ser la página principal
