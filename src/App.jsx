@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import PageTransition from './components/PageTransition'
 import ErrorBoundary from './components/ui/ErrorBoundary'
 import WhatsAppFloatButton from './components/WhatsAppFloatButton'
+import ScrollToTop from './components/ScrollToTop'
 import { analyticsService } from './services/analytics'
 import { initWebVitals } from './utils/webVitals'
 import './utils/testAnalytics' // Auto-expose test suite in development
@@ -65,6 +66,7 @@ function App() {
     <HelmetProvider>
       <ErrorBoundary>
         <div className="App">
+          <ScrollToTop />
           <PageTransition>
             <Suspense fallback={<PageLoader />}>
               <Routes>
