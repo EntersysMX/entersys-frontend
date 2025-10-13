@@ -5,8 +5,17 @@ import { Card } from "../../ui/Card";
 import React from "react";
 import { BiCalendarAlt, BiMap } from "react-icons/bi";
 import { RxChevronRight } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Event23({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleVerTodosClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Ver todos - Clientes Blueprints', 'clientes-blueprints');
+    navigate('/contacto#formulario-contacto');
+  };
+
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -29,6 +38,7 @@ export function Event23({ colorScheme = 1, ...props }) {
             size="primary"
             title="Ver todos"
             className="hidden md:flex"
+            onClick={handleVerTodosClick}
           >
             Ver todos
           </Button>
