@@ -15,7 +15,17 @@ class AnalyticsService {
   constructor() {
     this.initialized = false;
     this.scriptLoaded = false;
-    this.debug = true; // Siempre debug para troubleshooting
+    // Solo debug en development o cuando esté explícitamente habilitado
+    this.debug = config.app.env === 'development' || config.app.debug === true;
+  }
+
+  /**
+   * Helper para logging condicional
+   */
+  log(...args) {
+    if (this.debug) {
+      console.log(...args);
+    }
   }
 
   /**
@@ -23,12 +33,12 @@ class AnalyticsService {
    */
   async initialize() {
     if (this.initialized) {
-      console.log('🔧 Matomo already initialized');
+      this.log('🔧 Matomo already initialized');
       return;
     }
 
     try {
-      console.log('🚀 Initializing Matomo Analytics...');
+      this.log('🚀 Initializing Matomo Analytics...');
 
       // Configurar _paq global para Matomo
       window._paq = window._paq || [];
@@ -53,7 +63,7 @@ class AnalyticsService {
 
         script.onload = () => {
           this.scriptLoaded = true;
-          console.log('✅ Matomo script loaded successfully');
+          this.log('✅ Matomo script loaded successfully');
         };
 
         script.onerror = () => {
@@ -64,9 +74,9 @@ class AnalyticsService {
       }
 
       this.initialized = true;
-      console.log('✅ Matomo Analytics initialized successfully');
-      console.log('🔧 Tracker URL:', MATOMO_CONFIG.url + 'matomo.php');
-      console.log('🔧 Site ID:', MATOMO_CONFIG.siteId);
+      this.log('✅ Matomo Analytics initialized successfully');
+      this.log('🔧 Tracker URL:', MATOMO_CONFIG.url + 'matomo.php');
+      this.log('🔧 Site ID:', MATOMO_CONFIG.siteId);
 
     } catch (error) {
       console.error('❌ Error initializing Matomo:', error);
@@ -79,7 +89,7 @@ class AnalyticsService {
   trackPageView(customTitle = null) {
     try {
       if (!window._paq) {
-        console.warn('⚠️ Matomo not ready for page view tracking');
+        this.log('⚠️ Matomo not ready for page view tracking');
         return;
       }
 
@@ -88,7 +98,7 @@ class AnalyticsService {
       }
       window._paq.push(['trackPageView']);
 
-      console.log('📊 Page view tracked:', customTitle || window.location.pathname);
+      this.log('📊 Page view tracked:', customTitle || window.location.pathname);
     } catch (error) {
       console.error('❌ Error tracking page view:', error);
     }
@@ -100,7 +110,7 @@ class AnalyticsService {
   trackEvent(category, action, name = null, value = null) {
     try {
       if (!window._paq) {
-        console.warn('⚠️ Matomo not ready for event tracking');
+        this.log('⚠️ Matomo not ready for event tracking');
         return;
       }
 
@@ -110,8 +120,8 @@ class AnalyticsService {
 
       window._paq.push(eventData);
 
-      console.log('📊 Event tracked:', { category, action, name, value });
-      console.log('📊 _paq queue length:', window._paq.length);
+      this.log('📊 Event tracked:', { category, action, name, value });
+      this.log('📊 _paq queue length:', window._paq.length);
     } catch (error) {
       console.error('❌ Error tracking event:', error);
     }
@@ -149,17 +159,17 @@ class AnalyticsService {
    * Test Matomo connection
    */
   testConnection() {
-    console.log('🧪 Testing Matomo connection...');
-    console.log('🔧 Config:', MATOMO_CONFIG);
-    console.log('🔧 Initialized:', this.initialized);
-    console.log('🔧 Script loaded:', this.scriptLoaded);
-    console.log('🔧 _paq available:', typeof window._paq !== 'undefined');
-    console.log('🔧 _paq length:', window._paq ? window._paq.length : 'N/A');
+    this.log('🧪 Testing Matomo connection...');
+    this.log('🔧 Config:', MATOMO_CONFIG);
+    this.log('🔧 Initialized:', this.initialized);
+    this.log('🔧 Script loaded:', this.scriptLoaded);
+    this.log('🔧 _paq available:', typeof window._paq !== 'undefined');
+    this.log('🔧 _paq length:', window._paq ? window._paq.length : 'N/A');
 
     if (window._paq) {
       // Enviar un evento de prueba
       this.trackEvent('Test', 'Connection Test', 'Manual Debug', 1);
-      console.log('🧪 Test event sent to Matomo');
+      this.log('🧪 Test event sent to Matomo');
     } else {
       console.error('❌ _paq not available for testing');
     }
@@ -192,8 +202,8 @@ if (typeof window !== 'undefined') {
     })
   };
 
-  console.log('🔧 Analytics functions available in window.entersysAnalytics');
-  console.log('🔧 Use window.entersysAnalytics.testConnection() to debug');
+  analyticsService.log('🔧 Analytics functions available in window.entersysAnalytics');
+  analyticsService.log('🔧 Use window.entersysAnalytics.testConnection() to debug');
 }
 
 export default analyticsService;

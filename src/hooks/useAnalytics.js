@@ -1,65 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { analyticsService } from '../services/analytics';
 
 /**
- * Hook simplificado para analytics básico
- * Mantiene solo Matomo para tracking básico de páginas
+ * Hook simplificado para analytics
+ * REFACTORIZADO: Ahora es un wrapper del analyticsService para evitar código duplicado
+ *
+ * @deprecated Considerar usar analyticsService directamente en lugar de este hook
  */
 export const useAnalytics = () => {
-  const [matomoLoaded, setMatomoLoaded] = useState(false);
-
   useEffect(() => {
-    // Solo cargar si analytics está habilitado
-    if (process.env.REACT_APP_DISABLE_ANALYTICS === 'true') {
-      console.log('📊 Analytics disabled by env variable');
-      return;
-    }
-
-    if (!window._paq && !matomoLoaded) {
-      window._paq = window._paq || [];
-      window._paq.push(['trackPageView']);
-      window._paq.push(['enableLinkTracking']);
-      window._paq.push(['setTrackerUrl', 'https://analytics.entersys.mx/matomo.php']);
-      window._paq.push(['setSiteId', '1']);
-
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = 'https://analytics.entersys.mx/matomo.js';
-      script.onload = () => {
-        setMatomoLoaded(true);
-        console.log('✅ Matomo analytics loaded');
-      };
-      script.onerror = () => {
-        console.warn('⚠️ Matomo analytics failed to load');
-      };
-
-      const firstScript = document.getElementsByTagName('script')[0];
-      firstScript.parentNode.insertBefore(script, firstScript);
-    }
-  }, [matomoLoaded]);
-
-  const trackEvent = (category, action, name = '', value = 0) => {
-    if (window._paq && matomoLoaded) {
-      window._paq.push(['trackEvent', category, action, name, value]);
-      console.log(`📊 Event tracked: ${category} - ${action}`);
-    } else {
-      console.log(`📊 Event not tracked (Matomo not ready): ${category} - ${action}`);
-    }
-  };
-
-  const trackPageView = (customTitle = null) => {
-    if (window._paq && matomoLoaded) {
-      if (customTitle) {
-        window._paq.push(['setDocumentTitle', customTitle]);
-      }
-      window._paq.push(['trackPageView']);
-      console.log('📊 Page view tracked');
-    }
-  };
+    // Inicializar analytics al montar el componente
+    analyticsService.initialize();
+  }, []);
 
   return {
-    trackEvent,
-    trackPageView,
-    matomoLoaded
+    trackEvent: (category, action, name = '', value = 0) => {
+      analyticsService.trackEvent(category, action, name, value);
+    },
+    trackPageView: (customTitle = null) => {
+      analyticsService.trackPageView(customTitle);
+    },
+    trackFormSubmission: (formName) => {
+      analyticsService.trackFormSubmission(formName);
+    },
+    trackWhatsAppClick: (source) => {
+      analyticsService.trackWhatsAppClick(source);
+    },
+    trackButtonClick: (buttonName, section) => {
+      analyticsService.trackButtonClick(buttonName, section);
+    },
+    // Propiedad de compatibilidad
+    matomoLoaded: analyticsService.scriptLoaded
   };
 };
 
