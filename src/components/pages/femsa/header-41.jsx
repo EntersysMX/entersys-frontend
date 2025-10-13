@@ -2,8 +2,17 @@
 
 import { Button } from "@relume_io/relume-ui";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Header41() {
+  const navigate = useNavigate();
+
+  const handleEntersyzarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Entersyzar empresa - FEMSA Header', 'femsa-header');
+    navigate('/contacto#formulario-contacto');
+  };
+
   return (
     <section className="px-[5%] py-16 md:py-24 lg:py-28 color-scheme-2">
       <div className="container">
@@ -35,7 +44,7 @@ export function Header41() {
             <p className="text-lg md:text-xl mb-6 md:mb-8 leading-relaxed">
               Implementación de Worksys para digitalización y estandarización de gestión de contratistas en trabajos de alto riesgo. Automatización de procesos de seguridad industrial con Smartsheets en toda la operación nacional de FEMSA.
             </p>
-            <Button className="btn-primary">Entersyzar empresa</Button>
+            <Button className="btn-primary" onClick={handleEntersyzarClick}>Entersyzar empresa</Button>
           </div>
         </div>
       </div>

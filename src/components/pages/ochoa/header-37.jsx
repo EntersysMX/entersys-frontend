@@ -2,8 +2,17 @@
 
 import { Button } from "@relume_io/relume-ui";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Header37() {
+  const navigate = useNavigate();
+
+  const handleEntersyzarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Entersyzar empresa - Ochoa Hero', 'ochoa-hero');
+    navigate('/contacto#formulario-contacto');
+  };
+
   return (
     <section className="grid grid-cols-1 items-center gap-y-16 pt-16 md:pt-24 lg:grid-cols-2 lg:pt-0 color-scheme-2">
       <div className="order-2 lg:order-1">
@@ -24,7 +33,7 @@ export function Header37() {
           en tiempo real con Smartsheets y metodología Daily Management.
         </p>
         <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
-          <Button className="btn-primary">Entersyzar empresa</Button>
+          <Button className="btn-primary" onClick={handleEntersyzarClick}>Entersyzar empresa</Button>
         </div>
       </div>
     </section>

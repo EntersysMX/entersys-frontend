@@ -3,8 +3,22 @@
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Cta39() {
+  const navigate = useNavigate();
+
+  const handleContactarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Contactar - QHSE CTA', 'qhse-cta');
+    navigate('/contacto#formulario-contacto');
+  };
+
+  const handleDemoClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Agendar demo - QHSE CTA', 'qhse-cta');
+    navigate('/contacto#formulario-contacto');
+  };
+
   return (
     <section className="px-[5%] py-16 md:py-24 lg:py-28 color-scheme-3">
       <div className="container">
@@ -22,8 +36,8 @@ export function Cta39() {
               </p>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <Button title="Contactar">Contactar</Button>
-              <Button title="Agendar demo" variant="secondary">
+              <Button title="Contactar" onClick={handleContactarClick}>Contactar</Button>
+              <Button title="Agendar demo" variant="secondary" onClick={handleDemoClick}>
                 Agendar demo
               </Button>
             </div>
