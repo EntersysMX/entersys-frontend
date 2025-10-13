@@ -12,16 +12,31 @@ export default function ScrollToTop() {
   useEffect(() => {
     // Si hay un hash (ej: #formulario-contacto), hacer scroll a ese elemento
     if (hash) {
-      // Pequeño delay para asegurar que el elemento existe en el DOM
-      setTimeout(() => {
+      // Intentar hacer scroll con múltiples reintentos para asegurar que el elemento está en DOM
+      let attempts = 0;
+      const maxAttempts = 10;
+      const interval = 100; // Reintentar cada 100ms
+
+      const scrollToHash = () => {
         const element = document.querySelector(hash);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          // Elemento encontrado, hacer scroll
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return true;
+        } else if (attempts < maxAttempts) {
+          // Elemento no encontrado, reintentar
+          attempts++;
+          setTimeout(scrollToHash, interval);
+          return false;
         } else {
-          // Si el elemento no existe, scroll al tope
+          // Máximo de reintentos alcanzado, scroll al tope
           window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+          return false;
         }
-      }, 100);
+      };
+
+      // Iniciar el proceso de scroll con un pequeño delay inicial
+      setTimeout(scrollToHash, 100);
     } else {
       // Sin hash, scroll al tope inmediatamente
       window.scrollTo({
