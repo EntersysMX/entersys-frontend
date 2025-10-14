@@ -49,10 +49,10 @@ export function Layout363({ colorScheme = 2, ...props }) {
               className="h-full"
             >
               <div className="grid grid-cols-1 items-start sm:grid-cols-2 overflow-hidden bg-transparent border border-border-primary/20 rounded-lg shadow-sm h-full">
-                <div className="bg-[#C5F0E8] flex">
+                <div className="bg-[#C5F0E8] h-full flex items-stretch">
                   <OptimizedImage
                     src="/imagenes/inicio/servicios_insignia_worksys_inicio.webp"
-                    className="w-full object-cover block"
+                    className="w-full h-full object-cover"
                     alt="Digitalización de procesos Worksys"
                     effect="blur"
                   />
@@ -90,10 +90,10 @@ export function Layout363({ colorScheme = 2, ...props }) {
               className="h-full"
             >
               <div className="grid grid-cols-1 items-start sm:grid-cols-2 overflow-hidden bg-transparent border border-border-primary/20 rounded-lg shadow-sm h-full">
-                <div className="bg-[#C5F0E8] flex">
+                <div className="bg-[#C5F0E8] h-full flex items-stretch">
                   <OptimizedImage
                     src="/imagenes/inicio/servicios_gestion_inicio.webp"
-                    className="w-full object-cover block"
+                    className="w-full h-full object-cover"
                     alt="Implementación de sistemas Expersys"
                     effect="blur"
                   />
