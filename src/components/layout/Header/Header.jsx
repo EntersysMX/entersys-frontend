@@ -335,7 +335,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
                           <p className={`text-md font-semibold lg:text-base ${
                             location.pathname === '/clientes/femsa' ? 'text-[#009CA6]' : 'text-black'
                           }`}>
-                            FEMSA
+                            Coca-Cola
                           </p>
                           <p className="hidden text-sm md:block text-gray-600">
                             714 proyectos sin accidentes en 225 unidades
