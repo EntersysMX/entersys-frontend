@@ -84,6 +84,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
+                    className="block w-full"
                   >
                     <OptimizedImage
                       src="/imagenes/inicio/diferenciadores_eficiencia_inicio.webp"
@@ -130,6 +131,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
+                    className="block w-full"
                   >
                     <OptimizedImage
                       src="/imagenes/inicio/diferenciadores_escalabilidad_inicio.webp"
@@ -178,6 +180,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
+                    className="block w-full"
                   >
                     <OptimizedImage
                       src="/imagenes/inicio/diferenciadores_cumplimiento_inicio.webp"
