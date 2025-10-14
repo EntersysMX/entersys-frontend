@@ -42,7 +42,7 @@ export function Header30({ colorScheme = 1, ...props }) {
       <div className="absolute inset-0 z-0">
         <OptimizedImage
           src="/imagenes/expersys/hero_quality_expersys.webp"
-          className="size-full object-cover"
+          className="size-full object-contain object-center"
           alt="Expersys: calidad operativa"
           effect="blur"
           threshold={200}
