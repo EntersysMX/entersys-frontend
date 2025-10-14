@@ -151,7 +151,7 @@ export const cdmxOfficeSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Entersys CDMX",
-  "image": "https://www.entersys.mx/imagenes/contacto/cdmx.jpg",
+  "image": "https://www.entersys.mx/imagenes/contacto/cdmx.webp",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Paseo de la Reforma",
