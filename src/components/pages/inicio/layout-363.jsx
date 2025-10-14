@@ -49,19 +49,13 @@ export function Layout363({ colorScheme = 2, ...props }) {
               className="h-full"
             >
               <div className="grid grid-cols-1 items-start sm:grid-cols-2 overflow-hidden bg-transparent border border-border-primary/20 rounded-lg shadow-sm h-full">
-                <div className="bg-[#C5F0E8] h-full flex">
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
-                    className="h-full w-full block"
-                  >
-                    <OptimizedImage
-                      src="/imagenes/inicio/servicios_insignia_worksys_inicio.webp"
-                      className="w-full h-full object-cover block"
-                      alt="Digitalización de procesos Worksys"
-                      effect="blur"
-                    />
-                  </motion.div>
+                <div className="bg-[#C5F0E8] flex">
+                  <OptimizedImage
+                    src="/imagenes/inicio/servicios_insignia_worksys_inicio.webp"
+                    className="w-full object-cover block"
+                    alt="Digitalización de procesos Worksys"
+                    effect="blur"
+                  />
                 </div>
                 <div className="flex h-full flex-col justify-center p-6">
                   <p className="mb-2 text-sm font-semibold text-primary">Worksys</p>
@@ -96,19 +90,13 @@ export function Layout363({ colorScheme = 2, ...props }) {
               className="h-full"
             >
               <div className="grid grid-cols-1 items-start sm:grid-cols-2 overflow-hidden bg-transparent border border-border-primary/20 rounded-lg shadow-sm h-full">
-                <div className="bg-[#C5F0E8] h-full flex">
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
-                    className="h-full w-full block"
-                  >
-                    <OptimizedImage
-                      src="/imagenes/inicio/servicios_gestion_inicio.webp"
-                      className="w-full h-full object-cover block"
-                      alt="Implementación de sistemas Expersys"
-                      effect="blur"
-                    />
-                  </motion.div>
+                <div className="bg-[#C5F0E8] flex">
+                  <OptimizedImage
+                    src="/imagenes/inicio/servicios_gestion_inicio.webp"
+                    className="w-full object-cover block"
+                    alt="Implementación de sistemas Expersys"
+                    effect="blur"
+                  />
                 </div>
                 <div className="flex h-full flex-col justify-center p-6">
                   <p className="mb-2 text-sm font-semibold text-primary">Expersys</p>
