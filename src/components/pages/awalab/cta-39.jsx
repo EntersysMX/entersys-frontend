@@ -1,11 +1,24 @@
-
+"use client";
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
-
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Cta39({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleContactarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Contactar - Awalab CTA', 'awalab-cta');
+    navigate('/contacto#formulario-contacto');
+  };
+
+  const handleMasCasosClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Más casos - Awalab CTA', 'awalab-cta');
+    navigate('/clientes');
+  };
+
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -21,10 +34,10 @@ export function Cta39({ colorScheme = 1, ...props }) {
               </p>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <Button title="Contactar" variant="primary">
+              <Button title="Contactar" variant="primary" onClick={handleContactarClick}>
                 Contactar
               </Button>
-              <Button title="Más casos" variant="secondary">
+              <Button title="Más casos" variant="secondary" onClick={handleMasCasosClick}>
                 Más casos
               </Button>
             </div>
