@@ -5,8 +5,22 @@ import { Card } from "../../ui/Card";
 import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Layout93({ colorScheme = 2, ...props }) {
+  const navigate = useNavigate();
+
+  const handleConocerClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Conocer - Visión', 'nosotros-vision');
+    navigate('/contacto');
+  };
+
+  const handleExplorarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Explorar - Visión', 'nosotros-vision');
+    navigate('/clientes');
+  };
+
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -54,7 +68,7 @@ export function Layout93({ colorScheme = 2, ...props }) {
               </div>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <Button title="Conocer">
+              <Button title="Conocer" onClick={handleConocerClick}>
                 Conocer
               </Button>
               <Button
@@ -62,6 +76,7 @@ export function Layout93({ colorScheme = 2, ...props }) {
                 variant="link"
                 size="link"
                 iconRight={<RxChevronRight />}
+                onClick={handleExplorarClick}
               >
                 Explorar
               </Button>

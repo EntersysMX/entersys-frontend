@@ -13,11 +13,7 @@ export function Layout141({ colorScheme = 2, ...props }) {
 
   const handleConocerClick = () => {
     analyticsService.trackEvent('CTA', 'Button Click', 'Conocer - Nosotros Origen', 'nosotros');
-    // Ya estamos en la sección #origen, solo hacer scroll suave
-    const origenSection = document.getElementById('origen');
-    if (origenSection) {
-      origenSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    navigate('/contacto');
   };
 
   const handleExplorarClick = () => {

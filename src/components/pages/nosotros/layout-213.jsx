@@ -5,8 +5,22 @@ import { Card } from "../../ui/Card";
 import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Layout213({ colorScheme = 1, ...props }) {
+  const navigate = useNavigate();
+
+  const handleConocerloClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Quiero conocerlo - Voces Líderes', 'nosotros-lideres');
+    navigate('/contacto');
+  };
+
+  const handleExplorarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Explorar - Voces Líderes', 'nosotros-lideres');
+    navigate('/clientes');
+  };
+
   return (
     <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
       <div className="container">
@@ -35,7 +49,7 @@ export function Layout213({ colorScheme = 1, ...props }) {
               líderes de empresas en diferentes sectores e industrias.
             </p>
             <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
-              <Button title="Quiero conocerlo">
+              <Button title="Quiero conocerlo" onClick={handleConocerloClick}>
                 Quiero conocerlo
               </Button>
               <Button
@@ -43,6 +57,7 @@ export function Layout213({ colorScheme = 1, ...props }) {
                 variant="link"
                 size="link"
                 iconRight={<RxChevronRight />}
+                onClick={handleExplorarClick}
               >
                 Explorar
               </Button>
