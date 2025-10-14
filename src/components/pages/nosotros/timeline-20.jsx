@@ -4,8 +4,22 @@ import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
 import React, { Fragment } from "react";
 import { RxChevronRight } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
+import { analyticsService } from "../../../services/analytics";
 
 export function Timeline20({ colorScheme = 4, ...props }) {
+  const navigate = useNavigate();
+
+  const handleConocerClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Conocer - Trayectoria', 'nosotros-timeline');
+    navigate('/contacto');
+  };
+
+  const handleExplorarClick = () => {
+    analyticsService.trackEvent('CTA', 'Button Click', 'Explorar - Trayectoria', 'nosotros-timeline');
+    navigate('/clientes');
+  };
+
   return (
     <section
       id="relume"
@@ -25,7 +39,7 @@ export function Timeline20({ colorScheme = 4, ...props }) {
               expandir sus horizontes.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
-              <Button title="Conocer">
+              <Button title="Conocer" onClick={handleConocerClick}>
                 Conocer
               </Button>
               <Button
@@ -33,6 +47,7 @@ export function Timeline20({ colorScheme = 4, ...props }) {
                 variant="link"
                 size="link"
                 iconRight={<RxChevronRight />}
+                onClick={handleExplorarClick}
               >
                 Explorar
               </Button>
