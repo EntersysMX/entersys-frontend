@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { visualizer } from 'rollup-plugin-visualizer'
+import { VitePWA } from 'vite-plugin-pwa'
 import { versionPlugin } from './vite-plugins/version-plugin.js'
 import { securityHeadersPlugin } from './vite-plugins/security-headers-plugin.js'
 import { robotsPlugin } from './vite-plugins/robots-plugin.js'
@@ -15,6 +16,92 @@ export default defineConfig({
     robotsPlugin(),
     htmlMetaPlugin(),
     gtmPlugin(),
+    // PWA Service Worker
+    VitePWA({
+      registerType: 'autoUpdate',
+      includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
+      manifest: {
+        name: 'Entersys',
+        short_name: 'Entersys',
+        description: 'Transformamos operaciones empresariales con Worksys y Expersys',
+        theme_color: '#ffffff',
+        background_color: '#ffffff',
+        display: 'standalone',
+        scope: '/',
+        start_url: '/',
+        icons: [
+          {
+            src: 'imago-logo_entersys.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'imago-logo_entersys.png',
+            sizes: '512x512',
+            type: 'image/png'
+          }
+        ]
+      },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,svg,webp}'],
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'google-fonts-cache',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 año
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'gstatic-fonts-cache',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 año
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
+          {
+            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'images-cache',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 días
+              }
+            }
+          },
+          {
+            urlPattern: /^https:\/\/api\.entersys\.mx\/.*/i,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'api-cache',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 5 // 5 minutos
+              },
+              networkTimeoutSeconds: 10
+            }
+          }
+        ]
+      },
+      devOptions: {
+        enabled: false // Desactivar en desarrollo
+      }
+    }),
     // Bundle analyzer - solo en análisis
     visualizer({
       filename: './dist/stats.html',
@@ -43,15 +130,15 @@ export default defineConfig({
         safari10: true // Compatibilidad con Safari 10
       }
     },
-    // Mejorar chunk size para mejor caching
-    chunkSizeWarningLimit: 600,
+    // Performance Budgets - Alertas si los chunks exceden límites
+    chunkSizeWarningLimit: 500, // 500 KB para chunks individuales
+    // Configurar reportCompressedSize para warnings
+    reportCompressedSize: true,
     // Optimizar CSS
     cssCodeSplit: true,
     cssMinify: true,
     // Source maps para debugging (desactivar en producción si no se necesita)
     sourcemap: false,
-    // Reportar tamaños de chunks comprimidos
-    reportCompressedSize: true,
     // Module preload polyfill para mejor compatibilidad
     modulePreload: {
       polyfill: true

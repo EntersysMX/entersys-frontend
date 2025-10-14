@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sin conexión - Entersys</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 16px;
+      padding: 48px 32px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 24px;
+    }
+
+    .icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: #f3f4f6;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #1f2937;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 16px;
+      color: #6b7280;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .button {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.6);
+    }
+
+    .button:active {
+      transform: translateY(0);
+    }
+
+    .status {
+      margin-top: 24px;
+      padding: 12px;
+      background: #fef3c7;
+      border-radius: 8px;
+      color: #92400e;
+      font-size: 14px;
+      display: none;
+    }
+
+    .status.online {
+      background: #d1fae5;
+      color: #065f46;
+      display: block;
+    }
+
+    .status.offline {
+      display: block;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 32px 24px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+
+      .logo {
+        width: 100px;
+      }
+
+      .icon {
+        width: 64px;
+        height: 64px;
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="/imago-logo_entersys.png" alt="Entersys" class="logo">
+
+    <div class="icon">
+      📡
+    </div>
+
+    <h1>Sin conexión a Internet</h1>
+    <p>
+      Lo sentimos, parece que no tienes conexión a Internet en este momento.
+      Por favor, verifica tu conexión y vuelve a intentar.
+    </p>
+
+    <a href="/" class="button" onclick="window.location.reload(); return false;">
+      Reintentar
+    </a>
+
+    <div class="status" id="status">
+      🔄 Verificando conexión...
+    </div>
+  </div>
+
+  <script>
+    // Detectar cambios en el estado de conexión
+    function updateOnlineStatus() {
+      const status = document.getElementById('status');
+
+      if (navigator.onLine) {
+        status.className = 'status online';
+        status.textContent = '✅ Conexión restaurada - Haz clic en Reintentar';
+      } else {
+        status.className = 'status offline';
+        status.textContent = '❌ Sin conexión - Esperando red...';
+      }
+    }
+
+    // Listeners para detectar cambios de conexión
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+
+    // Check inicial
+    updateOnlineStatus();
+
+    // Auto-reload cuando vuelva la conexión (opcional)
+    window.addEventListener('online', () => {
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

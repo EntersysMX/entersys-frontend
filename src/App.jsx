@@ -11,6 +11,7 @@ import SimpleLoader from './components/ui/SimpleLoader'
 import { analyticsService } from './services/analytics'
 import { sentryService } from './services/sentry'
 import { initWebVitals } from './utils/webVitals'
+import { startPerformanceMonitoring } from './utils/performanceMonitor'
 import './utils/testAnalytics' // Auto-expose test suite in development
 
 // Lazy loading de páginas para mejor performance
@@ -57,6 +58,9 @@ function App() {
 
       // 3. Inicializar Web Vitals monitoring
       initWebVitals();
+
+      // 4. Inicializar Performance Monitoring
+      startPerformanceMonitoring();
 
       console.log('✅ All services initialized successfully');
     } catch (error) {
