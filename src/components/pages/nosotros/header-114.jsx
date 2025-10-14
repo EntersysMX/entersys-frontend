@@ -60,7 +60,7 @@ export function Header114({ colorScheme = 4, ...props }) {
           }}
         />
         {/* Large Desktop (≥1920px) */}
-        <style jsx>{`
+        <style>{`
           @media (min-width: 1920px) {
             .hero-large-bg {
               display: block !important;
