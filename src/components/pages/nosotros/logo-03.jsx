@@ -4,7 +4,7 @@ import React from "react";
 
 export function Logo03({ colorScheme = 3, ...props }) {
   const logos = [
-    { src: "/imagenes/nosotros/logo_femsa_nosotros.webp", alt: "FEMSA", url: "https://www.femsa.com" },
+    { src: "/imagenes/nosotros/logo_coca.webp", alt: "Coca-Cola", url: "https://www.coca-cola.com" },
     { src: "/imagenes/nosotros/logo_ochoa_nosotros.webp", alt: "Productos de Maíz Ochoa", url: "https://www.productosochoa.com" },
     { src: "/imagenes/nosotros/logo_chilando_nosotros.webp", alt: "Chilango Garage", url: "https://chilangogarage.com" },
     { src: "/imagenes/nosotros/logo_mlm_nosotros.webp", alt: "MLM", url: "https://www.mlm.com.mx" },
