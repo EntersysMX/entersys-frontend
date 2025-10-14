@@ -9,7 +9,8 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies (including devDependencies for build)
-RUN npm ci
+# Temporarily using npm install instead of npm ci while regenerating lockfile
+RUN npm install
 
 # Copy source code
 COPY . .
