@@ -12,6 +12,7 @@ import { analyticsService } from './services/analytics'
 import { sentryService } from './services/sentry'
 import { initWebVitals } from './utils/webVitals'
 import { startPerformanceMonitoring } from './utils/performanceMonitor'
+import { initJourneyTracking } from './utils/advancedAnalytics'
 import './utils/testAnalytics' // Auto-expose test suite in development
 
 // Lazy loading de páginas para mejor performance
@@ -61,6 +62,9 @@ function App() {
 
       // 4. Inicializar Performance Monitoring
       startPerformanceMonitoring();
+
+      // 5. Inicializar Journey Tracking
+      initJourneyTracking();
 
       console.log('✅ All services initialized successfully');
     } catch (error) {
