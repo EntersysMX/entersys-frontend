@@ -187,8 +187,8 @@ export function Contact06({ colorScheme = 2, ...props }) {
             </div>
             <div className="flex items-center gap-4">
               <MdPhone className="size-6 flex-none" />
-              <a href="tel:+525512345678" className="hover:underline">
-                +52 55 1234 5678
+              <a href="tel:+525625683662" className="hover:underline">
+                +52 56 2568 3662
               </a>
             </div>
             <div className="flex items-center gap-4">

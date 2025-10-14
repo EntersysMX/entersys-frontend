@@ -42,8 +42,8 @@ export function Contact13({ colorScheme = 3, ...props }) {
                 Teléfono
               </h3>
               <p className="mb-2">Comunícate con nuestro equipo</p>
-              <a className="underline hover:opacity-80" href="tel:+525512345678">
-                +52 55 1234 5678
+              <a className="underline hover:opacity-80" href="tel:+525625683662">
+                +52 56 2568 3662
               </a>
             </div>
             <div>
