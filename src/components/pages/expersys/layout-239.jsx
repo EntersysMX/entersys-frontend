@@ -35,7 +35,7 @@ export function Layout239({ colorScheme = 1, ...props }) {
             <div className="flex w-full flex-col items-center text-center">
               <div className="rb-6 mb-6 md:mb-8">
                 <OptimizedImage
-                  src="/imagenes/expersys/peak_soda_expersys_qhse.webp"
+                  src="/imagenes/expersys/peak_office_expersys.webp"
                   alt="QHSE"
                   className="rounded-image"
                   effect="blur"
@@ -49,7 +49,7 @@ export function Layout239({ colorScheme = 1, ...props }) {
             <div className="flex w-full flex-col items-center text-center">
               <div className="rb-6 mb-6 md:mb-8">
                 <OptimizedImage
-                  src="/imagenes/expersys/peak_office_expersys.webp"
+                  src="/imagenes/expersys/peak_soda_expersys_qhse.webp"
                   alt="Coca-Cola"
                   className="rounded-image"
                   effect="blur"
