@@ -1,5 +1,6 @@
 "use client";
 
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 
 export function Gallery1() {
@@ -17,40 +18,50 @@ export function Gallery1() {
         <div className="grid auto-cols-fr grid-cols-1 gap-8">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
             <div className="aspect-video overflow-hidden rounded-lg">
-              <img
+              <OptimizedImage
                 src="/imagenes/ochoa/sp_dash1_ochoa.webp"
                 alt="Dashboard de calidad Ochoa"
                 className="size-full object-cover"
+                effect="blur"
+                threshold={200}
               />
             </div>
             <div className="aspect-video overflow-hidden rounded-lg">
-              <img
+              <OptimizedImage
                 src="/imagenes/ochoa/sp_dash2_ochoa.webp"
                 alt="Control de producción Ochoa"
                 className="size-full object-cover"
+                effect="blur"
+                threshold={200}
               />
             </div>
           </div>
           <div className="aspect-[21/9] overflow-hidden rounded-lg">
-            <img
+            <OptimizedImage
               src="/imagenes/ochoa/sp_dash3_ochoa.webp"
               alt="Vista general del sistema Ochoa"
               className="size-full object-cover"
+              effect="blur"
+              threshold={200}
             />
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
             <div className="aspect-video overflow-hidden rounded-lg">
-              <img
+              <OptimizedImage
                 src="/imagenes/ochoa/sp_dash4_ochoa.webp"
                 alt="Análisis de cumplimiento Ochoa"
                 className="size-full object-cover"
+                effect="blur"
+                threshold={200}
               />
             </div>
             <div className="aspect-video overflow-hidden rounded-lg">
-              <img
+              <OptimizedImage
                 src="/imagenes/ochoa/sp_dash5_ochoa.webp"
                 alt="Reportes de calidad Ochoa"
                 className="size-full object-cover"
+                effect="blur"
+                threshold={200}
               />
             </div>
           </div>

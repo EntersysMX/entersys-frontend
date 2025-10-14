@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { analyticsService } from "../../../services/analytics";
@@ -44,10 +45,11 @@ export function Cta39({ colorScheme = 1, ...props }) {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <img
+            <OptimizedImage
               src="/imagenes/worksys/banner_meeting_worksys.webp"
               className="w-full object-cover"
               alt="Diagnóstico o demo Worksys"
+              effect="blur"
             />
           </div>
         </Card>

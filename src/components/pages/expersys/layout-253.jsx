@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { analyticsService } from "../../../services/analytics";
@@ -35,7 +36,7 @@ export function Layout253({ colorScheme = 1, ...props }) {
           <div className="grid w-full auto-cols-fr grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 md:gap-y-16 lg:gap-x-12">
             <div>
               <div className="rb-5 mb-5 md:mb-6">
-                <img src="/imagenes/expersys/icon_precision_manufacturing_expersys.svg" alt="Manufactura" className="h-12 w-12" />
+                <OptimizedImage src="/imagenes/expersys/icon_precision_manufacturing_expersys.svg" alt="Manufactura" className="h-12 w-12" effect="blur" />
               </div>
               <h1 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 Manufactura
@@ -46,7 +47,7 @@ export function Layout253({ colorScheme = 1, ...props }) {
             </div>
             <div>
               <div className="rb-5 mb-5 md:mb-6">
-                <img src="/imagenes/expersys/icon_storefront_expersys.svg" alt="Retail y franquicias" className="h-12 w-12" />
+                <OptimizedImage src="/imagenes/expersys/icon_storefront_expersys.svg" alt="Retail y franquicias" className="h-12 w-12" effect="blur" />
               </div>
               <h1 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 Retail y franquicias
@@ -58,7 +59,7 @@ export function Layout253({ colorScheme = 1, ...props }) {
             </div>
             <div>
               <div className="rb-5 mb-5 md:mb-6">
-                <img src="/imagenes/expersys/icon_fastfood_expersys.svg" alt="Alimentos y bebidas" className="h-12 w-12" />
+                <OptimizedImage src="/imagenes/expersys/icon_fastfood_expersys.svg" alt="Alimentos y bebidas" className="h-12 w-12" effect="blur" />
               </div>
               <h1 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 Alimentos y bebidas
@@ -70,7 +71,7 @@ export function Layout253({ colorScheme = 1, ...props }) {
             </div>
             <div>
               <div className="rb-5 mb-5 md:mb-6">
-                <img src="/imagenes/expersys/icon_delivery_truck_speed_expersys.svg" alt="Logística y distribución" className="h-12 w-12" />
+                <OptimizedImage src="/imagenes/expersys/icon_delivery_truck_speed_expersys.svg" alt="Logística y distribución" className="h-12 w-12" effect="blur" />
               </div>
               <h1 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 Logística y distribución

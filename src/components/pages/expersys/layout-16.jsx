@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { analyticsService } from "../../../services/analytics";
@@ -33,13 +34,13 @@ export function Layout16({ colorScheme = 1, ...props }) {
             <ul className="grid grid-cols-1 gap-4 py-2">
               <li className="flex self-start">
                 <div className="mr-4 flex-none self-start">
-                  <img src="/imagenes/expersys/icon_star_expersys.svg" alt="Cumplimiento" className="h-6 w-6" />
+                  <OptimizedImage src="/imagenes/expersys/icon_star_expersys.svg" alt="Cumplimiento" className="h-6 w-6" effect="blur" />
                 </div>
                 <span>Cumplimiento normativo sin estrés ni burocracia.</span>
               </li>
               <li className="flex self-start">
                 <div className="mr-4 flex-none self-start">
-                  <img src="/imagenes/expersys/icon_checklist_expersys.svg" alt="Procesos" className="h-6 w-6" />
+                  <OptimizedImage src="/imagenes/expersys/icon_checklist_expersys.svg" alt="Procesos" className="h-6 w-6" effect="blur" />
                 </div>
                 <span>
                   Procesos listos para competir en mercados más exigentes.
@@ -47,7 +48,7 @@ export function Layout16({ colorScheme = 1, ...props }) {
               </li>
               <li className="flex self-start">
                 <div className="mr-4 flex-none self-start">
-                  <img src="/imagenes/expersys/icon_docs_expersys.svg" alt="Documentación" className="h-6 w-6" />
+                  <OptimizedImage src="/imagenes/expersys/icon_docs_expersys.svg" alt="Documentación" className="h-6 w-6" effect="blur" />
                 </div>
                 <span>
                   Documentación completa y funcional para el día a día.
@@ -61,10 +62,12 @@ export function Layout16({ colorScheme = 1, ...props }) {
             </div>
           </div>
           <div>
-            <img
+            <OptimizedImage
               src="/imagenes/expersys/servicios_insignia_inicio.webp"
               className="w-full rounded-image object-cover"
               alt="Acreditaciones de calidad"
+              effect="blur"
+              threshold={200}
             />
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import { Badge, Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 
@@ -22,10 +23,11 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
           <Card className="mb-0">
             <div>
               <a href="/clientes/femsa">
-                <img
+                <OptimizedImage
                   src="/imagenes/clientes/peak_soda_expersys_qhse.webp"
                   className="w-full object-cover"
                   alt="FEMSA - Seguridad Industrial"
+                  effect="blur"
                 />
               </a>
             </div>
@@ -56,10 +58,11 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
           <Card className="mb-0">
             <div>
               <a href="/clientes/ochoa">
-                <img
+                <OptimizedImage
                   src="/imagenes/clientes/peak_corn_expersys_PDMO.webp"
                   className="w-full object-cover"
                   alt="Productos de Maíz Ochoa - Control de Calidad"
+                  effect="blur"
                 />
               </a>
             </div>
@@ -90,10 +93,11 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
           <Card className="mb-0">
             <div>
               <a href="/clientes/qhse">
-                <img
+                <OptimizedImage
                   src="/imagenes/clientes/peak_office_expersys.webp"
                   className="w-full object-cover"
                   alt="QHSE - Crecimiento y ISO 9001"
+                  effect="blur"
                 />
               </a>
             </div>

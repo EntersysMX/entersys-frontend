@@ -1,5 +1,6 @@
 "use client";
 
+import OptimizedImage from "../../ui/OptimizedImage";
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -53,10 +54,11 @@ export function Layout421({ colorScheme = 1, ...props }) {
             className="absolute left-[5%] top-[8%] w-[42%] z-30"
             style={{ y: image1Y }}
           >
-            <img
+            <OptimizedImage
               src="/imagenes/worksys/section_process_worksys.webp"
               alt="Digitalización de procesos"
               className="w-full h-auto object-cover rounded-md shadow-2xl"
+              effect="blur"
             />
           </motion.div>
 
@@ -65,10 +67,11 @@ export function Layout421({ colorScheme = 1, ...props }) {
             className="absolute right-[3%] top-[12%] w-[45%] z-50"
             style={{ y: image3Y }}
           >
-            <img
+            <OptimizedImage
               src="/imagenes/worksys/section_cascade_worksys.webp"
               alt="Inteligencia artificial"
               className="w-full h-auto object-cover rounded-md shadow-2xl"
+              effect="blur"
             />
           </motion.div>
 
@@ -77,10 +80,11 @@ export function Layout421({ colorScheme = 1, ...props }) {
             className="absolute left-[15%] top-[38%] w-[48%] z-40"
             style={{ y: image2Y }}
           >
-            <img
+            <OptimizedImage
               src="/imagenes/worksys/section_dashboard_worksys.webp"
               alt="Dashboards y analytics"
               className="w-full h-auto object-cover rounded-md shadow-2xl"
+              effect="blur"
             />
           </motion.div>
 
@@ -89,10 +93,11 @@ export function Layout421({ colorScheme = 1, ...props }) {
             className="absolute right-[8%] bottom-[5%] w-[40%] z-20"
             style={{ y: image1Y }}
           >
-            <img
+            <OptimizedImage
               src="/imagenes/worksys/section_manual_worksys.webp"
               alt="Workspace digital"
               className="w-full h-auto object-cover rounded-md shadow-2xl"
+              effect="blur"
             />
           </motion.div>
         </div>
@@ -104,10 +109,11 @@ export function Layout421({ colorScheme = 1, ...props }) {
             className="absolute left-[2%] bottom-[12%] w-[28%] z-20"
             style={{ y: image1Y }}
           >
-            <img
+            <OptimizedImage
               src="/imagenes/worksys/section_documentation_worksys.webp"
               alt="Worksys documentos"
               className="w-full h-auto object-cover rounded-md shadow-2xl"
+              effect="blur"
             />
           </motion.div>
 
@@ -116,10 +122,11 @@ export function Layout421({ colorScheme = 1, ...props }) {
             className="absolute left-[25%] top-[5%] w-[28%] z-40"
             style={{ y: image2Y }}
           >
-            <img
+            <OptimizedImage
               src="/imagenes/worksys/section_process_worksys.webp"
               alt="Worksys diagrama"
               className="w-full h-auto object-cover rounded-md shadow-2xl"
+              effect="blur"
             />
           </motion.div>
 
@@ -128,10 +135,11 @@ export function Layout421({ colorScheme = 1, ...props }) {
             className="absolute right-[5%] top-[8%] w-[28%] z-50"
             style={{ y: image3Y }}
           >
-            <img
+            <OptimizedImage
               src="/imagenes/worksys/section_cascade_worksys.webp"
               alt="Worksys red neuronal"
               className="w-full h-auto object-cover rounded-md shadow-2xl"
+              effect="blur"
             />
           </motion.div>
 
@@ -140,10 +148,11 @@ export function Layout421({ colorScheme = 1, ...props }) {
             className="absolute left-[32%] top-[52%] w-[28%] z-30"
             style={{ y: image1Y }}
           >
-            <img
+            <OptimizedImage
               src="/imagenes/worksys/section_manual_worksys.webp"
               alt="Worksys escritorio"
               className="w-full h-auto object-cover rounded-md shadow-2xl"
+              effect="blur"
             />
           </motion.div>
 
@@ -152,10 +161,11 @@ export function Layout421({ colorScheme = 1, ...props }) {
             className="absolute left-[51%] top-[44%] w-[28%] z-60"
             style={{ y: image2Y }}
           >
-            <img
+            <OptimizedImage
               src="/imagenes/worksys/section_dashboard_worksys.webp"
               alt="Worksys analytics"
               className="w-full h-auto object-cover rounded-md shadow-2xl"
+              effect="blur"
             />
           </motion.div>
         </div>

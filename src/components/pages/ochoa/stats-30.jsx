@@ -1,6 +1,7 @@
 "use client";
 
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React, { Fragment } from "react";
 
 export function Stats30() {
@@ -36,10 +37,11 @@ export function Stats30() {
           <Fragment>
             <Card className="p-8">
               <div className="mb-4 overflow-hidden rounded-lg">
-                <img
+                <OptimizedImage
                   src="/imagenes/ochoa/stats_format_ochoa.webp"
                   alt="Formatos digitales Ochoa"
                   className="w-full h-auto object-cover"
+                  effect="blur"
                 />
               </div>
             </Card>
@@ -71,10 +73,11 @@ export function Stats30() {
           <Fragment>
             <Card className="p-8 last:order-first last:md:order-none">
               <div className="mb-4 overflow-hidden rounded-lg">
-                <img
+                <OptimizedImage
                   src="/imagenes/ochoa/stats_growth_ochoa.webp"
                   alt="Crecimiento Ochoa"
                   className="w-full h-auto object-cover"
+                  effect="blur"
                 />
               </div>
             </Card>

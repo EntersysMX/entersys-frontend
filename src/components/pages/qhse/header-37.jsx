@@ -4,6 +4,7 @@ import { Button } from "@relume_io/relume-ui";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { analyticsService } from "../../../services/analytics";
+import OptimizedImage from "../../ui/OptimizedImage";
 
 export function Header37() {
   const navigate = useNavigate();
@@ -16,10 +17,12 @@ export function Header37() {
   return (
     <section className="grid grid-cols-1 items-center gap-y-16 pt-16 md:pt-24 lg:grid-cols-2 lg:pt-0 color-scheme-2">
       <div className="order-2 lg:order-1">
-        <img
+        <OptimizedImage
           src="/imagenes/qhse/banner_watertreatment-qhse.webp"
           alt="QHSE - Tratamiento de agua industrial"
           className="w-full object-cover lg:h-screen lg:max-h-[60rem]"
+          effect="blur"
+          threshold={200}
         />
       </div>
       <div className="order-1 mx-[5%] sm:max-w-md md:justify-self-start lg:order-2 lg:mr-[5vw] lg:ml-20">

@@ -1,11 +1,15 @@
 import React, { useEffect, Suspense, lazy } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
+import { Toaster } from 'react-hot-toast'
 import PageTransition from './components/PageTransition'
 import ErrorBoundary from './components/ui/ErrorBoundary'
 import WhatsAppFloatButton from './components/WhatsAppFloatButton'
 import ScrollToTop from './components/ScrollToTop'
+import SkipLink from './components/ui/SkipLink'
+import SimpleLoader from './components/ui/SimpleLoader'
 import { analyticsService } from './services/analytics'
+import { sentryService } from './services/sentry'
 import { initWebVitals } from './utils/webVitals'
 import './utils/testAnalytics' // Auto-expose test suite in development
 
@@ -34,27 +38,33 @@ const CookieSettings = lazy(() => import('./pages/CookieSettings'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 // Componente de loading mientras se cargan las páginas
-const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="text-center">
-      <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      <p className="mt-4 text-gray-600">Cargando...</p>
-    </div>
-  </div>
-)
+// Loader simple y elegante que no interfiere con el diseño
+const PageLoader = () => <SimpleLoader />
 
 function App() {
-  // Inicializar analytics y web vitals cuando la app se carga
+  // Inicializar analytics, sentry y web vitals cuando la app se carga
   useEffect(() => {
     // Inicializar servicios
     try {
+      // 1. Inicializar Sentry primero (para capturar errores de inicialización)
+      sentryService.initialize();
+
+      // 2. Inicializar Analytics
       analyticsService.initialize();
 
       // Habilitar scroll tracking automático (25%, 50%, 75%, 100%)
       analyticsService.setupScrollTracking();
 
+      // 3. Inicializar Web Vitals monitoring
       initWebVitals();
+
+      console.log('✅ All services initialized successfully');
     } catch (error) {
+      // Capturar error en Sentry
+      sentryService.captureError(error, {
+        context: 'App Initialization',
+      });
+
       // Silenciar errores en producción
       if (process.env.NODE_ENV !== 'production') {
         console.error('Initialization error:', error);
@@ -66,6 +76,9 @@ function App() {
     <HelmetProvider>
       <ErrorBoundary>
         <div className="App">
+          {/* Skip Link para accesibilidad */}
+          <SkipLink />
+
           <ScrollToTop />
           <PageTransition>
             <Suspense fallback={<PageLoader />}>
@@ -95,6 +108,22 @@ function App() {
 
           {/* NUEVO: WhatsApp Float Button - NO ALTERAR DISEÑO EXISTENTE */}
           <WhatsAppFloatButton />
+
+          {/* Toast Notifications - Sistema de notificaciones global */}
+          <Toaster
+            position="top-right"
+            reverseOrder={false}
+            gutter={8}
+            toastOptions={{
+              // Duración por defecto
+              duration: 4000,
+              // Estilos base
+              style: {
+                background: '#363636',
+                color: '#fff',
+              },
+            }}
+          />
         </div>
       </ErrorBoundary>
     </HelmetProvider>

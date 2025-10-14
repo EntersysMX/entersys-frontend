@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { RxChevronRight } from "react-icons/rx";
@@ -80,12 +81,16 @@ export function Layout394({ colorScheme = 2, ...props }) {
                   </div>
                 </div>
                 <div className="flex w-full flex-col items-center justify-center self-start">
-                  <motion.img
-                    src="/imagenes/inicio/diferenciadores_eficiencia_inicio.webp"
-                    alt="Resultados medibles en semanas"
+                  <motion.div
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
-                  />
+                  >
+                    <OptimizedImage
+                      src="/imagenes/inicio/diferenciadores_eficiencia_inicio.webp"
+                      alt="Resultados medibles en semanas"
+                      effect="blur"
+                    />
+                  </motion.div>
                 </div>
               </Card>
             </motion.div>
@@ -122,12 +127,16 @@ export function Layout394({ colorScheme = 2, ...props }) {
                   </div>
                 </div>
                 <div className="flex w-full flex-col items-center justify-center self-start">
-                  <motion.img
-                    src="/imagenes/inicio/diferenciadores_escalabilidad_inicio.webp"
-                    alt="Sistemas escalables"
+                  <motion.div
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
-                  />
+                  >
+                    <OptimizedImage
+                      src="/imagenes/inicio/diferenciadores_escalabilidad_inicio.webp"
+                      alt="Sistemas escalables"
+                      effect="blur"
+                    />
+                  </motion.div>
                 </div>
               </Card>
             </motion.div>
@@ -166,12 +175,16 @@ export function Layout394({ colorScheme = 2, ...props }) {
                   </div>
                 </div>
                 <div className="flex w-full flex-col items-center justify-center self-start">
-                  <motion.img
-                    src="/imagenes/inicio/diferenciadores_cumplimiento_inicio.webp"
-                    alt="Protección normativa"
+                  <motion.div
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
-                  />
+                  >
+                    <OptimizedImage
+                      src="/imagenes/inicio/diferenciadores_cumplimiento_inicio.webp"
+                      alt="Protección normativa"
+                      effect="blur"
+                    />
+                  </motion.div>
                 </div>
               </Card>
             </motion.div>

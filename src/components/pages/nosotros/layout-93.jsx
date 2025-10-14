@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 
@@ -25,7 +26,7 @@ export function Layout93({ colorScheme = 2, ...props }) {
             <div className="grid grid-cols-1 gap-6 py-2 lg:grid-cols-2">
               <div className="flex gap-4">
                 <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 flex-shrink-0">
-                  <img src="/imagenes/inicio/icon_factory_inicio.svg" alt="Misión" className="h-8 w-8" />
+                  <OptimizedImage src="/imagenes/inicio/icon_factory_inicio.svg" alt="Misión" className="h-8 w-8" effect="blur" />
                 </div>
                 <div>
                   <h6 className="mb-3 text-md leading-[1.4] font-bold md:mb-4 md:text-xl">
@@ -39,7 +40,7 @@ export function Layout93({ colorScheme = 2, ...props }) {
               </div>
               <div className="flex gap-4">
                 <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 flex-shrink-0">
-                  <img src="/imagenes/inicio/icon_speed_inicio.svg" alt="Valores" className="h-8 w-8" />
+                  <OptimizedImage src="/imagenes/inicio/icon_speed_inicio.svg" alt="Valores" className="h-8 w-8" effect="blur" />
                 </div>
                 <div>
                   <h6 className="mb-3 text-md leading-[1.4] font-bold md:mb-4 md:text-xl">

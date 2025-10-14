@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { visualizer } from 'rollup-plugin-visualizer'
 import { versionPlugin } from './vite-plugins/version-plugin.js'
 import { securityHeadersPlugin } from './vite-plugins/security-headers-plugin.js'
 import { robotsPlugin } from './vite-plugins/robots-plugin.js'
@@ -13,7 +14,14 @@ export default defineConfig({
     securityHeadersPlugin(),
     robotsPlugin(),
     htmlMetaPlugin(),
-    gtmPlugin()
+    gtmPlugin(),
+    // Bundle analyzer - solo en análisis
+    visualizer({
+      filename: './dist/stats.html',
+      open: false,
+      gzipSize: true,
+      brotliSize: true,
+    })
   ],
   server: {
     port: 3000,
@@ -53,9 +61,39 @@ export default defineConfig({
         // Cache busting con hash en nombres de archivo
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
-        // Vite automáticamente hace code splitting seguro basado en imports dinámicos
-        // Sin necesidad de manualChunks que puede causar problemas de orden de carga
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+        // Manual chunks para mejor code splitting
+        manualChunks: (id) => {
+          // Vendor chunk para librerías de terceros
+          if (id.includes('node_modules')) {
+            // React y ReactDOM en chunk separado
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor-react';
+            }
+            // React Router en chunk separado
+            if (id.includes('react-router')) {
+              return 'vendor-router';
+            }
+            // Framer Motion (animaciones) en chunk separado
+            if (id.includes('framer-motion')) {
+              return 'vendor-motion';
+            }
+            // Relume UI en chunk separado
+            if (id.includes('@relume_io')) {
+              return 'vendor-relume';
+            }
+            // Analytics y tracking
+            if (id.includes('sentry') || id.includes('web-vitals')) {
+              return 'vendor-analytics';
+            }
+            // Toast y skeleton
+            if (id.includes('react-hot-toast') || id.includes('react-loading-skeleton') || id.includes('react-lazy-load-image')) {
+              return 'vendor-ui';
+            }
+            // Resto de vendors
+            return 'vendor-other';
+          }
+        }
       }
     }
   },

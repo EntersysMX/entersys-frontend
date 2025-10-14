@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 
 export function Blog37() {
@@ -24,10 +25,11 @@ export function Blog37() {
           <div>
             <a href="#" className="mb-6 inline-block w-full max-w-full">
               <div className="w-full overflow-hidden">
-                <img
+                <OptimizedImage
                   src="/imagenes/worksys/section_dashboard_worksys.webp"
                   alt="Tablero de control"
                   className="aspect-[3/2] size-full rounded-image object-cover"
+                  effect="blur"
                 />
               </div>
             </a>
@@ -49,10 +51,11 @@ export function Blog37() {
             </p>
             <div className="mt-6 flex items-center">
               <div className="mr-4 shrink-0">
-                <img
+                <OptimizedImage
                   src="/imagenes/inicio/avatar_placeholder.webp"
                   alt="Juan Pérez"
                   className="size-12 min-h-12 min-w-12 rounded-full object-cover"
+                  effect="blur"
                 />
               </div>
               <div>
@@ -68,10 +71,11 @@ export function Blog37() {
           <div>
             <a href="#" className="mb-6 inline-block w-full max-w-full">
               <div className="w-full overflow-hidden">
-                <img
+                <OptimizedImage
                   src="/imagenes/worksys/section_process_worksys.webp"
                   alt="Digitalización de procesos"
                   className="aspect-[3/2] size-full rounded-image object-cover"
+                  effect="blur"
                 />
               </div>
             </a>
@@ -93,10 +97,11 @@ export function Blog37() {
             </p>
             <div className="mt-6 flex items-center">
               <div className="mr-4 shrink-0">
-                <img
+                <OptimizedImage
                   src="/imagenes/inicio/avatar_placeholder.webp"
                   alt="Ana Gómez"
                   className="size-12 min-h-12 min-w-12 rounded-full object-cover"
+                  effect="blur"
                 />
               </div>
               <div>
@@ -112,10 +117,11 @@ export function Blog37() {
           <div>
             <a href="#" className="mb-6 inline-block w-full max-w-full">
               <div className="w-full overflow-hidden">
-                <img
+                <OptimizedImage
                   src="/imagenes/worksys/section_cascade_worksys.webp"
                   alt="Visual management"
                   className="aspect-[3/2] size-full rounded-image object-cover"
+                  effect="blur"
                 />
               </div>
             </a>
@@ -137,10 +143,11 @@ export function Blog37() {
             </p>
             <div className="mt-6 flex items-center">
               <div className="mr-4 shrink-0">
-                <img
+                <OptimizedImage
                   src="/imagenes/inicio/avatar_placeholder.webp"
                   alt="Luis Martínez"
                   className="size-12 min-h-12 min-w-12 rounded-full object-cover"
+                  effect="blur"
                 />
               </div>
               <div>

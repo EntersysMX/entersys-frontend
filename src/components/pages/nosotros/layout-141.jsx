@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { RxChevronRight } from "react-icons/rx";
@@ -58,10 +59,12 @@ export function Layout141({ colorScheme = 2, ...props }) {
           </div>
         </div>
         <div className="w-full mx-auto max-w-5xl">
-          <img
+          <OptimizedImage
             src="/imagenes/nosotros/banner_leaders_entersys_nosotros.webp"
             className="w-full rounded-image object-cover"
             alt="Entersys equipo de liderazgo"
+            effect="blur"
+            threshold={200}
           />
         </div>
       </div>

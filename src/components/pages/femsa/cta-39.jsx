@@ -5,6 +5,7 @@ import { Card } from "../../ui/Card";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { analyticsService } from "../../../services/analytics";
+import OptimizedImage from "../../ui/OptimizedImage";
 
 export function Cta39() {
   const navigate = useNavigate();
@@ -42,10 +43,11 @@ export function Cta39() {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <img
+            <OptimizedImage
               src="/imagenes/femsa/banner_meeting_worksys.webp"
               className="w-full object-cover"
               alt="Estandariza tu operación con Worksys"
+              effect="blur"
             />
           </div>
         </Card>

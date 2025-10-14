@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { analyticsService } from "../../../services/analytics";
@@ -40,10 +41,12 @@ export function Header30({ colorScheme = 1, ...props }) {
         </div>
       </div>
       <div className="absolute inset-0 z-0">
-        <img
+        <OptimizedImage
           src="/imagenes/worksys/hero_dashboard_worksys.webp"
           className="size-full object-cover"
           alt="Worksys: gestión de negocios inteligente"
+          effect="blur"
+          threshold={200}
         />
         <div className="absolute inset-0 bg-black/50" />
       </div>

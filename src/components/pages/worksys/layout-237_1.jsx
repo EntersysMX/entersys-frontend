@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { analyticsService } from "../../../services/analytics";
@@ -43,7 +44,7 @@ export function Layout2371({ colorScheme = 1, ...props }) {
               onKeyDown={(e) => e.key === 'Enter' && handleCardClick('Productos de Maíz Ochoa', '/clientes/ochoa')}
             >
               <div className="rb-5 mb-5 md:mb-6">
-                <img src="/imagenes/worksys/icon_grass_worksys.svg" alt="Productos de Maíz Ochoa" className="h-12 w-12" />
+                <OptimizedImage src="/imagenes/worksys/icon_grass_worksys.svg" alt="Productos de Maíz Ochoa" className="h-12 w-12" effect="blur" />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 Productos de Maíz Ochoa
@@ -58,7 +59,7 @@ export function Layout2371({ colorScheme = 1, ...props }) {
               onKeyDown={(e) => e.key === 'Enter' && handleCardClick('QHSE', '/clientes/qhse')}
             >
               <div className="rb-5 mb-5 md:mb-6">
-                <img src="/imagenes/worksys/icon_water_bottle_worksys.svg" alt="QHSE" className="h-12 w-12" />
+                <OptimizedImage src="/imagenes/worksys/icon_water_bottle_worksys.svg" alt="QHSE" className="h-12 w-12" effect="blur" />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 QHSE
@@ -67,7 +68,7 @@ export function Layout2371({ colorScheme = 1, ...props }) {
             </div>
             <div className="flex w-full flex-col items-center text-center">
               <div className="rb-5 mb-5 md:mb-6">
-                <img src="/imagenes/worksys/icon_devices_worksys.svg" alt="SCRAM" className="h-12 w-12" />
+                <OptimizedImage src="/imagenes/worksys/icon_devices_worksys.svg" alt="SCRAM" className="h-12 w-12" effect="blur" />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 SCRAM
@@ -76,7 +77,7 @@ export function Layout2371({ colorScheme = 1, ...props }) {
             </div>  
             <div className="flex w-full flex-col items-center text-center">
               <div className="rb-5 mb-5 md:mb-6">
-                <img src="/imagenes/worksys/icon_cargear_worksys.svg" alt="Chilango Garage" className="h-12 w-12" />
+                <OptimizedImage src="/imagenes/worksys/icon_cargear_worksys.svg" alt="Chilango Garage" className="h-12 w-12" effect="blur" />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 Chilango Garage
@@ -91,7 +92,7 @@ export function Layout2371({ colorScheme = 1, ...props }) {
               onKeyDown={(e) => e.key === 'Enter' && handleCardClick('FEMSA', '/clientes/femsa')}
             >
               <div className="rb-5 mb-5 md:mb-6">
-                <img src="/imagenes/worksys/icon_brandfamily_worksys.svg" alt="FEMSA" className="h-12 w-12" />
+                <OptimizedImage src="/imagenes/worksys/icon_brandfamily_worksys.svg" alt="FEMSA" className="h-12 w-12" effect="blur" />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 FEMSA
@@ -100,7 +101,7 @@ export function Layout2371({ colorScheme = 1, ...props }) {
             </div>
               <div className="flex w-full flex-col items-center text-center">
               <div className="rb-5 mb-5 md:mb-6">
-                <img src="/imagenes/worksys/icon_brandfamily_worksys.svg" alt="MLM" className="h-12 w-12" />
+                <OptimizedImage src="/imagenes/worksys/icon_brandfamily_worksys.svg" alt="MLM" className="h-12 w-12" effect="blur" />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 MLM

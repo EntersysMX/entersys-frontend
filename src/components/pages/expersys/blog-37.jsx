@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 
 export function Blog37({ colorScheme = 1, ...props }) {
@@ -24,10 +25,11 @@ export function Blog37({ colorScheme = 1, ...props }) {
           <div>
             <a href="#" className="mb-6 inline-block w-full max-w-full">
               <div className="w-full overflow-hidden">
-                <img
+                <OptimizedImage
                   src="/imagenes/expersys/section_auditory_expersys.webp"
                   alt="Artículo sobre auditoría"
                   className="aspect-[3/2] size-full rounded-image object-cover"
+                  effect="blur"
                 />
               </div>
             </a>
@@ -48,10 +50,11 @@ export function Blog37({ colorScheme = 1, ...props }) {
             </p>
             <div className="mt-6 flex items-center">
               <div className="mr-4 shrink-0">
-                <img
+                <OptimizedImage
                   src="/imagenes/inicio/avatar_placeholder.webp"
                   alt="Juan Pérez"
                   className="size-12 min-h-12 min-w-12 rounded-full object-cover"
+                  effect="blur"
                 />
               </div>
               <div>
@@ -67,10 +70,11 @@ export function Blog37({ colorScheme = 1, ...props }) {
           <div>
             <a href="#" className="mb-6 inline-block w-full max-w-full">
               <div className="w-full overflow-hidden">
-                <img
+                <OptimizedImage
                   src="/imagenes/expersys/servicios_insignia_inicio.webp"
                   alt="Artículo sobre ISO"
                   className="aspect-[3/2] size-full rounded-image object-cover"
+                  effect="blur"
                 />
               </div>
             </a>
@@ -91,10 +95,11 @@ export function Blog37({ colorScheme = 1, ...props }) {
             </p>
             <div className="mt-6 flex items-center">
               <div className="mr-4 shrink-0">
-                <img
+                <OptimizedImage
                   src="/imagenes/inicio/avatar_placeholder.webp"
                   alt="Ana Gómez"
                   className="size-12 min-h-12 min-w-12 rounded-full object-cover"
+                  effect="blur"
                 />
               </div>
               <div>
@@ -110,10 +115,11 @@ export function Blog37({ colorScheme = 1, ...props }) {
           <div>
             <a href="#" className="mb-6 inline-block w-full max-w-full">
               <div className="w-full overflow-hidden">
-                <img
+                <OptimizedImage
                   src="/imagenes/expersys/banner_meeting_worksys.webp"
                   alt="Artículo sobre certificaciones"
                   className="aspect-[3/2] size-full rounded-image object-cover"
+                  effect="blur"
                 />
               </div>
             </a>
@@ -135,10 +141,11 @@ export function Blog37({ colorScheme = 1, ...props }) {
             </p>
             <div className="mt-6 flex items-center">
               <div className="mr-4 shrink-0">
-                <img
+                <OptimizedImage
                   src="/imagenes/inicio/avatar_placeholder.webp"
                   alt="Luis Martínez"
                   className="size-12 min-h-12 min-w-12 rounded-full object-cover"
+                  effect="blur"
                 />
               </div>
               <div>

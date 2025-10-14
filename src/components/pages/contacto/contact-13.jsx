@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { MdEmail, MdLocationOn, MdPhone } from 'react-icons/md';
 import { RxChevronRight } from "react-icons/rx";
@@ -72,10 +73,12 @@ export function Contact13({ colorScheme = 3, ...props }) {
             </div>
           </div>
           <div>
-            <img
+            <OptimizedImage
               src="/imagenes/contacto/modern_office_workspace.webp"
               alt="Oficina moderna Entersys - Espacio de trabajo profesional"
               className="size-full rounded-image object-cover"
+              effect="blur"
+              threshold={200}
             />
           </div>
         </div>

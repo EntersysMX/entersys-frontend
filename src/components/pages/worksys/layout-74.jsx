@@ -1,5 +1,6 @@
 "use client";
 
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 
 export function Layout74({ colorScheme = 1, ...props }) {
@@ -32,10 +33,12 @@ export function Layout74({ colorScheme = 1, ...props }) {
         </div>
       </div>
       <div className="absolute inset-0 z-0">
-        <img
+        <OptimizedImage
           src="/imagenes/worksys/banner_resultados_worksys.webp"
           className="absolute inset-0 size-full object-cover"
           alt="Operación eficiente y escalable"
+          effect="blur"
+          threshold={200}
         />
         <div className="absolute inset-0 bg-black/50" />
       </div>

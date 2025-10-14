@@ -1,5 +1,6 @@
 "use client";
 
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 
 export function Layout109({ colorScheme = 1, ...props }) {
@@ -46,10 +47,12 @@ export function Layout109({ colorScheme = 1, ...props }) {
             </ul>
           </div>
         </div>
-        <img
+        <OptimizedImage
           src="/imagenes/worksys/section_industries_worksys.webp"
           className="w-full rounded-image object-cover"
           alt="Worksys para diversas industrias"
+          effect="blur"
+          threshold={200}
         />
       </div>
     </section>

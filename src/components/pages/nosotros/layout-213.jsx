@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 
@@ -11,16 +12,18 @@ export function Layout213({ colorScheme = 1, ...props }) {
       <div className="container">
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-x-20">
           <div className="order-2 md:order-1">
-            <img
+            <OptimizedImage
               src="/imagenes/nosotros/image_rodrigo_lay_entersys_nosotros2.webp"
               className="w-full rounded-image object-cover"
               alt="Rodrigo Lay - Fundador Entersys"
+              effect="blur"
+              threshold={200}
             />
           </div>
           <div className="order-1 md:order-2">
             <div className="mb-5 md:mb-6">
               <div className="flex items-center justify-center w-24 h-24 rounded-full bg-primary/10">
-                <img src="/imagenes/inicio/icon_support_agent_inicio.svg" alt="Voces líderes" className="h-16 w-16" />
+                <OptimizedImage src="/imagenes/inicio/icon_support_agent_inicio.svg" alt="Voces líderes" className="h-16 w-16" effect="blur" />
               </div>
             </div>
             <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">

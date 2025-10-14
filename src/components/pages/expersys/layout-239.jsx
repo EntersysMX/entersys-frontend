@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { analyticsService } from "../../../services/analytics";
@@ -33,10 +34,11 @@ export function Layout239({ colorScheme = 1, ...props }) {
           <div className="grid grid-cols-1 items-start justify-center gap-y-12 md:grid-cols-3 md:gap-x-8 md:gap-y-16 lg:gap-x-12">
             <div className="flex w-full flex-col items-center text-center">
               <div className="rb-6 mb-6 md:mb-8">
-                <img
+                <OptimizedImage
                   src="/imagenes/expersys/peak_soda_expersys_qhse.webp"
                   alt="QHSE"
                   className="rounded-image"
+                  effect="blur"
                 />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
@@ -46,10 +48,11 @@ export function Layout239({ colorScheme = 1, ...props }) {
             </div>
             <div className="flex w-full flex-col items-center text-center">
               <div className="rb-6 mb-6 md:mb-8">
-                <img
+                <OptimizedImage
                   src="/imagenes/expersys/peak_office_expersys.webp"
                   alt="FEMSA"
                   className="rounded-image"
+                  effect="blur"
                 />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
@@ -61,10 +64,11 @@ export function Layout239({ colorScheme = 1, ...props }) {
             </div>
              <div className="flex w-full flex-col items-center text-center">
               <div className="rb-6 mb-6 md:mb-8">
-                <img
+                <OptimizedImage
                   src="/imagenes/expersys/peak_corn_expersys_PDMO.webp"
                   alt="Productos de Maíz Ochoa"
                   className="rounded-image"
+                  effect="blur"
                 />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">

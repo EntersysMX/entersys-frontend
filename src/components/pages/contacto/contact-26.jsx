@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 
@@ -19,10 +20,11 @@ export function Contact26() {
         <div className="grid auto-cols-fr grid-cols-1 items-center gap-x-12 gap-y-12 md:grid-cols-2 md:gap-16">
           <div className="flex flex-col items-center justify-start text-center">
             <div className="mb-6 aspect-[3/2] md:mb-8">
-              <img
+              <OptimizedImage
                 src="/imagenes/contacto/cdmx.jpg"
                 className="h-full w-full rounded-image object-cover"
                 alt="Ciudad de México - Oficina Entersys CDMX | Skyline Paseo de la Reforma"
+                effect="blur"
               />
             </div>
             <h3 className="mb-3 text-2xl leading-[1.4] font-bold md:text-3xl lg:mb-4 lg:text-4xl">
@@ -50,10 +52,11 @@ export function Contact26() {
           </div>
           <div className="flex flex-col items-center justify-start text-center">
             <div className="mb-6 aspect-[3/2] md:mb-8">
-              <img
+              <OptimizedImage
                 src="/imagenes/contacto/monterrey_skyline.webp"
                 className="h-full w-full rounded-image object-cover"
                 alt="Monterrey - Oficina Entersys MTY | Skyline Cerro de la Silla"
+                effect="blur"
               />
             </div>
             <h3 className="mb-3 text-2xl leading-[1.4] font-bold md:text-3xl lg:mb-4 lg:text-4xl">

@@ -2,6 +2,7 @@
 
 import { Button } from "@relume_io/relume-ui";
 import { Card } from "../../ui/Card";
+import OptimizedImage from "../../ui/OptimizedImage";
 import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 
@@ -27,7 +28,7 @@ export function Layout245({ colorScheme = 1, ...props }) {
             <div className="group cursor-pointer">
               <div className="rb-5 mb-5 md:mb-6">
                 <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-                  <img src="/imagenes/inicio/icon_speed_inicio.svg" alt="Resultados rápidos" className="h-8 w-8" />
+                  <OptimizedImage src="/imagenes/inicio/icon_speed_inicio.svg" alt="Resultados rápidos" className="h-8 w-8" effect="blur" />
                 </div>
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl group-hover:text-primary transition-colors">
@@ -38,7 +39,7 @@ export function Layout245({ colorScheme = 1, ...props }) {
             <div className="group cursor-pointer">
               <div className="rb-5 mb-5 md:mb-6">
                 <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-                  <img src="/imagenes/inicio/icon_support_agent_inicio.svg" alt="Soporte personalizado" className="h-8 w-8" />
+                  <OptimizedImage src="/imagenes/inicio/icon_support_agent_inicio.svg" alt="Soporte personalizado" className="h-8 w-8" effect="blur" />
                 </div>
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl group-hover:text-primary transition-colors">
@@ -49,7 +50,7 @@ export function Layout245({ colorScheme = 1, ...props }) {
             <div className="group cursor-pointer">
               <div className="rb-5 mb-5 md:mb-6">
                 <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-                  <img src="/imagenes/inicio/icon_book_3_inicio.svg" alt="Equipo funcional" className="h-8 w-8" />
+                  <OptimizedImage src="/imagenes/inicio/icon_book_3_inicio.svg" alt="Equipo funcional" className="h-8 w-8" effect="blur" />
                 </div>
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl group-hover:text-primary transition-colors">
