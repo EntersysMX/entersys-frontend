@@ -9,7 +9,7 @@ export function Header41() {
   const navigate = useNavigate();
 
   const handleEntersyzarClick = () => {
-    analyticsService.trackEvent('CTA', 'Button Click', 'Entersyzar empresa - FEMSA Header', 'femsa-header');
+    analyticsService.trackEvent('CTA', 'Button Click', 'Entersyzar empresa - Coca-Cola Header', 'femsa-header');
     navigate('/contacto#formulario-contacto');
   };
 
@@ -32,7 +32,7 @@ export function Header41() {
               </button>
               <img
                 src="https://d22po4pjz3o32e.cloudfront.net/placeholder-video-thumbnail-landscape.svg"
-                alt="Video FEMSA"
+                alt="Video Coca-Cola"
                 className="size-full object-cover opacity-70"
               />
             </div>
@@ -42,7 +42,7 @@ export function Header41() {
               714 proyectos de alto riesgo ejecutados sin accidentes en 225 unidades operativas
             </h1>
             <p className="text-lg md:text-xl mb-6 md:mb-8 leading-relaxed">
-              Implementación de Worksys para digitalización y estandarización de gestión de contratistas en trabajos de alto riesgo. Automatización de procesos de seguridad industrial con Smartsheets en toda la operación nacional de FEMSA.
+              Implementación de Worksys para digitalización y estandarización de gestión de contratistas en trabajos de alto riesgo. Automatización de procesos de seguridad industrial con Smartsheets en toda la operación nacional de Coca-Cola.
             </p>
             <Button className="btn-primary" onClick={handleEntersyzarClick}>Entersyzar empresa</Button>
           </div>

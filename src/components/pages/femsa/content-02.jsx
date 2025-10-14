@@ -11,7 +11,7 @@ export function Content2() {
           <div>
             <OptimizedImage
               src="/imagenes/femsa/case_image_femsa.webp"
-              alt="Solución FEMSA implementada"
+              alt="Solución Coca-Cola implementada"
               className="w-full rounded-lg object-cover"
               effect="blur"
               threshold={200}

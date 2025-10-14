@@ -17,7 +17,7 @@ export function Stats30() {
           <div>
             <p className="text-medium">
               La estandarización y digitalización de procesos de seguridad
-              transformó la operación de FEMSA: de inconsistencia operativa a
+              transformó la operación de Coca-Cola: de inconsistencia operativa a
               excelencia certificada sin margen de error.
             </p>
           </div>
@@ -40,8 +40,8 @@ export function Stats30() {
             <Card className="p-8">
               <div className="mb-4 overflow-hidden rounded-lg">
                 <OptimizedImage
-                  src="/imagenes/femsa/STATS_COVERAGE_FEMSA.webp"
-                  alt="Cobertura nacional FEMSA"
+                  src="/imagenes/femsa/STATS_COVERAGE_Coca-Cola.webp"
+                  alt="Cobertura nacional Coca-Cola"
                   className="w-full h-auto object-cover"
                   effect="blur"
                 />
@@ -76,8 +76,8 @@ export function Stats30() {
             <Card className="p-8 last:order-first last:md:order-none">
               <div className="mb-4 overflow-hidden rounded-lg">
                 <OptimizedImage
-                  src="/imagenes/femsa/STATS_DIGITAL_FEMSA.webp"
-                  alt="Digitalización FEMSA"
+                  src="/imagenes/femsa/STATS_DIGITAL_Coca-Cola.webp"
+                  alt="Digitalización Coca-Cola"
                   className="w-full h-auto object-cover"
                   effect="blur"
                 />

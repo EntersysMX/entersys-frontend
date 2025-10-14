@@ -26,14 +26,14 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
                 <OptimizedImage
                   src="/imagenes/clientes/peak_soda_expersys_qhse.webp"
                   className="w-full object-cover"
-                  alt="FEMSA - Seguridad Industrial"
+                  alt="Coca-Cola - Seguridad Industrial"
                   effect="blur"
                 />
               </a>
             </div>
             <div className="px-5 py-6 sm:px-6">
               <h3 className="mb-2 text-xl font-bold md:text-2xl">
-                <a href="/clientes/femsa">FEMSA</a>
+                <a href="/clientes/femsa">Coca-Cola</a>
               </h3>
               <p>
                 714 proyectos de alto riesgo ejecutados sin accidentes en 225 unidades operativas.

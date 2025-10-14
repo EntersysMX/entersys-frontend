@@ -14,15 +14,15 @@ const Femsa = () => {
   const breadcrumbItems = [
     { name: 'Inicio', url: '/' },
     { name: 'Clientes', url: '/clientes' },
-    { name: 'FEMSA', url: '/clientes/femsa' }
+    { name: 'Coca-Cola', url: '/clientes/femsa' }
   ];
 
   return (
     <div>
       <Helmet>
-        <title>Caso de éxito FEMSA: 714 proyectos sin accidentes con Worksys | Entersys</title>
-        <meta name="description" content="Descubre cómo FEMSA estandarizó la gestión de contratistas en 225 unidades operativas con automatización en Smartsheets, logrando 714 proyectos de alto riesgo sin accidentes." />
-        <meta name="keywords" content="FEMSA, Worksys, Smartsheets, Seguridad Industrial, Gestión de Contratistas, Alto Riesgo, Automatización de Procesos" />
+        <title>Caso de éxito Coca-Cola: 714 proyectos sin accidentes con Worksys | Entersys</title>
+        <meta name="description" content="Descubre cómo Coca-Cola estandarizó la gestión de contratistas en 225 unidades operativas con automatización en Smartsheets, logrando 714 proyectos de alto riesgo sin accidentes." />
+        <meta name="keywords" content="Coca-Cola, Worksys, Smartsheets, Seguridad Industrial, Gestión de Contratistas, Alto Riesgo, Automatización de Procesos" />
         <link rel="canonical" href="https://entersys.mx/casos-exito/femsa-seguridad-industrial-smartsheets" />
       </Helmet>
       <Header />

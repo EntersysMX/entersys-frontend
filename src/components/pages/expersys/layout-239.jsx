@@ -50,13 +50,13 @@ export function Layout239({ colorScheme = 1, ...props }) {
               <div className="rb-6 mb-6 md:mb-8">
                 <OptimizedImage
                   src="/imagenes/expersys/peak_office_expersys.webp"
-                  alt="FEMSA"
+                  alt="Coca-Cola"
                   className="rounded-image"
                   effect="blur"
                 />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
-                FEMSA
+                Coca-Cola
               </h3>
               <p>
                 Digitalización de gestión y documentación de contratistas para trabajos de alto riesgo

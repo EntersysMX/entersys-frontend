@@ -11,7 +11,10 @@
       "Bash(curl -s https://www.entersys.mx/)",
       "Bash(cat:*)",
       "Bash(taskkill:*)",
-      "Bash(gcloud compute ssh:*)"
+      "Bash(gcloud compute ssh:*)",
+      "Bash(for:*)",
+      "Bash(do sed -i 's/FEMSA/Coca-Cola/g' \"$file\")",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []

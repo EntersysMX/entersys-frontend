@@ -40,15 +40,12 @@ export function Header30({ colorScheme = 1, ...props }) {
         </div>
       </div>
       <div className="absolute inset-0 z-0">
-        <div className="size-full overflow-hidden">
-          <OptimizedImage
-            src="/imagenes/expersys/hero_quality_expersys.webp"
-            className="w-full h-full object-cover object-center scale-110"
-            alt="Expersys: calidad operativa"
-            effect="blur"
-            threshold={200}
-          />
-        </div>
+        <img
+          src="/imagenes/expersys/hero_quality_expersys.webp"
+          alt="Expersys: calidad operativa"
+          className="w-full h-full object-cover"
+          style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+        />
         <div className="absolute inset-0 bg-black/50" />
       </div>
     </section>

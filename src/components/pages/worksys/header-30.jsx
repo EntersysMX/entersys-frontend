@@ -41,12 +41,11 @@ export function Header30({ colorScheme = 1, ...props }) {
         </div>
       </div>
       <div className="absolute inset-0 z-0">
-        <OptimizedImage
+        <img
           src="/imagenes/worksys/hero_dashboard_worksys.webp"
-          className="absolute inset-0 w-full h-full object-cover object-center"
           alt="Worksys: gestión de negocios inteligente"
-          effect="blur"
-          threshold={200}
+          className="w-full h-full object-cover"
+          style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
         />
         <div className="absolute inset-0 bg-black/50" />
       </div>

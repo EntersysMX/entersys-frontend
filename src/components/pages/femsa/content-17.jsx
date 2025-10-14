@@ -11,7 +11,7 @@ export function Content17() {
             Seguridad a escala nacional sin margen de error
           </h2>
           <p className="text-medium">
-            FEMSA operaba 225 unidades en todo el país, cada una ejecutando
+            Coca-Cola operaba 225 unidades en todo el país, cada una ejecutando
             proyectos de alto riesgo con contratistas externos. La gestión de
             documentación —competencias laborales, planes de rescate, análisis
             de riesgos, certificaciones de personas físicas y morales— se

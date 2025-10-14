@@ -11,12 +11,12 @@ export function Cta39() {
   const navigate = useNavigate();
 
   const handleContactarClick = () => {
-    analyticsService.trackEvent('CTA', 'Button Click', 'Contactar - FEMSA CTA', 'femsa-cta');
+    analyticsService.trackEvent('CTA', 'Button Click', 'Contactar - Coca-Cola CTA', 'femsa-cta');
     navigate('/contacto#formulario-contacto');
   };
 
   const handleDemoClick = () => {
-    analyticsService.trackEvent('CTA', 'Button Click', 'Agendar demo - FEMSA CTA', 'femsa-cta');
+    analyticsService.trackEvent('CTA', 'Button Click', 'Agendar demo - Coca-Cola CTA', 'femsa-cta');
     navigate('/contacto#formulario-contacto');
   };
 

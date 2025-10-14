@@ -86,16 +86,16 @@ export function Layout2371({ colorScheme = 1, ...props }) {
             </div>
             <div
               className="flex w-full flex-col items-center text-center cursor-pointer transition-transform hover:scale-105"
-              onClick={() => handleCardClick('FEMSA', '/clientes/femsa')}
+              onClick={() => handleCardClick('Coca-Cola', '/clientes/femsa')}
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && handleCardClick('FEMSA', '/clientes/femsa')}
+              onKeyDown={(e) => e.key === 'Enter' && handleCardClick('Coca-Cola', '/clientes/femsa')}
             >
               <div className="rb-5 mb-5 md:mb-6">
-                <OptimizedImage src="/imagenes/worksys/icon_brandfamily_worksys.svg" alt="FEMSA" className="h-12 w-12" effect="blur" />
+                <OptimizedImage src="/imagenes/worksys/icon_brandfamily_worksys.svg" alt="Coca-Cola" className="h-12 w-12" effect="blur" />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
-                FEMSA
+                Coca-Cola
               </h3>
               <p>Digitalización de gestión y documentación de contratistas para trabajos de alto riesgo.</p>
             </div>
