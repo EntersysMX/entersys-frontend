@@ -113,7 +113,7 @@ export default defineConfig({
   ],
   resolve: {
     // Force single instance of React to avoid "Invalid hook call" errors
-    dedupe: ['react', 'react-dom', 'react-router-dom']
+    dedupe: ['react', 'react-dom', 'react-router-dom', 'framer-motion']
   },
   server: {
     port: 3000,
@@ -153,18 +153,9 @@ export default defineConfig({
         // Cache busting con hash en nombres de archivo
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
-        // Simplified chunking to avoid React duplication issues
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            // Put ALL React-related packages in one chunk
-            if (id.includes('react')) {
-              return 'vendor-react';
-            }
-            // Everything else goes to vendor chunk
-            return 'vendor';
-          }
-        }
+        assetFileNames: 'assets/[name]-[hash].[ext]'
+        // No manual chunking - let Vite handle it automatically
+        // The resolve.dedupe config ensures single React instance
       }
     }
   },
