@@ -270,9 +270,9 @@ export const casosExitoSchema = {
       "position": 5,
       "item": {
         "@type": "Organization",
-        "name": "FEMSA",
+        "name": "Coca-Cola",
         "description": "Digitalización de gestión y documentación de contratistas para trabajos de alto riesgo.",
-        "url": "https://www.entersys.mx/clientes/femsa",
+        "url": "https://www.entersys.mx/clientes/coca-cola",
         "image": "https://www.entersys.mx/imagenes/worksys/icon_brandfamily_worksys.svg"
       }
     },

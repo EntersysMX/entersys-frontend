@@ -86,10 +86,10 @@ export function Layout2371({ colorScheme = 1, ...props }) {
             </div>
             <div
               className="flex w-full flex-col items-center text-center cursor-pointer transition-transform hover:scale-105"
-              onClick={() => handleCardClick('Coca-Cola', '/clientes/femsa')}
+              onClick={() => handleCardClick('Coca-Cola', '/clientes/coca-cola')}
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && handleCardClick('Coca-Cola', '/clientes/femsa')}
+              onKeyDown={(e) => e.key === 'Enter' && handleCardClick('Coca-Cola', '/clientes/coca-cola')}
             >
               <div className="rb-5 mb-5 md:mb-6">
                 <OptimizedImage src="/imagenes/worksys/icon_brandfamily_worksys.svg" alt="Coca-Cola" className="h-12 w-12" effect="blur" />

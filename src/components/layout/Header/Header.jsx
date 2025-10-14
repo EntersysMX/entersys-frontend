@@ -326,14 +326,14 @@ const Header = ({ colorScheme = 1, ...props }) => {
                         </div>
                       </Link>
                       <Link
-                        to="/clientes/femsa"
+                        to="/clientes/coca-cola"
                         className={`block py-2 lg:py-1 transition-colors ${
-                          location.pathname === '/clientes/femsa' ? 'text-[#009CA6]' : 'text-black hover:text-[#009CA6]'
+                          location.pathname === '/clientes/coca-cola' ? 'text-[#009CA6]' : 'text-black hover:text-[#009CA6]'
                         }`}
                       >
                         <div className="flex flex-col items-start justify-center">
                           <p className={`text-md font-semibold lg:text-base ${
-                            location.pathname === '/clientes/femsa' ? 'text-[#009CA6]' : 'text-black'
+                            location.pathname === '/clientes/coca-cola' ? 'text-[#009CA6]' : 'text-black'
                           }`}>
                             Coca-Cola
                           </p>

@@ -25,7 +25,7 @@ export function Layout241({ colorScheme = 4, ...props }) {
 
   const handleFlotillasClick = () => {
     analyticsService.trackEvent('CTA', 'Button Click', 'Gestión Flotillas', 'inicio-industrias');
-    navigate('/clientes/femsa');
+    navigate('/clientes/coca-cola');
   };
 
   return (

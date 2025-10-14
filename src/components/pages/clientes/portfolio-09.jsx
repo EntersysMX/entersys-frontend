@@ -22,7 +22,7 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-8 lg:gap-x-12">
           <Card className="mb-0">
             <div>
-              <a href="/clientes/femsa">
+              <a href="/clientes/coca-cola">
                 <OptimizedImage
                   src="/imagenes/clientes/peak_soda_expersys_qhse.webp"
                   className="w-full object-cover"
@@ -33,7 +33,7 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
             </div>
             <div className="px-5 py-6 sm:px-6">
               <h3 className="mb-2 text-xl font-bold md:text-2xl">
-                <a href="/clientes/femsa">Coca-Cola</a>
+                <a href="/clientes/coca-cola">Coca-Cola</a>
               </h3>
               <p>
                 714 proyectos de alto riesgo ejecutados sin accidentes en 225 unidades operativas.
@@ -51,7 +51,7 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
                 iconRight={<RxChevronRight />}
                 className="mt-5 md:mt-6"
               >
-                <a href="/clientes/femsa">Ver proyecto</a>
+                <a href="/clientes/coca-cola">Ver proyecto</a>
               </Button>
             </div>
           </Card>

@@ -106,7 +106,7 @@ function App() {
                 <Route path="/expersys" element={<Expersys />} />
                 <Route path="/worksys" element={<Worksys />} />
                 <Route path="/clientes/qhse" element={<Qhse />} />
-                <Route path="/clientes/femsa" element={<Femsa />} />
+                <Route path="/clientes/coca-cola" element={<Femsa />} />
                 <Route path="/clientes/ochoa" element={<Ochoa />} />
                 {/* Páginas legales */}
                 <Route path="/politica-de-privacidad" element={<PrivacyPolicy />} />

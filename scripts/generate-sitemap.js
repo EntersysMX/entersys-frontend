@@ -30,7 +30,7 @@ const routes = [
   // Case Studies / Clientes
   { path: '/clientes', priority: 0.8, changefreq: 'monthly' },
   { path: '/clientes/qhse', priority: 0.8, changefreq: 'monthly' },
-  { path: '/clientes/femsa', priority: 0.8, changefreq: 'monthly' },
+  { path: '/clientes/coca-cola', priority: 0.8, changefreq: 'monthly' },
   { path: '/clientes/ochoa', priority: 0.8, changefreq: 'monthly' },
 
   // Blog
