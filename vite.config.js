@@ -111,6 +111,10 @@ export default defineConfig({
       brotliSize: true,
     })
   ],
+  resolve: {
+    // Force single instance of React to avoid "Invalid hook call" errors
+    dedupe: ['react', 'react-dom', 'react-router-dom']
+  },
   server: {
     port: 3000,
     host: true
@@ -145,6 +149,8 @@ export default defineConfig({
       polyfill: true
     },
     rollupOptions: {
+      // Preserve module structure to avoid React duplication
+      preserveEntrySignatures: 'strict',
       output: {
         // Cache busting con hash en nombres de archivo
         entryFileNames: 'assets/[name]-[hash].js',
@@ -154,13 +160,10 @@ export default defineConfig({
         manualChunks: (id) => {
           // Vendor chunk para librerías de terceros
           if (id.includes('node_modules')) {
-            // React y ReactDOM en chunk separado
-            if (id.includes('react') || id.includes('react-dom')) {
+            // CRITICAL: React ecosystem must be in same chunk to avoid duplication
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router') ||
+                id.includes('scheduler') || id.includes('react-is')) {
               return 'vendor-react';
-            }
-            // React Router en chunk separado
-            if (id.includes('react-router')) {
-              return 'vendor-router';
             }
             // Framer Motion (animaciones) en chunk separado
             if (id.includes('framer-motion')) {
@@ -173,10 +176,6 @@ export default defineConfig({
             // Analytics y tracking
             if (id.includes('sentry') || id.includes('web-vitals')) {
               return 'vendor-analytics';
-            }
-            // Toast y skeleton
-            if (id.includes('react-hot-toast') || id.includes('react-loading-skeleton') || id.includes('react-lazy-load-image')) {
-              return 'vendor-ui';
             }
             // Resto de vendors
             return 'vendor-other';
