@@ -154,29 +154,15 @@ export default defineConfig({
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]',
-        // Manual chunks para mejor code splitting
+        // Simplified chunking to avoid React duplication issues
         manualChunks: (id) => {
-          // Vendor chunk para librerías de terceros
           if (id.includes('node_modules')) {
-            // CRITICAL: React ecosystem must be in same chunk to avoid duplication
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router') ||
-                id.includes('scheduler') || id.includes('react-is')) {
+            // Put ALL React-related packages in one chunk
+            if (id.includes('react')) {
               return 'vendor-react';
             }
-            // Framer Motion (animaciones) en chunk separado
-            if (id.includes('framer-motion')) {
-              return 'vendor-motion';
-            }
-            // Relume UI en chunk separado
-            if (id.includes('@relume_io')) {
-              return 'vendor-relume';
-            }
-            // Analytics y tracking
-            if (id.includes('sentry') || id.includes('web-vitals')) {
-              return 'vendor-analytics';
-            }
-            // Resto de vendors
-            return 'vendor-other';
+            // Everything else goes to vendor chunk
+            return 'vendor';
           }
         }
       }
