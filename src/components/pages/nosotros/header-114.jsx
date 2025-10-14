@@ -26,10 +26,8 @@ export function Header114({ colorScheme = 4, ...props }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                Entersyzar es una manera a la que nos referimos cuando una
-                empresa acepta nuestro apoyo para sistematizar sus operaciones.
-                Vivimos para eso, día con día y todo comienza 'entrando al
-                sistema'.
+                Entersyzar es adoptar una cultura de gestión y mejora continua. Cuando una organización decide pensar, trabajar y evolucionar como un sistema, transformando la improvisación en control y los datos en decisiones.
+                Es entrar al sistema y hacer que la mejora continua se vuelva parte natural de la forma de trabajar.
               </motion.p>
             </div>
           </div>

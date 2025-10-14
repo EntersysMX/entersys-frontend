@@ -59,7 +59,7 @@ export function Layout2371({ colorScheme = 1, ...props }) {
               onKeyDown={(e) => e.key === 'Enter' && handleCardClick('QHSE', '/clientes/qhse')}
             >
               <div className="rb-5 mb-5 md:mb-6">
-                <OptimizedImage src="/imagenes/worksys/icon_water_bottle_worksys.svg" alt="QHSE" className="h-12 w-12" effect="blur" />
+                <OptimizedImage src="/imagenes/worksys/icon_brandfamily_worksys.svg" alt="QHSE" className="h-12 w-12" effect="blur" />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 QHSE
@@ -92,7 +92,7 @@ export function Layout2371({ colorScheme = 1, ...props }) {
               onKeyDown={(e) => e.key === 'Enter' && handleCardClick('Coca-Cola', '/clientes/coca-cola')}
             >
               <div className="rb-5 mb-5 md:mb-6">
-                <OptimizedImage src="/imagenes/worksys/icon_brandfamily_worksys.svg" alt="Coca-Cola" className="h-12 w-12" effect="blur" />
+                <OptimizedImage src="/imagenes/worksys/icon_water_bottle_worksys.svg" alt="Coca-Cola" className="h-12 w-12" effect="blur" />
               </div>
               <h3 className="mb-5 text-2xl font-bold md:mb-6 md:text-3xl md:leading-[1.3] lg:text-4xl">
                 Coca-Cola
