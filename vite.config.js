@@ -149,8 +149,6 @@ export default defineConfig({
       polyfill: true
     },
     rollupOptions: {
-      // Preserve module structure to avoid React duplication
-      preserveEntrySignatures: 'strict',
       output: {
         // Cache busting con hash en nombres de archivo
         entryFileNames: 'assets/[name]-[hash].js',
