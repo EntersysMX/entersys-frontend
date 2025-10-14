@@ -54,7 +54,7 @@ export function Layout363({ colorScheme = 2, ...props }) {
                     src="/imagenes/inicio/servicios_insignia_worksys_inicio.webp"
                     className="w-full h-full object-cover"
                     alt="Digitalización de procesos Worksys"
-                    effect="blur"
+                    effect="opacity"
                   />
                 </div>
                 <div className="flex h-full flex-col justify-center p-6">
@@ -95,7 +95,7 @@ export function Layout363({ colorScheme = 2, ...props }) {
                     src="/imagenes/inicio/servicios_gestion_inicio.webp"
                     className="w-full h-full object-cover"
                     alt="Implementación de sistemas Expersys"
-                    effect="blur"
+                    effect="opacity"
                   />
                 </div>
                 <div className="flex h-full flex-col justify-center p-6">

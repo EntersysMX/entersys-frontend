@@ -84,7 +84,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
                   <OptimizedImage
                     src="/imagenes/inicio/diferenciadores_eficiencia_inicio.webp"
                     alt="Resultados medibles en semanas"
-                    effect="blur"
+                    effect="opacity"
                   />
                 </div>
               </Card>
@@ -125,7 +125,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
                   <OptimizedImage
                     src="/imagenes/inicio/diferenciadores_escalabilidad_inicio.webp"
                     alt="Sistemas escalables"
-                    effect="blur"
+                    effect="opacity"
                   />
                 </div>
               </Card>
@@ -168,7 +168,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
                   <OptimizedImage
                     src="/imagenes/inicio/diferenciadores_cumplimiento_inicio.webp"
                     alt="Protección normativa"
-                    effect="blur"
+                    effect="opacity"
                   />
                 </div>
               </Card>
