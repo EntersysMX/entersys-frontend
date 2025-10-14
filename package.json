@@ -23,6 +23,7 @@
     "pwa:screenshots": "node scripts/generate-pwa-screenshots.js",
     "pwa:all": "npm run pwa:icons && npm run pwa:screenshots",
     "security:headers": "node scripts/generate-security-headers.js",
+    "seo:sitemap": "node scripts/generate-sitemap.js",
     "clean": "rm -rf dist node_modules/.vite src/version.json src/deploy-info.json"
   },
   "repository": {
