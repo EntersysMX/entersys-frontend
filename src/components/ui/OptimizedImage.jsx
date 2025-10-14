@@ -50,7 +50,7 @@ const OptimizedImage = ({
   const defaultPlaceholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3Crect fill="%23f3f4f6" width="1" height="1"/%3E%3C/svg%3E';
 
   return (
-    <picture className={wrapperClassName}>
+    <picture className={`block ${wrapperClassName}`}>
       {/* WebP source para navegadores que lo soporten */}
       {webpSrc && webpSrc !== originalSrc && (
         <source srcSet={webpSrc} type="image/webp" />
@@ -60,7 +60,7 @@ const OptimizedImage = ({
       <LazyLoadImage
         src={originalSrc}
         alt={alt}
-        className={className}
+        className={`block ${className}`}
         width={width}
         height={height}
         style={style}
