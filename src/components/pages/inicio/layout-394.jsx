@@ -81,10 +81,11 @@ export function Layout394({ colorScheme = 2, ...props }) {
                   </div>
                 </div>
                 <div className="flex w-full flex-col items-center justify-center self-start">
-                  <OptimizedImage
+                  <img
                     src="/imagenes/inicio/diferenciadores_eficiencia_inicio.webp"
                     alt="Resultados medibles en semanas"
-                    effect="opacity"
+                    className="w-full block"
+                    loading="eager"
                   />
                 </div>
               </Card>
@@ -122,10 +123,11 @@ export function Layout394({ colorScheme = 2, ...props }) {
                   </div>
                 </div>
                 <div className="flex w-full flex-col items-center justify-center self-start">
-                  <OptimizedImage
+                  <img
                     src="/imagenes/inicio/diferenciadores_escalabilidad_inicio.webp"
                     alt="Sistemas escalables"
-                    effect="opacity"
+                    className="w-full block"
+                    loading="eager"
                   />
                 </div>
               </Card>
@@ -165,10 +167,11 @@ export function Layout394({ colorScheme = 2, ...props }) {
                   </div>
                 </div>
                 <div className="flex w-full flex-col items-center justify-center self-start">
-                  <OptimizedImage
+                  <img
                     src="/imagenes/inicio/diferenciadores_cumplimiento_inicio.webp"
                     alt="Protección normativa"
-                    effect="opacity"
+                    className="w-full block"
+                    loading="eager"
                   />
                 </div>
               </Card>
