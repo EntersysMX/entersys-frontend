@@ -55,6 +55,15 @@ export class MauticService {
       if (leadData.message) mauticFormData.append('mauticform[message]', leadData.message);
       if (leadData.interest) mauticFormData.append('mauticform[interest]', leadData.interest);
 
+      // Campos de tracking (referrer, landing page, UTM)
+      if (leadData.referrerUrl) mauticFormData.append('mauticform[referrer_url]', leadData.referrerUrl);
+      if (leadData.landingPage) mauticFormData.append('mauticform[landing_page]', leadData.landingPage);
+      if (leadData.utmSource) mauticFormData.append('mauticform[utm_source]', leadData.utmSource);
+      if (leadData.utmMedium) mauticFormData.append('mauticform[utm_medium]', leadData.utmMedium);
+      if (leadData.utmCampaign) mauticFormData.append('mauticform[utm_campaign]', leadData.utmCampaign);
+      if (leadData.utmContent) mauticFormData.append('mauticform[utm_content]', leadData.utmContent);
+      if (leadData.utmTerm) mauticFormData.append('mauticform[utm_term]', leadData.utmTerm);
+
       // Campos del sistema de Mautic
       mauticFormData.append('mauticform[formId]', '1');
       mauticFormData.append('mauticform[return]', '');
@@ -123,7 +132,15 @@ export class MauticService {
         id: Date.now(),
         status: 'pending_sync',
         page_url: window.location.href,
-        user_agent: navigator.userAgent
+        user_agent: navigator.userAgent,
+        // Datos de tracking
+        referrer_url: leadData.referrerUrl || '',
+        landing_page: leadData.landingPage || '',
+        utm_source: leadData.utmSource || '',
+        utm_medium: leadData.utmMedium || '',
+        utm_campaign: leadData.utmCampaign || '',
+        utm_content: leadData.utmContent || '',
+        utm_term: leadData.utmTerm || ''
       };
 
       leads.push(newLead);

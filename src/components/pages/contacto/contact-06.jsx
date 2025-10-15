@@ -36,6 +36,59 @@ export function Contact06({ colorScheme = 2, ...props }) {
     source: ''
   });
 
+  // Estado para datos de tracking (referrer, landing page, UTM)
+  const [trackingData, setTrackingData] = useState({
+    referrerUrl: '',
+    landingPage: '',
+    utmSource: '',
+    utmMedium: '',
+    utmCampaign: '',
+    utmContent: '',
+    utmTerm: ''
+  });
+
+  // Capturar datos de tracking al montar el componente
+  useEffect(() => {
+    // Función para obtener parámetros UTM de la URL
+    const getUTMParams = () => {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        utmSource: params.get('utm_source') || '',
+        utmMedium: params.get('utm_medium') || '',
+        utmCampaign: params.get('utm_campaign') || '',
+        utmContent: params.get('utm_content') || '',
+        utmTerm: params.get('utm_term') || ''
+      };
+    };
+
+    // Obtener referrer (de dónde vino el usuario)
+    const referrerUrl = document.referrer || '';
+
+    // Landing page (página actual o la guardada en sessionStorage)
+    const landingPage = sessionStorage.getItem('landingPage') || window.location.href;
+
+    // Si no hay landingPage guardada, esta ES la landing page
+    if (!sessionStorage.getItem('landingPage')) {
+      sessionStorage.setItem('landingPage', window.location.href);
+    }
+
+    // Obtener UTM parameters
+    const utmParams = getUTMParams();
+
+    // Guardar datos de tracking
+    setTrackingData({
+      referrerUrl,
+      landingPage,
+      ...utmParams
+    });
+
+    console.log('📊 Tracking data captured:', {
+      referrerUrl,
+      landingPage,
+      ...utmParams
+    });
+  }, []);
+
   // Inicializar tracking services
   useEffect(() => {
     mauticService.initializeTracking();
@@ -73,7 +126,7 @@ export function Contact06({ colorScheme = 2, ...props }) {
         return;
       }
 
-      // Capturar lead en Mautic con campos exactos
+      // Capturar lead en Mautic con campos exactos + tracking data
       const result = await mauticService.captureLead({
         firstName: formData.firstName,
         lastName: formData.lastName,
@@ -82,7 +135,15 @@ export function Contact06({ colorScheme = 2, ...props }) {
         phone: formData.phone,
         message: formData.message,
         interest: formData.interest,
-        source: formData.source || 'website_contact_form'
+        source: formData.source || 'website_contact_form',
+        // Datos de tracking
+        referrerUrl: trackingData.referrerUrl,
+        landingPage: trackingData.landingPage,
+        utmSource: trackingData.utmSource,
+        utmMedium: trackingData.utmMedium,
+        utmCampaign: trackingData.utmCampaign,
+        utmContent: trackingData.utmContent,
+        utmTerm: trackingData.utmTerm
       });
 
       if (result.success) {
