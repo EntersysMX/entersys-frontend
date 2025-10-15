@@ -49,7 +49,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
         <AnimatedStaggerList className="grid auto-cols-fr grid-cols-1 gap-6 md:gap-8 lg:grid-cols-3">
           <AnimatedStaggerItem>
             <motion.div
-              whileHover={{ y: -8, scale: 1.02 }}
+              whileHover={{ y: -8 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <Card className="flex flex-col">
@@ -92,7 +92,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
           </AnimatedStaggerItem>
           <AnimatedStaggerItem>
             <motion.div
-              whileHover={{ y: -8, scale: 1.02 }}
+              whileHover={{ y: -8 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <Card className="flex flex-col">
@@ -133,7 +133,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
           </AnimatedStaggerItem>
           <AnimatedStaggerItem>
             <motion.div
-              whileHover={{ y: -8, scale: 1.02 }}
+              whileHover={{ y: -8 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <Card className="flex flex-col">

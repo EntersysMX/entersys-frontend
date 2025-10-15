@@ -44,7 +44,7 @@ export function Layout363({ colorScheme = 2, ...props }) {
         <AnimatedStaggerList className="grid grid-cols-1 items-stretch gap-6 md:gap-8 lg:grid-cols-2">
           <AnimatedStaggerItem>
             <motion.div
-              whileHover={{ y: -8, scale: 1.02 }}
+              whileHover={{ y: -8 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="h-full"
             >
@@ -85,7 +85,7 @@ export function Layout363({ colorScheme = 2, ...props }) {
           </AnimatedStaggerItem>
           <AnimatedStaggerItem>
             <motion.div
-              whileHover={{ y: -8, scale: 1.02 }}
+              whileHover={{ y: -8 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="h-full"
             >
