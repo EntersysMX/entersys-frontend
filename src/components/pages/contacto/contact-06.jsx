@@ -81,6 +81,7 @@ export function Contact06({ colorScheme = 2, ...props }) {
         company: formData.company,
         phone: formData.phone,
         message: formData.message,
+        interest: formData.interest,
         source: formData.source || 'website_contact_form'
       });
 

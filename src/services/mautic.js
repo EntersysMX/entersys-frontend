@@ -53,6 +53,7 @@ export class MauticService {
       if (leadData.company) mauticFormData.append('mauticform[company]', leadData.company);
       if (leadData.phone) mauticFormData.append('mauticform[phone]', leadData.phone);
       if (leadData.message) mauticFormData.append('mauticform[message]', leadData.message);
+      if (leadData.interest) mauticFormData.append('mauticform[interest]', leadData.interest);
 
       // Campos del sistema de Mautic
       mauticFormData.append('mauticform[formId]', '1');
