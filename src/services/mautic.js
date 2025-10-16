@@ -52,8 +52,9 @@ export class MauticService {
       if (leadData.email) mauticFormData.append('mauticform[email]', leadData.email);
       if (leadData.company) mauticFormData.append('mauticform[company]', leadData.company);
       if (leadData.phone) mauticFormData.append('mauticform[phone]', leadData.phone);
-      if (leadData.message) mauticFormData.append('mauticform[message]', leadData.message);
+      if (leadData.message) mauticFormData.append('mauticform[f_message]', leadData.message);
       if (leadData.interest) mauticFormData.append('mauticform[interest]', leadData.interest);
+      if (leadData.source) mauticFormData.append('mauticform[source]', leadData.source);
 
       // Campos de tracking (referrer, landing page, UTM)
       if (leadData.referrerUrl) mauticFormData.append('mauticform[referrer_url]', leadData.referrerUrl);
