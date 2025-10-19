@@ -77,9 +77,14 @@ async function getFileSize(filePath) {
   return Math.round(stats.size / 1024); // KB
 }
 
-async function compressImage(imageConfig) {
+async function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function compressImage(imageConfig, retryCount = 0) {
   const { input, quality, targetSize } = imageConfig;
   const inputPath = path.join(process.cwd(), input);
+  const MAX_RETRIES = 3;
 
   try {
     // Verificar que el archivo existe
@@ -89,19 +94,29 @@ async function compressImage(imageConfig) {
 
     // Crear backup
     const backupPath = inputPath.replace('.webp', '.webp.backup');
-    await fs.copyFile(inputPath, backupPath);
+    try {
+      await fs.copyFile(inputPath, backupPath);
+    } catch (e) {
+      // Backup ya existe, continuar
+    }
 
-    // Comprimir imagen
-    await sharp(inputPath)
+    // Esperar un poco antes de procesar (para liberar locks)
+    if (retryCount > 0) {
+      console.log(`   Retry ${retryCount}/${MAX_RETRIES}...`);
+      await sleep(2000 * retryCount); // 2s, 4s, 6s
+    }
+
+    // Comprimir imagen directamente a buffer
+    const compressedBuffer = await sharp(inputPath)
       .webp({
         quality,
         effort: 6, // Mayor esfuerzo de compresión (0-6)
         smartSubsample: true
       })
-      .toFile(inputPath + '.temp');
+      .toBuffer();
 
-    // Reemplazar original
-    await fs.rename(inputPath + '.temp', inputPath);
+    // Escribir buffer directamente sobre el archivo original
+    await fs.writeFile(inputPath, compressedBuffer);
 
     const newSize = await getFileSize(inputPath);
     const reduction = Math.round(((originalSize - newSize) / originalSize) * 100);
@@ -117,6 +132,13 @@ async function compressImage(imageConfig) {
     return { originalSize, newSize, reduction };
 
   } catch (error) {
+    // Reintentar si el archivo está bloqueado
+    if ((error.code === 'EBUSY' || error.code === 'EPERM' || error.code === 'UNKNOWN') && retryCount < MAX_RETRIES) {
+      console.log(`⚠️  ${path.basename(input)} is locked, retrying...`);
+      await sleep(1000);
+      return compressImage(imageConfig, retryCount + 1);
+    }
+
     console.error(`❌ Error compressing ${input}:`, error.message);
     return null;
   }
