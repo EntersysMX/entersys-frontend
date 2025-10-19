@@ -11,10 +11,12 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="dns-prefetch" href="https://analytics.entersys.mx" />
     <link rel="dns-prefetch" href="https://api.entersys.mx" />
+    <link rel="dns-prefetch" href="https://web-sdk.smartlook.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://analytics.entersys.mx" />
     <link rel="preconnect" href="https://api.entersys.mx" />
+    <link rel="preconnect" href="https://web-sdk.smartlook.com" />
 
     <!-- Preload removido: las imágenes hero se cargan como background-image inline -->
 
@@ -34,6 +36,16 @@
 
     <!-- Google Analytics 4 -->
     <!-- %%GA4_SCRIPT%% -->
+
+    <!-- Smartlook Analytics -->
+    <script type='text/javascript'>
+      window.smartlook||(function(d) {
+        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+        c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+        })(document);
+        smartlook('init', '8a2b748900ac3dec4920b4fd8b0c52cf3cf3bd0e', { region: 'eu' });
+    </script>
 
     <title>Entersys - Soluciones Tecnológicas</title>
     <!-- Fuentes con preload para mejor performance -->
