@@ -21,7 +21,11 @@
     <!-- Preload de imagen hero crítica para LCP -->
     <link rel="preload" as="image" href="/imagenes/inicio/hero_principal_inicio-escritorio.webp" fetchpriority="high" />
 
-    <!-- Preload removido: las imágenes hero se cargan como background-image inline -->
+    <!-- Prefetch de rutas probables para navegación anticipada -->
+    <link rel="prefetch" href="/nosotros" as="document" />
+    <link rel="prefetch" href="/contacto" as="document" />
+    <link rel="prefetch" href="/expersys" as="document" />
+    <link rel="prefetch" href="/worksys" as="document" />
 
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#0066cc" />
