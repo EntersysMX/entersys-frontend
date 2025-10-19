@@ -153,9 +153,27 @@ export default defineConfig({
         // Cache busting con hash en nombres de archivo
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
-        // No manual chunking - let Vite handle it automatically
-        // The resolve.dedupe config ensures single React instance
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+        // Manual chunking para mejor caching
+        manualChunks: {
+          // React core - cambia raramente
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          // Framer Motion - librería pesada de animaciones
+          'vendor-animation': ['framer-motion'],
+          // Utilidades y helpers
+          'vendor-utils': [
+            'react-hot-toast',
+            'react-helmet-async',
+            'react-icons',
+            'react-lazy-load-image-component',
+            'react-loading-skeleton'
+          ],
+          // Analytics y monitoring
+          'vendor-analytics': [
+            '@sentry/react',
+            'web-vitals'
+          ]
+        }
       }
     }
   },
