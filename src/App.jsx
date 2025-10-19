@@ -1,6 +1,5 @@
 import React, { useEffect, Suspense, lazy } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { HelmetProvider } from 'react-helmet-async'
 import { Toaster } from 'react-hot-toast'
 import PageTransition from './components/PageTransition'
 import ErrorBoundary from './components/ui/ErrorBoundary'
@@ -85,11 +84,10 @@ function App() {
   }, []);
 
   return (
-    <HelmetProvider>
-      <ErrorBoundary>
-        <div className="App">
-          {/* Skip Link para accesibilidad */}
-          <SkipLink />
+    <ErrorBoundary>
+      <div className="App">
+        {/* Skip Link para accesibilidad */}
+        <SkipLink />
 
           <ScrollToTop />
           <PageTransition>
@@ -138,7 +136,6 @@ function App() {
           />
         </div>
       </ErrorBoundary>
-    </HelmetProvider>
   )
 }
 

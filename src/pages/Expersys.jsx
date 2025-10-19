@@ -17,9 +17,9 @@ export default function Expersys() {
   return (
     <>
       <MetaTags
-        title="Expersys - Certificaciones ISO y Gestión de Calidad | Entersys"
-        description="Obtén certificaciones de calidad operativa: ISO 9001, SMETA, ECOVADIS, ISO 14001, ISO 45001. Acompañamiento inicio a fin."
-        keywords="Expersys, certificaciones ISO, gestión calidad, SMETA, ECOVADIS, ISO 9001, ISO 14001, auditoría"
+        title="Expersys - Certificación ISO 9001, 14001, 45001 y SMETA Digital México"
+        description="Certificaciones ISO digitalizadas con Smartsheet. Auditorías sin estrés, documentación organizada, preparación express. Caso: Awalab 7 años certificado sin observaciones. Software ISO 9001."
+        keywords="certificación ISO 9001 México, software ISO 9001, auditoría ISO, sistema gestión calidad digital, consultor ISO México, preparación auditoría ISO 9001, software SMETA"
         image="https://www.entersys.mx/imagenes/expersys/hero_quality_expersys.webp"
         url="/expersys"
         schemaData={expersysServiceSchema}

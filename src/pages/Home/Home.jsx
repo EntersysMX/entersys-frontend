@@ -16,9 +16,9 @@ const Home = () => {
   return (
     <div className="home-page">
       <MetaTags
-        title="Entersys - Automatización Empresarial Worksys & Expersys | PYMES México"
-        description="Transforma tu operación empresarial con Worksys y Expersys. Automatiza procesos, mejora eficiencia y obtén certificaciones de calidad. Demo gratuita."
-        keywords="automatización empresarial, Worksys, Expersys, gestión procesos, PYMES México, software empresarial, certificaciones ISO"
+        title="Entersys - Automatización Operativa y Certificaciones ISO México"
+        description="Worksys: Automatización de procesos con Smartsheet. Expersys: Certificación ISO 9001, 14001, 45001 digital. Partner oficial Smartsheet México. Casos: Awalab, Coca-Cola FEMSA."
+        keywords="automatización procesos operativos, Smartsheet México, certificación ISO 9001 México, software manufactura México, implementación Smartsheet, software ISO 9001, trazabilidad alimentos, dashboard operativo tiempo real"
         image="https://www.entersys.mx/imagenes/inicio/hero_office_inicio.webp"
         url="/"
         schemaData={organizationSchema}

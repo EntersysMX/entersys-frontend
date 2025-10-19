@@ -1,75 +1,61 @@
-import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { configureSEO, SITE_CONFIG, injectJSONLD } from '../utils/seo';
 
 /**
- * SEOHead Component
- * Componente React para configurar SEO dinámicamente usando react-helmet-async
+ * Componente para SEO meta tags por página
+ * Uso: <SEOHead title="..." description="..." keywords="..." />
  */
-const SEOHead = ({
-  title,
-  description,
-  image,
-  url,
-  type = 'website',
-  schema,
-  breadcrumbs,
-  keywords,
-  author,
+export default function SEOHead({
+  title = "Entersys - Automatización Operativa y Certificaciones ISO",
+  description = "Worksys: Automatización de procesos con Smartsheet. Expersys: Certificación ISO 9001, 14001, 45001 y SMETA digital. Partner oficial Smartsheet México.",
+  keywords = "automatización procesos, Smartsheet México, certificación ISO 9001, software manufactura, Worksys, Expersys",
+  ogImage = "https://www.entersys.mx/imagenes/inicio/hero_principal_inicio-escritorio.webp",
+  ogType = "website",
+  canonical,
   noindex = false,
-  nofollow = false,
-}) => {
-  const fullTitle = title ? `${title} | ${SITE_CONFIG.name}` : SITE_CONFIG.name;
-  const finalDescription = description || SITE_CONFIG.description;
-  const finalImage = image || SITE_CONFIG.defaultImage;
-  const finalUrl = url || `${SITE_CONFIG.url}${window.location.pathname}`;
-
-  useEffect(() => {
-    // Inyectar JSON-LD si se proporciona schema
-    if (schema) {
-      injectJSONLD(schema);
-    }
-  }, [schema]);
-
-  const robotsContent = [];
-  if (noindex) robotsContent.push('noindex');
-  if (nofollow) robotsContent.push('nofollow');
-  const robotsMeta = robotsContent.length > 0 ? robotsContent.join(', ') : 'index, follow';
+  schema
+}) {
+  const siteUrl = "https://www.entersys.mx";
+  const canonicalUrl = canonical || (typeof window !== 'undefined' ? window.location.href : siteUrl);
 
   return (
     <Helmet>
-      {/* Título y meta básicos */}
-      <title>{fullTitle}</title>
-      <meta name="description" content={finalDescription} />
-      {keywords && <meta name="keywords" content={keywords} />}
-      {author && <meta name="author" content={author} />}
-      <meta name="robots" content={robotsMeta} />
+      {/* Basic Meta Tags */}
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
+      <link rel="canonical" href={canonicalUrl} />
 
-      {/* Canonical URL */}
-      <link rel="canonical" href={finalUrl} />
+      {/* Robots */}
+      {noindex && <meta name="robots" content="noindex,nofollow" />}
 
-      {/* Open Graph */}
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={finalDescription} />
-      <meta property="og:image" content={finalImage} />
-      <meta property="og:url" content={finalUrl} />
-      <meta property="og:type" content={type} />
-      <meta property="og:locale" content={SITE_CONFIG.locale} />
-      <meta property="og:site_name" content={SITE_CONFIG.name} />
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content={ogType} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:site_name" content="Entersys" />
+      <meta property="og:locale" content="es_MX" />
 
-      {/* Twitter Card */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content={SITE_CONFIG.twitter} />
-      <meta name="twitter:creator" content={SITE_CONFIG.twitter} />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={finalDescription} />
-      <meta name="twitter:image" content={finalImage} />
+      {/* Twitter */}
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:url" content={canonicalUrl} />
+      <meta property="twitter:title" content={title} />
+      <meta property="twitter:description" content={description} />
+      <meta property="twitter:image" content={ogImage} />
 
-      {/* Additional meta tags */}
-      <meta name="format-detection" content="telephone=no" />
-      <meta name="theme-color" content="#0066cc" />
+      {/* Additional SEO */}
+      <meta name="author" content="Entersys" />
+      <meta name="geo.region" content="MX" />
+      <meta name="geo.placename" content="México" />
+      <meta name="language" content="Spanish" />
+
+      {/* Schema.org structured data */}
+      {schema && (
+        <script type="application/ld+json">
+          {JSON.stringify(schema)}
+        </script>
+      )}
     </Helmet>
   );
-};
-
-export default SEOHead;
+}

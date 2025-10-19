@@ -20,10 +20,10 @@ const Femsa = () => {
   return (
     <div>
       <Helmet>
-        <title>Caso de éxito Coca-Cola: 714 proyectos sin accidentes con Worksys | Entersys</title>
-        <meta name="description" content="Descubre cómo Coca-Cola estandarizó la gestión de contratistas en 225 unidades operativas con automatización en Smartsheets, logrando 714 proyectos de alto riesgo sin accidentes." />
-        <meta name="keywords" content="Coca-Cola, Worksys, Smartsheets, Seguridad Industrial, Gestión de Contratistas, Alto Riesgo, Automatización de Procesos" />
-        <link rel="canonical" href="https://entersys.mx/clientes/coca-cola" />
+        <title>Caso Coca-Cola FEMSA: Worksys en Industria Alimentos y Bebidas México</title>
+        <meta name="description" content="Dashboard ejecutivo Worksys para Coca-Cola FEMSA: ver si están ganando o perdiendo en 3 segundos. 714 proyectos sin accidentes. Trazabilidad y gestión calidad automatizada en industria alimentos y bebidas." />
+        <meta name="keywords" content="software industria alimentos, software bebidas México, trazabilidad alimentos, caso éxito Coca-Cola, gestión calidad alimentos, software manufactura bebidas, dashboard ejecutivo alimentos" />
+        <link rel="canonical" href="https://www.entersys.mx/clientes/coca-cola" />
       </Helmet>
       <Header />
       <div className="container mx-auto px-[5%] pt-4">

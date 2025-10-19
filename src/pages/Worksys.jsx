@@ -20,9 +20,9 @@ export default function Worksys() {
   return (
     <>
       <MetaTags
-        title="Worksys - Sistema de Gestión de Procesos Empresariales | Entersys"
-        description="Automatiza workflows, centraliza tareas y obtén dashboards ejecutivos en tiempo real. Reduce tareas manuales y mejora la eficiencia operativa."
-        keywords="Worksys, automatización procesos, gestión empresarial, workflows, dashboards, PYMES, productividad"
+        title="Worksys - Automatización de Procesos Operativos con Smartsheet México"
+        description="Migración de Excel a dashboards colaborativos en tiempo real. Implementación rápida (4-8 semanas) para manufactura, franquicias y multi-site. Casos: FEMSA, Awalab. Partner oficial Smartsheet."
+        keywords="automatización procesos operativos, implementación Smartsheet México, migración Excel Smartsheet, dashboard tiempo real, software manufactura México, dashboard OEE, automatización manufactura"
         image="https://www.entersys.mx/imagenes/worksys/hero_process_worksys.webp"
         url="/worksys"
         schemaData={worksysServiceSchema}
