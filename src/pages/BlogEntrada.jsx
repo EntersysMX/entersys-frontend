@@ -146,7 +146,17 @@ export default function BlogEntrada() {
       <div className="color-scheme-2">
         <section className="px-[5%] py-16 md:py-24 lg:py-28">
           <div className="container max-w-4xl">
-            <div className="prose prose-lg max-w-none">
+            <div className="prose prose-lg max-w-none
+              prose-headings:font-bold
+              prose-h1:text-4xl prose-h1:mb-6 prose-h1:mt-8
+              prose-h2:text-3xl prose-h2:mb-4 prose-h2:mt-8
+              prose-h3:text-2xl prose-h3:mb-3 prose-h3:mt-6
+              prose-p:text-base prose-p:leading-relaxed prose-p:mb-4
+              prose-ul:my-4 prose-ul:list-disc prose-ul:pl-6
+              prose-ol:my-4 prose-ol:list-decimal prose-ol:pl-6
+              prose-li:mb-2
+              prose-strong:font-bold
+              prose-a:text-[#009CA6] prose-a:no-underline hover:prose-a:underline">
               <ReactMarkdown>{post.content}</ReactMarkdown>
             </div>
           </div>
