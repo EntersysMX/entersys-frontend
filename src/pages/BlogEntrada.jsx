@@ -6,6 +6,8 @@ import Footer from "../components/layout/Footer/Footer";
 import { getPostBySlug, getRelatedPosts } from "../services/postsApi";
 import { Badge } from "../components/ui/badge";
 import { RelatedPosts } from "../components/pages/blog/components/related-posts";
+import { StickyShareButton } from "../components/pages/blog/components/StickyShareButton";
+import { SEOHead } from "../components/common/SEOHead";
 import { RxCalendar, RxClock, RxArrowLeft } from "react-icons/rx";
 
 export default function BlogEntrada() {
@@ -92,8 +94,78 @@ export default function BlogEntrada() {
     return date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
   };
 
+  // Generate Schema.org structured data
+  const generateSchema = () => {
+    if (!post) return null;
+
+    const baseUrl = import.meta.env.VITE_SITE_URL || 'https://www.entersys.mx';
+    const articleUrl = `${baseUrl}/blog/${post.slug}`;
+
+    return {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "description": post.excerpt || post.meta_description,
+      "image": post.image_url,
+      "datePublished": post.published_at || post.created_at,
+      "dateModified": post.updated_at || post.published_at || post.created_at,
+      "author": {
+        "@type": "Organization",
+        "name": "Entersys",
+        "url": baseUrl,
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${baseUrl}/logo.png`
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Entersys",
+        "url": baseUrl,
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${baseUrl}/logo.png`
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": articleUrl
+      },
+      "articleSection": post.category,
+      "keywords": post.tags || [post.category, "Entersys", "Transformación Digital", "Gestión Empresarial"],
+      "wordCount": post.content?.split(/\s+/).length || 0,
+      "inLanguage": "es-MX",
+      "copyrightYear": new Date(post.published_at || post.created_at).getFullYear(),
+      "copyrightHolder": {
+        "@type": "Organization",
+        "name": "Entersys"
+      }
+    };
+  };
+
   return (
     <div>
+      {post && (
+        <>
+          <SEOHead
+            title={post.title}
+            description={post.excerpt || post.meta_description}
+            image={post.image_url}
+            url={`${import.meta.env.VITE_SITE_URL || 'https://www.entersys.mx'}/blog/${post.slug}`}
+            type="article"
+            publishedTime={post.published_at || post.created_at}
+            modifiedTime={post.updated_at}
+            author="Entersys"
+            category={post.category}
+            tags={post.tags || [post.category, 'Entersys', 'Blog']}
+            schema={generateSchema()}
+          />
+          <StickyShareButton
+            title={post.title}
+            url={`${import.meta.env.VITE_SITE_URL || 'https://www.entersys.mx'}/blog/${post.slug}`}
+          />
+        </>
+      )}
       <Header />
 
       {/* Hero Section with Featured Image */}
