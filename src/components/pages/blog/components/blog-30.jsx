@@ -12,6 +12,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import { RxChevronRight } from "react-icons/rx";
+import { Link } from "react-router-dom";
 
 const useRelume = ({ defaultValue, selects }) => {
   const [activeSelect, setActiveSelect] = useState(defaultValue);
@@ -21,320 +22,20 @@ const useRelume = ({ defaultValue, selects }) => {
   return { activeSelect, setActiveSelect, currentSelect };
 };
 
-export function Blog30() {
+export function Blog30({ tagline = "Blog", heading = "Conocimiento que transforma", tabs = [] }) {
   const useActive = useRelume({
-    defaultValue: "all-posts",
-    selects: [
-      {
-        value: "all-posts",
-        trigger: "All Posts",
-        content: [
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-        ],
-      },
-      {
-        value: "category-one",
-        trigger: "Category one",
-        content: [
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-        ],
-      },
-      {
-        value: "category-two",
-        trigger: "Category two",
-        content: [
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-        ],
-      },
-      {
-        value: "category-three",
-        trigger: "Category three",
-        content: [
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-        ],
-      },
-      {
-        value: "category-four",
-        trigger: "Category four",
-        content: [
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-          {
-            url: "#",
-            image: {
-              src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-              alt: "Relume placeholder image",
-            },
-            category: "Category",
-            readTime: "5 min read",
-            title: "Blog title heading will go here",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-            button: {
-              title: "Read more",
-              variant: "link",
-              size: "link",
-              iconRight: <RxChevronRight />,
-            },
-          },
-        ],
-      },
-    ],
+    defaultValue: tabs.length > 0 ? tabs[0].value : "todos",
+    selects: tabs,
   });
+
   return (
     <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container flex max-w-lg flex-col">
         <div className="mb-12 text-center md:mb-18 lg:mb-20">
           <div className="w-full max-w-lg">
-            <p className="mb-3 font-semibold md:mb-4">Blog</p>
+            <p className="mb-3 font-semibold md:mb-4">{tagline}</p>
             <h1 className="heading-h1 mb-5 font-bold md:mb-6">
-              Conocimiento que transforma
+              {heading}
             </h1>
             <p className="text-medium">
               Descubre ideas prácticas para optimizar tu operación empresarial
@@ -344,146 +45,69 @@ export function Blog30() {
         <div className="flex flex-col justify-start">
           <div className="md:min-w- mb-10">
             <Select
-              defaultValue="all-posts"
               value={useActive.activeSelect}
               onValueChange={useActive.setActiveSelect}
             >
               <SelectTrigger className="min-w-[12.5rem] px-4 py-2 md:w-auto">
-                Todos los posts
+                {tabs.find(t => t.value === useActive.activeSelect)?.trigger || "Todos"}
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all-posts">Todos los posts</SelectItem>
-                <SelectItem value="category-one">Procesos</SelectItem>
-                <SelectItem value="category-two">Tecnología</SelectItem>
-                <SelectItem value="category-three">Gestión</SelectItem>
-                <SelectItem value="category-four">Innovación</SelectItem>
+                {tabs.map((tab) => (
+                  <SelectItem key={tab.value} value={tab.value}>
+                    {tab.trigger}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
           <AnimatePresence mode="wait">
             <motion.div
+              key={useActive.activeSelect}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
             >
               <div className="grid grid-cols-1 gap-x-12 gap-y-12 md:gap-y-16">
-                <Card className="flex flex-col">
-                  <a
-                    href="#"
-                    className="inline-block w-full max-w-full overflow-hidden"
-                  >
-                    <div className="w-full overflow-hidden">
-                      <img
-                        src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                        alt="Relume placeholder image"
-                        className="aspect-video size-full object-cover"
-                      />
-                    </div>
-                  </a>
-                  <div className="px-5 py-6 md:px-6">
-                    <div className="mb-4 flex w-full items-center justify-start">
-                      <Badge className="mr-4">Transformación</Badge>
-                      <p className="text-small inline font-semibold">
-                        5 min de lectura
-                      </p>
-                    </div>
-                    <a href="#" className="mb-2 block max-w-full">
-                      <h5 className="heading-h4 font-bold">
-                        Cómo digitalizar procesos sin morir en el intento
-                      </h5>
-                    </a>
-                    <p>
-                      Estrategias prácticas para convertir tareas manuales en
-                      sistemas inteligentes
-                    </p>
-                    <Button
-                      variant="link"
-                      size="link"
-                      iconRight={<RxChevronRight />}
-                      className="mt-6 flex items-center justify-center gap-x-2"
+                {useActive.currentSelect?.content?.map((post, index) => (
+                  <Card key={index} className="flex flex-col">
+                    <Link
+                      to={post.url}
+                      className="inline-block w-full max-w-full overflow-hidden"
                     >
-                      Leer más
-                    </Button>
-                  </div>
-                </Card>
-                <Card className="flex flex-col">
-                  <a
-                    href="#"
-                    className="inline-block w-full max-w-full overflow-hidden"
-                  >
-                    <div className="w-full overflow-hidden">
-                      <img
-                        src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                        alt="Relume placeholder image"
-                        className="aspect-video size-full object-cover"
-                      />
+                      <div className="w-full overflow-hidden">
+                        <img
+                          src={post.image.src}
+                          alt={post.image.alt}
+                          className="aspect-video size-full object-cover"
+                        />
+                      </div>
+                    </Link>
+                    <div className="px-5 py-6 md:px-6">
+                      <div className="mb-4 flex w-full items-center justify-start">
+                        <Badge className="mr-4">{post.category}</Badge>
+                        <p className="text-small inline font-semibold">
+                          {post.readTime}
+                        </p>
+                      </div>
+                      <Link to={post.url} className="mb-2 block max-w-full">
+                        <h5 className="heading-h4 font-bold">
+                          {post.title}
+                        </h5>
+                      </Link>
+                      <p>{post.description}</p>
+                      <Button
+                        asChild
+                        variant="link"
+                        size="link"
+                        iconRight={<RxChevronRight />}
+                        className="mt-6 flex items-center justify-center gap-x-2"
+                      >
+                        <Link to={post.url}>Leer más</Link>
+                      </Button>
                     </div>
-                  </a>
-                  <div className="px-5 py-6 md:px-6">
-                    <div className="mb-4 flex w-full items-center justify-start">
-                      <Badge className="mr-4">Procesos</Badge>
-                      <p className="text-small inline font-semibold">
-                        5 min de lectura
-                      </p>
-                    </div>
-                    <a href="#" className="mb-2 block max-w-full">
-                      <h5 className="heading-h4 font-bold">
-                        Inteligencia artificial en la gestión empresarial
-                      </h5>
-                    </a>
-                    <p>
-                      Descubre cómo la IA puede revolucionar tu modelo operativo
-                    </p>
-                    <Button
-                      variant="link"
-                      size="link"
-                      iconRight={<RxChevronRight />}
-                      className="mt-6 flex items-center justify-center gap-x-2"
-                    >
-                      Leer más
-                    </Button>
-                  </div>
-                </Card>
-                <Card className="flex flex-col">
-                  <a
-                    href="#"
-                    className="inline-block w-full max-w-full overflow-hidden"
-                  >
-                    <div className="w-full overflow-hidden">
-                      <img
-                        src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg"
-                        alt="Relume placeholder image"
-                        className="aspect-video size-full object-cover"
-                      />
-                    </div>
-                  </a>
-                  <div className="px-5 py-6 md:px-6">
-                    <div className="mb-4 flex w-full items-center justify-start">
-                      <Badge className="mr-4">Tecnología</Badge>
-                      <p className="text-small inline font-semibold">
-                        5 min de lectura
-                      </p>
-                    </div>
-                    <a href="#" className="mb-2 block max-w-full">
-                      <h5 className="heading-h4 font-bold">
-                        Metodologías ágiles para equipos de alto rendimiento
-                      </h5>
-                    </a>
-                    <p>
-                      Claves para implementar cambios efectivos en tu
-                      organización
-                    </p>
-                    <Button
-                      variant="link"
-                      size="link"
-                      iconRight={<RxChevronRight />}
-                      className="mt-6 flex items-center justify-center gap-x-2"
-                    >
-                      Leer más
-                    </Button>
-                  </div>
-                </Card>
+                  </Card>
+                ))}
               </div>
             </motion.div>
           </AnimatePresence>
