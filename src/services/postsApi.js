@@ -11,7 +11,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
  */
 export const getPosts = async ({ skip = 0, limit = 100, category = null } = {}) => {
   try {
-    const url = new URL(`${API_URL}/api/v1/posts`);
+    const url = new URL(`${API_URL}/api/v1/posts/`);
     url.searchParams.append('published_only', 'true');
     url.searchParams.append('skip', skip);
     url.searchParams.append('limit', limit);
@@ -43,7 +43,7 @@ export const getPosts = async ({ skip = 0, limit = 100, category = null } = {}) 
  */
 export const getPostBySlug = async (slug) => {
   try {
-    const response = await fetch(`${API_URL}/api/v1/posts/${slug}`);
+    const response = await fetch(`${API_URL}/api/v1/posts/${slug}/`);
 
     if (!response.ok) {
       if (response.status === 404) {
