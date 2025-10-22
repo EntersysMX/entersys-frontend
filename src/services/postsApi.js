@@ -43,7 +43,7 @@ export const getPosts = async ({ skip = 0, limit = 100, category = null } = {}) 
  */
 export const getPostBySlug = async (slug) => {
   try {
-    const response = await fetch(`${API_URL}/api/v1/posts/${slug}/`);
+    const response = await fetch(`${API_URL}/api/v1/posts/${slug}`);
 
     if (!response.ok) {
       if (response.status === 404) {
