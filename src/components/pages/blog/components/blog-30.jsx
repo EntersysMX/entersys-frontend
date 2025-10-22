@@ -96,15 +96,13 @@ export function Blog30({ tagline = "Blog", heading = "Conocimiento que transform
                         </h5>
                       </Link>
                       <p>{post.description}</p>
-                      <Button
-                        asChild
-                        variant="link"
-                        size="link"
-                        iconRight={<RxChevronRight />}
-                        className="mt-6 flex items-center justify-center gap-x-2"
+                      <Link
+                        to={post.url}
+                        className="mt-6 flex items-center justify-center gap-x-2 text-[#009CA6] underline-offset-4 hover:underline font-medium transition-colors"
                       >
-                        <Link to={post.url}>Leer más</Link>
-                      </Button>
+                        Leer más
+                        <RxChevronRight className="ml-1" />
+                      </Link>
                     </div>
                   </Card>
                 ))}
