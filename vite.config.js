@@ -7,6 +7,7 @@ import { securityHeadersPlugin } from './vite-plugins/security-headers-plugin.js
 import { robotsPlugin } from './vite-plugins/robots-plugin.js'
 import { htmlMetaPlugin } from './vite-plugins/html-meta-plugin.js'
 import { gtmPlugin } from './vite-plugins/gtm-plugin.js'
+import path from 'path'
 
 export default defineConfig({
   plugins: [
@@ -112,6 +113,9 @@ export default defineConfig({
     })
   ],
   resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    },
     // Force single instance of React to avoid "Invalid hook call" errors
     dedupe: ['react', 'react-dom', 'react-router-dom', 'framer-motion']
   },

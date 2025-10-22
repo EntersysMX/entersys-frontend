@@ -1,26 +1,26 @@
 import React from "react";
 import Header from "../components/layout/Header/Header";
 import Footer from "../components/layout/Footer/Footer";
-import { Blog30 } from "../components/pages/blog/components/blog-30";
+import { BlogPostHeader4 } from "../components/pages/blog/components/blog-post-header-04";
+import { Content27 } from "../components/pages/blog/components/content-27";
+import { RelatedPosts } from "../components/pages/blog/components/related-posts";
 import { Blog68 } from "../components/pages/blog/components/blog-68";
-import { Contact13 } from "../components/pages/blog/components/contact-13";
-import { Faq5 } from "../components/pages/blog/components/faq-05";
 
-export default function Blog() {
+export default function BlogEntrada() {
   return (
     <div>
       <Header />
       <div className="color-scheme-1">
-        <Blog30 />
+        <BlogPostHeader4 />
+      </div>
+      <div className="color-scheme-2">
+        <Content27 />
+      </div>
+      <div className="color-scheme-1">
+        <RelatedPosts />
       </div>
       <div className="color-scheme-2">
         <Blog68 />
-      </div>
-      <div className="color-scheme-1">
-        <Contact13 />
-      </div>
-      <div className="color-scheme-2">
-        <Faq5 />
       </div>
       <Footer />
     </div>

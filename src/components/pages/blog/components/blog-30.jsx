@@ -1,14 +1,14 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import {
-  Badge,
-  Button,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from "@relume_io/relume-ui";
-import { Card } from "../../ui/Card";
+} from "@/components/ui/select";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import { RxChevronRight } from "react-icons/rx";
@@ -21,7 +21,7 @@ const useRelume = ({ defaultValue, selects }) => {
   return { activeSelect, setActiveSelect, currentSelect };
 };
 
-export function Blog30({ colorScheme = 1, ...props }) {
+export function Blog30() {
   const useActive = useRelume({
     defaultValue: "all-posts",
     selects: [
@@ -328,15 +328,15 @@ export function Blog30({ colorScheme = 1, ...props }) {
     ],
   });
   return (
-    <section id="relume" className={`px-[5%] py-16 md:py-24 lg:py-28 color-scheme-${colorScheme}`} {...props}>
+    <section className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container flex max-w-lg flex-col">
         <div className="mb-12 text-center md:mb-18 lg:mb-20">
           <div className="w-full max-w-lg">
             <p className="mb-3 font-semibold md:mb-4">Blog</p>
-            <h1 className="mb-5 text-6xl font-bold md:mb-6 md:text-9xl lg:text-10xl">
+            <h1 className="heading-h1 mb-5 font-bold md:mb-6">
               Conocimiento que transforma
             </h1>
-            <p className="md:text-md">
+            <p className="text-medium">
               Descubre ideas prácticas para optimizar tu operación empresarial
             </p>
           </div>
@@ -344,6 +344,7 @@ export function Blog30({ colorScheme = 1, ...props }) {
         <div className="flex flex-col justify-start">
           <div className="md:min-w- mb-10">
             <Select
+              defaultValue="all-posts"
               value={useActive.activeSelect}
               onValueChange={useActive.setActiveSelect}
             >
@@ -381,14 +382,14 @@ export function Blog30({ colorScheme = 1, ...props }) {
                     </div>
                   </a>
                   <div className="px-5 py-6 md:px-6">
-                    <div className="rb-4 mb-4 flex w-full items-center justify-start">
+                    <div className="mb-4 flex w-full items-center justify-start">
                       <Badge className="mr-4">Transformación</Badge>
-                      <p className="inline text-sm font-semibold">
+                      <p className="text-small inline font-semibold">
                         5 min de lectura
                       </p>
                     </div>
                     <a href="#" className="mb-2 block max-w-full">
-                      <h5 className="text-2xl font-bold md:text-4xl">
+                      <h5 className="heading-h4 font-bold">
                         Cómo digitalizar procesos sin morir en el intento
                       </h5>
                     </a>
@@ -420,14 +421,14 @@ export function Blog30({ colorScheme = 1, ...props }) {
                     </div>
                   </a>
                   <div className="px-5 py-6 md:px-6">
-                    <div className="rb-4 mb-4 flex w-full items-center justify-start">
+                    <div className="mb-4 flex w-full items-center justify-start">
                       <Badge className="mr-4">Procesos</Badge>
-                      <p className="inline text-sm font-semibold">
+                      <p className="text-small inline font-semibold">
                         5 min de lectura
                       </p>
                     </div>
                     <a href="#" className="mb-2 block max-w-full">
-                      <h5 className="text-2xl font-bold md:text-4xl">
+                      <h5 className="heading-h4 font-bold">
                         Inteligencia artificial en la gestión empresarial
                       </h5>
                     </a>
@@ -458,14 +459,14 @@ export function Blog30({ colorScheme = 1, ...props }) {
                     </div>
                   </a>
                   <div className="px-5 py-6 md:px-6">
-                    <div className="rb-4 mb-4 flex w-full items-center justify-start">
+                    <div className="mb-4 flex w-full items-center justify-start">
                       <Badge className="mr-4">Tecnología</Badge>
-                      <p className="inline text-sm font-semibold">
+                      <p className="text-small inline font-semibold">
                         5 min de lectura
                       </p>
                     </div>
                     <a href="#" className="mb-2 block max-w-full">
-                      <h5 className="text-2xl font-bold md:text-4xl">
+                      <h5 className="heading-h4 font-bold">
                         Metodologías ágiles para equipos de alto rendimiento
                       </h5>
                     </a>

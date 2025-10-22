@@ -21,7 +21,7 @@ import Home from './pages/Home'
 
 // Páginas secundarias con lazy loading
 const Blog = lazy(() => import('./pages/Blog'))
-const BlogEntry = lazy(() => import('./pages/BlogEntry'))
+const BlogEntrada = lazy(() => import('./pages/BlogEntrada'))
 const Clientes = lazy(() => import('./pages/Clientes'))
 const Contacto = lazy(() => import('./pages/Contacto'))
 const Nosotros = lazy(() => import('./pages/Nosotros'))
@@ -96,7 +96,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/inicio" element={<Home />} />
                 <Route path="/blog" element={<Blog />} />
-                <Route path="/blog-entry" element={<BlogEntry />} />
+                <Route path="/blog-entrada" element={<BlogEntrada />} />
                 <Route path="/clientes" element={<Clientes />} />
                 <Route path="/contacto" element={<Contacto />} />
                 <Route path="/nosotros" element={<Nosotros />} />

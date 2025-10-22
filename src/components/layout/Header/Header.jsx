@@ -363,6 +363,14 @@ const Header = ({ colorScheme = 1, ...props }) => {
                   </motion.nav>
                 </AnimatePresence>
               </div>
+              <Link
+                to="/blog"
+                className={`block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 transition-colors ${
+                  isActive('/blog') ? 'text-[#009CA6] font-semibold' : 'text-black hover:text-[#009CA6]'
+                }`}
+              >
+                Blog
+              </Link>
             </nav>
             <div className="mt-6 flex flex-col gap-4 lg:mt-0 lg:ml-4 lg:flex-row lg:items-center">
               <Link to="/contacto">

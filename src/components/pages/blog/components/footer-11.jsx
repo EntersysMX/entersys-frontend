@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "../../ui/Card";
+import { Card } from "@/components/ui/card";
 import React from "react";
 import {
   BiLogoFacebookCircle,
@@ -12,7 +12,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 export function Footer11() {
   return (
-    <footer id="relume" className="px-[5%] py-12 md:py-18 lg:py-20">
+    <footer className="px-[5%] py-12 md:py-18 lg:py-20">
       <div className="container">
         <Card className="grid grid-cols-1 gap-x-[4vw] gap-y-12 p-8 md:gap-y-16 md:p-12 lg:grid-cols-[1fr_0.5fr] lg:gap-y-4">
           <div>
@@ -26,20 +26,20 @@ export function Footer11() {
               </a>
             </div>
             <div className="mb-6 md:mb-8">
-              <p className="mb-1 text-sm font-semibold">Dirección:</p>
-              <p className="mb-5 text-sm md:mb-6">
+              <p className="text-small mb-1 font-semibold">Dirección:</p>
+              <p className="text-small mb-5 md:mb-6">
                 Nivel 1, 12 Sample St, Sydney NSW 2000
               </p>
-              <p className="mb-1 text-sm font-semibold">Contacto:</p>
+              <p className="text-small mb-1 font-semibold">Contacto:</p>
               <a
                 href="tel:1800 123 4567"
-                className="block text-sm underline decoration-black underline-offset-1"
+                className="text-small block underline"
               >
                 1800 123 4567
               </a>
               <a
                 href="mailto:info@relume.io"
-                className="block text-sm underline decoration-black underline-offset-1"
+                className="text-small block underline"
               >
                 info@relume.io
               </a>
@@ -64,38 +64,38 @@ export function Footer11() {
           </div>
           <div className="grid grid-cols-1 items-start gap-x-6 gap-y-10 sm:grid-cols-2 md:gap-x-8 md:gap-y-4">
             <ul>
-              <li className="py-2 text-sm font-semibold">
+              <li className="text-small py-2 font-semibold">
                 <a href="#">Inicio</a>
               </li>
-              <li className="py-2 text-sm font-semibold">
+              <li className="text-small py-2 font-semibold">
                 <a href="#">Servicios</a>
               </li>
-              <li className="py-2 text-sm font-semibold">
+              <li className="text-small py-2 font-semibold">
                 <a href="#">Worksys</a>
               </li>
-              <li className="py-2 text-sm font-semibold">
+              <li className="text-small py-2 font-semibold">
                 <a href="#">Expersys</a>
               </li>
             </ul>
             <ul>
-              <li className="py-2 text-sm font-semibold">
+              <li className="text-small py-2 font-semibold">
                 <a href="#">Nosotros</a>
               </li>
-              <li className="py-2 text-sm font-semibold">
+              <li className="text-small py-2 font-semibold">
                 <a href="#">Clientes</a>
               </li>
-              <li className="py-2 text-sm font-semibold">
+              <li className="text-small py-2 font-semibold">
                 <a href="#">Blog</a>
               </li>
-              <li className="py-2 text-sm font-semibold">
+              <li className="text-small py-2 font-semibold">
                 <a href="#">Contacto</a>
               </li>
             </ul>
           </div>
         </Card>
-        <div className="flex flex-col-reverse items-start justify-between pt-6 pb-4 text-sm md:flex-row md:items-center md:pt-8 md:pb-0">
+        <div className="text-small flex flex-col-reverse items-start justify-between pt-6 pb-4 md:flex-row md:items-center md:pt-8 md:pb-0">
           <p className="mt-8 md:mt-0">© 2024 Relume. All rights reserved.</p>
-          <ul className="grid grid-flow-row grid-cols-[max-content] justify-center gap-y-4 text-sm md:grid-flow-col md:gap-x-6 md:gap-y-0">
+          <ul className="text-small grid grid-flow-row grid-cols-[max-content] justify-center gap-y-4 md:grid-flow-col md:gap-x-6 md:gap-y-0">
             <li className="underline">
               <a href="#">Política de privacidad</a>
             </li>
