@@ -96,7 +96,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/inicio" element={<Home />} />
                 <Route path="/blog" element={<Blog />} />
-                <Route path="/blog-entrada" element={<BlogEntrada />} />
+                <Route path="/blog/:slug" element={<BlogEntrada />} />
                 <Route path="/clientes" element={<Clientes />} />
                 <Route path="/contacto" element={<Contacto />} />
                 <Route path="/nosotros" element={<Nosotros />} />

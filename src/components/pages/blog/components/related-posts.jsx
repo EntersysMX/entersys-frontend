@@ -6,45 +6,24 @@ import React from "react";
 import { RxChevronRight } from "react-icons/rx";
 import { Link } from "react-router-dom";
 
-export function RelatedPosts() {
-  const relatedPosts = [
-    {
-      url: "/blog-entrada",
-      image: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-        alt: "Artículo relacionado 1",
-      },
-      category: "Tecnología",
-      readTime: "5 min lectura",
-      title: "Optimización de procesos con Worksys",
-      description:
-        "Descubre cómo la digitalización de procesos puede transformar la eficiencia operativa de tu empresa.",
+export function RelatedPosts({ posts = [] }) {
+  // If no posts provided, show nothing or placeholder
+  if (!posts || posts.length === 0) {
+    return null;
+  }
+
+  // Transform posts to display format
+  const displayPosts = posts.map(post => ({
+    url: `/blog/${post.slug}`,
+    image: {
+      src: post.image_url || "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
+      alt: post.title,
     },
-    {
-      url: "/blog-entrada",
-      image: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-        alt: "Artículo relacionado 2",
-      },
-      category: "Gestión",
-      readTime: "7 min lectura",
-      title: "Implementación de ISO 9001 paso a paso",
-      description:
-        "Una guía completa para implementar sistemas de gestión de calidad en tu organización.",
-    },
-    {
-      url: "/blog-entrada",
-      image: {
-        src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-landscape.svg",
-        alt: "Artículo relacionado 3",
-      },
-      category: "Innovación",
-      readTime: "6 min lectura",
-      title: "Automatización inteligente de procesos",
-      description:
-        "Cómo la inteligencia artificial está revolucionando la gestión de procesos empresariales.",
-    },
-  ];
+    category: post.category || "Tecnología",
+    readTime: post.read_time || "5 min lectura",
+    title: post.title,
+    description: post.excerpt || post.meta_description || "Lee más sobre este artículo...",
+  }));
 
   return (
     <section className="px-[5%] py-16 md:py-24 lg:py-28">
@@ -55,7 +34,7 @@ export function RelatedPosts() {
           </h2>
         </div>
         <div className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-          {relatedPosts.map((post, index) => (
+          {displayPosts.map((post, index) => (
             <div key={index} className="flex flex-col">
               <Link to={post.url} className="mb-6">
                 <div className="w-full overflow-hidden rounded-lg">

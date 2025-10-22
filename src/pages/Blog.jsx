@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/layout/Header/Header";
 import Footer from "../components/layout/Footer/Footer";
-import { Blog30 } from "../components/pages/blog/components/blog-30";
+import { BlogDynamic } from "../components/pages/blog/components/BlogDynamic";
 import { Blog68 } from "../components/pages/blog/components/blog-68";
 import { Contact13 } from "../components/pages/blog/components/contact-13";
 import { Faq5 } from "../components/pages/blog/components/faq-05";
@@ -11,7 +11,7 @@ export default function Blog() {
     <div>
       <Header />
       <div className="color-scheme-1">
-        <Blog30 />
+        <BlogDynamic />
       </div>
       <div className="color-scheme-2">
         <Blog68 />
