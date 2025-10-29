@@ -1,0 +1,24 @@
+# Redirecciones de URLs antiguas con .html a nuevas URLs sin extensión
+# Código 301 = redirección permanente (SEO-friendly)
+
+/inicio.html           /inicio            301
+/nosotros.html         /nosotros          301
+/contacto.html         /contacto          301
+/worksys.html          /worksys           301
+/expersys.html         /expersys          301
+/awalab.html           /awalab            301
+/clientes.html         /clientes          301
+/blog.html             /blog              301
+
+# Redirecciones para casos de estudio
+/clientes/qhse.html      /clientes/qhse      301
+/clientes/coca-cola.html /clientes/coca-cola 301
+/clientes/ochoa.html     /clientes/ochoa     301
+
+# Páginas legales
+/politica-de-privacidad.html   /politica-de-privacidad   301
+/terminos-de-servicio.html     /terminos-de-servicio     301
+/configuracion-de-cookies.html /configuracion-de-cookies 301
+
+# SPA fallback - debe estar al final
+/*    /index.html    200
