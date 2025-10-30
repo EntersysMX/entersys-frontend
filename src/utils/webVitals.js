@@ -255,6 +255,54 @@ const trackLongTasks = () => {
 };
 
 /**
+ * Tracking de Navigation Timing API v2 (métricas más precisas)
+ */
+const trackNavigationTiming = () => {
+  if (!('PerformanceObserver' in window)) return;
+
+  try {
+    const observer = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        // Server Response Time
+        const serverResponseTime = entry.responseStart - entry.requestStart;
+        analyticsService.trackEvent(
+          'Navigation Timing',
+          'Server Response Time',
+          serverResponseTime < 200 ? 'good' : serverResponseTime < 600 ? 'needs-improvement' : 'poor',
+          Math.round(serverResponseTime)
+        );
+
+        // DNS Lookup Time
+        const dnsTime = entry.domainLookupEnd - entry.domainLookupStart;
+        if (dnsTime > 100) {
+          analyticsService.trackEvent(
+            'Navigation Timing',
+            'DNS Lookup Time',
+            'slow',
+            Math.round(dnsTime)
+          );
+        }
+
+        // TCP Connection Time
+        const tcpTime = entry.connectEnd - entry.connectStart;
+        if (tcpTime > 100) {
+          analyticsService.trackEvent(
+            'Navigation Timing',
+            'TCP Connection Time',
+            'slow',
+            Math.round(tcpTime)
+          );
+        }
+      }
+    });
+
+    observer.observe({ entryTypes: ['navigation'] });
+  } catch (e) {
+    // Browser doesn't support
+  }
+};
+
+/**
  * Inicializa el tracking de Web Vitals
  */
 export const initWebVitals = () => {
@@ -283,6 +331,7 @@ export const initWebVitals = () => {
     if (import.meta.env.PROD) {
       trackResourceTiming();
       trackLongTasks();
+      trackNavigationTiming();
     }
 
     if (import.meta.env.DEV) {

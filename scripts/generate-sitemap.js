@@ -44,18 +44,24 @@ const routes = [
 ];
 
 /**
- * Genera el XML del sitemap
+ * Genera el XML del sitemap con fechas dinámicas
  */
 const generateSitemap = () => {
-  const lastmod = new Date().toISOString().split('T')[0];
+  // Fecha actual en formato YYYY-MM-DD (se actualiza cada vez que se genera)
+  const today = new Date().toISOString().split('T')[0];
 
-  const urlsXML = routes.map((route) => `
+  const urlsXML = routes.map((route) => {
+    // Usar fecha específica si la ruta la define, sino usar hoy
+    const lastmod = route.lastmod || today;
+
+    return `
   <url>
     <loc>${SITE_URL}${route.path}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${route.changefreq}</changefreq>
     <priority>${route.priority}</priority>
-  </url>`).join('');
+  </url>`;
+  }).join('');
 
   const sitemapXML = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
