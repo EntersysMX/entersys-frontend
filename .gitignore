@@ -75,3 +75,19 @@ Thumbs.db
 
 # Live server
 .live-server/
+
+# Deploy scripts (temporary)
+check_*.py
+deploy_manual.py
+deploy_docker.py
+final_deploy.py
+test_redirect_*.py
+dist.tar.gz
+
+# Documentation files (temporary)
+*_ANALYSIS.md
+*_STRATEGY.md
+*_PLAN.md
+*_IMPLEMENTATION.md
+*_VERIFICATION.md
+*_CHECKLIST.md
