@@ -7,14 +7,14 @@ export function Logo03({ colorScheme = 3, ...props }) {
   const scrollContainerRef = useRef(null);
 
   const logos = [
-    { src: "/imagenes/nosotros/logo_coca.webp", alt: "Coca-Cola", url: "https://www.coca-cola.com" },
-    { src: "/imagenes/nosotros/logo_ochoa_nosotros.webp", alt: "Productos de Maíz Ochoa", url: "https://www.productosochoa.com" },
-    { src: "/imagenes/nosotros/logo_chilando_nosotros.webp", alt: "Chilango Garage", url: "https://chilangogarage.com" },
-    { src: "/imagenes/nosotros/logo_mlm_nosotros.webp", alt: "MLM", url: "https://www.mlm.com.mx" },
+    { src: "/imagenes/nosotros/logo_coca.webp", alt: "Coca-Cola", url: "https://www.femsa.com/es/" },
+    { src: "/imagenes/nosotros/logo_ochoa_nosotros.webp", alt: "Productos de Maíz Ochoa", url: "https://www.productosochoa.com.mx/index.html" },
+    { src: "/imagenes/nosotros/logo_chilando_nosotros.webp", alt: "Chilango Garage", url: "https://www.chilangogarage.mx/" },
+    { src: "/imagenes/nosotros/logo_mlm_nosotros.webp", alt: "MLM", url: "https://mlmproductos.com/" },
     { src: "/imagenes/nosotros/logo_nd_nosotros.webp", alt: "ND", url: "https://www.ndinnl.com" },
-    { src: "/imagenes/nosotros/logo_raxya_nosotros.webp", alt: "Raxya", url: "https://www.raxya.com" },
-    { src: "/imagenes/nosotros/logo_rymmex_nosotros.webp", alt: "Rymmex", url: "https://www.rymmex.com" },
-    { src: "/imagenes/nosotros/logo_saludvida_nosotros.webp", alt: "Salud Vida", url: "https://www.amazon.com.mx/Salud-Vida-MX-Suplemento-Absorción/dp/B089RV6Z7F" }
+    { src: "/imagenes/nosotros/logo_raxya_nosotros.webp", alt: "Raxya", url: "https://raxya.com.mx/" },
+    { src: "/imagenes/nosotros/logo_rymmex_nosotros.webp", alt: "Rymmex", url: "https://www.rymmex.mx/" },
+    { src: "/imagenes/nosotros/logo_saludvida_nosotros.webp", alt: "Salud Vida", url: "https://saludvida.com.mx/" }
   ];
 
   const scroll = (direction) => {
