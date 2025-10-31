@@ -14,6 +14,7 @@ const useRelume = () => {
   const isMobile = useMediaQuery("(max-width: 991px)");
 
   const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   // Services dropdown handlers
   const openOnMobileServicesDropdownMenu = () => {
@@ -48,6 +49,7 @@ const useRelume = () => {
 
   return {
     toggleMobileMenu,
+    closeMobileMenu,
     // Services dropdown
     openOnDesktopServicesDropdownMenu,
     closeOnDesktopServicesDropdownMenu,
@@ -86,14 +88,29 @@ const Header = ({ colorScheme = 1, ...props }) => {
   };
 
   return (
-    <header
-      className={`header bg-white text-black border-b border-gray-200 color-scheme-${colorScheme}`}
-      {...props}
-    >
-      <section
-        id="relume"
-        className="z-[999] flex w-full items-center border-b md:min-h-18 lg:px-[5%]"
+    <>
+      {/* Backdrop overlay for mobile menu */}
+      <AnimatePresence>
+        {useActive.animateMobileMenu === 'open' && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[998] lg:hidden"
+            onClick={useActive.closeMobileMenu}
+          />
+        )}
+      </AnimatePresence>
+
+      <header
+        className={`header bg-white text-black border-b border-gray-200 color-scheme-${colorScheme} relative z-[999]`}
+        {...props}
       >
+        <section
+          id="relume"
+          className="flex w-full items-center border-b md:min-h-18 lg:px-[5%]"
+        >
         <div className="mx-auto size-full items-center justify-between lg:flex">
           <div className="grid min-h-16 grid-cols-2 items-center justify-between px-[5%] md:min-h-18 lg:min-h-full lg:px-0">
             <Link to="/">
@@ -116,19 +133,23 @@ const Header = ({ colorScheme = 1, ...props }) => {
           </div>
           <motion.div
             variants={{
-              open: { height: "var(--height-open, 100dvh)" },
+              open: { height: "var(--height-open, calc(100vh - 4rem))" },
               close: { height: "var(--height-closed, 0)" },
             }}
             initial="close"
             exit="close"
             animate={useActive.animateMobileMenu}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden px-[5%] lg:flex lg:items-center lg:px-0 lg:[--height-closed:auto] lg:[--height-open:auto]"
+            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            className="overflow-hidden overflow-y-auto px-[5%] pb-6 lg:flex lg:items-center lg:px-0 lg:pb-0 lg:overflow-visible lg:[--height-closed:auto] lg:[--height-open:auto]"
+            style={{
+              WebkitOverflowScrolling: 'touch',
+            }}
           >
             <nav className="lg:flex lg:items-center">
               <Link
                 to="/"
-                className={`block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 transition-colors ${
+                onClick={useActive.closeMobileMenu}
+                className={`block py-4 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 transition-colors touch-manipulation ${
                   isActive('/') ? 'text-[#009CA6] font-semibold' : 'text-black hover:text-[#009CA6]'
                 }`}
               >
@@ -136,7 +157,8 @@ const Header = ({ colorScheme = 1, ...props }) => {
               </Link>
               <Link
                 to="/nosotros"
-                className={`block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 transition-colors ${
+                onClick={useActive.closeMobileMenu}
+                className={`block py-4 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 transition-colors touch-manipulation ${
                   isActive('/nosotros') ? 'text-[#009CA6] font-semibold' : 'text-black hover:text-[#009CA6]'
                 }`}
               >
@@ -146,13 +168,14 @@ const Header = ({ colorScheme = 1, ...props }) => {
                 onMouseEnter={useActive.openOnDesktopServicesDropdownMenu}
                 onMouseLeave={useActive.closeOnDesktopServicesDropdownMenu}
               >
-                <div className={`header-dropdown-button flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base transition-colors ${
+                <div className={`header-dropdown-button flex w-full items-center justify-between gap-2 py-4 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base transition-colors touch-manipulation ${
                   isServicesActive() ? 'text-[#009CA6] font-semibold' : 'text-black hover:text-[#009CA6]'
                 }`}>
                   <span className="flex-1">Servicios</span>
                   <button
                     onClick={useActive.openOnMobileServicesDropdownMenu}
-                    className="lg:hidden"
+                    className="lg:hidden p-2 -mr-2"
+                    aria-label="Toggle services menu"
                   >
                     <AnimatePresence>
                       <motion.div
@@ -204,20 +227,21 @@ const Header = ({ colorScheme = 1, ...props }) => {
                     transition={{ duration: 0.3 }}
                     className="z-50 bg-white lg:absolute lg:w-80 lg:border lg:border-neutral-300 lg:p-6 lg:[--y-close:25%]"
                   >
-                    <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-2 py-3 md:py-3 lg:gap-y-4 lg:py-0">
+                    <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-1 py-3 md:py-3 lg:gap-y-4 lg:py-0 border-l-2 border-gray-100 pl-4 lg:border-0 lg:pl-0">
                       <Link
                         to="/worksys"
-                        className={`block py-2 lg:py-1 transition-colors ${
+                        onClick={useActive.closeMobileMenu}
+                        className={`block py-3 lg:py-1 transition-colors touch-manipulation ${
                           isActive('/worksys') ? 'text-[#009CA6]' : 'text-black hover:text-[#009CA6]'
                         }`}
                       >
-                        <div className="flex flex-col items-start justify-center">
+                        <div className="flex flex-col items-start justify-center gap-1">
                           <p className={`text-md font-semibold lg:text-base ${
                             isActive('/worksys') ? 'text-[#009CA6]' : 'text-black'
                           }`}>
                             Worksys
                           </p>
-                          <p className="hidden text-sm md:block text-gray-600">
+                          <p className="text-sm text-gray-600">
                             Implementación y digitalización de procesos
                             empresariales
                           </p>
@@ -225,17 +249,18 @@ const Header = ({ colorScheme = 1, ...props }) => {
                       </Link>
                       <Link
                         to="/expersys"
-                        className={`block py-2 lg:py-1 transition-colors ${
+                        onClick={useActive.closeMobileMenu}
+                        className={`block py-3 lg:py-1 transition-colors touch-manipulation ${
                           isActive('/expersys') ? 'text-[#009CA6]' : 'text-black hover:text-[#009CA6]'
                         }`}
                       >
-                        <div className="flex flex-col items-start justify-center">
+                        <div className="flex flex-col items-start justify-center gap-1">
                           <p className={`text-md font-semibold lg:text-base ${
                             isActive('/expersys') ? 'text-[#009CA6]' : 'text-black'
                           }`}>
                             Expersys
                           </p>
-                          <p className="hidden text-sm md:block text-gray-600">
+                          <p className="text-sm text-gray-600">
                             Implementación y acreditación de sistemas de gestión
                             de calidad
                           </p>
@@ -249,13 +274,14 @@ const Header = ({ colorScheme = 1, ...props }) => {
                 onMouseEnter={useActive.openOnDesktopClientesDropdownMenu}
                 onMouseLeave={useActive.closeOnDesktopClientesDropdownMenu}
               >
-                <div className={`header-dropdown-button flex w-full items-center justify-between gap-2 py-3 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base transition-colors ${
+                <div className={`header-dropdown-button flex w-full items-center justify-between gap-2 py-4 text-left text-md lg:flex-none lg:justify-start lg:px-4 lg:py-2 lg:text-base transition-colors touch-manipulation ${
                   isClientesActive() ? 'text-[#009CA6] font-semibold' : 'text-black hover:text-[#009CA6]'
                 }`}>
-                  <Link to="/clientes" className="flex-1">Clientes</Link>
+                  <Link to="/clientes" onClick={useActive.closeMobileMenu} className="flex-1">Clientes</Link>
                   <button
                     onClick={useActive.openOnMobileClientesDropdownMenu}
-                    className="lg:hidden"
+                    className="lg:hidden p-2 -mr-2"
+                    aria-label="Toggle clients menu"
                   >
                     <AnimatePresence>
                       <motion.div
@@ -307,54 +333,57 @@ const Header = ({ colorScheme = 1, ...props }) => {
                     transition={{ duration: 0.3 }}
                     className="z-50 bg-white lg:absolute lg:w-80 lg:border lg:border-neutral-300 lg:p-6 lg:[--y-close:25%]"
                   >
-                    <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-2 py-3 md:py-3 lg:gap-y-4 lg:py-0">
+                    <div className="grid grid-cols-1 grid-rows-[max-content] gap-y-1 py-3 md:py-3 lg:gap-y-4 lg:py-0 border-l-2 border-gray-100 pl-4 lg:border-0 lg:pl-0">
                       <Link
                         to="/clientes/qhse"
-                        className={`block py-2 lg:py-1 transition-colors ${
+                        onClick={useActive.closeMobileMenu}
+                        className={`block py-3 lg:py-1 transition-colors touch-manipulation ${
                           location.pathname === '/clientes/qhse' ? 'text-[#009CA6]' : 'text-black hover:text-[#009CA6]'
                         }`}
                       >
-                        <div className="flex flex-col items-start justify-center">
+                        <div className="flex flex-col items-start justify-center gap-1">
                           <p className={`text-md font-semibold lg:text-base ${
                             location.pathname === '/clientes/qhse' ? 'text-[#009CA6]' : 'text-black'
                           }`}>
                             QHSE
                           </p>
-                          <p className="hidden text-sm md:block text-gray-600">
+                          <p className="text-sm text-gray-600">
                             De 11 a 253 millones. Crecimiento 2,000% con ISO 9001
                           </p>
                         </div>
                       </Link>
                       <Link
                         to="/clientes/coca-cola"
-                        className={`block py-2 lg:py-1 transition-colors ${
+                        onClick={useActive.closeMobileMenu}
+                        className={`block py-3 lg:py-1 transition-colors touch-manipulation ${
                           location.pathname === '/clientes/coca-cola' ? 'text-[#009CA6]' : 'text-black hover:text-[#009CA6]'
                         }`}
                       >
-                        <div className="flex flex-col items-start justify-center">
+                        <div className="flex flex-col items-start justify-center gap-1">
                           <p className={`text-md font-semibold lg:text-base ${
                             location.pathname === '/clientes/coca-cola' ? 'text-[#009CA6]' : 'text-black'
                           }`}>
                             Coca-Cola
                           </p>
-                          <p className="hidden text-sm md:block text-gray-600">
-                            714 proyectos sin accidentes en 225 unidades
+                          <p className="text-sm text-gray-600">
+                            714 proyectos sin accidentes en 195 unidades
                           </p>
                         </div>
                       </Link>
                       <Link
                         to="/clientes/ochoa"
-                        className={`block py-2 lg:py-1 transition-colors ${
+                        onClick={useActive.closeMobileMenu}
+                        className={`block py-3 lg:py-1 transition-colors touch-manipulation ${
                           location.pathname === '/clientes/ochoa' ? 'text-[#009CA6]' : 'text-black hover:text-[#009CA6]'
                         }`}
                       >
-                        <div className="flex flex-col items-start justify-center">
+                        <div className="flex flex-col items-start justify-center gap-1">
                           <p className={`text-md font-semibold lg:text-base ${
                             location.pathname === '/clientes/ochoa' ? 'text-[#009CA6]' : 'text-black'
                           }`}>
                             Productos de Maíz Ochoa
                           </p>
-                          <p className="hidden text-sm md:block text-gray-600">
+                          <p className="text-sm text-gray-600">
                             Del 56% al 95% de cumplimiento en calidad
                           </p>
                         </div>
@@ -365,48 +394,18 @@ const Header = ({ colorScheme = 1, ...props }) => {
               </div>
               <Link
                 to="/blog"
-                className={`block py-3 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 transition-colors ${
+                onClick={useActive.closeMobileMenu}
+                className={`block py-4 text-left text-md first:pt-7 lg:px-4 lg:py-2 lg:text-base lg:first:pt-2 transition-colors touch-manipulation ${
                   isActive('/blog') ? 'text-[#009CA6] font-semibold' : 'text-black hover:text-[#009CA6]'
                 }`}
               >
                 Blog
               </Link>
             </nav>
-            <div className="mt-6 flex flex-col gap-4 lg:mt-0 lg:ml-4 lg:flex-row lg:items-center">
-              <Link to="/contacto">
+            <div className="mt-8 pt-6 border-t border-gray-200 flex flex-col gap-4 lg:mt-0 lg:pt-0 lg:border-0 lg:ml-4 lg:flex-row lg:items-center">
+              <Link to="/contacto" onClick={useActive.closeMobileMenu} className="w-full lg:w-auto">
                 <button
-                  className="contact-button-custom px-4 py-2 font-medium text-sm rounded-md transition-all duration-200 transform hover:scale-[1.05] active:scale-[0.95]"
-                  style={{
-                    backgroundColor: '#009CA6',
-                    color: 'white',
-                    borderRadius: '8px',
-                    boxShadow: '0 4px 8px rgba(0, 156, 166, 0.3), 0 1px 3px rgba(0, 0, 0, 0.1)',
-                    border: 'none',
-                    cursor: 'pointer',
-                    background: 'linear-gradient(135deg, #009CA6 0%, #008A94 100%)',
-                    position: 'relative',
-                    zIndex: 1000,
-                    minWidth: '80px',
-                    whiteSpace: 'nowrap'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.background = 'linear-gradient(135deg, #008A94 0%, #007A82 100%)';
-                    e.target.style.boxShadow = '0 6px 12px rgba(0, 156, 166, 0.4), 0 2px 6px rgba(0, 0, 0, 0.15)';
-                    e.target.style.transform = 'translateY(-1px) scale(1.05)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.background = 'linear-gradient(135deg, #009CA6 0%, #008A94 100%)';
-                    e.target.style.boxShadow = '0 4px 8px rgba(0, 156, 166, 0.3), 0 1px 3px rgba(0, 0, 0, 0.1)';
-                    e.target.style.transform = 'translateY(0) scale(1)';
-                  }}
-                  onMouseDown={(e) => {
-                    e.target.style.transform = 'translateY(1px) scale(0.95)';
-                    e.target.style.boxShadow = '0 2px 4px rgba(0, 156, 166, 0.2), inset 0 1px 2px rgba(0, 0, 0, 0.1)';
-                  }}
-                  onMouseUp={(e) => {
-                    e.target.style.transform = 'translateY(-1px) scale(1.05)';
-                    e.target.style.boxShadow = '0 6px 12px rgba(0, 156, 166, 0.4), 0 2px 6px rgba(0, 0, 0, 0.15)';
-                  }}
+                  className="w-full lg:w-auto px-6 py-3 lg:px-4 lg:py-2 font-semibold text-base lg:text-sm text-white rounded-lg lg:rounded-md transition-all duration-300 touch-manipulation bg-gradient-to-br from-[#009CA6] to-[#008A94] hover:from-[#008A94] hover:to-[#007A82] active:scale-95 shadow-lg shadow-[#009CA6]/30 hover:shadow-xl hover:shadow-[#009CA6]/40"
                   title="Contacto"
                 >
                   Contacto
@@ -417,6 +416,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
         </div>
       </section>
     </header>
+    </>
   );
 };
 
