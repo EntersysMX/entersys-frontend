@@ -33,9 +33,14 @@ export function Header30({ colorScheme = 1, ...props }) {
               software code, no-code e IA.
             </p>
             <div className="mt-6 flex items-center justify-center gap-x-4 md:mt-8">
-              <button type="button" className="white-button-custom" onClick={handleVerMasClick}>
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={handleVerMasClick}
+                className="bg-white text-black hover:bg-gray-100 font-semibold px-8 py-3"
+              >
                 Ver más
-              </button>
+              </Button>
             </div>
           </div>
         </div>
