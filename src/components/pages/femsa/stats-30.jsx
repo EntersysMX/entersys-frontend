@@ -17,7 +17,7 @@ export function Stats30() {
           <div>
             <p className="text-medium">
               La estandarización y digitalización de procesos de seguridad
-              transformó la operación de Coca-Cola: de inconsistencia operativa a
+              transformó la operación de Coca-Cola: de operación compleja a
               excelencia certificada sin margen de error.
             </p>
           </div>
@@ -51,7 +51,7 @@ export function Stats30() {
           <Fragment>
             <Card className="p-8">
               <p className="mb-6 text-[2.5rem] leading-[1.2] font-bold md:mb-8 md:text-[3rem] lg:mb-10 lg:text-[3.5rem]">
-                225
+                195
               </p>
               <h3 className="heading-h6 font-bold">Unidades operativas</h3>
               <p className="mt-2">

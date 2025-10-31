@@ -11,18 +11,19 @@ export function Content17() {
             Seguridad a escala nacional sin margen de error
           </h2>
           <p className="text-medium">
-            Coca-Cola operaba 225 unidades en todo el país, cada una ejecutando
+            Coca-Cola operaba 195 unidades en todo el país, cada una ejecutando
             proyectos de alto riesgo con contratistas externos. La gestión de
             documentación —competencias laborales, planes de rescate, análisis
             de riesgos, certificaciones de personas físicas y morales— se
-            llevaba en drives dispersos y archivos de Excel sin conexión entre
-            unidades. El resultado era inconsistencia operativa: cada sitio
-            aplicaba sus propios criterios, no existía trazabilidad sobre el
-            cumplimiento de protocolos de seguridad, y la visibilidad central
-            sobre el avance de los 714 proyectos en ejecución era prácticamente
-            nula. En una industria donde un accidente puede costar vidas y
-            millones en responsabilidades, operar sin estándares unificados era
-            un riesgo inaceptable.
+            manejaba en carpetas digitales dispersas y hojas de cálculo
+            desconectadas. Esto hacía más complejo el seguimiento operativo:
+            cada sitio aplicaba sus propios criterios, la trazabilidad sobre el
+            cumplimiento de protocolos de seguridad era difícil de monitorear,
+            por lo tanto, la visibilidad central sobre el avance de los 714
+            proyectos en ejecución era un verdadero desafío. En una industria
+            donde un accidente puede costar vidas y millones en
+            responsabilidades, operar sin estándares unificados era un riesgo
+            inaceptable.
           </p>
         </div>
       </div>

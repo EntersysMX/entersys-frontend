@@ -27,7 +27,7 @@ export function Header37() {
       </div>
       <div className="order-1 mx-[5%] sm:max-w-md md:justify-self-start lg:order-2 lg:mr-[5vw] lg:ml-20">
         <h1 className="heading-h1 mb-5 font-bold md:mb-6">
-          714 proyectos de alto riesgo ejecutados sin accidentes en 225 unidades operativas
+          714 proyectos de alto riesgo ejecutados sin accidentes en 195 unidades operativas
         </h1>
         <p className="text-medium mb-6 md:mb-8">
           Implementación de Worksys para digitalización y estandarización de gestión de contratistas en trabajos de alto riesgo. Automatización de procesos de seguridad industrial con Smartsheets en toda la operación nacional de Coca-Cola.

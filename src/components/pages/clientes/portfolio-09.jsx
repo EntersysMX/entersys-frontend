@@ -36,7 +36,7 @@ export function Portfolio09({ colorScheme = 1, ...props }) {
                 <a href="/clientes/coca-cola">Coca-Cola</a>
               </h3>
               <p>
-                714 proyectos de alto riesgo ejecutados sin accidentes en 225 unidades operativas.
+                714 proyectos de alto riesgo ejecutados sin accidentes en 195 unidades operativas.
               </p>
               <div className="mt-3 flex flex-wrap gap-2 md:mt-4">
                 <Badge className="bg-blue-100 text-blue-800">Worksys</Badge>
