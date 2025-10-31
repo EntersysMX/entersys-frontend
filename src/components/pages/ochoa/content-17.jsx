@@ -11,7 +11,7 @@ export function Content17() {
             Producir alimentos sin saber si cumples estándares
           </h2>
           <p className="text-medium">
-            Productos de Maíz Ochoa operaba sus líneas de producción con análisis de calidad en hojas de papel. Cada turno llenaba formatos manuales que quedaban archivados sin posibilidad de análisis histórico ni comparación entre líneas. Cuando un gerente necesitaba saber si estaban cumpliendo los estándares de calidad, debía buscar entre carpetas físicas, reconstruir información dispersa y hacer cálculos manuales que consumían horas. No había información a la mano, no existía visibilidad sobre el desempeño de cada línea de producción, y mucho menos datos sobre cuántas horas paraba cada una para planear mantenimientos. En una industria alimenticia donde la calidad no es negociable, operar sin control en tiempo real era operar a ciegas.
+            Productos de Maíz Ochoa operaba sus líneas de producción con un análisis de calidad manual. Cada turno llenaba formatos físicos que quedaban archivados sin posibilidad de análisis histórico ni comparación entre líneas, mediante un método digital ágil. Cuando un gerente necesitaba saber si estaban cumpliendo los estándares de calidad, debía buscar entre carpetas físicas, reconstruir información y hacer cálculos que consumían horas. Conseguir visibilidad sobre el desempeño de cada línea de producción era una labor extensa que, a su vez, prolongaba la programación de mantenimientos en cada maquinaria.
           </p>
         </div>
       </div>
