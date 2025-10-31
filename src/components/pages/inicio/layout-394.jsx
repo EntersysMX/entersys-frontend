@@ -36,7 +36,7 @@ export function Layout394({ colorScheme = 2, ...props }) {
           </AnimatedSection>
           <AnimatedSection animation="fadeInUp" delay={0.2}>
             <h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
-              Por qué elegir Entersys
+              ¿Por qué elegir Entersys?
             </h1>
           </AnimatedSection>
           <AnimatedSection animation="fadeInUp" delay={0.4}>
