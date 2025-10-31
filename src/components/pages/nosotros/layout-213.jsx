@@ -27,9 +27,9 @@ export function Layout213({ colorScheme = 1, ...props }) {
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-x-20">
           <div className="order-2 md:order-1">
             <OptimizedImage
-              src="/imagenes/nosotros/image_rodrigo_lay_entersys_nosotros2.webp"
+              src="/imagenes/nosotros/image_rodrigo_dalay_entersys_nosotros.webp"
               className="w-full rounded-image object-cover"
-              alt="Rodrigo Lay - Fundador Entersys"
+              alt="Rodrigo Dalay - Fundador Entersys"
               effect="blur"
               threshold={200}
             />
