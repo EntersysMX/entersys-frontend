@@ -43,7 +43,7 @@ export function Layout241({ colorScheme = 4, ...props }) {
             </AnimatedSection>
             <AnimatedSection animation="fadeInUp" delay={0.4}>
               <p className="md:text-md">
-                Expertos ença industrias para diversos sectores, optimizando procesos y mejorando la eficiencia. Transformamos la operación de tu negocio.
+                Expertos en industrias para diversos sectores, optimizando procesos y mejorando la eficiencia. Transformamos la operación de tu negocio.
               </p>
             </AnimatedSection>
           </div>
