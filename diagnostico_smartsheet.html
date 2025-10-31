@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico Smartsheet - Entersys</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .diagnostic-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .diagnostic-card h2 {
+            margin-top: 0;
+            color: #E51636;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .status.success {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .status.error {
+            background-color: #f44336;
+            color: white;
+        }
+        .status.warning {
+            background-color: #ff9800;
+            color: white;
+        }
+        .test-item {
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #ddd;
+            background-color: #fafafa;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .console-log {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .console-log .error {
+            color: #f48771;
+        }
+        .console-log .success {
+            color: #4ec9b0;
+        }
+        .console-log .warning {
+            color: #dcdcaa;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Diagnóstico de Formularios Smartsheet</h1>
+
+    <div class="diagnostic-card">
+        <h2>1. Prueba de CSP del Sitio</h2>
+        <div id="csp-test"></div>
+    </div>
+
+    <div class="diagnostic-card">
+        <h2>2. Prueba de Conexión a Smartsheet</h2>
+        <div id="connectivity-test"></div>
+    </div>
+
+    <div class="diagnostic-card">
+        <h2>3. Prueba de Carga de Iframe</h2>
+        <div id="iframe-test"></div>
+        <div id="iframe-container"></div>
+    </div>
+
+    <div class="diagnostic-card">
+        <h2>4. Errores de Consola Capturados</h2>
+        <div class="console-log" id="console-output">
+            <div class="warning">⏳ Esperando errores...</div>
+        </div>
+    </div>
+
+    <div class="diagnostic-card">
+        <h2>5. Recomendaciones</h2>
+        <div id="recommendations"></div>
+    </div>
+
+    <script>
+        // Capturar errores de consola
+        const consoleOutput = document.getElementById('console-output');
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        const errors = [];
+
+        console.error = function(...args) {
+            errors.push({ type: 'error', message: args.join(' '), time: new Date().toLocaleTimeString() });
+            updateConsoleOutput();
+            originalError.apply(console, args);
+        };
+
+        console.warn = function(...args) {
+            errors.push({ type: 'warning', message: args.join(' '), time: new Date().toLocaleTimeString() });
+            updateConsoleOutput();
+            originalWarn.apply(console, args);
+        };
+
+        function updateConsoleOutput() {
+            if (errors.length === 0) return;
+
+            consoleOutput.innerHTML = errors.map(err =>
+                `<div class="${err.type}">[${err.time}] ${err.type.toUpperCase()}: ${err.message}</div>`
+            ).join('');
+        }
+
+        // Test 1: Verificar CSP
+        function testCSP() {
+            const cspTest = document.getElementById('csp-test');
+            const meta = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
+
+            let html = '<div class="test-item">';
+
+            if (meta) {
+                html += '<strong>CSP encontrado en meta tag:</strong><span class="status warning">ADVERTENCIA</span>';
+                html += `<pre>${meta.getAttribute('content')}</pre>`;
+            } else {
+                html += '<strong>CSP en meta tag:</strong><span class="status success">No encontrado (se usa del servidor)</span>';
+            }
+
+            html += '</div>';
+            html += '<div class="test-item">';
+            html += '<strong>Prueba de violación de CSP:</strong> Verificar en consola si hay errores de CSP';
+            html += '</div>';
+
+            cspTest.innerHTML = html;
+        }
+
+        // Test 2: Verificar conectividad a Smartsheet
+        async function testConnectivity() {
+            const connectivityTest = document.getElementById('connectivity-test');
+            const formUrls = [
+                'https://app.smartsheet.com/b/form/6fc496639d9044dd8e33947978dfc8ea',
+                'https://app.smartsheet.com/b/form/eb8e88f5aabb40ee9b87ae88f45d2c97',
+                'https://app.smartsheet.com/b/form/3238dec4fbb74f63a7d90bf91090b196'
+            ];
+
+            let html = '';
+
+            for (let i = 0; i < formUrls.length; i++) {
+                const url = formUrls[i];
+                html += `<div class="test-item">`;
+                html += `<strong>Formulario ${i + 1}:</strong><br>`;
+                html += `<small>${url}</small><br>`;
+
+                try {
+                    const response = await fetch(url, { mode: 'no-cors' });
+                    html += `<span class="status success">✓ Conexión exitosa</span>`;
+                } catch (error) {
+                    html += `<span class="status error">✗ Error: ${error.message}</span>`;
+                }
+
+                html += `</div>`;
+            }
+
+            connectivityTest.innerHTML = html;
+        }
+
+        // Test 3: Cargar iframe real
+        function testIframe() {
+            const iframeTest = document.getElementById('iframe-test');
+            const iframeContainer = document.getElementById('iframe-container');
+
+            iframeTest.innerHTML = '<div class="test-item"><strong>Cargando iframe de prueba...</strong><span class="status warning">EN PROGRESO</span></div>';
+
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://app.smartsheet.com/b/form/6fc496639d9044dd8e33947978dfc8ea';
+            iframe.onload = function() {
+                iframeTest.innerHTML = '<div class="test-item"><strong>Iframe cargado:</strong><span class="status success">✓ ÉXITO</span><br><small>El iframe se cargó correctamente. Si ves contenido abajo, el problema está resuelto.</small></div>';
+            };
+            iframe.onerror = function(e) {
+                iframeTest.innerHTML = '<div class="test-item"><strong>Iframe cargado:</strong><span class="status error">✗ ERROR</span><br><small>El iframe no pudo cargar. Revisa los errores de consola.</small></div>';
+            };
+
+            // Detectar si el iframe está bloqueado después de 5 segundos
+            setTimeout(() => {
+                try {
+                    if (!iframe.contentWindow || iframe.contentWindow.location.href === 'about:blank') {
+                        iframeTest.innerHTML = '<div class="test-item"><strong>Iframe:</strong><span class="status error">✗ BLOQUEADO</span><br><small>El iframe está bloqueado. Esto puede ser por X-Frame-Options o CSP de Smartsheet.</small></div>';
+                    }
+                } catch (e) {
+                    // Cross-origin error es esperado y significa que el iframe SÍ cargó
+                    if (e.name === 'SecurityError') {
+                        iframeTest.innerHTML = '<div class="test-item"><strong>Iframe:</strong><span class="status success">✓ CARGADO</span><br><small>El iframe cargó correctamente (cross-origin). Si no ves contenido, puede ser un problema de configuración de Smartsheet.</small></div>';
+                    }
+                }
+            }, 5000);
+
+            iframeContainer.appendChild(iframe);
+        }
+
+        // Generar recomendaciones basadas en los resultados
+        function generateRecommendations() {
+            setTimeout(() => {
+                const recommendations = document.getElementById('recommendations');
+                let html = '';
+
+                const cspErrors = errors.filter(e => e.message.includes('Content Security Policy') || e.message.includes('CSP'));
+                const frameErrors = errors.filter(e => e.message.includes('X-Frame-Options') || e.message.includes('frame-ancestors'));
+                const smartsheetErrors = errors.filter(e => e.message.includes('smartsheet') || e.message.includes('blocked'));
+
+                if (cspErrors.length > 0) {
+                    html += '<div class="test-item">';
+                    html += '<strong>🔴 Problema de CSP detectado:</strong><br>';
+                    html += '<ul>';
+                    html += '<li>Tu sitio está bloqueando scripts o recursos de Smartsheet</li>';
+                    html += '<li>Solución: Agregar dominios de Smartsheet al CSP en nginx.conf</li>';
+                    html += '<li>Dominios a agregar: <code>https://app.smartsheet.com</code>, <code>https://*.smartsheet.com</code></li>';
+                    html += '</ul>';
+                    html += '</div>';
+                }
+
+                if (frameErrors.length > 0) {
+                    html += '<div class="test-item">';
+                    html += '<strong>🔴 Problema de X-Frame-Options detectado:</strong><br>';
+                    html += '<ul>';
+                    html += '<li>Smartsheet está bloqueando el iframe desde su lado</li>';
+                    html += '<li>Solución: Contactar a Smartsheet para agregar tu dominio a la lista aprobada</li>';
+                    html += '<li>Si tienes cuenta Enterprise, agregar <code>entersys.mx</code> en Admin Center → Domain Management</li>';
+                    html += '</ul>';
+                    html += '</div>';
+                }
+
+                if (errors.length === 0) {
+                    html += '<div class="test-item">';
+                    html += '<strong>✅ No se detectaron errores de CSP o Frame:</strong><br>';
+                    html += '<ul>';
+                    html += '<li>El problema puede ser de configuración de Smartsheet</li>';
+                    html += '<li>Verifica que los formularios estén publicados correctamente</li>';
+                    html += '<li>Verifica que "Allow anyone to submit" esté activado en Form Settings</li>';
+                    html += '<li>Si tienes cuenta Enterprise, verifica la Safe Sharing Policy</li>';
+                    html += '</ul>';
+                    html += '</div>';
+                } else {
+                    html += '<div class="test-item">';
+                    html += `<strong>📊 Resumen:</strong> ${errors.length} error(es) detectado(s)<br>`;
+                    html += '<small>Revisa la sección "Errores de Consola Capturados" arriba para más detalles.</small>';
+                    html += '</div>';
+                }
+
+                recommendations.innerHTML = html || '<div class="test-item"><strong>🟢 Todo parece estar bien</strong></div>';
+            }, 6000);
+        }
+
+        // Ejecutar todos los tests
+        document.addEventListener('DOMContentLoaded', function() {
+            testCSP();
+            testConnectivity();
+            testIframe();
+            generateRecommendations();
+        });
+    </script>
+</body>
+</html>
