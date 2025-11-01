@@ -17,49 +17,49 @@ export function Gallery1() {
         </div>
         <div className="grid auto-cols-fr grid-cols-1 gap-8">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
-            <div className="aspect-video overflow-hidden rounded-lg">
+            <div className="overflow-hidden rounded-lg bg-white p-4">
               <OptimizedImage
                 src="/imagenes/femsa/SP_DASH1_Coca-Cola.webp"
                 alt="Dashboard de seguridad Coca-Cola"
-                className="size-full object-cover"
+                className="w-full h-auto object-contain"
                 effect="blur"
                 threshold={200}
               />
             </div>
-            <div className="aspect-video overflow-hidden rounded-lg">
+            <div className="overflow-hidden rounded-lg bg-white p-4">
               <OptimizedImage
                 src="/imagenes/femsa/SP_DASH2_Coca-Cola.webp"
                 alt="Gestión de contratistas Coca-Cola"
-                className="size-full object-cover"
+                className="w-full h-auto object-contain"
                 effect="blur"
                 threshold={200}
               />
             </div>
           </div>
-          <div className="aspect-[21/9] overflow-hidden rounded-lg">
+          <div className="overflow-hidden rounded-lg bg-white p-4">
             <OptimizedImage
               src="/imagenes/femsa/SP_DASH3_Coca-Cola.webp"
               alt="Vista general del sistema Coca-Cola"
-              className="size-full object-cover"
+              className="w-full h-auto object-contain"
               effect="blur"
               threshold={200}
             />
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
-            <div className="aspect-video overflow-hidden rounded-lg">
+            <div className="overflow-hidden rounded-lg bg-white p-4">
               <OptimizedImage
                 src="/imagenes/femsa/SP_DASH4_Coca-Cola.webp"
                 alt="Análisis de riesgos Coca-Cola"
-                className="size-full object-cover"
+                className="w-full h-auto object-contain"
                 effect="blur"
                 threshold={200}
               />
             </div>
-            <div className="aspect-video overflow-hidden rounded-lg">
+            <div className="overflow-hidden rounded-lg bg-white p-4">
               <OptimizedImage
                 src="/imagenes/femsa/SP_DASH5_Coca-Cola.webp"
                 alt="Certificaciones y cumplimiento Coca-Cola"
-                className="size-full object-cover"
+                className="w-full h-auto object-contain"
                 effect="blur"
                 threshold={200}
               />
