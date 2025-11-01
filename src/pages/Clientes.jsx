@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../components/layout/Header";
-import Breadcrumbs from "../components/ui/Breadcrumbs";
 import { Header64 } from "../components/pages/clientes/header-64";
 import { Portfolio09 } from "../components/pages/clientes/portfolio-09";
 import { Cta39 } from "../components/pages/clientes/cta-39";
@@ -18,9 +17,6 @@ export default function Clientes() {
         url="/clientes"
       />
       <Header />
-      <div className="container mx-auto px-[5%] pt-4">
-        <Breadcrumbs />
-      </div>
       <Header64 colorScheme={2} />
       <Portfolio09 colorScheme={1} />
       <Cta39 colorScheme={3} />

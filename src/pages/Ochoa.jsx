@@ -1,7 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/layout/Header';
-import Breadcrumbs from '../components/ui/Breadcrumbs';
 import Footer from '../components/layout/Footer';
 import { Header37 } from '../components/pages/ochoa/header-37';
 import { Content17 } from '../components/pages/ochoa/content-17';
@@ -11,12 +10,6 @@ import { Gallery1 } from '../components/pages/ochoa/gallery-01';
 import { Cta39 } from '../components/pages/ochoa/cta-39';
 
 const Ochoa = () => {
-  const breadcrumbItems = [
-    { name: 'Inicio', url: '/' },
-    { name: 'Clientes', url: '/clientes' },
-    { name: 'Ochoa', url: '/clientes/ochoa' }
-  ];
-
   return (
     <div>
       <Helmet>
@@ -26,9 +19,6 @@ const Ochoa = () => {
         <link rel="canonical" href="https://entersys.mx/casos-exito/productos-maiz-ochoa-calidad-dashboards" />
       </Helmet>
       <Header />
-      <div className="container mx-auto px-[5%] pt-4">
-        <Breadcrumbs customItems={breadcrumbItems} />
-      </div>
       <Header37 />
       <Content17 />
       <Content2 />
