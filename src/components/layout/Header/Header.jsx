@@ -405,7 +405,7 @@ const Header = ({ colorScheme = 1, ...props }) => {
             <div className="mt-8 pt-6 border-t border-gray-200 flex flex-col gap-4 lg:mt-0 lg:pt-0 lg:border-0 lg:ml-4 lg:flex-row lg:items-center">
               <Link to="/contacto" onClick={useActive.closeMobileMenu} className="w-full lg:w-auto">
                 <button
-                  className="w-full lg:w-auto px-6 py-3 lg:px-4 lg:py-2 font-semibold text-base lg:text-sm text-white rounded-lg lg:rounded-md transition-all duration-300 touch-manipulation bg-gradient-to-br from-[#009CA6] to-[#008A94] hover:from-[#008A94] hover:to-[#007A82] active:scale-95 shadow-lg shadow-[#009CA6]/30 hover:shadow-xl hover:shadow-[#009CA6]/40"
+                  className="w-full lg:w-auto contact-button-custom px-6 py-3 lg:px-4 lg:py-2 font-semibold text-base lg:font-medium lg:text-sm text-white rounded-lg transition-all duration-300 touch-manipulation bg-gradient-to-br from-[#009CA6] to-[#008A94] hover:from-[#008A94] hover:to-[#007A82] active:scale-95 shadow-lg shadow-[#009CA6]/30 hover:shadow-xl hover:shadow-[#009CA6]/40 lg:shadow-md lg:hover:shadow-lg"
                   title="Contacto"
                 >
                   Contacto

@@ -24,7 +24,7 @@ export function Header5({ colorScheme = 4, ...props }) {
     navigate('/nosotros#origen');
   };
   return (
-    <section id="relume" className={`relative mt-16 md:mt-18 color-scheme-${colorScheme}`} {...props}>
+    <section id="relume" className={`relative color-scheme-${colorScheme}`} {...props}>
       <div className="relative z-10 container px-[5%]">
         <div className="flex h-screen max-h-[900px] items-center py-8">
           <div className="max-w-xl lg:max-w-2xl">
