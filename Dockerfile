@@ -27,11 +27,11 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copy built assets from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
+# Copy modular CSP configuration first (needed by nginx.conf)
+COPY csp-config.conf /etc/nginx/conf.d/csp-config.conf
+
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Copy modular CSP configuration
-COPY csp-config.conf /etc/nginx/csp-config.conf
 
 # Add labels for better container management
 LABEL maintainer="Entersys Development Team"
