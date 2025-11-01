@@ -30,6 +30,9 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+# Copy modular CSP configuration
+COPY csp-config.conf /etc/nginx/csp-config.conf
+
 # Add labels for better container management
 LABEL maintainer="Entersys Development Team"
 LABEL version="1.0"
