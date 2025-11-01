@@ -23,6 +23,15 @@ if (process.env.NODE_ENV === 'production') {
   }, 5000);
 }
 
+// Unregister old service workers to prevent caching errors
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+    for(let registration of registrations) {
+      registration.unregister();
+    }
+  });
+}
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
