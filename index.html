@@ -16,6 +16,7 @@
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
     <link rel="dns-prefetch" href="https://analytics.entersys.mx" />
     <link rel="dns-prefetch" href="https://api.entersys.mx" />
+    <link rel="dns-prefetch" href="https://web-sdk.smartlook.com" />
 
     <!-- Preconnect para recursos críticos (reduce latencia) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -59,5 +60,20 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Smartlook Analytics - Carga diferida para no bloquear render -->
+    <script>
+      // Cargar Smartlook después de que la página esté completamente cargada
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          window.smartlook||(function(d) {
+            var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+            var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+            c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+            })(document);
+            smartlook('init', '8a2b748900ac3dec4920b4fd8b0c52cf3cf3bd0e', { region: 'eu' });
+        }, 1000); // Esperar 1 segundo después del load
+      });
+    </script>
   </body>
 </html>
