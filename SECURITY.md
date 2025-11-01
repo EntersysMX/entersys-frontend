@@ -2,41 +2,47 @@
 
 ## Content Security Policy (CSP)
 
-### Arquitectura Modular
+### Arquitectura Profesional Inline
 
-La configuración de CSP está separada en un archivo independiente (`csp-config.conf`) para facilitar:
+La configuración de CSP está organizada dentro de `nginx.conf` con documentación inline clara para facilitar:
 
-- **Mantenibilidad**: Un solo lugar para gestionar todas las políticas de seguridad
+- **Mantenibilidad**: CSP organizada con comentarios por categoría
 - **Auditoría**: Fácil revisión de qué dominios están permitidos y por qué
-- **Escalabilidad**: Agregar nuevas integraciones sin modificar nginx.conf principal
-- **Documentación**: Cada categoría está documentada con su propósito
+- **Escalabilidad**: Agregar nuevas integraciones en la política CSP
+- **Documentación**: Cada categoría está documentada inline con su propósito
+- **Simplicidad**: Todo en un solo archivo, configuración directa y confiable
 
 ### Estructura del CSP
 
 ```
-csp-config.conf
-├── Analytics & Tracking (GA4, Facebook, Smartlook)
-├── Forms & Integrations (Smartsheet)
-├── CDN & External Resources (Cloudflare, Fonts)
-├── Media & Embeds (YouTube)
-├── API & Backend (Entersys APIs)
-└── Directivas CSP completas
+nginx.conf (location / y location = /index.html)
+├── ANALYTICS & TRACKING: GA4, Facebook Pixel, Smartlook
+├── FORMS: Smartsheet
+├── CDN: Cloudflare, Google Fonts
+├── MEDIA: YouTube
+└── API: Entersys Backend
 ```
+
+La política CSP completa está en línea 63 (location /) y línea 83 (location = /index.html).
 
 ### Agregar Nuevos Dominios
 
+Para agregar un nuevo dominio, edita la línea 63 del `nginx.conf` y agrega el dominio en la directiva correspondiente:
+
 #### Para Analytics/Tracking:
 ```nginx
-# En csp-config.conf, línea 13-14
-set $csp_analytics_scripts "... https://nuevo-tracking.com";
-set $csp_analytics_connect "... https://api.nuevo-tracking.com";
+# En script-src y connect-src, agregar el nuevo dominio:
+script-src '...' https://nuevo-tracking.com;
+connect-src '...' https://api.nuevo-tracking.com;
 ```
 
 #### Para un Nuevo CDN:
 ```nginx
-# En csp-config.conf, línea 23-25
-set $csp_cdn_scripts "... https://nuevo-cdn.com";
+# En script-src o style-src según corresponda:
+script-src '...' https://nuevo-cdn.com;
 ```
+
+**IMPORTANTE**: Después de modificar la CSP en `location /`, copiar la misma política a `location = /index.html` (línea 83) para mantener consistencia.
 
 ### Dominios Actuales Permitidos
 
@@ -161,14 +167,15 @@ Cuando agregues una nueva herramienta/servicio:
 ## Mantenimiento
 
 ### Frecuencia de Revisión
-- **Trimestral**: Auditar dominios en `csp-config.conf`
+- **Trimestral**: Auditar dominios en `nginx.conf` (sección CSP líneas 22-105)
 - **Por cambio**: Al agregar nuevas integraciones
 - **Anual**: Revisar mejores prácticas de CSP
 
 ### Changelog de Seguridad
-- **2025-11-01**: Arquitectura modular implementada
-- **2025-11-01**: Smartlook agregado con dominios cloud
-- **2025-11-01**: Facebook Pixel integrado
+- **2025-11-01**: Arquitectura modular inline implementada (CSP variables en nginx.conf)
+- **2025-11-01**: Smartlook agregado con dominios cloud (*.smartlook.com, *.smartlook.cloud)
+- **2025-11-01**: Facebook Pixel integrado (connect.facebook.net, www.facebook.com)
+- **2025-11-01**: Service worker cleanup automático implementado
 - **2025-10**: CSP inicial con GA4 y Smartsheet
 
 ## Recursos

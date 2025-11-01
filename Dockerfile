@@ -27,10 +27,10 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copy built assets from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copy modular CSP configuration first (needed by nginx.conf)
-COPY csp-config.conf /etc/nginx/conf.d/csp-config.conf
+# Remove any old CSP config files (from previous builds)
+RUN rm -f /etc/nginx/conf.d/csp-config.conf
 
-# Copy custom nginx configuration
+# Copy custom nginx configuration with inline CSP architecture
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Add labels for better container management
