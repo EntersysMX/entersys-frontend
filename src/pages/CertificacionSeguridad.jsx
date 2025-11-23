@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
@@ -9,7 +9,6 @@ import Footer from '../components/layout/Footer';
  * Muestra la validacion exitosa de un certificado de seguridad
  */
 const CertificacionSeguridad = () => {
-  const { uuid } = useParams();
 
   return (
     <>
@@ -66,12 +65,6 @@ const CertificacionSeguridad = () => {
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   Valido
-                </span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                <span className="text-gray-600">ID Certificado:</span>
-                <span className="text-sm font-mono text-gray-900 break-all">
-                  {uuid ? uuid.substring(0, 8) + '...' : 'N/A'}
                 </span>
               </div>
               <div className="flex justify-between items-center py-2">
