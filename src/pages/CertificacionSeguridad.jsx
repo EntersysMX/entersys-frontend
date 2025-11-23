@@ -21,7 +21,7 @@ const CertificacionSeguridad = () => {
         <header className="bg-white shadow-sm py-4">
           <div className="max-w-4xl mx-auto px-4 flex justify-center">
             <img
-              src="https://www.femsa.com/wp-content/uploads/2023/03/logo-femsa.svg"
+              src="https://www.femsa.com/wp-content/uploads/2019/07/femsa.png"
               alt="FEMSA"
               className="h-12"
             />
@@ -48,7 +48,7 @@ const CertificacionSeguridad = () => {
                   />
                 </svg>
               </div>
-              <div className="h-1 w-24 bg-[#D91E18] mx-auto rounded"></div>
+              <div className="h-1 w-24 bg-[#FFC600] mx-auto rounded"></div>
             </div>
 
             {/* Mensaje principal */}
@@ -90,13 +90,13 @@ const CertificacionSeguridad = () => {
               © {new Date().getFullYear()} Entersys. Todos los derechos reservados.
             </p>
             <div className="flex justify-center space-x-6 text-sm">
-              <Link to="/politica-de-privacidad" className="text-gray-500 hover:text-[#D91E18] transition-colors">
+              <Link to="/politica-de-privacidad" className="text-gray-500 hover:text-[#FFC600] transition-colors">
                 Política de privacidad
               </Link>
-              <Link to="/terminos-de-servicio" className="text-gray-500 hover:text-[#D91E18] transition-colors">
+              <Link to="/terminos-de-servicio" className="text-gray-500 hover:text-[#FFC600] transition-colors">
                 Términos de servicio
               </Link>
-              <Link to="/configuracion-de-cookies" className="text-gray-500 hover:text-[#D91E18] transition-colors">
+              <Link to="/configuracion-de-cookies" className="text-gray-500 hover:text-[#FFC600] transition-colors">
                 Configuración de cookies
               </Link>
             </div>
