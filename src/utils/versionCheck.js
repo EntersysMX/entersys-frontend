@@ -110,6 +110,9 @@ export class VersionChecker {
    * Mostrar notificación de actualización disponible
    */
   showUpdateAvailableNotification(newVersion) {
+    // Deshabilitado - no mostrar notificaciones de versión al usuario
+    return;
+
     // Evitar mostrar múltiples notificaciones
     if (document.getElementById('update-available-notification')) {
       return;

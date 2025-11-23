@@ -1,106 +1,113 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import Header from '../components/layout/Header';
-import Footer from '../components/layout/Footer';
 
 /**
  * AccesoDenegado Page
- * Muestra cuando un certificado no es valido o el score es menor a 80
+ * Muestra cuando un certificado no es valido o el score es menor a 80 - Branding FEMSA
  */
 const AccesoDenegado = () => {
   return (
     <>
       <Helmet>
-        <title>Acceso Denegado | Entersys</title>
-        <meta name="description" content="El certificado de seguridad no es valido." />
+        <title>Onboarding No Aprobado | FEMSA</title>
+        <meta name="description" content="Tu certificación de Seguridad Industrial no pudo ser validada." />
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
-      <Header />
-
-      <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-gray-50 px-4 py-16">
-        <div className="max-w-3xl w-full text-center">
-          {/* Icono de error */}
-          <div className="mb-8">
-            <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-100 mb-4">
-              <svg
-                className="w-16 h-16 text-red-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                />
-              </svg>
-            </div>
-            <div className="h-1 w-24 bg-red-600 mx-auto rounded"></div>
+      <main className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white">
+        {/* Header con logo FEMSA */}
+        <header className="bg-white shadow-sm py-4">
+          <div className="max-w-4xl mx-auto px-4 flex justify-center">
+            <img
+              src="https://www.femsa.com/wp-content/uploads/2023/03/logo-femsa.svg"
+              alt="FEMSA"
+              className="h-12"
+            />
           </div>
+        </header>
 
-          {/* Mensaje principal */}
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Acceso Denegado
-          </h1>
+        {/* Contenido principal */}
+        <div className="flex-1 flex items-center justify-center px-4 py-12">
+          <div className="max-w-2xl w-full text-center">
+            {/* Icono de error */}
+            <div className="mb-8">
+              <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-100 mb-4">
+                <svg
+                  className="w-16 h-16 text-[#D91E18]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  />
+                </svg>
+              </div>
+              <div className="h-1 w-24 bg-[#D91E18] mx-auto rounded"></div>
+            </div>
 
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            El certificado de seguridad no es valido o ha expirado.
-            El portador de este codigo QR no esta autorizado para ingresar a las instalaciones.
-          </p>
+            {/* Mensaje principal */}
+            <h1 className="text-4xl font-bold text-gray-900 mb-6">
+              Onboarding No Aprobado
+            </h1>
 
-          {/* Mensaje de advertencia */}
-          <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-8 max-w-md mx-auto">
-            <div className="flex items-start">
-              <svg className="w-6 h-6 text-red-600 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <p className="text-lg text-gray-600 mb-6 max-w-xl mx-auto leading-relaxed">
+              Tu certificación de Seguridad Industrial no pudo ser validada.
+              La información proporcionada o los requisitos del curso no cumplen
+              con los estándares mínimos de seguridad establecidos.
+            </p>
+
+            <p className="text-base text-gray-600 mb-8 max-w-xl mx-auto leading-relaxed">
+              Por favor revisa las observaciones enviadas, corrige la información
+              o completa los requisitos faltantes para volver a enviar tu solicitud
+              de validación.
+            </p>
+
+            {/* Badge de estado */}
+            <div className="inline-flex items-center px-6 py-3 rounded-full bg-red-100 text-[#D91E18] font-semibold mb-8">
+              <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
               </svg>
-              <div className="text-left">
-                <p className="text-sm font-semibold text-red-800 mb-1">
-                  Certificado No Valido
-                </p>
-                <p className="text-sm text-red-700">
-                  Esta persona no ha completado exitosamente la capacitacion de seguridad industrial
-                  o su certificacion ha expirado.
-                </p>
-              </div>
+              Certificación No Válida
             </div>
-          </div>
 
-          {/* Instrucciones */}
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-8 max-w-md mx-auto">
-            <p className="text-sm text-gray-600 text-left">
-              <strong>Para el personal de seguridad:</strong> No permita el acceso a las instalaciones.
-              Solicite al visitante que contacte a su supervisor para obtener una nueva certificacion.
+            {/* Fecha de verificación */}
+            <p className="text-sm text-gray-500 mb-8">
+              Verificado el {new Date().toLocaleDateString('es-MX', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+              })}
             </p>
           </div>
-
-          {/* Boton de regreso */}
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"
-          >
-            <svg
-              className="w-5 h-5 mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-              />
-            </svg>
-            Volver al inicio
-          </Link>
         </div>
-      </main>
 
-      <Footer />
+        {/* Footer minimalista */}
+        <footer className="bg-gray-100 py-6">
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <p className="text-sm text-gray-600 mb-3">
+              © {new Date().getFullYear()} Entersys. Todos los derechos reservados.
+            </p>
+            <div className="flex justify-center space-x-6 text-sm">
+              <Link to="/politica-de-privacidad" className="text-gray-500 hover:text-[#D91E18] transition-colors">
+                Política de privacidad
+              </Link>
+              <Link to="/terminos-de-servicio" className="text-gray-500 hover:text-[#D91E18] transition-colors">
+                Términos de servicio
+              </Link>
+              <Link to="/configuracion-de-cookies" className="text-gray-500 hover:text-[#D91E18] transition-colors">
+                Configuración de cookies
+              </Link>
+            </div>
+          </div>
+        </footer>
+      </main>
     </>
   );
 };
