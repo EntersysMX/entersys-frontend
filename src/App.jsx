@@ -37,6 +37,9 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
 const TermsOfService = lazy(() => import('./pages/TermsOfService'))
 const CookieSettings = lazy(() => import('./pages/CookieSettings'))
 
+// Certificación de seguridad
+const CertificacionSeguridad = lazy(() => import('./pages/CertificacionSeguridad'))
+
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 // Componente de loading mientras se cargan las páginas
@@ -110,6 +113,8 @@ function App() {
                 <Route path="/politica-de-privacidad" element={<PrivacyPolicy />} />
                 <Route path="/terminos-de-servicio" element={<TermsOfService />} />
                 <Route path="/configuracion-de-cookies" element={<CookieSettings />} />
+                {/* Certificación de seguridad */}
+                <Route path="/certificacion-seguridad/:uuid" element={<CertificacionSeguridad />} />
                 {/* Ruta 404 - debe estar al final */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
