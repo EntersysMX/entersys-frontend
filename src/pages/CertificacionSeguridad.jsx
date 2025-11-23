@@ -21,7 +21,7 @@ const CertificacionSeguridad = () => {
         <header className="bg-white shadow-sm py-4">
           <div className="max-w-4xl mx-auto px-4 flex justify-center">
             <img
-              src="https://www.femsa.com/wp-content/uploads/2019/07/femsa.png"
+              src="/images/femsa-logo.png"
               alt="FEMSA"
               className="h-12"
             />
