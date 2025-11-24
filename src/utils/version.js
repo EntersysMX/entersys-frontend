@@ -119,8 +119,12 @@ export class VersionManager {
 
   /**
    * Mostrar notificación de nueva versión
+   * DESHABILITADO - Auto-actualización sin notificación
    */
   showUpdateNotification() {
+    // Deshabilitado - no mostrar notificación, auto-actualizar silenciosamente
+    return;
+
     const notification = document.createElement('div');
     notification.id = 'version-update-notification';
     notification.style.cssText = `

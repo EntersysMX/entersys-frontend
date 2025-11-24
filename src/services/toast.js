@@ -281,11 +281,11 @@ const toastService = {
 
   /**
    * Notificación de actualización disponible
+   * DESHABILITADO - Auto-actualización sin notificación
    */
   updateAvailable() {
-    return this.info('Nueva versión disponible. Recarga la página.', {
-      duration: 10000,
-    });
+    // Deshabilitado - no mostrar notificación
+    return null;
   },
 };
 
