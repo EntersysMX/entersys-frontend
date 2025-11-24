@@ -22,15 +22,17 @@ const CertificacionSeguridad = () => {
     const formats = [
       // ISO format
       (str) => new Date(str),
-      // DD/MM/YYYY
+      // DD/MM/YYYY or DD/MM/YY
       (str) => {
         const [d, m, y] = str.split('/');
-        return new Date(y, m - 1, d);
+        const year = y.length <= 2 ? `20${y}` : y;
+        return new Date(year, m - 1, d);
       },
-      // MM/DD/YYYY
+      // MM/DD/YYYY or MM/DD/YY
       (str) => {
         const [m, d, y] = str.split('/');
-        return new Date(y, m - 1, d);
+        const year = y.length <= 2 ? `20${y}` : y;
+        return new Date(year, m - 1, d);
       }
     ];
 
