@@ -39,7 +39,6 @@ const CookieSettings = lazy(() => import('./pages/CookieSettings'))
 
 // Certificación de seguridad
 const CertificacionSeguridad = lazy(() => import('./pages/CertificacionSeguridad'))
-const AccesoDenegado = lazy(() => import('./pages/AccesoDenegado'))
 
 const NotFound = lazy(() => import('./pages/NotFound'))
 
@@ -116,7 +115,6 @@ function App() {
                 <Route path="/configuracion-de-cookies" element={<CookieSettings />} />
                 {/* Certificación de seguridad */}
                 <Route path="/certificacion-seguridad/:uuid" element={<CertificacionSeguridad />} />
-                <Route path="/access-denied" element={<AccesoDenegado />} />
                 {/* Ruta 404 - debe estar al final */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
