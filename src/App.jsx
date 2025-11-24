@@ -40,6 +40,9 @@ const CookieSettings = lazy(() => import('./pages/CookieSettings'))
 // Certificación de seguridad
 const CertificacionSeguridad = lazy(() => import('./pages/CertificacionSeguridad'))
 
+// QR Generator
+const QRGenerator = lazy(() => import('./pages/QRGenerator'))
+
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 // Componente de loading mientras se cargan las páginas
@@ -115,6 +118,8 @@ function App() {
                 <Route path="/configuracion-de-cookies" element={<CookieSettings />} />
                 {/* Certificación de seguridad */}
                 <Route path="/certificacion-seguridad/:uuid" element={<CertificacionSeguridad />} />
+                {/* QR Generator */}
+                <Route path="/qr-generator" element={<QRGenerator />} />
                 {/* Ruta 404 - debe estar al final */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
