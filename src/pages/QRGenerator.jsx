@@ -4,7 +4,7 @@ import toastService from '../services/toast';
 
 /**
  * QR Generator Page
- * Permite generar códigos QR para cualquier URL con el logo de Entersys
+ * Permite generar códigos QR para cualquier URL
  */
 const QRGenerator = () => {
   const [url, setUrl] = useState('');
@@ -75,7 +75,7 @@ const QRGenerator = () => {
     <>
       <Helmet>
         <title>Generador de Códigos QR | Entersys</title>
-        <meta name="description" content="Genera códigos QR personalizados con el logo de Entersys para cualquier URL" />
+        <meta name="description" content="Genera códigos QR personalizados para cualquier URL" />
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
@@ -90,7 +90,7 @@ const QRGenerator = () => {
               Generador de Códigos QR
             </h1>
             <p className="text-lg text-gray-600">
-              Crea códigos QR personalizados con el logo de Entersys
+              Crea códigos QR personalizados de forma profesional
             </p>
           </div>
 
@@ -248,7 +248,7 @@ const QRGenerator = () => {
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">Genera QR</h3>
                 <p className="text-sm text-gray-600">
-                  El sistema crea el QR con el logo de Entersys automáticamente
+                  El sistema crea el QR automáticamente con diseño profesional
                 </p>
               </div>
               <div>
