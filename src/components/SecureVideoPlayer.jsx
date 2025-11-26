@@ -10,6 +10,7 @@
  */
 
 import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { config } from '../config/environment';
 
 const API_BASE_URL = config.urls.api;
@@ -21,8 +22,10 @@ const SecureVideoPlayer = ({
   userId,
   onComplete,
   posterImage = null,
-  title = 'Video de Capacitación'
+  title = 'Video de Capacitación',
+  examPath = '/formulario-curso-seguridad'
 }) => {
+  const navigate = useNavigate();
   const videoRef = useRef(null);
   const heartbeatIntervalRef = useRef(null);
   const lastTimeRef = useRef(0);
@@ -36,7 +39,6 @@ const SecureVideoPlayer = ({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [canAccessExam, setCanAccessExam] = useState(false);
-  const [examUrl, setExamUrl] = useState(null);
 
   // Cargar progreso guardado al iniciar
   useEffect(() => {
@@ -197,34 +199,55 @@ const SecureVideoPlayer = ({
 
   // Validar si el usuario puede acceder al examen
   const validateCompletion = async () => {
-    if (!userId || !duration) return;
+    if (!duration) return;
 
-    try {
-      const response = await fetch(`${API_BASE_URL}/validate-completion`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user_id: userId,
-          video_id: videoId,
-          video_duration: duration
-        })
-      });
+    // Validación local: si ha visto >= 90% del video
+    const watchedPercentage = (totalWatched / duration) * 100;
 
-      if (response.ok) {
-        const data = await response.json();
-        setCanAccessExam(data.authorized);
-        setExamUrl(data.exam_url);
+    if (watchedPercentage >= 90) {
+      setCanAccessExam(true);
+      if (onComplete) {
+        onComplete({ authorized: true, progress_percentage: watchedPercentage });
+      }
+      return;
+    }
 
-        if (data.authorized && onComplete) {
-          onComplete(data);
+    // Si tiene userId, intentar validar con el servidor
+    if (userId) {
+      try {
+        const response = await fetch(`${API_BASE_URL}/validate-completion`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: userId,
+            video_id: videoId,
+            video_duration: duration
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setCanAccessExam(data.authorized);
+
+          if (data.authorized && onComplete) {
+            onComplete(data);
+          }
+        }
+      } catch (err) {
+        // Si falla el servidor, usar validación local
+        console.warn('Error validando con servidor, usando validación local:', err);
+        if (watchedPercentage >= 90) {
+          setCanAccessExam(true);
         }
       }
-    } catch (err) {
-      setError('Error al validar completitud. Por favor, intenta de nuevo.');
-      console.error('Error validando completitud:', err);
     }
+  };
+
+  // Navegar al formulario de examen
+  const handleGoToExam = () => {
+    navigate(examPath);
   };
 
   // Formatear tiempo en mm:ss
@@ -322,14 +345,12 @@ const SecureVideoPlayer = ({
       {/* Exam Access Button */}
       <div className="mt-6 flex justify-center">
         {canAccessExam ? (
-          <a
-            href={examUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={handleGoToExam}
             className="px-8 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-md"
           >
-            Acceder al Examen
-          </a>
+            Continuar al Examen
+          </button>
         ) : (
           <button
             onClick={validateCompletion}
