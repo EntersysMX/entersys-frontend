@@ -148,8 +148,10 @@ const SecureVideoPlayer = ({
       setCurrentTime(video.currentTime);
       setProgress((video.currentTime / video.duration) * 100);
 
-      // Actualizar el máximo tiempo visto
-      if (video.currentTime > maxWatchedTimeRef.current) {
+      // Solo actualizar el máximo si es un avance pequeño (reproducción normal, no seek)
+      // Un avance normal es de ~0.25s por frame, permitimos hasta 1s de tolerancia
+      const timeDiff = video.currentTime - maxWatchedTimeRef.current;
+      if (timeDiff > 0 && timeDiff <= 1) {
         maxWatchedTimeRef.current = video.currentTime;
       }
     }
@@ -158,7 +160,18 @@ const SecureVideoPlayer = ({
   // Bloquear el seek más allá del tiempo máximo visto
   const handleSeeking = () => {
     const video = videoRef.current;
-    if (video && video.currentTime > maxWatchedTimeRef.current) {
+    if (video) {
+      // Si intenta ir más adelante del máximo permitido, regresarlo
+      if (video.currentTime > maxWatchedTimeRef.current + 0.5) {
+        video.currentTime = maxWatchedTimeRef.current;
+      }
+    }
+  };
+
+  // También bloquear en el evento seeked (después de que el seek se completa)
+  const handleSeeked = () => {
+    const video = videoRef.current;
+    if (video && video.currentTime > maxWatchedTimeRef.current + 0.5) {
       video.currentTime = maxWatchedTimeRef.current;
     }
   };
@@ -296,6 +309,7 @@ const SecureVideoPlayer = ({
           onLoadedMetadata={handleLoadedMetadata}
           onTimeUpdate={handleTimeUpdate}
           onSeeking={handleSeeking}
+          onSeeked={handleSeeked}
           onPlay={handlePlay}
           onPause={handlePause}
           onEnded={handleEnded}
