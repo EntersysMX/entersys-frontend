@@ -43,6 +43,9 @@ const CertificacionSeguridad = lazy(() => import('./pages/CertificacionSeguridad
 // Curso de seguridad con video anti-skip (MD050)
 const CursoSeguridad = lazy(() => import('./pages/CursoSeguridad'))
 
+// Formulario de examen de seguridad (público)
+const FormularioCursoSeguridad = lazy(() => import('./pages/FormularioCursoSeguridad'))
+
 // QR Generator
 const QRGenerator = lazy(() => import('./pages/QRGenerator'))
 
@@ -123,6 +126,8 @@ function App() {
                 <Route path="/certificacion-seguridad/:uuid" element={<CertificacionSeguridad />} />
                 {/* Curso de seguridad con video anti-skip (MD050) */}
                 <Route path="/curso-seguridad" element={<CursoSeguridad />} />
+                {/* Formulario de examen de seguridad */}
+                <Route path="/formulario-curso-seguridad" element={<FormularioCursoSeguridad />} />
                 {/* QR Generator */}
                 <Route path="/qr-generator" element={<QRGenerator />} />
                 {/* Ruta 404 - debe estar al final */}
