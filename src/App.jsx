@@ -40,6 +40,9 @@ const CookieSettings = lazy(() => import('./pages/CookieSettings'))
 // Certificación de seguridad
 const CertificacionSeguridad = lazy(() => import('./pages/CertificacionSeguridad'))
 
+// Curso de seguridad con video anti-skip (MD050)
+const CursoSeguridad = lazy(() => import('./pages/CursoSeguridad'))
+
 // QR Generator
 const QRGenerator = lazy(() => import('./pages/QRGenerator'))
 
@@ -118,6 +121,8 @@ function App() {
                 <Route path="/configuracion-de-cookies" element={<CookieSettings />} />
                 {/* Certificación de seguridad */}
                 <Route path="/certificacion-seguridad/:uuid" element={<CertificacionSeguridad />} />
+                {/* Curso de seguridad con video anti-skip (MD050) */}
+                <Route path="/curso-seguridad" element={<CursoSeguridad />} />
                 {/* QR Generator */}
                 <Route path="/qr-generator" element={<QRGenerator />} />
                 {/* Ruta 404 - debe estar al final */}
