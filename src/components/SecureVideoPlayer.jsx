@@ -220,24 +220,33 @@ const SecureVideoPlayer = ({
   // Manejar fin del video
   const handleEnded = () => {
     setIsPlaying(false);
-    // Enviar último heartbeat
     const video = videoRef.current;
     if (video) {
+      // Enviar último heartbeat
       const timeDiff = video.currentTime - lastTimeRef.current;
       if (timeDiff > 0) {
         sendHeartbeat(timeDiff);
       }
+      // Actualizar display al 100%
+      setDisplayWatched(video.duration);
+      maxWatchedTimeRef.current = video.duration;
     }
-    // Validar completitud
-    validateCompletion();
+    // Activar acceso al examen automáticamente cuando termina el video
+    setCanAccessExam(true);
+    if (onComplete) {
+      onComplete({ authorized: true, progress_percentage: 100, exam_url: examPath });
+    }
   };
 
-  // Validar si el usuario puede acceder al examen
+  // Validar si el usuario puede acceder al examen (llamado manualmente por botón)
   const validateCompletion = async () => {
     if (!duration) return;
 
-    // Validación local: si ha visto >= 90% del video (usando displayWatched que es sincronizado)
-    const watchedPercentage = (displayWatched / duration) * 100;
+    const video = videoRef.current;
+    const currentWatched = video ? video.currentTime : displayWatched;
+    const watchedPercentage = (currentWatched / duration) * 100;
+
+    console.log(`[Validate] Progreso: ${watchedPercentage.toFixed(1)}%`);
 
     if (watchedPercentage >= 90) {
       setCanAccessExam(true);
