@@ -165,16 +165,16 @@ const SecureVideoPlayer = ({
   const handleTimeUpdate = () => {
     const video = videoRef.current;
     if (video) {
-      setCurrentTime(video.currentTime);
-      setProgress((video.currentTime / video.duration) * 100);
+      const currentVideoTime = video.currentTime;
+      setCurrentTime(currentVideoTime);
+      setProgress((currentVideoTime / video.duration) * 100);
 
-      // Actualizar el máximo visto si es reproducción normal (no seek adelante)
-      // Permitimos hasta 2 segundos de diferencia para manejar buffering
-      const timeDiff = video.currentTime - maxWatchedTimeRef.current;
-      if (timeDiff > 0 && timeDiff <= 2) {
-        maxWatchedTimeRef.current = video.currentTime;
-        // Actualizar display cada segundo aproximadamente
-        setDisplayWatched(Math.floor(video.currentTime));
+      // Siempre actualizar el display con el tiempo actual del video
+      setDisplayWatched(currentVideoTime);
+
+      // Actualizar el máximo visto solo si avanza (no retrocede)
+      if (currentVideoTime > maxWatchedTimeRef.current) {
+        maxWatchedTimeRef.current = currentVideoTime;
       }
     }
   };
