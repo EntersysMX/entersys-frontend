@@ -12,116 +12,105 @@ import { config } from '../config/environment';
 const API_BASE_URL = config.urls.api;
 
 // Preguntas del examen con sus opciones y respuesta correcta
+// IMPORTANTE: Los valores deben coincidir EXACTAMENTE con los PICKLIST de Smartsheet
 const EXAM_QUESTIONS = [
   {
     id: 1,
     question: "Las siglas PPP corresponden a:",
     options: [
-      "Prevención, Protección, Preparación",
-      "Protección, Prevención, Planificación",
-      "Planificación, Prevención, Protección",
-      "Preparación, Planificación, Prevención"
+      "Protocolo de Prevención de Peligro",
+      "Pensamiento de Prevención de Peligro",
+      "Pensamiento de Protección Personal"
     ],
-    correctAnswer: "Prevención, Protección, Preparación"
+    correctAnswer: "Protocolo de Prevención de Peligro"
   },
   {
     id: 2,
     question: "Poder reconocer peligros y riesgos en el lugar de trabajo nos ayuda a:",
     options: [
-      "Prevenir accidentes y enfermedades laborales",
-      "Aumentar la producción",
-      "Reducir costos operativos",
-      "Mejorar la imagen de la empresa"
+      "seguridad",
+      "prevención",
+      "protocolo"
     ],
-    correctAnswer: "Prevenir accidentes y enfermedades laborales"
+    correctAnswer: "prevención"
   },
   {
     id: 3,
     question: "Son tres elementos del equipo de protección personal (EPP):",
     options: [
-      "Casco, guantes y calzado de seguridad",
-      "Uniforme, gafete y reloj",
-      "Celular, radio y linterna",
-      "Escritorio, silla y computadora"
+      "casco de seguridad, botas con casquillo y chaleco reflejante",
+      "casco de seguridad, arnés de seguridad y tapones auditivos",
+      "casco de seguridad, traje de bombero y guantes para químicos"
     ],
-    correctAnswer: "Casco, guantes y calzado de seguridad"
+    correctAnswer: "casco de seguridad, botas con casquillo y chaleco reflejante"
   },
   {
     id: 4,
     question: "Tres acciones que debemos realizar en caso de emergencia:",
     options: [
-      "Mantener la calma, seguir instrucciones y evacuar por rutas seguras",
-      "Correr, gritar y empujar",
-      "Ignorar las alarmas y continuar trabajando",
-      "Tomar fotos y subirlas a redes sociales"
+      "Conservar la calma, guardar silencio y usar el teléfono celular",
+      "Seguir todas las instrucciones del coordinador, conservar la calma y apagar equipos o máquinas.",
+      "No hacer bromas, mantener grupos de 50 personas por fila y conservar la calma"
     ],
-    correctAnswer: "Mantener la calma, seguir instrucciones y evacuar por rutas seguras"
+    correctAnswer: "Seguir todas las instrucciones del coordinador, conservar la calma y apagar equipos o máquinas."
   },
   {
     id: 5,
     question: "Es un incidente que tuvo graves consecuencias para la persona:",
     options: [
-      "Accidente de trabajo",
-      "Casi accidente",
-      "Acto inseguro",
-      "Condición insegura"
+      "SIF",
+      "SIG",
+      "CIS"
     ],
-    correctAnswer: "Accidente de trabajo"
+    correctAnswer: "SIF"
   },
   {
     id: 6,
     question: "Estado patológico o condición que se deriva del trabajo:",
     options: [
+      "Enfermedad profesional",
       "Enfermedad laboral",
-      "Incapacidad temporal",
-      "Vacaciones médicas",
-      "Licencia por maternidad"
+      "Enfermedad de trabajo"
     ],
-    correctAnswer: "Enfermedad laboral"
+    correctAnswer: "Enfermedad de trabajo"
   },
   {
     id: 7,
-    question: "Establecer zonas de seguridad y rutas de evacuación corresponde a:",
+    question: "Establecer zonas de seguridad y rutas de evacuación ¿es parte de las Reglas que Salvan Vidas?",
     options: [
-      "Plan de emergencia",
-      "Plan de marketing",
-      "Plan de producción",
-      "Plan de ventas"
+      "Sí",
+      "No"
     ],
-    correctAnswer: "Plan de emergencia"
+    correctAnswer: "Sí"
   },
   {
     id: 8,
     question: "Es la principal prioridad de la compañía:",
     options: [
-      "La seguridad de las personas",
-      "Las ganancias económicas",
-      "La satisfacción del cliente",
-      "El cumplimiento de metas"
+      "El desarrollo",
+      "La seguridad",
+      "La venta del producto"
     ],
-    correctAnswer: "La seguridad de las personas"
+    correctAnswer: "La seguridad"
   },
   {
     id: 9,
     question: "Un ejemplo de incidente es:",
     options: [
-      "Tropezar sin caerse ni lesionarse",
-      "Fracturarse un hueso",
-      "Quemadura de tercer grado",
-      "Intoxicación por químicos"
+      "No usar casco",
+      "Caída"
     ],
-    correctAnswer: "Tropezar sin caerse ni lesionarse"
+    correctAnswer: "Caída"
   },
   {
     id: 10,
     question: "La gravedad y frecuencia son factores para evaluar:",
     options: [
-      "El nivel de riesgo",
-      "El salario del trabajador",
-      "Las horas extras",
-      "Los días de vacaciones"
+      "Incidente",
+      "Peligro",
+      "Riesgo"
     ],
-    correctAnswer: "El nivel de riesgo"
+    correctAnswer: "Riesgo"
   }
 ];
 
@@ -588,7 +577,7 @@ export default function FormularioCursoSeguridad() {
         {/* Header */}
         <header className="bg-white shadow-sm py-4">
           <div className="max-w-4xl mx-auto px-4 flex items-center justify-between">
-            <img src="/images/femsa-logo.png" alt="FEMSA" className="h-12" />
+            <img src="/images/coca-cola-femsa-logo.png" alt="Coca-Cola FEMSA" className="h-12" />
             <div className="flex items-center space-x-2">
               {[1, 2, 3].map((step) => (
                 <div

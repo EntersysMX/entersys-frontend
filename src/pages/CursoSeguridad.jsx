@@ -6,7 +6,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import MetaTags from '../components/SEO/MetaTags';
 import SecureVideoPlayer from '../components/SecureVideoPlayer';
@@ -65,7 +64,12 @@ export default function CursoSeguridad() {
         noIndex={true}
       />
 
-      <Header />
+      {/* Custom Header with Coca-Cola FEMSA logo */}
+      <header className="bg-white shadow-sm py-4">
+        <div className="max-w-4xl mx-auto px-4 flex justify-center">
+          <img src="/images/coca-cola-femsa-logo.png" alt="Coca-Cola FEMSA" className="h-12" />
+        </div>
+      </header>
 
       <main className="flex-grow bg-gradient-to-b from-gray-50 to-white">
         {/* Hero Section */}

@@ -43,7 +43,7 @@ const CertificacionSeguridad = () => {
       <main className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white">
         <header className="bg-white shadow-sm py-4">
           <div className="max-w-4xl mx-auto px-4 flex justify-center">
-            <img src="/images/femsa-logo.png" alt="FEMSA" className="h-12" />
+            <img src="/images/coca-cola-femsa-logo.png" alt="Coca-Cola FEMSA" className="h-12" />
           </div>
         </header>
         <div className="flex-1 flex items-center justify-center">
@@ -68,7 +68,7 @@ const CertificacionSeguridad = () => {
         <main className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white">
           <header className="bg-white shadow-sm py-4">
             <div className="max-w-4xl mx-auto px-4 flex justify-center">
-              <img src="/images/femsa-logo.png" alt="FEMSA" className="h-12" />
+              <img src="/images/coca-cola-femsa-logo.png" alt="Coca-Cola FEMSA" className="h-12" />
             </div>
           </header>
 
@@ -152,7 +152,7 @@ const CertificacionSeguridad = () => {
         <main className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white">
           <header className="bg-white shadow-sm py-4">
             <div className="max-w-4xl mx-auto px-4 flex justify-center">
-              <img src="/images/femsa-logo.png" alt="FEMSA" className="h-12" />
+              <img src="/images/coca-cola-femsa-logo.png" alt="Coca-Cola FEMSA" className="h-12" />
             </div>
           </header>
 
@@ -228,7 +228,7 @@ const CertificacionSeguridad = () => {
         <main className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white">
           <header className="bg-white shadow-sm py-4">
             <div className="max-w-4xl mx-auto px-4 flex justify-center">
-              <img src="/images/femsa-logo.png" alt="FEMSA" className="h-12" />
+              <img src="/images/coca-cola-femsa-logo.png" alt="Coca-Cola FEMSA" className="h-12" />
             </div>
           </header>
 
@@ -310,7 +310,7 @@ const CertificacionSeguridad = () => {
       <main className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white">
         <header className="bg-white shadow-sm py-4">
           <div className="max-w-4xl mx-auto px-4 flex justify-center">
-            <img src="/images/femsa-logo.png" alt="FEMSA" className="h-12" />
+            <img src="/images/coca-cola-femsa-logo.png" alt="Coca-Cola FEMSA" className="h-12" />
           </div>
         </header>
 
