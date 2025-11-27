@@ -65,9 +65,9 @@ export default function CursoSeguridad() {
       />
 
       {/* Custom Header with Coca-Cola FEMSA logo */}
-      <header className="bg-white shadow-sm py-4">
+      <header className="bg-white shadow-sm py-6">
         <div className="max-w-4xl mx-auto px-4 flex justify-center">
-          <img src="/images/coca-cola-femsa-logo.png" alt="Coca-Cola FEMSA" className="h-12" />
+          <img src="/images/coca-cola-femsa-logo.png" alt="Coca-Cola FEMSA" className="h-20 md:h-24" />
         </div>
       </header>
 

@@ -77,6 +77,8 @@ const SecureVideoPlayer = ({
   const sendHeartbeat = useCallback(async (secondsWatched) => {
     if (!userId || secondsWatched <= 0) return;
 
+    console.log(`[Heartbeat] Enviando ${secondsWatched.toFixed(2)}s para user ${userId}`);
+
     try {
       const response = await fetch(`${API_BASE_URL}/video-heartbeat`, {
         method: 'POST',
@@ -92,23 +94,29 @@ const SecureVideoPlayer = ({
 
       if (response.ok) {
         const data = await response.json();
+        console.log(`[Heartbeat] Respuesta OK: total_seconds=${data.total_seconds}`);
         setTotalWatched(data.total_seconds);
         maxWatchedTimeRef.current = Math.max(maxWatchedTimeRef.current, data.total_seconds);
+      } else {
+        console.error(`[Heartbeat] Error HTTP: ${response.status}`);
       }
     } catch (err) {
+      console.error('[Heartbeat] Error de red:', err);
       // Fallback: guardar en localStorage
-      const currentProgress = {
-        seconds: totalWatched + secondsWatched,
-        timestamp: Date.now()
-      };
-      localStorage.setItem(
-        `video_progress_${userId}_${videoId}`,
-        JSON.stringify(currentProgress)
-      );
-      setTotalWatched(currentProgress.seconds);
-      console.warn('Error enviando heartbeat, guardado localmente:', err);
+      setTotalWatched(prev => {
+        const newTotal = prev + secondsWatched;
+        const currentProgress = {
+          seconds: newTotal,
+          timestamp: Date.now()
+        };
+        localStorage.setItem(
+          `video_progress_${userId}_${videoId}`,
+          JSON.stringify(currentProgress)
+        );
+        return newTotal;
+      });
     }
-  }, [userId, videoId, totalWatched]);
+  }, [userId, videoId]);
 
   // Iniciar intervalo de heartbeat cuando el video está reproduciéndose
   useEffect(() => {
@@ -148,10 +156,10 @@ const SecureVideoPlayer = ({
       setCurrentTime(video.currentTime);
       setProgress((video.currentTime / video.duration) * 100);
 
-      // Solo actualizar el máximo si es un avance pequeño (reproducción normal, no seek)
-      // Un avance normal es de ~0.25s por frame, permitimos hasta 1s de tolerancia
+      // Actualizar el máximo visto si es reproducción normal (no seek adelante)
+      // Permitimos hasta 2 segundos de diferencia para manejar buffering
       const timeDiff = video.currentTime - maxWatchedTimeRef.current;
-      if (timeDiff > 0 && timeDiff <= 1) {
+      if (timeDiff > 0 && timeDiff <= 2) {
         maxWatchedTimeRef.current = video.currentTime;
       }
     }
