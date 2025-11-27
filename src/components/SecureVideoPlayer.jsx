@@ -36,6 +36,7 @@ const SecureVideoPlayer = ({
   const [duration, setDuration] = useState(0);
   const [progress, setProgress] = useState(0);
   const [totalWatched, setTotalWatched] = useState(0);
+  const [displayWatched, setDisplayWatched] = useState(0); // Tiempo mostrado en UI (sincronizado con video)
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [canAccessExam, setCanAccessExam] = useState(false);
@@ -146,6 +147,17 @@ const SecureVideoPlayer = ({
     if (video) {
       setDuration(video.duration);
       setIsLoading(false);
+      // Forzar velocidad normal
+      video.playbackRate = 1.0;
+    }
+  };
+
+  // Bloquear cambio de velocidad de reproducción
+  const handleRateChange = () => {
+    const video = videoRef.current;
+    if (video && video.playbackRate !== 1.0) {
+      console.log('[Video] Bloqueando cambio de velocidad');
+      video.playbackRate = 1.0;
     }
   };
 
@@ -161,6 +173,8 @@ const SecureVideoPlayer = ({
       const timeDiff = video.currentTime - maxWatchedTimeRef.current;
       if (timeDiff > 0 && timeDiff <= 2) {
         maxWatchedTimeRef.current = video.currentTime;
+        // Actualizar display cada segundo aproximadamente
+        setDisplayWatched(Math.floor(video.currentTime));
       }
     }
   };
@@ -222,13 +236,13 @@ const SecureVideoPlayer = ({
   const validateCompletion = async () => {
     if (!duration) return;
 
-    // Validación local: si ha visto >= 90% del video
-    const watchedPercentage = (totalWatched / duration) * 100;
+    // Validación local: si ha visto >= 90% del video (usando displayWatched que es sincronizado)
+    const watchedPercentage = (displayWatched / duration) * 100;
 
     if (watchedPercentage >= 90) {
       setCanAccessExam(true);
       if (onComplete) {
-        onComplete({ authorized: true, progress_percentage: watchedPercentage });
+        onComplete({ authorized: true, progress_percentage: watchedPercentage, exam_url: examPath });
       }
       return;
     }
@@ -298,8 +312,8 @@ const SecureVideoPlayer = ({
         <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
         {userId && (
           <p className="text-sm text-gray-500">
-            Tiempo acumulado: {formatTime(totalWatched)}
-            {duration > 0 && ` / ${formatTime(duration)} (${Math.round((totalWatched / duration) * 100)}%)`}
+            Tiempo acumulado: {formatTime(displayWatched)}
+            {duration > 0 && ` / ${formatTime(duration)} (${Math.round((displayWatched / duration) * 100)}%)`}
           </p>
         )}
       </div>
@@ -321,7 +335,8 @@ const SecureVideoPlayer = ({
           onPlay={handlePlay}
           onPause={handlePause}
           onEnded={handleEnded}
-          controlsList="nodownload"
+          onRateChange={handleRateChange}
+          controlsList="nodownload noplaybackrate"
           disablePictureInPicture
           playsInline
           controls
@@ -343,13 +358,13 @@ const SecureVideoPlayer = ({
         <div className="flex justify-between items-center mb-2">
           <span className="text-sm font-medium text-gray-700">Progreso de visualización</span>
           <span className="text-sm text-gray-500">
-            {Math.round((totalWatched / (duration || 1)) * 100)}% completado
+            {Math.round((displayWatched / (duration || 1)) * 100)}% completado
           </span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2">
           <div
             className="bg-green-600 h-2 rounded-full transition-all duration-300"
-            style={{ width: `${Math.min((totalWatched / (duration || 1)) * 100, 100)}%` }}
+            style={{ width: `${Math.min((displayWatched / (duration || 1)) * 100, 100)}%` }}
           />
         </div>
         <p className="mt-2 text-xs text-gray-500">
@@ -376,14 +391,14 @@ const SecureVideoPlayer = ({
         ) : (
           <button
             onClick={validateCompletion}
-            disabled={!duration || totalWatched < duration * 0.9}
+            disabled={!duration || displayWatched < duration * 0.9}
             className={`px-8 py-3 font-semibold rounded-lg transition-colors shadow-md ${
-              totalWatched >= duration * 0.9
+              displayWatched >= duration * 0.9
                 ? 'bg-green-600 text-white hover:bg-green-700'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
           >
-            {totalWatched >= duration * 0.9
+            {displayWatched >= duration * 0.9
               ? 'Verificar y Acceder al Examen'
               : 'Complete el video para continuar'}
           </button>
