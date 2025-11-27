@@ -228,7 +228,7 @@ export default function FormularioCursoSeguridad() {
         score_frontend: score
       };
 
-      const response = await fetch(`${API_BASE_URL}/api/v1/onboarding/submit-exam`, {
+      const response = await fetch(`${API_BASE_URL}/v1/onboarding/submit-exam`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
