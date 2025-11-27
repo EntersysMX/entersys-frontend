@@ -30,6 +30,8 @@ const SecureVideoPlayer = ({
   const heartbeatIntervalRef = useRef(null);
   const lastTimeRef = useRef(0);
   const maxWatchedTimeRef = useRef(0);
+  const previousTimeRef = useRef(0); // Para detectar seeks
+  const isSeekingRef = useRef(false); // Flag para bloquear actualizaciones durante seek
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -164,27 +166,39 @@ const SecureVideoPlayer = ({
   // Manejar actualización del tiempo
   const handleTimeUpdate = () => {
     const video = videoRef.current;
-    if (video) {
+    if (video && !isSeekingRef.current) {
       const currentVideoTime = video.currentTime;
+
+      // Detectar si hubo un salto grande (seek adelante no permitido)
+      const timeDiff = currentVideoTime - previousTimeRef.current;
+      if (timeDiff > 2 && currentVideoTime > maxWatchedTimeRef.current + 1) {
+        // Salto no permitido, regresar al máximo visto
+        console.log(`[Video] Bloqueando seek: de ${previousTimeRef.current.toFixed(1)}s a ${currentVideoTime.toFixed(1)}s (max: ${maxWatchedTimeRef.current.toFixed(1)}s)`);
+        video.currentTime = maxWatchedTimeRef.current;
+        return;
+      }
+
       setCurrentTime(currentVideoTime);
       setProgress((currentVideoTime / video.duration) * 100);
-
-      // Siempre actualizar el display con el tiempo actual del video
       setDisplayWatched(currentVideoTime);
 
-      // Actualizar el máximo visto solo si avanza (no retrocede)
-      if (currentVideoTime > maxWatchedTimeRef.current) {
+      // Actualizar el máximo visto solo si es un avance pequeño (reproducción normal)
+      if (currentVideoTime > maxWatchedTimeRef.current && timeDiff <= 2) {
         maxWatchedTimeRef.current = currentVideoTime;
       }
+
+      previousTimeRef.current = currentVideoTime;
     }
   };
 
   // Bloquear el seek más allá del tiempo máximo visto
   const handleSeeking = () => {
+    isSeekingRef.current = true;
     const video = videoRef.current;
     if (video) {
       // Si intenta ir más adelante del máximo permitido, regresarlo
-      if (video.currentTime > maxWatchedTimeRef.current + 0.5) {
+      if (video.currentTime > maxWatchedTimeRef.current + 1) {
+        console.log(`[Video] Seeking bloqueado: intentó ir a ${video.currentTime.toFixed(1)}s, max permitido: ${maxWatchedTimeRef.current.toFixed(1)}s`);
         video.currentTime = maxWatchedTimeRef.current;
       }
     }
@@ -193,9 +207,16 @@ const SecureVideoPlayer = ({
   // También bloquear en el evento seeked (después de que el seek se completa)
   const handleSeeked = () => {
     const video = videoRef.current;
-    if (video && video.currentTime > maxWatchedTimeRef.current + 0.5) {
+    if (video && video.currentTime > maxWatchedTimeRef.current + 1) {
       video.currentTime = maxWatchedTimeRef.current;
     }
+    // Pequeño delay antes de permitir actualizaciones de nuevo
+    setTimeout(() => {
+      isSeekingRef.current = false;
+      if (video) {
+        previousTimeRef.current = video.currentTime;
+      }
+    }, 100);
   };
 
   // Manejar play
