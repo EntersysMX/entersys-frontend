@@ -619,16 +619,11 @@ export default function FormularioCursoSeguridad() {
         {/* Footer */}
         <footer className="bg-gray-100 py-6">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <p className="text-sm text-gray-600 mb-3">
-              © {new Date().getFullYear()} Entersys. Todos los derechos reservados.
-            </p>
+            <p className="text-sm text-gray-600 mb-3">© {new Date().getFullYear()} Entersys. Todos los derechos reservados.</p>
             <div className="flex justify-center space-x-6 text-sm">
-              <Link to="/politica-de-privacidad" className="text-gray-500 hover:text-[#D91E18] transition-colors">
-                Política de privacidad
-              </Link>
-              <Link to="/terminos-de-servicio" className="text-gray-500 hover:text-[#D91E18] transition-colors">
-                Términos de servicio
-              </Link>
+              <Link to="/politica-de-privacidad" className="text-gray-500 hover:text-[#FFC600] transition-colors">Política de privacidad</Link>
+              <Link to="/terminos-de-servicio" className="text-gray-500 hover:text-[#FFC600] transition-colors">Términos de servicio</Link>
+              <Link to="/configuracion-de-cookies" className="text-gray-500 hover:text-[#FFC600] transition-colors">Configuración de cookies</Link>
             </div>
           </div>
         </footer>
