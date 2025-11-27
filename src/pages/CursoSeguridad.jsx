@@ -13,7 +13,7 @@ import SecureVideoPlayer from '../components/SecureVideoPlayer';
 const VIDEO_CONFIG = {
   id: 'seguridad-2024',
   src: '/videos/Seguridad_Laboral.mp4',
-  poster: '/imagenes/seguridad/video-poster.webp',
+  poster: null, // No usar poster
   title: 'Capacitación Obligatoria de Seguridad Laboral 2024'
 };
 
