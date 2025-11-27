@@ -388,31 +388,6 @@ const SecureVideoPlayer = ({
         </div>
       )}
 
-      {/* Exam Access Button */}
-      <div className="mt-6 flex justify-center">
-        {canAccessExam ? (
-          <button
-            onClick={handleGoToExam}
-            className="px-8 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-md"
-          >
-            Continuar al Examen
-          </button>
-        ) : (
-          <button
-            onClick={validateCompletion}
-            disabled={!duration || displayWatched < duration * 0.9}
-            className={`px-8 py-3 font-semibold rounded-lg transition-colors shadow-md ${
-              displayWatched >= duration * 0.9
-                ? 'bg-green-600 text-white hover:bg-green-700'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
-          >
-            {displayWatched >= duration * 0.9
-              ? 'Verificar y Acceder al Examen'
-              : 'Complete el video para continuar'}
-          </button>
-        )}
-      </div>
     </div>
   );
 };
