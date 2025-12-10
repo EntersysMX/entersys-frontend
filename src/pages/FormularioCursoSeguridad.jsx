@@ -627,7 +627,7 @@ export default function FormularioCursoSeguridad() {
 
         <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
           <p className="text-amber-800 text-sm">
-            <strong>Importante:</strong> Debe obtener un mínimo de 80% (8 de 10 correctas) para aprobar.
+            <strong>Importante:</strong> Debe obtener un mínimo de 85% (9 de 10 correctas) para aprobar.
             Las preguntas y opciones aparecen en orden aleatorio.
           </p>
         </div>
@@ -689,7 +689,7 @@ export default function FormularioCursoSeguridad() {
 
   // Renderizar paso 3: Resultado
   const renderResultStep = () => {
-    const approved = result?.approved || result?.localScore >= 80;
+    const approved = result?.approved || result?.localScore >= 85;
 
     return (
       <div className="max-w-2xl mx-auto">
