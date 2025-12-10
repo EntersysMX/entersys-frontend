@@ -342,20 +342,14 @@ export default function FormularioCursoSeguridad() {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Tipo de Servicio
             </label>
-            <select
+            <input
+              type="text"
               name="tipo_servicio"
               value={formData.tipo_servicio}
               onChange={handleInputChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent"
-            >
-              <option value="">Seleccionar...</option>
-              <option value="Mantenimiento">Mantenimiento</option>
-              <option value="Limpieza">Limpieza</option>
-              <option value="Seguridad">Seguridad</option>
-              <option value="Logística">Logística</option>
-              <option value="Construcción">Construcción</option>
-              <option value="Otro">Otro</option>
-            </select>
+              placeholder="Ej: Mantenimiento, Limpieza, Seguridad, etc."
+            />
           </div>
 
           {/* Proveedor */}
