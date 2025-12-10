@@ -11,9 +11,9 @@ import { config } from '../config/environment';
 
 const API_BASE_URL = config.urls.api;
 
-// Preguntas del examen con sus opciones y respuesta correcta
+// Banco de 30 preguntas del examen - Se seleccionan 10 al azar cada vez
 // IMPORTANTE: Los valores deben coincidir EXACTAMENTE con los PICKLIST de Smartsheet
-const EXAM_QUESTIONS = [
+const EXAM_QUESTIONS_BANK = [
   {
     id: 1,
     question: "Las siglas PPP corresponden a:",
@@ -111,6 +111,206 @@ const EXAM_QUESTIONS = [
       "Riesgo"
     ],
     correctAnswer: "Riesgo"
+  },
+  {
+    id: 11,
+    question: "¿Qué se requiere para el ingreso de sustancias químicas a la planta?",
+    options: [
+      "Solo presentar la factura de compra.",
+      "Hoja de Datos de Seguridad (HDS) y formato de autorización firmado.",
+      "Que el envase sea de vidrio."
+    ],
+    correctAnswer: "Hoja de Datos de Seguridad (HDS) y formato de autorización firmado."
+  },
+  {
+    id: 12,
+    question: "¿Cuál es la sanción establecida para un contratista que reincide en violar las normas de seguridad?",
+    options: [
+      "Una segunda amonestación verbal.",
+      "Se le negará el acceso a la empresa definitivamente.",
+      "Multa económica del 10% del contrato."
+    ],
+    correctAnswer: "Se le negará el acceso a la empresa definitivamente."
+  },
+  {
+    id: 13,
+    question: "En trabajos de excavación, ¿a qué profundidad se requiere el uso de escalera para entrada y salida?",
+    options: [
+      "Más de 1.20 metros.",
+      "Más de 50 centímetros.",
+      "Solo si es mayor a 2 metros."
+    ],
+    correctAnswer: "Más de 1.20 metros."
+  },
+  {
+    id: 14,
+    question: "¿Cómo se clasifican los trapos impregnados con grasas, tintas o aceites?",
+    options: [
+      "Residuos de manejo especial.",
+      "Residuo Peligroso.",
+      "Basura general."
+    ],
+    correctAnswer: "Residuo Peligroso."
+  },
+  {
+    id: 15,
+    question: "En el uso de escaleras portátiles, ¿cuál es la regla de colocación para asegurar la estabilidad?",
+    options: [
+      "La distancia de la pared a las patas debe ser 1/4 de la longitud de la escalera.",
+      "La escalera debe estar totalmente vertical (90 grados).",
+      "La distancia debe ser igual a la longitud de la escalera."
+    ],
+    correctAnswer: "La distancia de la pared a las patas debe ser 1/4 de la longitud de la escalera."
+  },
+  {
+    id: 16,
+    question: "¿Qué acción está PROHIBIDA realizar en las instalaciones según los lineamientos generales?",
+    options: [
+      "Usar pasillos peatonales.",
+      "Fumar.",
+      "Reportar incidentes."
+    ],
+    correctAnswer: "Fumar."
+  },
+  {
+    id: 17,
+    question: "¿Cuál es el ancho mínimo que debe tener el tablón de apoyo en un andamio?",
+    options: [
+      "30 cm.",
+      "50 cm.",
+      "1 metro."
+    ],
+    correctAnswer: "50 cm."
+  },
+  {
+    id: 18,
+    question: "¿Qué significa el estado ZES en el contexto de bloqueo de energías?",
+    options: [
+      "Zona de Emergencia Segura.",
+      "Zero Energy State (Estado Cero Energía).",
+      "Zona Estándar de Seguridad."
+    ],
+    correctAnswer: "Zero Energy State (Estado Cero Energía)."
+  },
+  {
+    id: 19,
+    question: "¿Cuál es la distancia de seguridad que se debe mantener con líneas eléctricas de alto voltaje?",
+    options: [
+      "Por lo menos 3 metros.",
+      "1 metro es suficiente.",
+      "50 centímetros."
+    ],
+    correctAnswer: "Por lo menos 3 metros."
+  },
+  {
+    id: 20,
+    question: "¿Qué deben hacer los contratistas con sus residuos generados?",
+    options: [
+      "Dejarlos en el lugar de trabajo para que limpieza los recoja.",
+      "Retirarlos y disponerlos ellos mismos (especialmente si son peligrosos) o llevarlos al almacén correspondiente.",
+      "Quemarlos en un área abierta."
+    ],
+    correctAnswer: "Retirarlos y disponerlos ellos mismos (especialmente si son peligrosos) o llevarlos al almacén correspondiente."
+  },
+  {
+    id: 21,
+    question: "¿Cuántos puntos de reunión de emergencia existen dentro de las instalaciones de Planta Ixtacomitán?",
+    options: [
+      "3 puntos de reunión.",
+      "4 puntos de reunión.",
+      "5 puntos de reunión."
+    ],
+    correctAnswer: "4 puntos de reunión."
+  },
+  {
+    id: 22,
+    question: "¿Qué significan las siglas SIF en la clasificación de eventos de seguridad (Nivel 3)?",
+    options: [
+      "Sistemas Integrales de Fabricación.",
+      "Serious Injuries or Fatalities (Incidentes Serios o Fatalidades).",
+      "Seguridad Interna de la Fábrica."
+    ],
+    correctAnswer: "Serious Injuries or Fatalities (Incidentes Serios o Fatalidades)."
+  },
+  {
+    id: 23,
+    question: "Según los lineamientos de Buenas Prácticas de Manufactura, ¿qué está prohibido portar de la cintura para arriba en áreas productivas?",
+    options: [
+      "Equipo de protección personal básico.",
+      "Botones, bolsillos, joyería, plumas u objetos desprendibles.",
+      "Camisa de manga larga de algodón."
+    ],
+    correctAnswer: "Botones, bolsillos, joyería, plumas u objetos desprendibles."
+  },
+  {
+    id: 24,
+    question: "¿Cuáles son las tres salidas de emergencia mencionadas específicamente para esta planta?",
+    options: [
+      "Entrada principal, Comedor y Baños.",
+      "Salida por cuarto de máquinas, Salida por Materias Primas y Salida por andenes de carga.",
+      "Almacén de refacciones, Taller mecánico y Laboratorio."
+    ],
+    correctAnswer: "Salida por cuarto de máquinas, Salida por Materias Primas y Salida por andenes de carga."
+  },
+  {
+    id: 25,
+    question: "¿Qué características definen a un Residuo Peligroso (código CRETIB)?",
+    options: [
+      "Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-infeccioso.",
+      "Contaminante, Ruidoso, Estorboso, Tardo, Inerte, Basura.",
+      "Reciclable, Reutilizable, Reducible, Recuperable, Renovable."
+    ],
+    correctAnswer: "Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-infeccioso."
+  },
+  {
+    id: 26,
+    question: "¿Cuál es la calificación mínima aprobatoria requerida para el examen de inducción de contratistas en línea?",
+    options: [
+      "80%",
+      "90%",
+      "100%"
+    ],
+    correctAnswer: "90%"
+  },
+  {
+    id: 27,
+    question: "¿Qué sistema de certificación de inocuidad alimentaria implementa la planta para garantizar productos seguros?",
+    options: [
+      "ISO 9001",
+      "FSSC 22000",
+      "Industria Limpia Nivel 1"
+    ],
+    correctAnswer: "FSSC 22000"
+  },
+  {
+    id: 28,
+    question: "En temas de inocuidad, ¿Cuáles son ejemplos de peligros FÍSICOS para el producto?",
+    options: [
+      "Bacterias, virus y parásitos.",
+      "Residuos de detergentes, aceites y lubricantes.",
+      "Vidrio, madera, metal, plástico rígido, piedras y huesos."
+    ],
+    correctAnswer: "Vidrio, madera, metal, plástico rígido, piedras y huesos."
+  },
+  {
+    id: 29,
+    question: "¿Qué elementos conforman el Equipo de Protección Personal (EPP) considerado BÁSICO en el documento?",
+    options: [
+      "Arnés, línea de vida y equipo de respiración autónoma.",
+      "Botas con casquillo, tapones auditivos, guantes anti corte, chaleco reflejante, casco y gafas.",
+      "Traje de bombero, careta de soldar y mandil de PVC."
+    ],
+    correctAnswer: "Botas con casquillo, tapones auditivos, guantes anti corte, chaleco reflejante, casco y gafas."
+  },
+  {
+    id: 30,
+    question: "¿Cuál es el lineamiento para el manejo de residuos peligrosos generados por contratistas?",
+    options: [
+      "Pueden depositarse en los contenedores generales de la planta.",
+      "Deben ser retirados y dispuestos por el propio contratista.",
+      "Se deben dejar en el área de trabajo para que el personal de limpieza los recoja."
+    ],
+    correctAnswer: "Deben ser retirados y dispuestos por el propio contratista."
   }
 ];
 
@@ -122,6 +322,12 @@ const shuffleArray = (array) => {
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
   return shuffled;
+};
+
+// Seleccionar N preguntas aleatorias del banco
+const selectRandomQuestions = (questionsBank, count) => {
+  const shuffled = shuffleArray(questionsBank);
+  return shuffled.slice(0, count);
 };
 
 export default function FormularioCursoSeguridad() {
@@ -142,9 +348,12 @@ export default function FormularioCursoSeguridad() {
   const [result, setResult] = useState(null);
   const [errors, setErrors] = useState({});
 
-  // Aleatorizar preguntas y opciones una sola vez al cargar
+  // Seleccionar 10 preguntas aleatorias y aleatorizar sus opciones
   const shuffledQuestions = useMemo(() => {
-    return shuffleArray(EXAM_QUESTIONS).map(q => ({
+    // Seleccionar 10 preguntas aleatorias del banco de 30
+    const selectedQuestions = selectRandomQuestions(EXAM_QUESTIONS_BANK, 10);
+    // Aleatorizar el orden de las opciones de cada pregunta
+    return selectedQuestions.map(q => ({
       ...q,
       options: shuffleArray(q.options)
     }));
