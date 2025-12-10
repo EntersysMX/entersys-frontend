@@ -1,0 +1,139 @@
+﻿MD070 - Requerimiento Técnico y Arquitectura de Software para Entersys.mx
+Versión
+	Fecha
+	Autor
+	Resumen de Cambios
+	2.0
+	2025-09-02
+	Arquitectura de Software
+	Versión inicial del documento.
+	2.1
+	2025-09-02
+	Arquitectura de Software
+	Alineación con manual de infraestructura y uso de Traefik.
+	3.0
+	2025-09-02
+	Arquitectura de Software
+	Versión final. Añadida justificación de arquitectura y detalles.
+	1. Introducción y Visión Arquitectónica
+1.1. Propósito
+Este documento establece la arquitectura técnica definitiva y el plan de implementación para la plataforma web de Entersys.mx. Sirve como la fuente única de verdad para el equipo de desarrollo, alineando la ejecución técnica con los objetivos estratégicos definidos en el documento MD050.
+1.2. Principios Arquitectónicos
+La arquitectura se fundamenta en los siguientes principios clave:
+* Separación de Responsabilidades (SoC): La arquitectura headless desacopla la presentación (Front-End) de la lógica de negocio (Back-End), permitiendo desarrollos y despliegues independientes.
+* Simplicidad y Enfoque: El CMS personalizado se adhiere al principio KISS (Keep It Simple, Stupid), enfocándose exclusivamente en la gestión de contenido dinámico (blog/podcast) para reducir la complejidad y la superficie de ataque.
+* Seguridad por Diseño: Las consideraciones de seguridad se integran en cada capa de la arquitectura, desde la infraestructura hasta el código de la aplicación.
+* Automatización (DevOps): Se prioriza la automatización de los procesos de integración, despliegue y monitoreo para garantizar la fiabilidad y agilidad del ciclo de vida del software.
+1.3. Alcance y Limitaciones (Non-Goals)
+* El CMS no gestionará contenido de páginas estáticas (Home, Soluciones, etc.).
+* El sistema no incluirá un sistema de comentarios nativo para el blog en la v1.
+* No se implementará la autenticación de usuarios finales/clientes en esta fase.
+2. Arquitectura General del Sistema
+Se implementará una arquitectura headless distribuida en tres capas lógicas.
+graph TD
+   subgraph "Infraestructura VPS (GCP)"
+       A[Usuario Final] --> B{Traefik Reverse Proxy};
+       
+       subgraph "Front-End (Servido por Contenedor Web Ligero)"
+           C[Archivos Estáticos<br/>HTML/CSS/JS de Google Stitch]
+       end
+
+       subgraph "Back-End (API)"
+           D[Contenedor: Python/FastAPI<br/>api.ambiente.entersys.mx] -- Conexión TCP --> E[Contenedor: PostgreSQL];
+       end
+
+       B -- Host: ambiente.entersys.mx --> C;
+       B -- Host: api.ambiente.entersys.mx --> D;
+       C -- Llamada API (axios) --> B;
+   end
+
+
+3. Capa de Presentación (Front-End)
+* Herramienta de Construcción: Google Stitch para el diseño y maquetación visual. El código exportado (HTML/CSS/JS) será la base del artefacto a desplegar.
+* Manejo de Estado: Se implementará un manejo de estado reactivo y ligero en JavaScript puro, basado en el patrón Observer.
+* Consumo de API: Se utilizará la librería axios para las llamadas a la API.
+* Variables de Entorno: La URL de la API del Back-End (API_BASE_URL) se gestionará a través de variables de entorno.
+* Gestión de Scripts de Seguimiento: Se implementará Google Tag Manager (GTM) como contenedor para todos los scripts de analítica y marketing.
+* Política de Seguridad de Contenido (CSP): Se implementará una CSP estricta a través de headers HTTP.
+* Integraciones Estratégicas:
+   * CRM/Alineación Comercial: Formularios conectados a webhooks del CRM.
+   * Chatbot/Soporte (WhatsApp): Ícono flotante con redirección a un bot de WhatsApp en n8n.
+4. Capa de Aplicación (Back-End)
+El Back-End se diseñará siguiendo un patrón de arquitectura en capas:
+* Capa de Ruteo (API - FastAPI): Define endpoints y gestiona peticiones/respuestas.
+* Capa de Servicios (Lógica de Negocio): Contiene la lógica principal.
+* Capa de Repositorio (Acceso a Datos): Abstrae el acceso a la base de datos usando SQLAlchemy.
+4.1. Stack Tecnológico
+* Framework: FastAPI con Pydantic V2.
+* ORM: SQLAlchemy 2.0.
+* Servidor ASGI: Uvicorn gestionado por Gunicorn.
+* Gestión de Configuración: pydantic-settings para cargar y validar variables de entorno.
+4.2. Contrato de la API (v1) y Estrategia de Versionado
+Autenticación mediante JWT con tokens de acceso y refresco.
+Endpoints Principales:
+* POST /api/v1/auth/token: Login con credenciales.
+* GET /api/v1/posts: Listar artículos del blog.
+* GET /api/v1/health: Endpoint de verificación de estado.
+* (Endpoints protegidos para administración de posts)
+5. Capa de Datos (PostgreSQL)
+5.1. Esquema de Base de Datos
+El esquema incluye tablas para admin_users y blog_posts, con relaciones, índices y triggers.
+-- Tabla para administradores del CMS
+CREATE TABLE admin_users (
+   id SERIAL PRIMARY KEY,
+   email VARCHAR(255) UNIQUE NOT NULL,
+   hashed_password VARCHAR(255) NOT NULL,
+   google_id VARCHAR(255) UNIQUE,
+   created_at TIMESTAMPTZ DEFAULT NOW(),
+   is_active BOOLEAN DEFAULT TRUE
+);
+-- Tabla para los artículos del blog
+CREATE TABLE blog_posts (
+   id SERIAL PRIMARY KEY,
+   title VARCHAR(255) NOT NULL,
+   slug VARCHAR(255) UNIQUE NOT NULL,
+   content TEXT,
+   author_id INTEGER NOT NULL REFERENCES admin_users(id) ON DELETE RESTRICT,
+   status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'published')),
+   published_at TIMESTAMPTZ,
+   created_at TIMESTAMPTZ DEFAULT NOW(),
+   updated_at TIMESTAMPTZ,
+   meta_description VARCHAR(300),
+   faq_json JSONB
+);
+
+
+6. Estrategias de Seguridad
+* Web Application Firewall (WAF): Uso de Cloudflare como primera línea de defensa.
+* Análisis de Dependencias: Integración de Snyk o Dependabot en el pipeline de CI/CD.
+* Gestión de Secretos: Uso de variables de entorno (metodología Twelve-Factor App).
+7. Estrategia de Medición y Monitoreo
+* Analítica Web (Client-Side): Google Analytics 4 y Microsoft Clarity a través de GTM.
+* Monitoreo del Servidor (Server-Side): Logging estructurado, monitoreo de Uptime y APM con Sentry.
+8. Infraestructura y DevOps
+8.1. Entornos
+Se utilizarán tres entornos definidos para el ciclo de vida de la aplicación: Desarrollo Local, Staging (test.entersys.mx) y Producción (entersys.mx).
+8.2. Pipeline de CI/CD (GitHub Actions)
+Se seguirá un pipeline estándar de la industria, automatizando pruebas, construcción de imágenes Docker y despliegue vía SSH.
+8.3. Configuración de Infraestructura del Servidor (VPS)
+* Reverse Proxy: Traefik gestionará el enrutamiento y los certificados SSL.
+* Gestión de Contenedores: Docker y Docker Compose para orquestar los servicios.
+* Firewall (UFW): Configurado para permitir tráfico en los puertos 80, 443 y 22.
+8.4. Estrategia de Dominios y Subdominios
+Para mantener la consistencia en los despliegues, se define la siguiente estructura de dominios:
+8.5. Configuración de Despliegue con Traefik
+El archivo docker-compose.yml del back-end incluirá las etiquetas (labels) necesarias para que Traefik lo descubra y enrute automáticamente.
+9. Justificación de la Arquitectura y Adherencia a Estándares
+Esta sección finaliza el documento validando que la arquitectura propuesta no solo es técnicamente sólida, sino que también se alinea con los más altos estándares de la industria del software.
+* 1. Arquitectura Moderna y Desacoplada (Headless): La separación del front-end y el back-end es la práctica recomendada para el desarrollo web moderno. Otorga flexibilidad para evolucionar cada componente de forma independiente, facilita el trabajo en paralelo de los equipos y prepara la plataforma para consumir la API desde futuros canales (ej. una aplicación móvil) sin necesidad de reconstruir la lógica de negocio.
+* 2. Tecnologías de Vanguardia: La elección del stack tecnológico (FastAPI, Docker, Traefik) está basada en el rendimiento, la seguridad y la eficiencia en el desarrollo. FastAPI es uno de los frameworks más rápidos para construir APIs en Python, y su integración nativa con Pydantic y OpenAPI reduce errores y acelera la documentación. Docker y Traefik son el estándar de oro para el despliegue basado en contenedores, garantizando consistencia y automatización.
+* 3. Procesos de DevOps Sólidos (CI/CD): La definición de un pipeline de Integración Continua y Despliegue Continuo (CI/CD) es fundamental para la agilidad y fiabilidad. Al automatizar las pruebas, la construcción de artefactos y el despliegue, se minimizan los errores humanos, se acelera la entrega de valor y se establece un proceso repetible y auditable.
+* 4. Seguridad Integral por Capas: La arquitectura implementa un enfoque de "defensa en profundidad". La seguridad no recae en un único punto, sino que se distribuye en múltiples capas: un WAF en el borde de la red, análisis proactivo de vulnerabilidades en el código, y prácticas seguras en la aplicación (JWT con tokens de refresco, CSP). Este enfoque proactivo es un pilar de los estándares de seguridad modernos.
+* 5. Estrategia de Monitoreo 360°: Una plataforma de nivel empresarial debe ser observable. La combinación de herramientas para medir el impacto en el negocio (GA4), la experiencia del usuario (Clarity), los errores de la aplicación (Sentry) y la salud de la infraestructura (Uptime) proporciona una visibilidad completa que permite tomar decisiones basadas en datos y resolver problemas antes de que afecten a los usuarios.
+* 6. Alineación con la Infraestructura de Despliegue Existente: La arquitectura no es una propuesta genérica, sino que ha sido diseñada explícitamente para integrarse con la infraestructura y metodología de despliegue existente. Esto reduce la fricción, acelera la implementación y garantiza que el nuevo proyecto se beneficie de las prácticas, la seguridad y la automatización ya establecidas.
+10. Conclusión y Próximos Pasos
+Este documento técnico (MD070) proporciona el plano arquitectónico completo para el desarrollo y despliegue de la nueva plataforma web de Entersys.mx. La arquitectura seleccionada garantiza un sistema moderno, seguro, escalable y perfectamente alineado con la infraestructura existente.
+Los próximos pasos inmediatos para el equipo de desarrollo son:
+10. Configuración del Repositorio: Crear los repositorios de Git para el front-end y el back-end.
+11. Planificación del Sprint 1: Detallar las tareas para el primer sprint basándose en este documento.
+12. Configuración del Entorno de Desarrollo: Preparar los entornos locales con Docker para comenzar el desarrollo.

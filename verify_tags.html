@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verificar Tags - Entersys</title>
+</head>
+<body>
+    <h1>Verificación de Tags en Consola</h1>
+    <p>Abre la consola de Chrome (F12) en www.entersys.mx y ejecuta estos comandos:</p>
+
+    <h2>1. Verificar GA4</h2>
+    <pre>
+// Debería mostrar el dataLayer con eventos de GA4
+console.log(window.dataLayer);
+
+// Buscar configuración de GA4
+window.dataLayer.filter(item => item[0] === 'config' || item.event === 'gtm.js');
+    </pre>
+
+    <h2>2. Verificar Facebook Pixel</h2>
+    <pre>
+// Debería devolver true si está cargado
+console.log(typeof fbq !== 'undefined');
+
+// Ver la cola de eventos
+console.log(window.fbq?.queue || 'No cargado');
+    </pre>
+
+    <h2>3. Verificar LinkedIn Insight Tag</h2>
+    <pre>
+// Debería devolver tu Partner ID
+console.log(window._linkedin_partner_id);
+
+// Verificar que el script se cargó
+console.log(typeof window.lintrk !== 'undefined');
+    </pre>
+
+    <h2>Método Alternativo: Chrome Extensions</h2>
+    <ul>
+        <li><strong>Google Tag Assistant:</strong> https://chrome.google.com/webstore/detail/tag-assistant-legacy-by-g/kejbdjndbnbjgmefkgdddjlbokphdefk</li>
+        <li><strong>Facebook Pixel Helper:</strong> https://chrome.google.com/webstore/detail/facebook-pixel-helper/fdgfkebogiimcoedlicjlajpkdmockpc</li>
+        <li><strong>LinkedIn Insight Tag Helper:</strong> Usa Tag Assistant o revisa en la pestaña Network</li>
+    </ul>
+</body>
+</html>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { mauticService } from '../services/mautic';
 import { analyticsService } from '../services/analytics';
 import { config } from '../config/environment';
@@ -10,6 +11,24 @@ import { config } from '../config/environment';
 const WhatsAppFloatButton = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [debugInfo, setDebugInfo] = useState({});
+  const location = useLocation();
+
+  // Rutas donde NO se debe mostrar el botón de WhatsApp
+  const HIDDEN_ROUTES = [
+    '/curso-seguridad',
+    '/formulario-curso-seguridad',
+    '/certificacion-seguridad'
+  ];
+
+  // Verificar si la ruta actual está en la lista de rutas ocultas
+  const isHiddenRoute = HIDDEN_ROUTES.some(route =>
+    location.pathname.startsWith(route)
+  );
+
+  // Si estamos en una ruta oculta, no renderizar el componente
+  if (isHiddenRoute) {
+    return null;
+  }
 
   // Inicializar Mautic tracking
   useEffect(() => {
