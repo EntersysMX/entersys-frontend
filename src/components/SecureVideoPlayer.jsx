@@ -154,6 +154,33 @@ const SecureVideoPlayer = ({
     }
   };
 
+  // Bloquear teclas de adelanto (flechas, etc.)
+  const handleKeyDown = (e) => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Bloquear flechas derecha y L (adelantar)
+    if (e.key === 'ArrowRight' || e.key === 'l' || e.key === 'L') {
+      const newTime = video.currentTime + (e.key === 'ArrowRight' ? 5 : 10);
+      if (newTime > maxWatchedTimeRef.current + 0.5) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('[Video] Tecla de adelanto bloqueada');
+      }
+    }
+  };
+
+  // Añadir listener de teclado cuando el video está en foco
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.addEventListener('keydown', handleKeyDown, true);
+      return () => {
+        video.removeEventListener('keydown', handleKeyDown, true);
+      };
+    }
+  }, []);
+
   // Bloquear cambio de velocidad de reproducción
   const handleRateChange = () => {
     const video = videoRef.current;
@@ -196,10 +223,17 @@ const SecureVideoPlayer = ({
     isSeekingRef.current = true;
     const video = videoRef.current;
     if (video) {
-      // Si intenta ir más adelante del máximo permitido, regresarlo
-      if (video.currentTime > maxWatchedTimeRef.current + 1) {
-        console.log(`[Video] Seeking bloqueado: intentó ir a ${video.currentTime.toFixed(1)}s, max permitido: ${maxWatchedTimeRef.current.toFixed(1)}s`);
-        video.currentTime = maxWatchedTimeRef.current;
+      const maxAllowed = maxWatchedTimeRef.current;
+      // Si intenta ir más adelante del máximo permitido, regresarlo inmediatamente
+      if (video.currentTime > maxAllowed + 0.5) {
+        console.log(`[Video] Seeking bloqueado: intentó ir a ${video.currentTime.toFixed(1)}s, max permitido: ${maxAllowed.toFixed(1)}s`);
+        // Pausar temporalmente para evitar flicker
+        const wasPlaying = !video.paused;
+        video.pause();
+        video.currentTime = maxAllowed;
+        if (wasPlaying) {
+          video.play().catch(() => {});
+        }
       }
     }
   };
@@ -207,8 +241,10 @@ const SecureVideoPlayer = ({
   // También bloquear en el evento seeked (después de que el seek se completa)
   const handleSeeked = () => {
     const video = videoRef.current;
-    if (video && video.currentTime > maxWatchedTimeRef.current + 1) {
-      video.currentTime = maxWatchedTimeRef.current;
+    const maxAllowed = maxWatchedTimeRef.current;
+    if (video && video.currentTime > maxAllowed + 0.5) {
+      console.log(`[Video] Seeked bloqueado: forzando regreso a ${maxAllowed.toFixed(1)}s`);
+      video.currentTime = maxAllowed;
     }
     // Pequeño delay antes de permitir actualizaciones de nuevo
     setTimeout(() => {
