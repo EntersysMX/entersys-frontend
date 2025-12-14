@@ -365,21 +365,28 @@ export default function FormularioCursoSeguridad() {
   const [examStatus, setExamStatus] = useState(null);
   const [statusError, setStatusError] = useState(null);
 
-  // Preparar preguntas con opciones aleatorias
+  // Preparar preguntas con orden aleatorio por sección y opciones aleatorias
   const questionsWithShuffledOptions = useMemo(() => {
-    return EXAM_QUESTIONS.map(q => ({
+    // Agrupar preguntas por sección
+    const section1 = EXAM_QUESTIONS.filter(q => q.section === 1);
+    const section2 = EXAM_QUESTIONS.filter(q => q.section === 2);
+    const section3 = EXAM_QUESTIONS.filter(q => q.section === 3);
+
+    // Aleatorizar el orden de preguntas dentro de cada sección
+    const shuffledSection1 = shuffleArray(section1);
+    const shuffledSection2 = shuffleArray(section2);
+    const shuffledSection3 = shuffleArray(section3);
+
+    // Combinar todas las secciones y aleatorizar opciones de respuesta
+    return [...shuffledSection1, ...shuffledSection2, ...shuffledSection3].map(q => ({
       ...q,
       options: shuffleArray(q.options)
     }));
   }, []);
 
-  // Obtener preguntas de una sección específica
+  // Obtener preguntas de una sección específica (ya están en orden aleatorio)
   const getQuestionsForSection = (sectionId) => {
-    const section = EXAM_SECTIONS.find(s => s.id === sectionId);
-    if (!section) return [];
-    return questionsWithShuffledOptions.filter(
-      q => q.id >= section.startQuestion && q.id <= section.endQuestion
-    );
+    return questionsWithShuffledOptions.filter(q => q.section === sectionId);
   };
 
   // Contar respuestas por sección
@@ -843,7 +850,7 @@ export default function FormularioCursoSeguridad() {
               Sección {currentSection}: {currentSectionInfo?.name}
             </h2>
             <p className="text-gray-600 text-sm mt-1">
-              Preguntas {currentSectionInfo?.startQuestion} - {currentSectionInfo?.endQuestion}
+              10 preguntas de esta sección
             </p>
             <p className={`text-sm mt-2 ${colors.text}`}>
               <strong>Importante:</strong> Debes obtener mínimo 80% (8 de 10 correctas) en esta sección.
@@ -854,7 +861,7 @@ export default function FormularioCursoSeguridad() {
             {currentSectionQuestions.map((q, index) => (
               <div key={q.id} className="border-b border-gray-200 pb-6 last:border-0">
                 <p className="font-medium text-gray-900 mb-4">
-                  <span className={`${colors.text} font-bold`}>{q.id}.</span> {q.question}
+                  <span className={`${colors.text} font-bold`}>{index + 1}.</span> {q.question}
                 </p>
                 <div className="space-y-3">
                   {q.options.map((option, optIndex) => (
