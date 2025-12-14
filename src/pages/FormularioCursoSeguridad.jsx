@@ -1,21 +1,37 @@
 /**
  * FormularioCursoSeguridad.jsx
- * Formulario público de examen de seguridad con preguntas aleatorias.
- * Implementa Fisher-Yates shuffle para aleatorizar preguntas y opciones.
+ * Formulario de examen de seguridad con 30 preguntas en 3 secciones.
+ *
+ * Secciones:
+ * - Sección 1 (Seguridad): Preguntas 1-10
+ * - Sección 2 (Inocuidad): Preguntas 11-20
+ * - Sección 3 (Ambiental): Preguntas 21-30
+ *
+ * Criterios de aprobación:
+ * - Cada sección debe tener mínimo 80% (8/10 correctas)
+ * - Máximo 3 intentos por RFC
  */
 
-import React, { useState, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useMemo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { config } from '../config/environment';
 
 const API_BASE_URL = config.urls.api;
 
-// Banco de 30 preguntas del examen - Se seleccionan 10 al azar cada vez
-// IMPORTANTE: Los valores deben coincidir EXACTAMENTE con los PICKLIST de Smartsheet
-const EXAM_QUESTIONS_BANK = [
+// Definición de las 3 secciones del examen
+const EXAM_SECTIONS = [
+  { id: 1, name: 'Seguridad', startQuestion: 1, endQuestion: 10, color: 'red' },
+  { id: 2, name: 'Inocuidad', startQuestion: 11, endQuestion: 20, color: 'blue' },
+  { id: 3, name: 'Ambiental', startQuestion: 21, endQuestion: 30, color: 'green' }
+];
+
+// Banco completo de 30 preguntas del examen
+const EXAM_QUESTIONS = [
+  // ========== SECCIÓN 1: SEGURIDAD (Preguntas 1-10) ==========
   {
     id: 1,
+    section: 1,
     question: "Las siglas PPP corresponden a:",
     options: [
       "Protocolo de Prevención de Peligro",
@@ -26,6 +42,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 2,
+    section: 1,
     question: "Poder reconocer peligros y riesgos en el lugar de trabajo nos ayuda a:",
     options: [
       "seguridad",
@@ -36,6 +53,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 3,
+    section: 1,
     question: "Son tres elementos del equipo de protección personal (EPP):",
     options: [
       "casco de seguridad, botas con casquillo y chaleco reflejante",
@@ -46,6 +64,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 4,
+    section: 1,
     question: "Tres acciones que debemos realizar en caso de emergencia:",
     options: [
       "Conservar la calma, guardar silencio y usar el teléfono celular",
@@ -56,16 +75,14 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 5,
+    section: 1,
     question: "Es un incidente que tuvo graves consecuencias para la persona:",
-    options: [
-      "SIF",
-      "SIG",
-      "CIS"
-    ],
+    options: ["SIF", "SIG", "CIS"],
     correctAnswer: "SIF"
   },
   {
     id: 6,
+    section: 1,
     question: "Estado patológico o condición que se deriva del trabajo:",
     options: [
       "Enfermedad profesional",
@@ -76,44 +93,36 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 7,
+    section: 1,
     question: "Establecer zonas de seguridad y rutas de evacuación ¿es parte de las Reglas que Salvan Vidas?",
-    options: [
-      "Sí",
-      "No"
-    ],
+    options: ["Sí", "No"],
     correctAnswer: "Sí"
   },
   {
     id: 8,
+    section: 1,
     question: "Es la principal prioridad de la compañía:",
-    options: [
-      "El desarrollo",
-      "La seguridad",
-      "La venta del producto"
-    ],
+    options: ["El desarrollo", "La seguridad", "La venta del producto"],
     correctAnswer: "La seguridad"
   },
   {
     id: 9,
+    section: 1,
     question: "Un ejemplo de incidente es:",
-    options: [
-      "No usar casco",
-      "Caída"
-    ],
+    options: ["No usar casco", "Caída"],
     correctAnswer: "Caída"
   },
   {
     id: 10,
+    section: 1,
     question: "La gravedad y frecuencia son factores para evaluar:",
-    options: [
-      "Incidente",
-      "Peligro",
-      "Riesgo"
-    ],
+    options: ["Incidente", "Peligro", "Riesgo"],
     correctAnswer: "Riesgo"
   },
+  // ========== SECCIÓN 2: INOCUIDAD (Preguntas 11-20) ==========
   {
     id: 11,
+    section: 2,
     question: "¿Qué se requiere para el ingreso de sustancias químicas a la planta?",
     options: [
       "Solo presentar la factura de compra.",
@@ -124,6 +133,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 12,
+    section: 2,
     question: "¿Cuál es la sanción establecida para un contratista que reincide en violar las normas de seguridad?",
     options: [
       "Una segunda amonestación verbal.",
@@ -134,6 +144,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 13,
+    section: 2,
     question: "En trabajos de excavación, ¿a qué profundidad se requiere el uso de escalera para entrada y salida?",
     options: [
       "Más de 1.20 metros.",
@@ -144,6 +155,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 14,
+    section: 2,
     question: "¿Cómo se clasifican los trapos impregnados con grasas, tintas o aceites?",
     options: [
       "Residuos de manejo especial.",
@@ -154,6 +166,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 15,
+    section: 2,
     question: "En el uso de escaleras portátiles, ¿cuál es la regla de colocación para asegurar la estabilidad?",
     options: [
       "La distancia de la pared a las patas debe ser 1/4 de la longitud de la escalera.",
@@ -164,6 +177,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 16,
+    section: 2,
     question: "¿Qué acción está PROHIBIDA realizar en las instalaciones según los lineamientos generales?",
     options: [
       "Usar pasillos peatonales.",
@@ -174,16 +188,14 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 17,
+    section: 2,
     question: "¿Cuál es el ancho mínimo que debe tener el tablón de apoyo en un andamio?",
-    options: [
-      "30 cm.",
-      "50 cm.",
-      "1 metro."
-    ],
+    options: ["30 cm.", "50 cm.", "1 metro."],
     correctAnswer: "50 cm."
   },
   {
     id: 18,
+    section: 2,
     question: "¿Qué significa el estado ZES en el contexto de bloqueo de energías?",
     options: [
       "Zona de Emergencia Segura.",
@@ -194,6 +206,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 19,
+    section: 2,
     question: "¿Cuál es la distancia de seguridad que se debe mantener con líneas eléctricas de alto voltaje?",
     options: [
       "Por lo menos 3 metros.",
@@ -204,6 +217,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 20,
+    section: 2,
     question: "¿Qué deben hacer los contratistas con sus residuos generados?",
     options: [
       "Dejarlos en el lugar de trabajo para que limpieza los recoja.",
@@ -212,8 +226,10 @@ const EXAM_QUESTIONS_BANK = [
     ],
     correctAnswer: "Retirarlos y disponerlos ellos mismos (especialmente si son peligrosos) o llevarlos al almacén correspondiente."
   },
+  // ========== SECCIÓN 3: AMBIENTAL (Preguntas 21-30) ==========
   {
     id: 21,
+    section: 3,
     question: "¿Cuántos puntos de reunión de emergencia existen dentro de las instalaciones de Planta Ixtacomitán?",
     options: [
       "3 puntos de reunión.",
@@ -224,6 +240,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 22,
+    section: 3,
     question: "¿Qué significan las siglas SIF en la clasificación de eventos de seguridad (Nivel 3)?",
     options: [
       "Sistemas Integrales de Fabricación.",
@@ -234,6 +251,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 23,
+    section: 3,
     question: "Según los lineamientos de Buenas Prácticas de Manufactura, ¿qué está prohibido portar de la cintura para arriba en áreas productivas?",
     options: [
       "Equipo de protección personal básico.",
@@ -244,6 +262,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 24,
+    section: 3,
     question: "¿Cuáles son las tres salidas de emergencia mencionadas específicamente para esta planta?",
     options: [
       "Entrada principal, Comedor y Baños.",
@@ -254,6 +273,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 25,
+    section: 3,
     question: "¿Qué características definen a un Residuo Peligroso (código CRETIB)?",
     options: [
       "Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-infeccioso.",
@@ -264,26 +284,21 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 26,
+    section: 3,
     question: "¿Cuál es la calificación mínima aprobatoria requerida para el examen de inducción de contratistas en línea?",
-    options: [
-      "80%",
-      "90%",
-      "100%"
-    ],
-    correctAnswer: "90%"
+    options: ["80%", "90%", "100%"],
+    correctAnswer: "80%"
   },
   {
     id: 27,
+    section: 3,
     question: "¿Qué sistema de certificación de inocuidad alimentaria implementa la planta para garantizar productos seguros?",
-    options: [
-      "ISO 9001",
-      "FSSC 22000",
-      "Industria Limpia Nivel 1"
-    ],
+    options: ["ISO 9001", "FSSC 22000", "Industria Limpia Nivel 1"],
     correctAnswer: "FSSC 22000"
   },
   {
     id: 28,
+    section: 3,
     question: "En temas de inocuidad, ¿Cuáles son ejemplos de peligros FÍSICOS para el producto?",
     options: [
       "Bacterias, virus y parásitos.",
@@ -294,6 +309,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 29,
+    section: 3,
     question: "¿Qué elementos conforman el Equipo de Protección Personal (EPP) considerado BÁSICO en el documento?",
     options: [
       "Arnés, línea de vida y equipo de respiración autónoma.",
@@ -304,6 +320,7 @@ const EXAM_QUESTIONS_BANK = [
   },
   {
     id: 30,
+    section: 3,
     question: "¿Cuál es el lineamiento para el manejo de residuos peligrosos generados por contratistas?",
     options: [
       "Pueden depositarse en los contenedores generales de la planta.",
@@ -314,7 +331,7 @@ const EXAM_QUESTIONS_BANK = [
   }
 ];
 
-// Fisher-Yates Shuffle
+// Fisher-Yates Shuffle para aleatorizar opciones
 const shuffleArray = (array) => {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -324,13 +341,9 @@ const shuffleArray = (array) => {
   return shuffled;
 };
 
-// Seleccionar N preguntas aleatorias del banco
-const selectRandomQuestions = (questionsBank, count) => {
-  const shuffled = shuffleArray(questionsBank);
-  return shuffled.slice(0, count);
-};
-
 export default function FormularioCursoSeguridad() {
+  const navigate = useNavigate();
+
   // Estado del formulario
   const [formData, setFormData] = useState({
     nombre_completo: '',
@@ -344,20 +357,36 @@ export default function FormularioCursoSeguridad() {
 
   const [answers, setAnswers] = useState({});
   const [currentStep, setCurrentStep] = useState(1); // 1: datos, 2: examen, 3: resultado
+  const [currentSection, setCurrentSection] = useState(1); // Sección actual del examen (1, 2 o 3)
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isCheckingStatus, setIsCheckingStatus] = useState(false);
   const [result, setResult] = useState(null);
   const [errors, setErrors] = useState({});
+  const [examStatus, setExamStatus] = useState(null);
+  const [statusError, setStatusError] = useState(null);
 
-  // Seleccionar 10 preguntas aleatorias y aleatorizar sus opciones
-  const shuffledQuestions = useMemo(() => {
-    // Seleccionar 10 preguntas aleatorias del banco de 30
-    const selectedQuestions = selectRandomQuestions(EXAM_QUESTIONS_BANK, 10);
-    // Aleatorizar el orden de las opciones de cada pregunta
-    return selectedQuestions.map(q => ({
+  // Preparar preguntas con opciones aleatorias
+  const questionsWithShuffledOptions = useMemo(() => {
+    return EXAM_QUESTIONS.map(q => ({
       ...q,
       options: shuffleArray(q.options)
     }));
   }, []);
+
+  // Obtener preguntas de una sección específica
+  const getQuestionsForSection = (sectionId) => {
+    const section = EXAM_SECTIONS.find(s => s.id === sectionId);
+    if (!section) return [];
+    return questionsWithShuffledOptions.filter(
+      q => q.id >= section.startQuestion && q.id <= section.endQuestion
+    );
+  };
+
+  // Contar respuestas por sección
+  const getAnsweredCountForSection = (sectionId) => {
+    const sectionQuestions = getQuestionsForSection(sectionId);
+    return sectionQuestions.filter(q => answers[q.id]).length;
+  };
 
   // Validar datos personales
   const validatePersonalData = () => {
@@ -394,6 +423,11 @@ export default function FormularioCursoSeguridad() {
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: null }));
     }
+    // Limpiar error de estatus al cambiar RFC
+    if (name === 'rfc_colaborador') {
+      setStatusError(null);
+      setExamStatus(null);
+    }
   };
 
   // Manejar selección de respuesta
@@ -401,19 +435,75 @@ export default function FormularioCursoSeguridad() {
     setAnswers(prev => ({ ...prev, [questionId]: answer }));
   };
 
-  // Continuar al examen
-  const handleContinueToExam = () => {
-    if (validatePersonalData()) {
-      setCurrentStep(2);
-      window.scrollTo(0, 0);
+  // Verificar estatus del examen por RFC
+  const checkExamStatus = async () => {
+    if (!formData.rfc_colaborador || formData.rfc_colaborador.length < 10) {
+      setErrors(prev => ({ ...prev, rfc_colaborador: 'El RFC debe tener al menos 10 caracteres' }));
+      return null;
     }
+
+    setIsCheckingStatus(true);
+    setStatusError(null);
+
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/v1/onboarding/check-exam-status/${formData.rfc_colaborador.toUpperCase()}`
+      );
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || 'Error al verificar estatus');
+      }
+
+      setExamStatus(data);
+      return data;
+    } catch (error) {
+      console.error('Error verificando estatus:', error);
+      setStatusError(error.message);
+      return null;
+    } finally {
+      setIsCheckingStatus(false);
+    }
+  };
+
+  // Continuar al examen (verifica estatus primero)
+  const handleContinueToExam = async () => {
+    if (!validatePersonalData()) return;
+
+    const status = await checkExamStatus();
+
+    if (!status) {
+      // Error al verificar, permitir continuar de todos modos (primera vez)
+      setCurrentStep(2);
+      setCurrentSection(1);
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    if (!status.can_take_exam) {
+      // No puede hacer el examen
+      setStatusError(status.message);
+      return;
+    }
+
+    // Puede hacer el examen
+    setCurrentStep(2);
+    setCurrentSection(1);
+    window.scrollTo(0, 0);
+  };
+
+  // Navegar entre secciones del examen
+  const goToSection = (sectionId) => {
+    setCurrentSection(sectionId);
+    window.scrollTo(0, 0);
   };
 
   // Enviar examen
   const handleSubmit = async () => {
     // Verificar que todas las preguntas estén contestadas
-    if (Object.keys(answers).length < 10) {
-      alert('Por favor responde todas las preguntas antes de enviar.');
+    const totalAnswered = Object.keys(answers).length;
+    if (totalAnswered < 30) {
+      alert(`Por favor responde todas las preguntas antes de enviar. Faltan ${30 - totalAnswered} preguntas.`);
       return;
     }
 
@@ -421,20 +511,15 @@ export default function FormularioCursoSeguridad() {
 
     try {
       // Preparar respuestas con is_correct
-      const formattedAnswers = shuffledQuestions.map(q => ({
+      const formattedAnswers = EXAM_QUESTIONS.map(q => ({
         question_id: q.id,
         answer: answers[q.id],
         is_correct: answers[q.id] === q.correctAnswer
       }));
 
-      // Calcular score
-      const correctCount = formattedAnswers.filter(a => a.is_correct).length;
-      const score = (correctCount / 10) * 100;
-
       const payload = {
         ...formData,
-        answers: formattedAnswers,
-        score_frontend: score
+        answers: formattedAnswers
       };
 
       const response = await fetch(`${API_BASE_URL}/v1/onboarding/submit-exam`, {
@@ -447,11 +532,7 @@ export default function FormularioCursoSeguridad() {
 
       const data = await response.json();
 
-      setResult({
-        ...data,
-        localScore: score,
-        correctCount
-      });
+      setResult(data);
       setCurrentStep(3);
       window.scrollTo(0, 0);
 
@@ -463,6 +544,20 @@ export default function FormularioCursoSeguridad() {
     }
   };
 
+  // Volver a intentar el examen
+  const handleRetry = () => {
+    setAnswers({});
+    setResult(null);
+    setCurrentStep(2);
+    setCurrentSection(1);
+    window.scrollTo(0, 0);
+  };
+
+  // Volver a ver el video
+  const handleWatchVideo = () => {
+    navigate('/curso-seguridad');
+  };
+
   // Renderizar paso 1: Datos personales
   const renderPersonalDataStep = () => (
     <div className="max-w-2xl mx-auto">
@@ -471,6 +566,79 @@ export default function FormularioCursoSeguridad() {
         <p className="text-gray-600 mb-8">
           Complete la siguiente información antes de iniciar el examen de certificación.
         </p>
+
+        {/* Mensaje especial cuando ya tiene certificación vigente */}
+        {examStatus && examStatus.is_approved && !examStatus.is_expired && (
+          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+            <div className="flex items-start">
+              <svg className="w-6 h-6 text-green-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p className="text-green-800 font-semibold">¡Ya tienes una certificación vigente!</p>
+                <p className="text-green-700 text-sm mt-1">
+                  Tu certificación de seguridad sigue activa y no necesitas volver a realizar el examen.
+                </p>
+                {examStatus.expiration_date && (
+                  <p className="text-green-700 text-sm mt-1">
+                    <strong>Vigente hasta:</strong> {examStatus.expiration_date}
+                  </p>
+                )}
+                {examStatus.certificate_resent && (
+                  <p className="text-green-600 text-sm mt-2 font-medium">
+                    ✉️ Hemos reenviado tu certificado con código QR a tu correo electrónico registrado.
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Mensaje cuando la certificación expiró pero puede renovar */}
+        {examStatus && examStatus.is_approved && examStatus.is_expired && (
+          <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+            <div className="flex items-start">
+              <svg className="w-6 h-6 text-amber-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p className="text-amber-800 font-semibold">Tu certificación ha expirado</p>
+                <p className="text-amber-700 text-sm mt-1">
+                  Tu certificación anterior venció. Puedes realizar el examen nuevamente para renovarla.
+                </p>
+                {examStatus.expiration_date && (
+                  <p className="text-amber-600 text-sm mt-1">
+                    <strong>Venció el:</strong> {examStatus.expiration_date}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Mensaje de error de estatus (cuando no puede hacer examen) */}
+        {statusError && !examStatus?.is_approved && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-red-800 font-medium">{statusError}</p>
+            {examStatus && !examStatus.can_take_exam && examStatus.attempts_used >= 3 && (
+              <p className="text-red-600 text-sm mt-2">
+                Has agotado tus 3 intentos. Contacta al administrador para más información.
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* Mostrar estatus si ya hay intentos (pero no aprobado) */}
+        {examStatus && examStatus.attempts_used > 0 && examStatus.can_take_exam && !examStatus.is_approved && (
+          <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+            <p className="text-amber-800 font-medium">
+              Ya tienes {examStatus.attempts_used} intento(s) registrado(s).
+            </p>
+            <p className="text-amber-700 text-sm mt-1">
+              Te quedan {examStatus.attempts_remaining} intento(s) disponible(s).
+            </p>
+          </div>
+        )}
 
         <div className="space-y-6">
           {/* Nombre Completo */}
@@ -605,164 +773,282 @@ export default function FormularioCursoSeguridad() {
         <div className="mt-8">
           <button
             onClick={handleContinueToExam}
-            className="w-full py-4 bg-[#D91E18] text-white font-semibold rounded-lg hover:bg-[#b81915] transition-colors"
-          >
-            Continuar al Examen
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-
-  // Renderizar paso 2: Examen
-  const renderExamStep = () => (
-    <div className="max-w-3xl mx-auto">
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">Examen de Seguridad</h2>
-          <span className="text-sm text-gray-500">
-            {Object.keys(answers).length} / 10 respondidas
-          </span>
-        </div>
-
-        <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-          <p className="text-amber-800 text-sm">
-            <strong>Importante:</strong> Debe obtener un mínimo de 85% (9 de 10 correctas) para aprobar.
-            Las preguntas y opciones aparecen en orden aleatorio.
-          </p>
-        </div>
-
-        <div className="space-y-8">
-          {shuffledQuestions.map((q, index) => (
-            <div key={q.id} className="border-b border-gray-200 pb-6 last:border-0">
-              <p className="font-medium text-gray-900 mb-4">
-                <span className="text-[#D91E18] font-bold">{index + 1}.</span> {q.question}
-              </p>
-              <div className="space-y-3">
-                {q.options.map((option, optIndex) => (
-                  <label
-                    key={optIndex}
-                    className={`flex items-center p-4 border rounded-lg cursor-pointer transition-all ${
-                      answers[q.id] === option
-                        ? 'border-[#D91E18] bg-red-50'
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name={`question_${q.id}`}
-                      value={option}
-                      checked={answers[q.id] === option}
-                      onChange={() => handleAnswerSelect(q.id, option)}
-                      className="w-4 h-4 text-[#D91E18] focus:ring-[#D91E18]"
-                    />
-                    <span className="ml-3 text-gray-700">{option}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-8 flex gap-4">
-          <button
-            onClick={() => setCurrentStep(1)}
-            className="flex-1 py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            Volver a Datos
-          </button>
-          <button
-            onClick={handleSubmit}
-            disabled={isSubmitting || Object.keys(answers).length < 10}
-            className={`flex-1 py-4 font-semibold rounded-lg transition-colors ${
-              isSubmitting || Object.keys(answers).length < 10
+            disabled={isCheckingStatus}
+            className={`w-full py-4 font-semibold rounded-lg transition-colors ${
+              isCheckingStatus
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 : 'bg-[#D91E18] text-white hover:bg-[#b81915]'
             }`}
           >
-            {isSubmitting ? 'Enviando...' : 'Enviar Examen'}
+            {isCheckingStatus ? 'Verificando estatus...' : 'Continuar al Examen'}
           </button>
         </div>
       </div>
     </div>
   );
 
+  // Renderizar paso 2: Examen con secciones
+  const renderExamStep = () => {
+    const currentSectionQuestions = getQuestionsForSection(currentSection);
+    const currentSectionInfo = EXAM_SECTIONS.find(s => s.id === currentSection);
+    const totalAnswered = Object.keys(answers).length;
+
+    const sectionColors = {
+      1: { bg: 'bg-red-500', light: 'bg-red-50', border: 'border-red-200', text: 'text-red-700' },
+      2: { bg: 'bg-blue-500', light: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-700' },
+      3: { bg: 'bg-green-500', light: 'bg-green-50', border: 'border-green-200', text: 'text-green-700' }
+    };
+
+    const colors = sectionColors[currentSection];
+
+    return (
+      <div className="max-w-4xl mx-auto">
+        {/* Navegación de secciones */}
+        <div className="bg-white rounded-lg shadow-lg p-4 mb-6">
+          <div className="flex flex-wrap justify-between items-center gap-4">
+            {EXAM_SECTIONS.map((section) => {
+              const answeredCount = getAnsweredCountForSection(section.id);
+              const isComplete = answeredCount === 10;
+              const isCurrent = currentSection === section.id;
+              const sColors = sectionColors[section.id];
+
+              return (
+                <button
+                  key={section.id}
+                  onClick={() => goToSection(section.id)}
+                  className={`flex-1 min-w-[120px] p-3 rounded-lg transition-all ${
+                    isCurrent
+                      ? `${sColors.bg} text-white`
+                      : `${sColors.light} ${sColors.text} hover:opacity-80`
+                  }`}
+                >
+                  <div className="text-sm font-medium">Sección {section.id}</div>
+                  <div className="text-xs opacity-80">{section.name}</div>
+                  <div className="text-xs mt-1">
+                    {answeredCount}/10 {isComplete && '✓'}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+          <div className="mt-4 text-center text-sm text-gray-600">
+            Total: {totalAnswered} / 30 preguntas respondidas
+          </div>
+        </div>
+
+        {/* Contenido de la sección actual */}
+        <div className="bg-white rounded-lg shadow-lg p-8">
+          <div className={`${colors.light} ${colors.border} border rounded-lg p-4 mb-6`}>
+            <h2 className={`text-xl font-bold ${colors.text}`}>
+              Sección {currentSection}: {currentSectionInfo?.name}
+            </h2>
+            <p className="text-gray-600 text-sm mt-1">
+              Preguntas {currentSectionInfo?.startQuestion} - {currentSectionInfo?.endQuestion}
+            </p>
+            <p className={`text-sm mt-2 ${colors.text}`}>
+              <strong>Importante:</strong> Debes obtener mínimo 80% (8 de 10 correctas) en esta sección.
+            </p>
+          </div>
+
+          <div className="space-y-8">
+            {currentSectionQuestions.map((q, index) => (
+              <div key={q.id} className="border-b border-gray-200 pb-6 last:border-0">
+                <p className="font-medium text-gray-900 mb-4">
+                  <span className={`${colors.text} font-bold`}>{q.id}.</span> {q.question}
+                </p>
+                <div className="space-y-3">
+                  {q.options.map((option, optIndex) => (
+                    <label
+                      key={optIndex}
+                      className={`flex items-center p-4 border rounded-lg cursor-pointer transition-all ${
+                        answers[q.id] === option
+                          ? `${colors.border} ${colors.light}`
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name={`question_${q.id}`}
+                        value={option}
+                        checked={answers[q.id] === option}
+                        onChange={() => handleAnswerSelect(q.id, option)}
+                        className="w-4 h-4 text-[#D91E18] focus:ring-[#D91E18]"
+                      />
+                      <span className="ml-3 text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Navegación entre secciones */}
+          <div className="mt-8 flex flex-wrap gap-4">
+            {currentSection > 1 && (
+              <button
+                onClick={() => goToSection(currentSection - 1)}
+                className="flex-1 py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                ← Sección Anterior
+              </button>
+            )}
+
+            {currentSection < 3 ? (
+              <button
+                onClick={() => goToSection(currentSection + 1)}
+                className={`flex-1 py-4 font-semibold rounded-lg transition-colors ${colors.bg} text-white hover:opacity-90`}
+              >
+                Siguiente Sección →
+              </button>
+            ) : (
+              <button
+                onClick={handleSubmit}
+                disabled={isSubmitting || totalAnswered < 30}
+                className={`flex-1 py-4 font-semibold rounded-lg transition-colors ${
+                  isSubmitting || totalAnswered < 30
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-[#D91E18] text-white hover:bg-[#b81915]'
+                }`}
+              >
+                {isSubmitting ? 'Enviando...' : `Enviar Examen (${totalAnswered}/30)`}
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   // Renderizar paso 3: Resultado
   const renderResultStep = () => {
-    const approved = result?.approved || result?.localScore >= 85;
+    if (!result) return null;
+
+    const approved = result.approved;
+    const sections = result.sections || [];
 
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-          {/* Icono */}
-          <div className={`inline-flex items-center justify-center w-24 h-24 rounded-full mb-6 ${
-            approved ? 'bg-green-100' : 'bg-red-100'
-          }`}>
-            {approved ? (
-              <svg className="w-16 h-16 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            ) : (
-              <svg className="w-16 h-16 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            )}
+        <div className="bg-white rounded-lg shadow-lg p-8">
+          {/* Icono y título principal */}
+          <div className="text-center mb-8">
+            <div className={`inline-flex items-center justify-center w-24 h-24 rounded-full mb-6 ${
+              approved ? 'bg-green-100' : 'bg-red-100'
+            }`}>
+              {approved ? (
+                <svg className="w-16 h-16 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              ) : (
+                <svg className="w-16 h-16 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              )}
+            </div>
+
+            <h1 className={`text-4xl font-bold mb-2 ${approved ? 'text-green-600' : 'text-red-600'}`}>
+              {approved ? '¡Felicidades!' : 'No Aprobado'}
+            </h1>
+            <p className="text-gray-600">{result.message}</p>
           </div>
 
-          <div className="h-1 w-24 bg-[#FFC600] mx-auto rounded mb-6"></div>
-
-          <h1 className={`text-4xl font-bold mb-4 ${approved ? 'text-green-600' : 'text-red-600'}`}>
-            {approved ? '¡Felicidades!' : 'No Aprobado'}
-          </h1>
-
-          <div className="bg-gray-50 rounded-lg p-6 mb-6">
+          {/* Score general */}
+          <div className="bg-gray-50 rounded-lg p-6 mb-6 text-center">
             <p className="text-5xl font-bold text-gray-900 mb-2">
-              {result?.score || result?.localScore}%
+              {result.overall_score?.toFixed(1)}%
             </p>
-            <p className="text-gray-600">
-              {result?.correctCount || Math.round((result?.score || result?.localScore) / 10)} de 10 respuestas correctas
+            <p className="text-gray-600">Promedio General</p>
+          </div>
+
+          {/* Resultados por sección */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Resultados por Sección</h3>
+            <div className="space-y-4">
+              {sections.map((section) => {
+                const sectionColors = {
+                  1: { bg: 'bg-red-500', light: 'bg-red-50', text: 'text-red-700' },
+                  2: { bg: 'bg-blue-500', light: 'bg-blue-50', text: 'text-blue-700' },
+                  3: { bg: 'bg-green-500', light: 'bg-green-50', text: 'text-green-700' }
+                };
+                const colors = sectionColors[section.section_number];
+
+                return (
+                  <div
+                    key={section.section_number}
+                    className={`p-4 rounded-lg border ${
+                      section.approved ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'
+                    }`}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <span className={`inline-block px-2 py-1 rounded text-xs font-medium ${colors.bg} text-white mr-2`}>
+                          Sección {section.section_number}
+                        </span>
+                        <span className="font-medium text-gray-900">{section.section_name}</span>
+                      </div>
+                      <div className="text-right">
+                        <span className={`text-2xl font-bold ${section.approved ? 'text-green-600' : 'text-red-600'}`}>
+                          {section.score}%
+                        </span>
+                        <p className="text-xs text-gray-500">
+                          {section.correct_count}/{section.total_questions} correctas
+                        </p>
+                      </div>
+                    </div>
+                    <div className="mt-2">
+                      <span className={`text-sm font-medium ${section.approved ? 'text-green-600' : 'text-red-600'}`}>
+                        {section.approved ? '✓ Aprobada' : '✗ Reprobada (mínimo 80%)'}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Información de intentos */}
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
+            <p className="text-amber-800 text-sm">
+              <strong>Intentos:</strong> {result.attempts_used} de 3 utilizados
+              {result.can_retry && (
+                <span className="ml-2">
+                  (Te quedan {result.attempts_remaining} intento(s))
+                </span>
+              )}
             </p>
           </div>
 
-          <p className="text-lg text-gray-600 mb-8 max-w-lg mx-auto">
-            {approved
-              ? 'Has completado exitosamente el examen de seguridad. Recibirás un correo con tu código QR de certificación.'
-              : 'No alcanzaste el puntaje mínimo requerido (80%). Por favor revisa el material de capacitación y vuelve a intentarlo.'
-            }
-          </p>
-
-          <div className={`inline-flex items-center px-6 py-3 rounded-full font-semibold mb-8 ${
-            approved ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-          }`}>
-            {approved ? (
+          {/* Botones de acción */}
+          <div className="flex flex-col gap-4">
+            {result.can_retry && (
               <>
-                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                Examen Aprobado
-              </>
-            ) : (
-              <>
-                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                </svg>
-                Requiere Repetir
+                <button
+                  onClick={handleRetry}
+                  className="w-full py-4 bg-[#D91E18] text-white font-semibold rounded-lg hover:bg-[#b81915] transition-colors"
+                >
+                  Intentar de Nuevo
+                </button>
+                <button
+                  onClick={handleWatchVideo}
+                  className="w-full py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  Ver Video de Capacitación Nuevamente
+                </button>
               </>
             )}
-          </div>
 
-          {!approved && (
-            <button
-              onClick={() => {
-                setAnswers({});
-                setResult(null);
-                setCurrentStep(2);
-              }}
-              className="px-8 py-3 bg-[#D91E18] text-white font-semibold rounded-lg hover:bg-[#b81915] transition-colors"
-            >
-              Intentar de Nuevo
-            </button>
-          )}
+            {!result.can_retry && !approved && (
+              <div className="text-center text-red-600 p-4 bg-red-50 rounded-lg">
+                <p className="font-medium">Has agotado tus 3 intentos.</p>
+                <p className="text-sm mt-1">Contacta al administrador para más información.</p>
+              </div>
+            )}
+
+            {approved && (
+              <div className="text-center text-green-600 p-4 bg-green-50 rounded-lg">
+                <p className="font-medium">Recibirás tu certificación por correo electrónico.</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -803,12 +1089,17 @@ export default function FormularioCursoSeguridad() {
           <div className="max-w-4xl mx-auto px-4 text-center">
             <h1 className="text-3xl font-bold mb-2">
               {currentStep === 1 && 'Registro de Datos'}
-              {currentStep === 2 && 'Examen de Certificación'}
+              {currentStep === 2 && `Examen de Certificación - Sección ${currentSection}`}
               {currentStep === 3 && 'Resultado del Examen'}
             </h1>
             <p className="text-red-100">
               Certificación de Seguridad Industrial - Coca-Cola FEMSA
             </p>
+            {currentStep === 2 && (
+              <p className="text-red-200 text-sm mt-2">
+                30 preguntas en 3 secciones | Mínimo 80% en cada sección para aprobar
+              </p>
+            )}
           </div>
         </section>
 
