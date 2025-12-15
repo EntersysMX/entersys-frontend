@@ -364,6 +364,7 @@ export default function FormularioCursoSeguridad() {
   const [errors, setErrors] = useState({});
   const [examStatus, setExamStatus] = useState(null);
   const [statusError, setStatusError] = useState(null);
+  const [isBlocked, setIsBlocked] = useState(false); // Nuevo estado para bloqueo
 
   // Preparar preguntas con orden aleatorio por sección y opciones aleatorias
   const questionsWithShuffledOptions = useMemo(() => {
@@ -488,8 +489,9 @@ export default function FormularioCursoSeguridad() {
     }
 
     if (!status.can_take_exam) {
-      // No puede hacer el examen
+      // No puede hacer el examen - mostrar pantalla de bloqueo
       setStatusError(status.message);
+      setIsBlocked(true);
       return;
     }
 
@@ -1061,6 +1063,52 @@ export default function FormularioCursoSeguridad() {
     );
   };
 
+  // Renderizar pantalla de bloqueo
+  const renderBlockedScreen = () => (
+    <div className="max-w-2xl mx-auto">
+      <div className="bg-white rounded-lg shadow-lg p-8">
+        <div className="text-center">
+          {/* Icono de bloqueo */}
+          <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-100 mb-6">
+            <svg className="w-16 h-16 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+
+          <h1 className="text-3xl font-bold text-red-600 mb-4">
+            Acceso Bloqueado
+          </h1>
+
+          <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-6">
+            <p className="text-red-800 text-lg font-medium mb-2">
+              {statusError || 'Has agotado tus 3 intentos.'}
+            </p>
+            <p className="text-red-700">
+              Contacta al administrador para más información.
+            </p>
+          </div>
+
+          <div className="bg-gray-50 rounded-lg p-6 mb-6">
+            <h3 className="font-semibold text-gray-900 mb-3">Información de contacto:</h3>
+            <p className="text-gray-600 mb-2">
+              <strong>Correo:</strong> seguridad@entersys.mx
+            </p>
+            <p className="text-gray-600">
+              <strong>RFC registrado:</strong> {formData.rfc_colaborador?.toUpperCase()}
+            </p>
+          </div>
+
+          <button
+            onClick={() => navigate('/curso-seguridad')}
+            className="w-full py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
+          >
+            Volver al Inicio
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <Helmet>
@@ -1095,9 +1143,10 @@ export default function FormularioCursoSeguridad() {
         <section className="bg-[#D91E18] text-white py-8">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <h1 className="text-3xl font-bold mb-2">
-              {currentStep === 1 && 'Registro de Datos'}
-              {currentStep === 2 && `Examen de Certificación - Sección ${currentSection}`}
-              {currentStep === 3 && 'Resultado del Examen'}
+              {isBlocked && 'Acceso Restringido'}
+              {!isBlocked && currentStep === 1 && 'Registro de Datos'}
+              {!isBlocked && currentStep === 2 && `Examen de Certificación - Sección ${currentSection}`}
+              {!isBlocked && currentStep === 3 && 'Resultado del Examen'}
             </h1>
             <p className="text-red-100">
               Certificación de Seguridad Industrial - Coca-Cola FEMSA
@@ -1112,9 +1161,10 @@ export default function FormularioCursoSeguridad() {
 
         {/* Content */}
         <div className="flex-1 py-12 px-4">
-          {currentStep === 1 && renderPersonalDataStep()}
-          {currentStep === 2 && renderExamStep()}
-          {currentStep === 3 && renderResultStep()}
+          {isBlocked && renderBlockedScreen()}
+          {!isBlocked && currentStep === 1 && renderPersonalDataStep()}
+          {!isBlocked && currentStep === 2 && renderExamStep()}
+          {!isBlocked && currentStep === 3 && renderResultStep()}
         </div>
 
         {/* Footer */}
