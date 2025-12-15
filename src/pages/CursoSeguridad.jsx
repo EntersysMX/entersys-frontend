@@ -12,7 +12,7 @@ import SecureVideoPlayer from '../components/SecureVideoPlayer';
 // Configuración del video de seguridad
 const VIDEO_CONFIG = {
   id: 'seguridad-2026',
-  src: '/videos/CURSO_INDUCCION_2026_SYS.mp4',
+  src: '/videos/Seguridad_Laboral.mp4',
   poster: null, // No usar poster
   title: 'Capacitación Obligatoria de Seguridad Laboral 2026'
 };
