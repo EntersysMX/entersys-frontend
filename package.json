@@ -1,6 +1,6 @@
 {
   "name": "entersys-frontend",
-  "version": "2025.10.29-0742-b273a8f",
+  "version": "2025.12.19-0456-im1h4",
   "description": "Frontend web application for Entersys.mx project",
   "private": true,
   "type": "module",
@@ -45,6 +45,7 @@
   "homepage": "https://github.com/armando-entersys/entersys-frontend#readme",
   "dependencies": {
     "@emotion/react": "^11.14.0",
+    "axios": "^1.6.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.2",
     "@mui/material": "^7.3.2",

@@ -49,6 +49,9 @@ const FormularioCursoSeguridad = lazy(() => import('./pages/FormularioCursoSegur
 // QR Generator
 const QRGenerator = lazy(() => import('./pages/QRGenerator'))
 
+// Soporte KOF (MD070)
+const SoporteKof = lazy(() => import('./pages/SoporteKof'))
+
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 // Componente de loading mientras se cargan las páginas
@@ -101,61 +104,63 @@ function App() {
         {/* Skip Link para accesibilidad */}
         <SkipLink />
 
-          <ScrollToTop />
-          <PageTransition>
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/inicio" element={<Home />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:slug" element={<BlogEntrada />} />
-                <Route path="/clientes" element={<Clientes />} />
-                <Route path="/contacto" element={<Contacto />} />
-                <Route path="/nosotros" element={<Nosotros />} />
-                <Route path="/awalab" element={<Awalab />} />
-                <Route path="/expersys" element={<Expersys />} />
-                <Route path="/worksys" element={<Worksys />} />
-                <Route path="/clientes/qhse" element={<Qhse />} />
-                <Route path="/clientes/coca-cola" element={<Femsa />} />
-                <Route path="/clientes/ochoa" element={<Ochoa />} />
-                {/* Páginas legales */}
-                <Route path="/politica-de-privacidad" element={<PrivacyPolicy />} />
-                <Route path="/terminos-de-servicio" element={<TermsOfService />} />
-                <Route path="/configuracion-de-cookies" element={<CookieSettings />} />
-                {/* Certificación de seguridad */}
-                <Route path="/certificacion-seguridad/:uuid" element={<CertificacionSeguridad />} />
-                {/* Curso de seguridad con video anti-skip (MD050) */}
-                <Route path="/curso-seguridad" element={<CursoSeguridad />} />
-                {/* Formulario de examen de seguridad */}
-                <Route path="/formulario-curso-seguridad" element={<FormularioCursoSeguridad />} />
-                {/* QR Generator */}
-                <Route path="/qr-generator" element={<QRGenerator />} />
-                {/* Ruta 404 - debe estar al final */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </PageTransition>
+        <ScrollToTop />
+        <PageTransition>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/inicio" element={<Home />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogEntrada />} />
+              <Route path="/clientes" element={<Clientes />} />
+              <Route path="/contacto" element={<Contacto />} />
+              <Route path="/nosotros" element={<Nosotros />} />
+              <Route path="/awalab" element={<Awalab />} />
+              <Route path="/expersys" element={<Expersys />} />
+              <Route path="/worksys" element={<Worksys />} />
+              <Route path="/clientes/qhse" element={<Qhse />} />
+              <Route path="/clientes/coca-cola" element={<Femsa />} />
+              <Route path="/clientes/ochoa" element={<Ochoa />} />
+              {/* Páginas legales */}
+              <Route path="/politica-de-privacidad" element={<PrivacyPolicy />} />
+              <Route path="/terminos-de-servicio" element={<TermsOfService />} />
+              <Route path="/configuracion-de-cookies" element={<CookieSettings />} />
+              {/* Certificación de seguridad */}
+              <Route path="/certificacion-seguridad/:uuid" element={<CertificacionSeguridad />} />
+              {/* Curso de seguridad con video anti-skip (MD050) */}
+              <Route path="/curso-seguridad" element={<CursoSeguridad />} />
+              {/* Formulario de examen de seguridad */}
+              <Route path="/formulario-curso-seguridad" element={<FormularioCursoSeguridad />} />
+              {/* QR Generator */}
+              <Route path="/qr-generator" element={<QRGenerator />} />
+              {/* Soporte KOF (MD070) */}
+              <Route path="/soporte-kof" element={<SoporteKof />} />
+              {/* Ruta 404 - debe estar al final */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </PageTransition>
 
-          {/* NUEVO: WhatsApp Float Button - NO ALTERAR DISEÑO EXISTENTE */}
-          <WhatsAppFloatButton />
+        {/* NUEVO: WhatsApp Float Button - NO ALTERAR DISEÑO EXISTENTE */}
+        <WhatsAppFloatButton />
 
-          {/* Toast Notifications - Sistema de notificaciones global */}
-          <Toaster
-            position="top-right"
-            reverseOrder={false}
-            gutter={8}
-            toastOptions={{
-              // Duración por defecto
-              duration: 4000,
-              // Estilos base
-              style: {
-                background: '#363636',
-                color: '#fff',
-              },
-            }}
-          />
-        </div>
-      </ErrorBoundary>
+        {/* Toast Notifications - Sistema de notificaciones global */}
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+          gutter={8}
+          toastOptions={{
+            // Duración por defecto
+            duration: 4000,
+            // Estilos base
+            style: {
+              background: '#363636',
+              color: '#fff',
+            },
+          }}
+        />
+      </div>
+    </ErrorBoundary>
   )
 }
 
