@@ -26,308 +26,345 @@ const EXAM_SECTIONS = [
   { id: 3, name: 'Ambiental', startQuestion: 21, endQuestion: 30, color: 'green' }
 ];
 
-// Banco completo de 30 preguntas del examen
+// Banco completo de 30 preguntas del examen (Actualizado 2026-01-05)
 const EXAM_QUESTIONS = [
   // ========== SECCIÓN 1: SEGURIDAD (Preguntas 1-10) ==========
   {
     id: 1,
     section: 1,
-    question: "Las siglas PPP corresponden a:",
+    question: "¿Cuál de las siguientes opciones describe mejor el concepto de 'Riesgo' en el contexto de la seguridad industrial?",
     options: [
-      "Protocolo de Prevención de Peligro",
-      "Pensamiento de Prevención de Peligro",
-      "Pensamiento de Protección Personal"
+      "Una fuente o situación con potencial de causar daño.",
+      "Un suceso relacionado con el trabajo donde ocurre o podría ocurrir un daño.",
+      "Cualquier condición que ha sido evaluada y declarada libre de peligros.",
+      "La combinación de la probabilidad de que ocurra un suceso y la consecuencia del mismo."
     ],
-    correctAnswer: "Protocolo de Prevención de Peligro"
+    correctAnswer: "La combinación de la probabilidad de que ocurra un suceso y la consecuencia del mismo."
   },
   {
     id: 2,
     section: 1,
-    question: "Poder reconocer peligros y riesgos en el lugar de trabajo nos ayuda a:",
-    options: [
-      "seguridad",
-      "prevención",
-      "protocolo"
-    ],
-    correctAnswer: "prevención"
+    question: "Según la clasificación de eventos de Coca-Cola FEMSA, un incidente que resulta en fatalidades o lesiones serias (SIF) se clasifica internamente como:",
+    options: ["Nivel 1", "Nivel 3", "Nivel 0", "Nivel 2"],
+    correctAnswer: "Nivel 3"
   },
   {
     id: 3,
     section: 1,
-    question: "Son tres elementos del equipo de protección personal (EPP):",
+    question: "¿Cuál es el propósito principal del procedimiento LOTO (Bloqueo y Etiquetado) mencionado en las 'Reglas para salvar vidas'?",
     options: [
-      "casco de seguridad, botas con casquillo y chaleco reflejante",
-      "casco de seguridad, arnés de seguridad y tapones auditivos",
-      "casco de seguridad, traje de bombero y guantes para químicos"
+      "Confirmar que no hay energía presente o está aislada antes de intervenir un equipo.",
+      "Protegerse contra caídas cuando se trabaja en altura.",
+      "Verificar que el personal tenga las habilidades adecuadas para la tarea.",
+      "Asegurar que los contratistas tengan el permiso de trabajo adecuado."
     ],
-    correctAnswer: "casco de seguridad, botas con casquillo y chaleco reflejante"
+    correctAnswer: "Confirmar que no hay energía presente o está aislada antes de intervenir un equipo."
   },
   {
     id: 4,
     section: 1,
-    question: "Tres acciones que debemos realizar en caso de emergencia:",
+    question: "¿Qué elemento del Equipo de Protección Personal (EPP) de categoría ESPECIAL es fundamental para un trabajo de soldadura?",
     options: [
-      "Conservar la calma, guardar silencio y usar el teléfono celular",
-      "Seguir todas las instrucciones del coordinador, conservar la calma y apagar equipos o máquinas.",
-      "No hacer bromas, mantener grupos de 50 personas por fila y conservar la calma"
+      "Guantes de carnaza",
+      "Botas industriales con casquillo",
+      "Chaleco de alta visibilidad",
+      "Careta para soldar"
     ],
-    correctAnswer: "Seguir todas las instrucciones del coordinador, conservar la calma y apagar equipos o máquinas."
+    correctAnswer: "Careta para soldar"
   },
   {
     id: 5,
     section: 1,
-    question: "Es un incidente que tuvo graves consecuencias para la persona:",
-    options: ["SIF", "SIG", "CIS"],
-    correctAnswer: "SIF"
+    question: "De acuerdo con la normativa para el levantamiento manual de cargas, ¿cuál es la masa máxima que un trabajador masculino de 35 años puede levantar?",
+    options: ["25 kg", "15 kg", "7 kg", "20 kg"],
+    correctAnswer: "25 kg"
   },
   {
     id: 6,
     section: 1,
-    question: "Estado patológico o condición que se deriva del trabajo:",
-    options: [
-      "Enfermedad profesional",
-      "Enfermedad laboral",
-      "Enfermedad de trabajo"
-    ],
-    correctAnswer: "Enfermedad de trabajo"
+    question: "Según las categorías de riesgo para las actividades de contratistas, ¿cómo se clasifica una tarea que implica trabajos de construcción o demolición?",
+    options: ["Riesgo Ad Hoc", "Riesgo Alto", "Riesgo Bajo", "Riesgo Medio"],
+    correctAnswer: "Riesgo Alto"
   },
   {
     id: 7,
     section: 1,
-    question: "Establecer zonas de seguridad y rutas de evacuación ¿es parte de las Reglas que Salvan Vidas?",
-    options: ["Sí", "No"],
-    correctAnswer: "Sí"
+    question: "Durante una situación de emergencia en las instalaciones, ¿qué acción se debe tomar si se escucha un sonido de alarma continuo?",
+    options: [
+      "Buscar al supervisor para confirmar si la emergencia es real.",
+      "Permanecer alerta y esperar instrucciones adicionales.",
+      "Detener el trabajo y apagar únicamente los equipos de cómputo.",
+      "Dirigirse al punto de reunión más cercano de manera ordenada."
+    ],
+    correctAnswer: "Dirigirse al punto de reunión más cercano de manera ordenada."
   },
   {
     id: 8,
     section: 1,
-    question: "Es la principal prioridad de la compañía:",
-    options: ["El desarrollo", "La seguridad", "La venta del producto"],
-    correctAnswer: "La seguridad"
+    question: "Para realizar trabajos en calor, como corte y soldadura, ¿cuál es el número mínimo de personas requeridas y cuáles son sus roles?",
+    options: [
+      "Dos personas: el ejecutor que realiza el trabajo y el monitor que vigila.",
+      "Tres personas: ejecutor, monitor y un supervisor de KOF.",
+      "Una sola persona, siempre que esté debidamente capacitada.",
+      "No se especifica un número, solo se requiere un extintor cerca."
+    ],
+    correctAnswer: "Dos personas: el ejecutor que realiza el trabajo y el monitor que vigila."
   },
   {
     id: 9,
     section: 1,
-    question: "Un ejemplo de incidente es:",
-    options: ["No usar casco", "Caída"],
-    correctAnswer: "Caída"
+    question: "De acuerdo con las normas de seguridad para el 'joggeo' de maquinaria, ¿qué práctica está estrictamente prohibida?",
+    options: [
+      "Que una persona accione el control mientras otra persona interviene el equipo.",
+      "Realizar el joggeo a una velocidad reducida al 50% o inferior.",
+      "Notificar al personal del área antes de iniciar el joggeo.",
+      "Realizar el joggeo con las guardas de seguridad físicas correctamente colocadas."
+    ],
+    correctAnswer: "Que una persona accione el control mientras otra persona interviene el equipo."
   },
   {
     id: 10,
     section: 1,
-    question: "La gravedad y frecuencia son factores para evaluar:",
-    options: ["Incidente", "Peligro", "Riesgo"],
-    correctAnswer: "Riesgo"
+    question: "Al utilizar una escalera de extensión para acceder a un nivel superior, esta debe sobrepasar el punto de apoyo. ¿Cuál es la distancia mínima requerida?",
+    options: [
+      "Debe estar exactamente al mismo nivel que el punto de acceso.",
+      "La escalera no debe sobrepasar el punto de acceso para evitar tropiezos.",
+      "Debe sobrepasar 50 cm.",
+      "Debe sobrepasar 91 cm."
+    ],
+    correctAnswer: "Debe sobrepasar 91 cm."
   },
   // ========== SECCIÓN 2: INOCUIDAD (Preguntas 11-20) ==========
   {
     id: 11,
     section: 2,
-    question: "¿Qué se requiere para el ingreso de sustancias químicas a la planta?",
+    question: "¿Qué se entiende por Inocuidad Alimentaria?",
     options: [
-      "Solo presentar la factura de compra.",
-      "Hoja de Datos de Seguridad (HDS) y formato de autorización firmado.",
-      "Que el envase sea de vidrio."
+      "Que el producto tenga buen sabor",
+      "Que el producto cumpla con requisitos comerciales",
+      "Que el producto y/o alimento no haga daño a la salud",
+      "Que el producto tenga buena presentación"
     ],
-    correctAnswer: "Hoja de Datos de Seguridad (HDS) y formato de autorización firmado."
+    correctAnswer: "Que el producto y/o alimento no haga daño a la salud"
   },
   {
     id: 12,
     section: 2,
-    question: "¿Cuál es la sanción establecida para un contratista que reincide en violar las normas de seguridad?",
-    options: [
-      "Una segunda amonestación verbal.",
-      "Se le negará el acceso a la empresa definitivamente.",
-      "Multa económica del 10% del contrato."
-    ],
-    correctAnswer: "Se le negará el acceso a la empresa definitivamente."
+    question: "¿Qué sistema de certificación implementa Coca-Cola FEMSA para garantizar la inocuidad de sus productos?",
+    options: ["ISO 9001", "HACCP", "FSSC 22000", "Industria Limpia"],
+    correctAnswer: "FSSC 22000"
   },
   {
     id: 13,
     section: 2,
-    question: "En trabajos de excavación, ¿a qué profundidad se requiere el uso de escalera para entrada y salida?",
+    question: "¿Qué normas conforman el esquema FSSC 22000?",
     options: [
-      "Más de 1.20 metros.",
-      "Más de 50 centímetros.",
-      "Solo si es mayor a 2 metros."
+      "ISO 14001, ISO 45001 y NOM-051",
+      "ISO 22000, ISO/TS 22002-1 y requisitos adicionales de FSSC 22000",
+      "HACCP y BPM",
+      "ISO 9001 y ISO 14001"
     ],
-    correctAnswer: "Más de 1.20 metros."
+    correctAnswer: "ISO 22000, ISO/TS 22002-1 y requisitos adicionales de FSSC 22000"
   },
   {
     id: 14,
     section: 2,
-    question: "¿Cómo se clasifican los trapos impregnados con grasas, tintas o aceites?",
+    question: "¿Qué es un peligro de inocuidad alimentaria según ISO 22000?",
     options: [
-      "Residuos de manejo especial.",
-      "Residuo Peligroso.",
-      "Basura general."
+      "Cualquier situación incómoda para el consumidor",
+      "Un agente biológico, químico o físico con potencial de causar daño a la salud",
+      "Un error en el proceso productivo",
+      "Un incumplimiento legal"
     ],
-    correctAnswer: "Residuo Peligroso."
+    correctAnswer: "Un agente biológico, químico o físico con potencial de causar daño a la salud"
   },
   {
     id: 15,
     section: 2,
-    question: "En el uso de escaleras portátiles, ¿cuál es la regla de colocación para asegurar la estabilidad?",
-    options: [
-      "La distancia de la pared a las patas debe ser 1/4 de la longitud de la escalera.",
-      "La escalera debe estar totalmente vertical (90 grados).",
-      "La distancia debe ser igual a la longitud de la escalera."
-    ],
-    correctAnswer: "La distancia de la pared a las patas debe ser 1/4 de la longitud de la escalera."
+    question: "¿Cuál de los siguientes es un ejemplo de peligro físico?",
+    options: ["Detergentes", "Bacterias", "Vidrio", "Insecticidas"],
+    correctAnswer: "Vidrio"
   },
   {
     id: 16,
     section: 2,
-    question: "¿Qué acción está PROHIBIDA realizar en las instalaciones según los lineamientos generales?",
+    question: "¿Qué son los Pre-requisitos (PPR) en Inocuidad Alimentaria?",
     options: [
-      "Usar pasillos peatonales.",
-      "Fumar.",
-      "Reportar incidentes."
+      "Actividades opcionales para mejorar la calidad",
+      "Condiciones y actividades básicas para mantener un ambiente higiénico",
+      "Auditorías externas",
+      "Indicadores de desempeño"
     ],
-    correctAnswer: "Fumar."
+    correctAnswer: "Condiciones y actividades básicas para mantener un ambiente higiénico"
   },
   {
     id: 17,
     section: 2,
-    question: "¿Cuál es el ancho mínimo que debe tener el tablón de apoyo en un andamio?",
-    options: ["30 cm.", "50 cm.", "1 metro."],
-    correctAnswer: "50 cm."
+    question: "¿Cuál de las siguientes acciones corresponde a los Buenos Hábitos de Manufactura?",
+    options: [
+      "Usar joyería en áreas de proceso",
+      "Consumir alimentos en cualquier área",
+      "Usar correctamente cofia y cubrebocas",
+      "Masticar chicle en planta"
+    ],
+    correctAnswer: "Usar correctamente cofia y cubrebocas"
   },
   {
     id: 18,
     section: 2,
-    question: "¿Qué significa el estado ZES en el contexto de bloqueo de energías?",
+    question: "¿Cuál es el objetivo del Manejo Integral de Plagas?",
     options: [
-      "Zona de Emergencia Segura.",
-      "Zero Energy State (Estado Cero Energía).",
-      "Zona Estándar de Seguridad."
+      "Eliminar todas las plagas con químicos",
+      "Minimizar impactos a los procesos y garantizar productos seguros",
+      "Mantener limpias solo las áreas externas",
+      "Usar únicamente trampas mecánicas"
     ],
-    correctAnswer: "Zero Energy State (Estado Cero Energía)."
+    correctAnswer: "Minimizar impactos a los procesos y garantizar productos seguros"
   },
   {
     id: 19,
     section: 2,
-    question: "¿Cuál es la distancia de seguridad que se debe mantener con líneas eléctricas de alto voltaje?",
+    question: "¿Qué acción ayuda a prevenir la contaminación cruzada?",
     options: [
-      "Por lo menos 3 metros.",
-      "1 metro es suficiente.",
-      "50 centímetros."
+      "Usar los mismos utensilios en todas las áreas",
+      "Respetar rutas de tránsito del personal",
+      "Mezclar ingredientes sin identificación",
+      "Ignorar monitoreos ambientales"
     ],
-    correctAnswer: "Por lo menos 3 metros."
+    correctAnswer: "Respetar rutas de tránsito del personal"
   },
   {
     id: 20,
     section: 2,
-    question: "¿Qué deben hacer los contratistas con sus residuos generados?",
+    question: "¿Qué se debe hacer si se detecta personal no autorizado en áreas críticas?",
     options: [
-      "Dejarlos en el lugar de trabajo para que limpieza los recoja.",
-      "Retirarlos y disponerlos ellos mismos (especialmente si son peligrosos) o llevarlos al almacén correspondiente.",
-      "Quemarlos en un área abierta."
+      "No hacer nada",
+      "Confrontarlo directamente",
+      "Reportarlo inmediatamente al encargado del área de trabajo",
+      "Retirarse del área"
     ],
-    correctAnswer: "Retirarlos y disponerlos ellos mismos (especialmente si son peligrosos) o llevarlos al almacén correspondiente."
+    correctAnswer: "Reportarlo inmediatamente al encargado del área de trabajo"
   },
   // ========== SECCIÓN 3: AMBIENTAL (Preguntas 21-30) ==========
   {
     id: 21,
     section: 3,
-    question: "¿Cuántos puntos de reunión de emergencia existen dentro de las instalaciones de Planta Ixtacomitán?",
+    question: "¿Cuál es la definición correcta de medio ambiente según la presentación?",
     options: [
-      "3 puntos de reunión.",
-      "4 puntos de reunión.",
-      "5 puntos de reunión."
+      "El entorno natural sin intervención humana",
+      "Únicamente el aire, agua y suelo",
+      "El entorno en el cual una planta opera, incluyendo aire, agua, suelo, recursos naturales, flora, fauna, seres humanos y sus interrelaciones",
+      "Solo el área externa de la unidad operativa"
     ],
-    correctAnswer: "4 puntos de reunión."
+    correctAnswer: "El entorno en el cual una planta opera, incluyendo aire, agua, suelo, recursos naturales, flora, fauna, seres humanos y sus interrelaciones"
   },
   {
     id: 22,
     section: 3,
-    question: "¿Qué significan las siglas SIF en la clasificación de eventos de seguridad (Nivel 3)?",
+    question: "¿Qué es la certificación ISO 14001?",
     options: [
-      "Sistemas Integrales de Fabricación.",
-      "Serious Injuries or Fatalities (Incidentes Serios o Fatalidades).",
-      "Seguridad Interna de la Fábrica."
+      "Un programa exclusivo para residuos peligrosos",
+      "Una norma que regula únicamente el consumo de agua",
+      "Una norma internacional que apoya la protección ambiental y la prevención de la contaminación",
+      "Un plan de reciclaje obligatorio"
     ],
-    correctAnswer: "Serious Injuries or Fatalities (Incidentes Serios o Fatalidades)."
+    correctAnswer: "Una norma internacional que apoya la protección ambiental y la prevención de la contaminación"
   },
   {
     id: 23,
     section: 3,
-    question: "Según los lineamientos de Buenas Prácticas de Manufactura, ¿qué está prohibido portar de la cintura para arriba en áreas productivas?",
+    question: "¿Cuáles son los principales aspectos ambientales identificados en la unidad operativa?",
     options: [
-      "Equipo de protección personal básico.",
-      "Botones, bolsillos, joyería, plumas u objetos desprendibles.",
-      "Camisa de manga larga de algodón."
+      "Ruido, iluminación y temperatura",
+      "Agua, energía, residuos y aire",
+      "Clima, fauna y suelo",
+      "Transporte y tráfico"
     ],
-    correctAnswer: "Botones, bolsillos, joyería, plumas u objetos desprendibles."
+    correctAnswer: "Agua, energía, residuos y aire"
   },
   {
     id: 24,
     section: 3,
-    question: "¿Cuáles son las tres salidas de emergencia mencionadas específicamente para esta planta?",
+    question: "¿Qué es la Matriz de Aspectos e Impactos Ambientales (MAIA)?",
     options: [
-      "Entrada principal, Comedor y Baños.",
-      "Salida por cuarto de máquinas, Salida por Materias Primas y Salida por andenes de carga.",
-      "Almacén de refacciones, Taller mecánico y Laboratorio."
+      "Un listado de residuos peligrosos",
+      "Una herramienta para evaluar proveedores",
+      "Un instrumento para identificar y evaluar aspectos e impactos ambientales",
+      "Un plan de emergencias ambientales"
     ],
-    correctAnswer: "Salida por cuarto de máquinas, Salida por Materias Primas y Salida por andenes de carga."
+    correctAnswer: "Un instrumento para identificar y evaluar aspectos e impactos ambientales"
   },
   {
     id: 25,
     section: 3,
-    question: "¿Qué características definen a un Residuo Peligroso (código CRETIB)?",
+    question: "¿Cuál de los siguientes es un residuo orgánico según la clasificación KOF?",
     options: [
-      "Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-infeccioso.",
-      "Contaminante, Ruidoso, Estorboso, Tardo, Inerte, Basura.",
-      "Reciclable, Reutilizable, Reducible, Recuperable, Renovable."
+      "Latas de aluminio",
+      "Botellas de vidrio",
+      "Restos de comida sin envoltura",
+      "Envases PET"
     ],
-    correctAnswer: "Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-infeccioso."
+    correctAnswer: "Restos de comida sin envoltura"
   },
   {
     id: 26,
     section: 3,
-    question: "¿Cuál es la calificación mínima aprobatoria requerida para el examen de inducción de contratistas en línea?",
-    options: ["80%", "90%", "100%"],
-    correctAnswer: "80%"
+    question: "¿Qué significa la sigla CRETIB en residuos peligrosos?",
+    options: [
+      "Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable y Biológico-Infeccioso",
+      "Contaminante, Reciclable, Ecológico, Tóxico, Inflamable y Biológico",
+      "Corrosivo, Residual, Explosivo, Tóxico, Inflamable y Básico",
+      "Químico, Reactivo, Explosivo, Tóxico, Inflamable y Biológico"
+    ],
+    correctAnswer: "Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable y Biológico-Infeccioso"
   },
   {
     id: 27,
     section: 3,
-    question: "¿Qué sistema de certificación de inocuidad alimentaria implementa la planta para garantizar productos seguros?",
-    options: ["ISO 9001", "FSSC 22000", "Industria Limpia Nivel 1"],
-    correctAnswer: "FSSC 22000"
+    question: "¿Cuál de los siguientes residuos se considera peligroso?",
+    options: [
+      "Papel y cartón",
+      "Restos de jardinería",
+      "Aceite contaminado con amoniaco",
+      "Botellas de vidrio"
+    ],
+    correctAnswer: "Aceite contaminado con amoniaco"
   },
   {
     id: 28,
     section: 3,
-    question: "En temas de inocuidad, ¿Cuáles son ejemplos de peligros FÍSICOS para el producto?",
+    question: "¿Qué práctica ayuda al uso eficiente de la energía?",
     options: [
-      "Bacterias, virus y parásitos.",
-      "Residuos de detergentes, aceites y lubricantes.",
-      "Vidrio, madera, metal, plástico rígido, piedras y huesos."
+      "Dejar encendidos los equipos en espera",
+      "Apagar motores y transportadores cuando no estén en uso",
+      "Usar más ventiladores",
+      "Mantener enchufes conectados"
     ],
-    correctAnswer: "Vidrio, madera, metal, plástico rígido, piedras y huesos."
+    correctAnswer: "Apagar motores y transportadores cuando no estén en uso"
   },
   {
     id: 29,
     section: 3,
-    question: "¿Qué elementos conforman el Equipo de Protección Personal (EPP) considerado BÁSICO en el documento?",
+    question: "¿Cuál es una buena práctica para prevenir la contaminación de aguas residuales?",
     options: [
-      "Arnés, línea de vida y equipo de respiración autónoma.",
-      "Botas con casquillo, tapones auditivos, guantes anti corte, chaleco reflejante, casco y gafas.",
-      "Traje de bombero, careta de soldar y mandil de PVC."
+      "Depositar sólidos pequeños en el drenaje",
+      "Derramar aceites en coladeras",
+      "Utilizar charolas de contención durante mantenimientos",
+      "Lavar envases químicos en lavabos"
     ],
-    correctAnswer: "Botas con casquillo, tapones auditivos, guantes anti corte, chaleco reflejante, casco y gafas."
+    correctAnswer: "Utilizar charolas de contención durante mantenimientos"
   },
   {
     id: 30,
     section: 3,
-    question: "¿Cuál es el lineamiento para el manejo de residuos peligrosos generados por contratistas?",
+    question: "¿Qué debe hacerse en caso de un derrame de material peligroso?",
     options: [
-      "Pueden depositarse en los contenedores generales de la planta.",
-      "Deben ser retirados y dispuestos por el propio contratista.",
-      "Se deben dejar en el área de trabajo para que el personal de limpieza los recoja."
+      "Limpiarlo sin notificar",
+      "Ignorarlo si es pequeño",
+      "Notificar al encargado del área para activar el protocolo con personal capacitado",
+      "Esperar a que se evapore"
     ],
-    correctAnswer: "Deben ser retirados y dispuestos por el propio contratista."
+    correctAnswer: "Notificar al encargado del área para activar el protocolo con personal capacitado"
   }
 ];
 
