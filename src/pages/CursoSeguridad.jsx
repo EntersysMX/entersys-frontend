@@ -9,12 +9,12 @@ import { useSearchParams, Link } from 'react-router-dom';
 import MetaTags from '../components/SEO/MetaTags';
 import SecureVideoPlayer from '../components/SecureVideoPlayer';
 
-// Configuración del video de seguridad
+// Configuración del video de seguridad (GCS + Cloudflare CDN)
 const VIDEO_CONFIG = {
-  id: 'seguridad-2026',
-  src: '/videos/CURSO_INDUCCION_2026_SYS.mp4?v=2',
+  id: 'onboarding-2026',
+  src: 'https://storage.googleapis.com/entersys-videos-cdn/Curso_On_Boarding_2026_SYS.mp4',
   poster: null, // No usar poster
-  title: 'Capacitación Obligatoria de Seguridad Laboral 2026'
+  title: 'Curso de On-Boarding 2026'
 };
 
 export default function CursoSeguridad() {
