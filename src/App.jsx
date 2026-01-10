@@ -40,6 +40,9 @@ const CookieSettings = lazy(() => import('./pages/CookieSettings'))
 // Certificación de seguridad
 const CertificacionSeguridad = lazy(() => import('./pages/CertificacionSeguridad'))
 
+// Credencial virtual KOF
+const CredencialKOF = lazy(() => import('./pages/CredencialKOF'))
+
 // Curso de seguridad con video anti-skip (MD050)
 const CursoSeguridad = lazy(() => import('./pages/CursoSeguridad'))
 
@@ -124,6 +127,8 @@ function App() {
                 <Route path="/configuracion-de-cookies" element={<CookieSettings />} />
                 {/* Certificación de seguridad */}
                 <Route path="/certificacion-seguridad/:uuid" element={<CertificacionSeguridad />} />
+                {/* Credencial virtual KOF */}
+                <Route path="/credencial-kof/:rfc" element={<CredencialKOF />} />
                 {/* Curso de seguridad con video anti-skip (MD050) */}
                 <Route path="/curso-seguridad" element={<CursoSeguridad />} />
                 {/* Formulario de examen de seguridad */}
