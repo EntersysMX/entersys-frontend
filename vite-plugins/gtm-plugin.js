@@ -1,13 +1,18 @@
 /**
- * Plugin de Vite para inyectar Google Tag Manager en index.html
+ * Plugin de Vite para inyectar Google Analytics (GA4 o GTM) en index.html
  *
- * - development/staging: NO inyecta GTM (evita tracking en desarrollo)
- * - production: Inyecta GTM si existe VITE_GTM_ID
+ * - development/staging: NO inyecta (evita tracking en desarrollo)
+ * - production: Inyecta GA4 o GTM según configuración
+ *
+ * Variables de entorno:
+ * - VITE_GA4_MEASUREMENT_ID: ID de GA4 (ej: G-XXXXXXXXXX)
+ * - VITE_GTM_ID: ID de GTM (ej: GTM-XXXXXXX)
  */
 
 export function gtmPlugin() {
   let viteMode = 'development';
   let gtmId = '';
+  let ga4Id = '';
 
   return {
     name: 'vite-plugin-gtm',
@@ -15,22 +20,46 @@ export function gtmPlugin() {
     configResolved(config) {
       viteMode = config.mode;
       gtmId = config.env.VITE_GTM_ID || '';
-      console.log(`\n📊 GTM Plugin: Modo detectado = ${viteMode}`);
-      if (gtmId) {
-        console.log(`📊 GTM Plugin: GTM ID encontrado = ${gtmId}`);
+      ga4Id = config.env.VITE_GA4_MEASUREMENT_ID || '';
+      console.log(`\n📊 Analytics Plugin: Modo detectado = ${viteMode}`);
+      if (ga4Id) {
+        console.log(`📊 Analytics Plugin: GA4 ID encontrado = ${ga4Id}`);
+      } else if (gtmId) {
+        console.log(`📊 Analytics Plugin: GTM ID encontrado = ${gtmId}`);
       } else {
-        console.log(`⚠️  GTM Plugin: GTM ID no configurado`);
+        console.log(`⚠️  Analytics Plugin: No hay GA4 ni GTM configurado`);
       }
     },
 
     transformIndexHtml(html) {
       const mode = viteMode || 'development';
 
-      // Solo inyectar GTM en producción y si existe GTM_ID
-      if (mode === 'production' && gtmId) {
-        console.log(`📊 GTM Plugin: Inyectando GTM (${gtmId}) en producción`);
+      // Solo inyectar en producción
+      if (mode !== 'production') {
+        console.log(`⚠️  Analytics Plugin: NO inyectado (ambiente: ${mode})`);
+        return html;
+      }
 
-        // Script para el <head>
+      // Prioridad: GA4 > GTM
+      if (ga4Id) {
+        console.log(`📊 Analytics Plugin: Inyectando GA4 (${ga4Id}) en producción`);
+
+        const ga4Script = `
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=${ga4Id}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${ga4Id}');
+    </script>`;
+
+        html = html.replace('</head>', `${ga4Script}\n  </head>`);
+        console.log(`✅ Analytics Plugin: Google Analytics 4 inyectado correctamente`);
+
+      } else if (gtmId) {
+        console.log(`📊 Analytics Plugin: Inyectando GTM (${gtmId}) en producción`);
+
         const gtmHeadScript = `
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -40,24 +69,18 @@ export function gtmPlugin() {
     })(window,document,'script','dataLayer','${gtmId}');</script>
     <!-- End Google Tag Manager -->`;
 
-        // NoScript para el <body>
         const gtmBodyNoScript = `
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->`;
 
-        // Inyectar script en <head>
         html = html.replace('</head>', `${gtmHeadScript}\n  </head>`);
-
-        // Inyectar noscript después de <body>
         html = html.replace('<body>', `<body>\n${gtmBodyNoScript}`);
+        console.log(`✅ Analytics Plugin: Google Tag Manager inyectado correctamente`);
 
-        console.log(`✅ GTM Plugin: Google Tag Manager inyectado correctamente`);
-      } else if (mode !== 'production') {
-        console.log(`⚠️  GTM Plugin: NO inyectado (ambiente: ${mode})`);
-      } else if (!gtmId) {
-        console.log(`⚠️  GTM Plugin: NO inyectado (GTM_ID no configurado)`);
+      } else {
+        console.log(`⚠️  Analytics Plugin: NO inyectado (sin GA4_ID ni GTM_ID)`);
       }
 
       return html;
