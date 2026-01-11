@@ -222,12 +222,25 @@ const CredencialKOF = () => {
                 <div className="p-6">
                   {/* Photo and Info Section */}
                   <div className="flex gap-6">
-                    {/* Photo Placeholder */}
+                    {/* Photo */}
                     <div className="flex-shrink-0">
-                      <div className="w-24 h-28 bg-gray-700 rounded-lg flex items-center justify-center border-2 border-gray-600">
-                        <svg className="w-12 h-12 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                        </svg>
+                      <div className="w-24 h-28 bg-gray-700 rounded-lg overflow-hidden border-2 border-gray-600 shadow-lg">
+                        <img
+                          src="/images/credential-photo-default.jpg"
+                          alt={`Foto de ${nombre}`}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            // Si la imagen no carga, mostrar placeholder
+                            e.target.style.display = 'none';
+                            e.target.parentElement.innerHTML = `
+                              <div class="w-full h-full flex items-center justify-center bg-gray-700">
+                                <svg class="w-12 h-12 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                </svg>
+                              </div>
+                            `;
+                          }}
+                        />
                       </div>
                     </div>
 
