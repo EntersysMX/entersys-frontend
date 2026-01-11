@@ -226,7 +226,7 @@ const CredencialKOF = () => {
                     <div className="flex-shrink-0">
                       <div className="w-24 h-28 bg-gray-700 rounded-lg overflow-hidden border-2 border-gray-600 shadow-lg">
                         <img
-                          src="/images/credential-photo-default.jpg?v=2"
+                          src="/images/credential-photo-default.jpg"
                           alt={`Foto de ${nombre}`}
                           className="w-full h-full object-cover"
                           onError={(e) => {
