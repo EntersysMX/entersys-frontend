@@ -133,8 +133,11 @@ const CredencialKOF = () => {
     );
   }
 
-  const { status, nombre, proveedor, tipo_servicio, nss, cert_uuid, vencimiento, fecha_emision, is_expired } = credentialData;
+  const { status, nombre, proveedor, tipo_servicio, nss, cert_uuid, vencimiento, fecha_emision, url_imagen, is_expired } = credentialData;
   const certificateUrl = getCertificateUrl(cert_uuid);
+
+  // URL de foto: usar la del colaborador si existe, sino la default
+  const photoUrl = url_imagen || '/images/credential-photo.jpg';
 
   // Status badge configuration
   const getStatusConfig = () => {
@@ -226,7 +229,7 @@ const CredencialKOF = () => {
                     <div className="flex-shrink-0">
                       <div className="w-24 h-28 bg-gray-700 rounded-lg overflow-hidden border-2 border-gray-600 shadow-lg">
                         <img
-                          src="/images/credential-photo.jpg"
+                          src={photoUrl}
                           alt={`Foto de ${nombre}`}
                           className="w-full h-full object-cover"
                           onError={(e) => {

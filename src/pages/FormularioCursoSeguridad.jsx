@@ -393,6 +393,11 @@ export default function FormularioCursoSeguridad() {
     email: ''
   });
 
+  // Estado para foto de credencial
+  const [photoFile, setPhotoFile] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
+
   const [answers, setAnswers] = useState({});
   const [currentStep, setCurrentStep] = useState(1); // 1: datos, 2: examen, 3: resultado
   const [currentSection, setCurrentSection] = useState(1); // Sección actual del examen (1, 2 o 3)
@@ -458,6 +463,10 @@ export default function FormularioCursoSeguridad() {
       newErrors.email = 'Ingresa un email válido';
     }
 
+    if (!photoFile) {
+      newErrors.photo = 'La foto es obligatoria para tu credencial de acceso';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -473,6 +482,70 @@ export default function FormularioCursoSeguridad() {
     if (name === 'rfc_colaborador') {
       setStatusError(null);
       setExamStatus(null);
+    }
+  };
+
+  // Manejar cambio de foto
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Validar tipo de archivo
+    if (!file.type.startsWith('image/')) {
+      setErrors(prev => ({ ...prev, photo: 'Por favor selecciona una imagen válida (JPG, PNG)' }));
+      return;
+    }
+
+    // Validar tamaño (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      setErrors(prev => ({ ...prev, photo: 'La imagen no debe exceder 5MB' }));
+      return;
+    }
+
+    setPhotoFile(file);
+    setErrors(prev => ({ ...prev, photo: null }));
+
+    // Crear preview
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPhotoPreview(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // Eliminar foto seleccionada
+  const handleRemovePhoto = () => {
+    setPhotoFile(null);
+    setPhotoPreview(null);
+  };
+
+  // Subir foto a GCS
+  const uploadPhoto = async () => {
+    if (!photoFile || !formData.rfc_colaborador) return null;
+
+    setIsUploadingPhoto(true);
+    try {
+      const formDataUpload = new FormData();
+      formDataUpload.append('file', photoFile);
+      formDataUpload.append('rfc', formData.rfc_colaborador.toUpperCase());
+
+      const response = await fetch(`${API_BASE_URL}/v1/onboarding/upload-photo`, {
+        method: 'POST',
+        body: formDataUpload
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al subir la foto');
+      }
+
+      const data = await response.json();
+      return data.url;
+    } catch (error) {
+      console.error('Error subiendo foto:', error);
+      setErrors(prev => ({ ...prev, photo: 'Error al subir la foto. Intenta de nuevo.' }));
+      return null;
+    } finally {
+      setIsUploadingPhoto(false);
     }
   };
 
@@ -557,6 +630,16 @@ export default function FormularioCursoSeguridad() {
     setIsSubmitting(true);
 
     try {
+      // Subir foto primero si existe
+      let photoUrl = null;
+      if (photoFile) {
+        photoUrl = await uploadPhoto();
+        if (!photoUrl) {
+          // Si falla la subida de foto, continuar sin ella
+          console.warn('No se pudo subir la foto, continuando sin ella');
+        }
+      }
+
       // Preparar respuestas con is_correct
       const formattedAnswers = EXAM_QUESTIONS.map(q => ({
         question_id: q.id,
@@ -566,6 +649,7 @@ export default function FormularioCursoSeguridad() {
 
       const payload = {
         ...formData,
+        url_imagen: photoUrl,
         answers: formattedAnswers
       };
 
@@ -813,6 +897,103 @@ export default function FormularioCursoSeguridad() {
             />
             {errors.email && (
               <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+            )}
+          </div>
+
+          {/* Foto para Credencial */}
+          <div className="pt-6 border-t border-gray-200">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Foto para Credencial de Acceso <span className="text-red-500">*</span>
+            </label>
+
+            {/* Requisitos de la foto */}
+            <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-sm font-medium text-blue-800 mb-2">Requisitos de la foto:</p>
+              <ul className="text-sm text-blue-700 space-y-1">
+                <li className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Buena iluminación (preferentemente luz natural)
+                </li>
+                <li className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Rostro centrado y visible (sin lentes oscuros ni gorra)
+                </li>
+                <li className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Fondo liso (preferentemente blanco o claro)
+                </li>
+                <li className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Formato JPG o PNG (máximo 5MB)
+                </li>
+              </ul>
+            </div>
+
+            {/* Área de carga/preview */}
+            {!photoPreview ? (
+              <div className="relative">
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/jpg"
+                  onChange={handlePhotoChange}
+                  className="hidden"
+                  id="photo-upload"
+                />
+                <label
+                  htmlFor="photo-upload"
+                  className={`flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
+                    errors.photo
+                      ? 'border-red-400 bg-red-50 hover:bg-red-100'
+                      : 'border-gray-300 bg-gray-50 hover:bg-gray-100'
+                  }`}
+                >
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg className={`w-12 h-12 mb-3 ${errors.photo ? 'text-red-400' : 'text-gray-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <p className="mb-2 text-sm text-gray-500">
+                      <span className="font-semibold">Haz clic para subir</span> o arrastra tu foto
+                    </p>
+                    <p className="text-xs text-gray-400">JPG o PNG (máx. 5MB)</p>
+                  </div>
+                </label>
+              </div>
+            ) : (
+              <div className="relative">
+                <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <img
+                    src={photoPreview}
+                    alt="Preview de foto"
+                    className="w-32 h-40 object-cover rounded-lg border-2 border-gray-300 shadow-sm"
+                  />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-gray-700 mb-1">Foto seleccionada</p>
+                    <p className="text-xs text-gray-500 mb-3">{photoFile?.name}</p>
+                    <button
+                      type="button"
+                      onClick={handleRemovePhoto}
+                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition-colors"
+                    >
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                      Eliminar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {errors.photo && (
+              <p className="mt-2 text-sm text-red-500">{errors.photo}</p>
             )}
           </div>
         </div>
