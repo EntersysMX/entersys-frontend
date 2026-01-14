@@ -507,19 +507,9 @@ export default function FormularioCursoSeguridad() {
     setShowPermissionHelp(false);
 
     try {
-      // Verificar estado del permiso primero (si el navegador lo soporta)
-      if (navigator.permissions && navigator.permissions.query) {
-        try {
-          const permissionStatus = await navigator.permissions.query({ name: 'camera' });
-          if (permissionStatus.state === 'denied') {
-            setShowPermissionHelp(true);
-            return;
-          }
-        } catch (e) {
-          // Algunos navegadores no soportan query de cámara, continuar
-        }
-      }
-
+      // Siempre intentar solicitar acceso a la cámara
+      // El navegador mostrará el prompt nativo de "Permitir/Bloquear" si es la primera vez
+      // o si el usuario no ha bloqueado permanentemente el permiso
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
           facingMode: 'user', // Cámara frontal
@@ -536,12 +526,15 @@ export default function FormularioCursoSeguridad() {
       setIsCameraActive(true);
     } catch (err) {
       console.error('Error al acceder a la cámara:', err);
-      if (err.name === 'NotAllowedError') {
+      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+        // El usuario bloqueó el permiso - mostrar modal de ayuda
         setShowPermissionHelp(true);
-      } else if (err.name === 'NotFoundError') {
+      } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
         setCameraError('No se encontró ninguna cámara en tu dispositivo.');
+      } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
+        setCameraError('La cámara está siendo usada por otra aplicación. Ciérrala e intenta de nuevo.');
       } else {
-        setCameraError('Error al acceder a la cámara. Verifica que no esté siendo usada por otra aplicación.');
+        setCameraError('Error al acceder a la cámara. Verifica los permisos de tu navegador.');
       }
     }
   }, []);
