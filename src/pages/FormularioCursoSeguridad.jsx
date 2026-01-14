@@ -469,9 +469,7 @@ export default function FormularioCursoSeguridad() {
       newErrors.email = 'Ingresa un email válido';
     }
 
-    if (!photoFile) {
-      newErrors.photo = 'La foto es obligatoria para tu credencial de acceso';
-    }
+    // La foto es opcional - no validamos si existe
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -980,7 +978,7 @@ export default function FormularioCursoSeguridad() {
           {/* Foto para Credencial */}
           <div className="pt-6 border-t border-gray-200">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Foto para Credencial de Acceso <span className="text-red-500">*</span>
+              Foto para Credencial de Acceso <span className="text-gray-400 text-xs font-normal">(opcional)</span>
             </label>
 
             {/* Requisitos de la foto */}
