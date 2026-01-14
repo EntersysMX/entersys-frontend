@@ -399,6 +399,7 @@ export default function FormularioCursoSeguridad() {
   const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
   const [isCameraActive, setIsCameraActive] = useState(false);
   const [cameraError, setCameraError] = useState(null);
+  const [showPermissionHelp, setShowPermissionHelp] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
@@ -490,10 +491,35 @@ export default function FormularioCursoSeguridad() {
     }
   };
 
+  // Detectar navegador
+  const getBrowserName = useCallback(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    if (userAgent.includes('edg')) return 'edge';
+    if (userAgent.includes('chrome')) return 'chrome';
+    if (userAgent.includes('firefox')) return 'firefox';
+    if (userAgent.includes('safari')) return 'safari';
+    return 'otro';
+  }, []);
+
   // Iniciar cámara
   const startCamera = useCallback(async () => {
     setCameraError(null);
+    setShowPermissionHelp(false);
+
     try {
+      // Verificar estado del permiso primero (si el navegador lo soporta)
+      if (navigator.permissions && navigator.permissions.query) {
+        try {
+          const permissionStatus = await navigator.permissions.query({ name: 'camera' });
+          if (permissionStatus.state === 'denied') {
+            setShowPermissionHelp(true);
+            return;
+          }
+        } catch (e) {
+          // Algunos navegadores no soportan query de cámara, continuar
+        }
+      }
+
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
           facingMode: 'user', // Cámara frontal
@@ -511,7 +537,7 @@ export default function FormularioCursoSeguridad() {
     } catch (err) {
       console.error('Error al acceder a la cámara:', err);
       if (err.name === 'NotAllowedError') {
-        setCameraError('Permiso de cámara denegado. Por favor permite el acceso a la cámara en tu navegador.');
+        setShowPermissionHelp(true);
       } else if (err.name === 'NotFoundError') {
         setCameraError('No se encontró ninguna cámara en tu dispositivo.');
       } else {
@@ -997,6 +1023,109 @@ export default function FormularioCursoSeguridad() {
 
             {/* Canvas oculto para captura */}
             <canvas ref={canvasRef} className="hidden" />
+
+            {/* Modal de ayuda para permisos de cámara */}
+            {showPermissionHelp && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                <div className="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-bold text-gray-900">Permitir acceso a la cámara</h3>
+                      <button
+                        onClick={() => setShowPermissionHelp(false)}
+                        className="text-gray-400 hover:text-gray-600"
+                      >
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+
+                    <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                      <p className="text-sm text-amber-800">
+                        Para tomar tu foto de credencial, necesitamos acceso a tu cámara.
+                      </p>
+                    </div>
+
+                    {/* Instrucciones para Chrome/Edge */}
+                    {(getBrowserName() === 'chrome' || getBrowserName() === 'edge') && (
+                      <div className="space-y-3">
+                        <p className="text-sm font-medium text-gray-700">Sigue estos pasos:</p>
+                        <ol className="text-sm text-gray-600 space-y-2 list-decimal list-inside">
+                          <li>Haz clic en el icono de candado <span className="inline-flex items-center px-1 py-0.5 bg-gray-100 rounded text-xs">🔒</span> en la barra de direcciones</li>
+                          <li>Busca la opción <strong>"Cámara"</strong></li>
+                          <li>Cámbiala a <strong>"Permitir"</strong></li>
+                          <li>Recarga la página o haz clic en "Reintentar"</li>
+                        </ol>
+                        <div className="mt-4 p-3 bg-gray-100 rounded-lg">
+                          <p className="text-xs text-gray-500 mb-2">O copia esta dirección en tu navegador:</p>
+                          <code className="text-xs bg-white px-2 py-1 rounded border block break-all">
+                            {getBrowserName() === 'chrome' ? 'chrome://settings/content/camera' : 'edge://settings/content/camera'}
+                          </code>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Instrucciones para Firefox */}
+                    {getBrowserName() === 'firefox' && (
+                      <div className="space-y-3">
+                        <p className="text-sm font-medium text-gray-700">Sigue estos pasos:</p>
+                        <ol className="text-sm text-gray-600 space-y-2 list-decimal list-inside">
+                          <li>Haz clic en el icono de escudo/candado en la barra de direcciones</li>
+                          <li>Haz clic en <strong>"Permisos"</strong></li>
+                          <li>Busca <strong>"Usar la cámara"</strong> y haz clic en la X para quitar el bloqueo</li>
+                          <li>Recarga la página o haz clic en "Reintentar"</li>
+                        </ol>
+                      </div>
+                    )}
+
+                    {/* Instrucciones para Safari */}
+                    {getBrowserName() === 'safari' && (
+                      <div className="space-y-3">
+                        <p className="text-sm font-medium text-gray-700">Sigue estos pasos:</p>
+                        <ol className="text-sm text-gray-600 space-y-2 list-decimal list-inside">
+                          <li>Ve a <strong>Safari → Preferencias → Sitios web</strong></li>
+                          <li>Selecciona <strong>"Cámara"</strong> en el menú izquierdo</li>
+                          <li>Busca este sitio y cámbialo a <strong>"Permitir"</strong></li>
+                          <li>Recarga la página</li>
+                        </ol>
+                      </div>
+                    )}
+
+                    {/* Instrucciones genéricas */}
+                    {getBrowserName() === 'otro' && (
+                      <div className="space-y-3">
+                        <p className="text-sm font-medium text-gray-700">Sigue estos pasos:</p>
+                        <ol className="text-sm text-gray-600 space-y-2 list-decimal list-inside">
+                          <li>Busca el icono de candado o configuración en la barra de direcciones</li>
+                          <li>Busca los permisos del sitio o configuración de cámara</li>
+                          <li>Permite el acceso a la cámara para este sitio</li>
+                          <li>Recarga la página</li>
+                        </ol>
+                      </div>
+                    )}
+
+                    <div className="mt-6 flex gap-3">
+                      <button
+                        onClick={() => setShowPermissionHelp(false)}
+                        className="flex-1 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                      >
+                        Cancelar
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowPermissionHelp(false);
+                          startCamera();
+                        }}
+                        className="flex-1 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+                      >
+                        Reintentar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Área de cámara/preview */}
             {!photoPreview ? (
