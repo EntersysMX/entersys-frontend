@@ -538,29 +538,40 @@ export default function FormularioCursoSeguridad() {
       }
       setIsCameraActive(true);
     } catch (err) {
-      console.error('Error al acceder a la cámara:', err);
-      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-        // El usuario bloqueó el permiso - mostrar modal de ayuda
-        setShowPermissionHelp(true);
-      } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
-        setCameraError('No se encontró ninguna cámara en tu dispositivo.');
-      } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
-        setCameraError('La cámara está siendo usada por otra aplicación. Ciérrala e intenta de nuevo.');
-      } else if (err.name === 'OverconstrainedError') {
-        // Intentar con constraints más simples
+      console.error('Error al acceder a la cámara:', err.name, err.message);
+
+      // Intentar con constraints más simples primero
+      if (err.name === 'OverconstrainedError' || err.name === 'ConstraintNotSatisfiedError') {
         try {
           const simpleStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
           streamRef.current = simpleStream;
           if (videoRef.current) {
             videoRef.current.srcObject = simpleStream;
+            await videoRef.current.play();
           }
           setIsCameraActive(true);
           return;
         } catch (e) {
-          setCameraError('Error al acceder a la cámara.');
+          console.error('Error con constraints simples:', e.name, e.message);
         }
+      }
+
+      // Manejar errores específicos
+      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+        setShowPermissionHelp(true);
+      } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+        setCameraError('No se encontró ninguna cámara en tu dispositivo.');
+      } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
+        setCameraError('La cámara está ocupada. Cierra otras apps que la usen e intenta de nuevo.');
+      } else if (err.name === 'AbortError') {
+        setCameraError('Se canceló el acceso a la cámara. Intenta de nuevo.');
+      } else if (err.name === 'SecurityError') {
+        setCameraError('Error de seguridad. Asegúrate de usar HTTPS.');
+      } else if (err.name === 'TypeError') {
+        setCameraError('Tu navegador no soporta acceso a la cámara.');
       } else {
-        setCameraError('Error al acceder a la cámara. Verifica los permisos.');
+        // Mostrar error real para diagnóstico
+        setCameraError(`Error: ${err.name || 'Desconocido'} - ${err.message || 'Intenta recargar la página'}`);
       }
     }
   }, [isMobile]);
