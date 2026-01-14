@@ -12,7 +12,7 @@
  * - Máximo 3 intentos por RFC
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { BiLogoFacebookCircle, BiLogoInstagram, BiLogoLinkedinSquare, BiLogoYoutube } from 'react-icons/bi';
@@ -393,10 +393,15 @@ export default function FormularioCursoSeguridad() {
     email: ''
   });
 
-  // Estado para foto de credencial
+  // Estado para foto de credencial (captura con cámara)
   const [photoFile, setPhotoFile] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(null);
   const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
+  const [isCameraActive, setIsCameraActive] = useState(false);
+  const [cameraError, setCameraError] = useState(null);
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+  const streamRef = useRef(null);
 
   const [answers, setAnswers] = useState({});
   const [currentStep, setCurrentStep] = useState(1); // 1: datos, 2: examen, 3: resultado
@@ -485,39 +490,92 @@ export default function FormularioCursoSeguridad() {
     }
   };
 
-  // Manejar cambio de foto
-  const handlePhotoChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  // Iniciar cámara
+  const startCamera = useCallback(async () => {
+    setCameraError(null);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: 'user', // Cámara frontal
+          width: { ideal: 640 },
+          height: { ideal: 800 }
+        },
+        audio: false
+      });
 
-    // Validar tipo de archivo
-    if (!file.type.startsWith('image/')) {
-      setErrors(prev => ({ ...prev, photo: 'Por favor selecciona una imagen válida (JPG, PNG)' }));
-      return;
+      streamRef.current = stream;
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+      setIsCameraActive(true);
+    } catch (err) {
+      console.error('Error al acceder a la cámara:', err);
+      if (err.name === 'NotAllowedError') {
+        setCameraError('Permiso de cámara denegado. Por favor permite el acceso a la cámara en tu navegador.');
+      } else if (err.name === 'NotFoundError') {
+        setCameraError('No se encontró ninguna cámara en tu dispositivo.');
+      } else {
+        setCameraError('Error al acceder a la cámara. Verifica que no esté siendo usada por otra aplicación.');
+      }
     }
+  }, []);
 
-    // Validar tamaño (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      setErrors(prev => ({ ...prev, photo: 'La imagen no debe exceder 5MB' }));
-      return;
+  // Detener cámara
+  const stopCamera = useCallback(() => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current = null;
     }
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
+    }
+    setIsCameraActive(false);
+  }, []);
 
-    setPhotoFile(file);
-    setErrors(prev => ({ ...prev, photo: null }));
+  // Capturar foto desde el video
+  const capturePhoto = useCallback(() => {
+    if (!videoRef.current || !canvasRef.current) return;
 
-    // Crear preview
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setPhotoPreview(reader.result);
-    };
-    reader.readAsDataURL(file);
-  };
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
 
-  // Eliminar foto seleccionada
-  const handleRemovePhoto = () => {
+    // Configurar canvas con las dimensiones del video
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const ctx = canvas.getContext('2d');
+    // Voltear horizontalmente para efecto espejo
+    ctx.translate(canvas.width, 0);
+    ctx.scale(-1, 1);
+    ctx.drawImage(video, 0, 0);
+
+    // Convertir canvas a blob
+    canvas.toBlob((blob) => {
+      if (blob) {
+        // Crear archivo desde blob
+        const file = new File([blob], `foto_${Date.now()}.jpg`, { type: 'image/jpeg' });
+        setPhotoFile(file);
+        setPhotoPreview(canvas.toDataURL('image/jpeg', 0.9));
+        setErrors(prev => ({ ...prev, photo: null }));
+        stopCamera();
+      }
+    }, 'image/jpeg', 0.9);
+  }, [stopCamera]);
+
+  // Eliminar foto y permitir tomar otra
+  const handleRemovePhoto = useCallback(() => {
     setPhotoFile(null);
     setPhotoPreview(null);
-  };
+  }, []);
+
+  // Limpiar cámara al desmontar componente
+  useEffect(() => {
+    return () => {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, []);
 
   // Subir foto a GCS
   const uploadPhoto = async () => {
@@ -908,92 +966,136 @@ export default function FormularioCursoSeguridad() {
 
             {/* Requisitos de la foto */}
             <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-sm font-medium text-blue-800 mb-2">Requisitos de la foto:</p>
+              <p className="text-sm font-medium text-blue-800 mb-2">Para tomar tu foto:</p>
               <ul className="text-sm text-blue-700 space-y-1">
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  Buena iluminación (preferentemente luz natural)
+                  Ubícate en un lugar con buena iluminación
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  Rostro centrado y visible (sin lentes oscuros ni gorra)
+                  Centra tu rostro (sin lentes oscuros ni gorra)
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  Fondo liso (preferentemente blanco o claro)
+                  Busca un fondo liso (preferentemente claro)
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  Formato JPG o PNG (máximo 5MB)
+                  Permite el acceso a la cámara cuando se solicite
                 </li>
               </ul>
             </div>
 
-            {/* Área de carga/preview */}
+            {/* Canvas oculto para captura */}
+            <canvas ref={canvasRef} className="hidden" />
+
+            {/* Área de cámara/preview */}
             {!photoPreview ? (
               <div className="relative">
-                <input
-                  type="file"
-                  accept="image/jpeg,image/png,image/jpg"
-                  onChange={handlePhotoChange}
-                  className="hidden"
-                  id="photo-upload"
-                />
-                <label
-                  htmlFor="photo-upload"
-                  className={`flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
-                    errors.photo
-                      ? 'border-red-400 bg-red-50 hover:bg-red-100'
-                      : 'border-gray-300 bg-gray-50 hover:bg-gray-100'
-                  }`}
-                >
-                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                    <svg className={`w-12 h-12 mb-3 ${errors.photo ? 'text-red-400' : 'text-gray-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <p className="mb-2 text-sm text-gray-500">
-                      <span className="font-semibold">Haz clic para subir</span> o arrastra tu foto
-                    </p>
-                    <p className="text-xs text-gray-400">JPG o PNG (máx. 5MB)</p>
-                  </div>
-                </label>
-              </div>
-            ) : (
-              <div className="relative">
-                <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                  <img
-                    src={photoPreview}
-                    alt="Preview de foto"
-                    className="w-32 h-40 object-cover rounded-lg border-2 border-gray-300 shadow-sm"
-                  />
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-gray-700 mb-1">Foto seleccionada</p>
-                    <p className="text-xs text-gray-500 mb-3">{photoFile?.name}</p>
+                {!isCameraActive ? (
+                  // Botón para iniciar cámara
+                  <div className="flex flex-col items-center">
                     <button
                       type="button"
-                      onClick={handleRemovePhoto}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition-colors"
+                      onClick={startCamera}
+                      className={`flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg transition-colors ${
+                        errors.photo
+                          ? 'border-red-400 bg-red-50 hover:bg-red-100'
+                          : 'border-gray-300 bg-gray-50 hover:bg-gray-100'
+                      }`}
                     >
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      <svg className={`w-16 h-16 mb-4 ${errors.photo ? 'text-red-400' : 'text-gray-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
-                      Eliminar
+                      <p className="text-lg font-semibold text-gray-700 mb-1">Tomar Foto</p>
+                      <p className="text-sm text-gray-500">Haz clic para activar la cámara</p>
                     </button>
+                    {cameraError && (
+                      <p className="mt-3 text-sm text-red-500 text-center">{cameraError}</p>
+                    )}
+                  </div>
+                ) : (
+                  // Vista de cámara activa
+                  <div className="flex flex-col items-center">
+                    <div className="relative w-full max-w-sm mx-auto">
+                      <video
+                        ref={videoRef}
+                        autoPlay
+                        playsInline
+                        muted
+                        className="w-full h-80 object-cover rounded-lg border-4 border-blue-500 shadow-lg"
+                        style={{ transform: 'scaleX(-1)' }}
+                      />
+                      {/* Guía de encuadre */}
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div className="w-40 h-52 border-2 border-white border-dashed rounded-full opacity-50"></div>
+                      </div>
+                    </div>
+                    <p className="mt-3 text-sm text-gray-600 text-center">Centra tu rostro dentro del óvalo</p>
+                    <div className="flex gap-3 mt-4">
+                      <button
+                        type="button"
+                        onClick={stopCamera}
+                        className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors"
+                      >
+                        Cancelar
+                      </button>
+                      <button
+                        type="button"
+                        onClick={capturePhoto}
+                        className="px-6 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+                      >
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                          <circle cx="12" cy="13" r="3" />
+                        </svg>
+                        Capturar
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              // Preview de foto capturada
+              <div className="flex flex-col items-center">
+                <div className="relative">
+                  <img
+                    src={photoPreview}
+                    alt="Foto capturada"
+                    className="w-48 h-60 object-cover rounded-lg border-4 border-green-500 shadow-lg"
+                  />
+                  <div className="absolute -top-2 -right-2 bg-green-500 rounded-full p-1">
+                    <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
                   </div>
                 </div>
+                <p className="mt-3 text-sm font-medium text-green-700">Foto capturada correctamente</p>
+                <button
+                  type="button"
+                  onClick={handleRemovePhoto}
+                  className="mt-3 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  Tomar otra foto
+                </button>
               </div>
             )}
 
-            {errors.photo && (
-              <p className="mt-2 text-sm text-red-500">{errors.photo}</p>
+            {errors.photo && !isCameraActive && (
+              <p className="mt-3 text-sm text-red-500 text-center">{errors.photo}</p>
             )}
           </div>
         </div>
