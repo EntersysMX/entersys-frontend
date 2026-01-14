@@ -489,7 +489,7 @@ export default function FormularioCursoSeguridad() {
     }
   };
 
-  // Detectar navegador
+  // Detectar navegador y dispositivo
   const getBrowserName = useCallback(() => {
     const userAgent = navigator.userAgent.toLowerCase();
     if (userAgent.includes('edg')) return 'edge';
@@ -499,27 +499,42 @@ export default function FormularioCursoSeguridad() {
     return 'otro';
   }, []);
 
+  const isMobile = useCallback(() => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }, []);
+
+  const isIOS = useCallback(() => {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }, []);
+
   // Iniciar cámara
   const startCamera = useCallback(async () => {
     setCameraError(null);
     setShowPermissionHelp(false);
 
     try {
-      // Siempre intentar solicitar acceso a la cámara
-      // El navegador mostrará el prompt nativo de "Permitir/Bloquear" si es la primera vez
-      // o si el usuario no ha bloqueado permanentemente el permiso
-      const stream = await navigator.mediaDevices.getUserMedia({
+      // Configuración optimizada para móviles y escritorio
+      const constraints = {
         video: {
           facingMode: 'user', // Cámara frontal
-          width: { ideal: 640 },
-          height: { ideal: 800 }
+          width: { ideal: isMobile() ? 480 : 640 },
+          height: { ideal: isMobile() ? 640 : 800 }
         },
         audio: false
-      });
+      };
+
+      // Solicitar acceso a la cámara - el navegador mostrará el prompt nativo
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
 
       streamRef.current = stream;
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
+        // En iOS, necesitamos play() explícito
+        try {
+          await videoRef.current.play();
+        } catch (playErr) {
+          console.log('Autoplay handled by browser');
+        }
       }
       setIsCameraActive(true);
     } catch (err) {
@@ -531,11 +546,24 @@ export default function FormularioCursoSeguridad() {
         setCameraError('No se encontró ninguna cámara en tu dispositivo.');
       } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
         setCameraError('La cámara está siendo usada por otra aplicación. Ciérrala e intenta de nuevo.');
+      } else if (err.name === 'OverconstrainedError') {
+        // Intentar con constraints más simples
+        try {
+          const simpleStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+          streamRef.current = simpleStream;
+          if (videoRef.current) {
+            videoRef.current.srcObject = simpleStream;
+          }
+          setIsCameraActive(true);
+          return;
+        } catch (e) {
+          setCameraError('Error al acceder a la cámara.');
+        }
       } else {
-        setCameraError('Error al acceder a la cámara. Verifica los permisos de tu navegador.');
+        setCameraError('Error al acceder a la cámara. Verifica los permisos.');
       }
     }
-  }, []);
+  }, [isMobile]);
 
   // Detener cámara
   const stopCamera = useCallback(() => {
@@ -1084,7 +1112,7 @@ export default function FormularioCursoSeguridad() {
                     )}
 
                     {/* Instrucciones genéricas */}
-                    {getBrowserName() === 'otro' && (
+                    {getBrowserName() === 'otro' && !isMobile() && (
                       <div className="space-y-3">
                         <p className="text-sm font-medium text-gray-700">Sigue estos pasos:</p>
                         <ol className="text-sm text-gray-600 space-y-2 list-decimal list-inside">
@@ -1093,6 +1121,43 @@ export default function FormularioCursoSeguridad() {
                           <li>Permite el acceso a la cámara para este sitio</li>
                           <li>Recarga la página</li>
                         </ol>
+                      </div>
+                    )}
+
+                    {/* Instrucciones para iOS (iPhone/iPad) */}
+                    {isIOS() && (
+                      <div className="space-y-3">
+                        <p className="text-sm font-medium text-gray-700">En tu iPhone/iPad:</p>
+                        <ol className="text-sm text-gray-600 space-y-2 list-decimal list-inside">
+                          <li>Abre <strong>Configuración</strong> (⚙️) de tu dispositivo</li>
+                          <li>Busca <strong>Safari</strong> (o el navegador que uses)</li>
+                          <li>Toca <strong>Cámara</strong></li>
+                          <li>Selecciona <strong>"Permitir"</strong></li>
+                          <li>Regresa aquí y toca "Reintentar"</li>
+                        </ol>
+                        <div className="mt-3 p-3 bg-blue-50 rounded-lg">
+                          <p className="text-xs text-blue-700">
+                            💡 También puedes tocar el icono <strong>"aA"</strong> en la barra de Safari y seleccionar "Configuración del sitio web"
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Instrucciones para Android */}
+                    {isMobile() && !isIOS() && (
+                      <div className="space-y-3">
+                        <p className="text-sm font-medium text-gray-700">En tu dispositivo Android:</p>
+                        <ol className="text-sm text-gray-600 space-y-2 list-decimal list-inside">
+                          <li>Toca el icono de <strong>candado 🔒</strong> en la barra de direcciones</li>
+                          <li>Toca <strong>"Permisos"</strong></li>
+                          <li>Activa el permiso de <strong>"Cámara"</strong></li>
+                          <li>Toca "Reintentar" abajo</li>
+                        </ol>
+                        <div className="mt-3 p-3 bg-blue-50 rounded-lg">
+                          <p className="text-xs text-blue-700">
+                            💡 Si no aparece, ve a Configuración del teléfono → Apps → Chrome → Permisos → Cámara
+                          </p>
+                        </div>
                       </div>
                     )}
 
