@@ -116,7 +116,7 @@ const CertificacionSeguridad = () => {
     );
   }
 
-  const { status, nombre, vencimiento, message } = certificateData;
+  const { status, nombre, vencimiento, message, url_imagen } = certificateData;
 
   // Format expiration date for display
   const formatDate = (dateStr) => {
@@ -328,6 +328,16 @@ const CertificacionSeguridad = () => {
             <h1 className="text-4xl font-bold text-gray-900 mb-6">Onboarding Aprobado</h1>
 
             <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6 shadow-sm">
+              {/* Foto de credencial */}
+              {url_imagen && (
+                <div className="mb-4 flex justify-center">
+                  <img
+                    src={url_imagen}
+                    alt={`Foto de ${nombre}`}
+                    className="w-32 h-40 object-cover rounded-lg border-2 border-gray-200 shadow-md"
+                  />
+                </div>
+              )}
               <p className="text-2xl font-semibold text-gray-900 mb-2">{nombre}</p>
               <p className="text-gray-600">Vigencia hasta: <span className="text-green-600 font-semibold">{formattedExpiration}</span></p>
             </div>

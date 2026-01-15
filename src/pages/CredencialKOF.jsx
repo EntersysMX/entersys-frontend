@@ -133,7 +133,7 @@ const CredencialKOF = () => {
     );
   }
 
-  const { status, nombre, proveedor, tipo_servicio, nss, cert_uuid, vencimiento, fecha_emision, url_imagen, is_expired } = credentialData;
+  const { status, nombre, proveedor, tipo_servicio, nss, rfc_empresa, cert_uuid, vencimiento, fecha_emision, url_imagen, is_expired } = credentialData;
   const certificateUrl = getCertificateUrl(cert_uuid);
 
   // URL de foto: usar la del colaborador si existe, sino la default
@@ -267,6 +267,24 @@ const CredencialKOF = () => {
                       )}
                     </div>
                   </div>
+
+                  {/* NSS y RFC Empresa */}
+                  {(nss || rfc_empresa) && (
+                    <div className="mt-4 grid grid-cols-2 gap-4">
+                      {nss && (
+                        <div>
+                          <p className="text-gray-500 text-xs uppercase tracking-wide">NSS</p>
+                          <p className="text-gray-300 text-sm font-mono">{nss}</p>
+                        </div>
+                      )}
+                      {rfc_empresa && (
+                        <div>
+                          <p className="text-gray-500 text-xs uppercase tracking-wide">RFC Empresa</p>
+                          <p className="text-gray-300 text-sm font-mono">{rfc_empresa}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
 
                   {/* Divider */}
                   <div className="my-6 border-t border-gray-700 border-dashed"></div>

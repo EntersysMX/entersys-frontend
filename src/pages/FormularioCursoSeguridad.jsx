@@ -513,6 +513,32 @@ export default function FormularioCursoSeguridad() {
     setShowPermissionHelp(false);
 
     try {
+      // Verificar el estado actual del permiso para logging
+      let permissionStatus = 'unknown';
+      try {
+        if (navigator.permissions && navigator.permissions.query) {
+          const result = await navigator.permissions.query({ name: 'camera' });
+          permissionStatus = result.state;
+        }
+      } catch (e) {
+        permissionStatus = 'query-not-supported';
+      }
+
+      console.log('=== DIAGNÓSTICO DE CÁMARA ===');
+      console.log('Estado del permiso:', permissionStatus);
+      console.log('Navegador:', navigator.userAgent);
+      console.log('Es móvil:', isMobile());
+      console.log('Protocolo:', window.location.protocol);
+
+
+      // Si el permiso ya está denegado, mostrar mensaje específico
+      if (permissionStatus === 'denied') {
+        console.log('⚠️ El permiso de cámara está BLOQUEADO. El usuario debe habilitarlo manualmente.');
+        setCameraError('El permiso de cámara está bloqueado. Debes habilitarlo manualmente en la configuración del navegador.');
+        setShowPermissionHelp(true);
+        return;
+      }
+
       // Configuración optimizada para móviles y escritorio
       const constraints = {
         video: {
@@ -523,20 +549,26 @@ export default function FormularioCursoSeguridad() {
         audio: false
       };
 
-      // Solicitar acceso a la cámara - el navegador mostrará el prompt nativo
+      console.log('Solicitando acceso a cámara con constraints:', JSON.stringify(constraints));
+      console.log('El navegador debería mostrar el diálogo nativo ahora...');
+
+      // Llamar a getUserMedia - esto mostrará el diálogo nativo del navegador
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      console.log('✅ Acceso a cámara concedido!');
 
       streamRef.current = stream;
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        // En iOS, necesitamos play() explícito
-        try {
-          await videoRef.current.play();
-        } catch (playErr) {
-          console.log('Autoplay handled by browser');
-        }
-      }
+      // Primero activamos la cámara para que el elemento video se renderice
       setIsCameraActive(true);
+
+      // Usamos setTimeout para esperar a que el video se renderice
+      setTimeout(() => {
+        if (videoRef.current && streamRef.current) {
+          videoRef.current.srcObject = streamRef.current;
+          videoRef.current.play().catch(err => {
+            console.log('Autoplay handled by browser:', err.message);
+          });
+        }
+      }, 100);
     } catch (err) {
       console.error('Error al acceder a la cámara:', err.name, err.message);
 
@@ -545,11 +577,13 @@ export default function FormularioCursoSeguridad() {
         try {
           const simpleStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
           streamRef.current = simpleStream;
-          if (videoRef.current) {
-            videoRef.current.srcObject = simpleStream;
-            await videoRef.current.play();
-          }
           setIsCameraActive(true);
+          setTimeout(() => {
+            if (videoRef.current && streamRef.current) {
+              videoRef.current.srcObject = streamRef.current;
+              videoRef.current.play().catch(err => console.log('Autoplay:', err.message));
+            }
+          }, 100);
           return;
         } catch (e) {
           console.error('Error con constraints simples:', e.name, e.message);
@@ -1071,10 +1105,19 @@ export default function FormularioCursoSeguridad() {
                       </button>
                     </div>
 
-                    <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                      <p className="text-sm text-amber-800">
-                        Para tomar tu foto de credencial, necesitamos acceso a tu cámara.
+                    <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                      <p className="text-sm text-red-800 font-medium mb-1">
+                        El permiso de cámara está BLOQUEADO
                       </p>
+                      <p className="text-xs text-red-700">
+                        El navegador no puede mostrar el diálogo de permiso porque fue bloqueado anteriormente.
+                        Debes habilitarlo manualmente siguiendo los pasos de abajo.
+                      </p>
+                      {cameraError && (
+                        <p className="text-xs text-red-600 mt-2 font-mono bg-red-100 p-1 rounded">
+                          {cameraError}
+                        </p>
+                      )}
                     </div>
 
                     {/* Instrucciones para Chrome/Edge */}
