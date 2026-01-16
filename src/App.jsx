@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense, lazy } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import PageTransition from './components/PageTransition'
 import ErrorBoundary from './components/ui/ErrorBoundary'
@@ -59,6 +59,9 @@ const NotFound = lazy(() => import('./pages/NotFound'))
 const PageLoader = () => <SimpleLoader />
 
 function App() {
+  // Obtener ubicación actual para resetear ErrorBoundary al navegar
+  const location = useLocation();
+
   // Inicializar analytics, sentry y web vitals cuando la app se carga
   useEffect(() => {
     // Inicializar servicios
@@ -99,7 +102,7 @@ function App() {
   }, []);
 
   return (
-    <ErrorBoundary>
+    <ErrorBoundary key={location.pathname}>
       <div className="App">
         {/* Skip Link para accesibilidad */}
         <SkipLink />
