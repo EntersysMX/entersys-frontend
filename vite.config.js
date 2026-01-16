@@ -44,6 +44,8 @@ export default defineConfig({
         ]
       },
       workbox: {
+        skipWaiting: true,      // Activa el nuevo SW inmediatamente
+        clientsClaim: true,     // Toma control de los clientes existentes
         globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,svg,webp}'],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MB limit for large images
         runtimeCaching: [
