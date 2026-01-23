@@ -227,13 +227,8 @@ const SecureVideoPlayer = ({
       // Si intenta ir más adelante del máximo permitido, regresarlo inmediatamente
       if (video.currentTime > maxAllowed + 0.5) {
         console.log(`[Video] Seeking bloqueado: intentó ir a ${video.currentTime.toFixed(1)}s, max permitido: ${maxAllowed.toFixed(1)}s`);
-        // Pausar temporalmente para evitar flicker
-        const wasPlaying = !video.paused;
-        video.pause();
+        // Forzar regreso inmediato sin pausar para evitar evasión
         video.currentTime = maxAllowed;
-        if (wasPlaying) {
-          video.play().catch(() => {});
-        }
       }
     }
   };
@@ -251,6 +246,10 @@ const SecureVideoPlayer = ({
       isSeekingRef.current = false;
       if (video) {
         previousTimeRef.current = video.currentTime;
+        // Verificación adicional después del delay
+        if (video.currentTime > maxAllowed + 0.5) {
+          video.currentTime = maxAllowed;
+        }
       }
     }, 100);
   };
@@ -363,6 +362,34 @@ const SecureVideoPlayer = ({
     e.preventDefault();
   };
 
+  // Prevenir doble clic que permite adelantar el video
+  const handleDoubleClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('[Video] Doble clic bloqueado');
+  };
+
+  // Bloquear clics en la barra de progreso que intenten adelantar
+  const handleVideoClick = (e) => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Obtener la posición del clic relativa al video
+    const rect = video.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const clickPercent = clickX / rect.width;
+    const clickTime = clickPercent * video.duration;
+
+    // Si el clic intenta ir más allá del máximo permitido, bloquearlo
+    if (clickTime > maxWatchedTimeRef.current + 1) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log(`[Video] Clic en barra bloqueado: intentó ir a ${clickTime.toFixed(1)}s, max: ${maxWatchedTimeRef.current.toFixed(1)}s`);
+      // Forzar el tiempo al máximo permitido
+      video.currentTime = maxWatchedTimeRef.current;
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64 bg-gray-900 rounded-lg">
@@ -402,6 +429,8 @@ const SecureVideoPlayer = ({
           onPause={handlePause}
           onEnded={handleEnded}
           onRateChange={handleRateChange}
+          onDoubleClick={handleDoubleClick}
+          onClick={handleVideoClick}
           controlsList="nodownload noplaybackrate"
           disablePictureInPicture
           playsInline
