@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { config } from '../config/environment';
 
 const API_BASE_URL = config.urls.api;
-const HEARTBEAT_INTERVAL = 5000; // 5 segundos
+const HEARTBEAT_INTERVAL = 15000; // 15 segundos - optimizado para reducir carga del servidor 3x
 
 const SecureVideoPlayer = ({
   videoSrc,
