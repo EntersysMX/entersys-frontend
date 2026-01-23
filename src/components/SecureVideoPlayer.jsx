@@ -143,6 +143,19 @@ const SecureVideoPlayer = ({
     };
   }, [isPlaying, userId, sendHeartbeat]);
 
+  // Verificador constante anti-skip - se ejecuta cada 100ms para atrapar clics rápidos
+  useEffect(() => {
+    const antiSkipInterval = setInterval(() => {
+      const video = videoRef.current;
+      if (video && video.currentTime > maxWatchedTimeRef.current + 0.5) {
+        console.log(`[AntiSkip] Forzando regreso: ${video.currentTime.toFixed(1)}s -> ${maxWatchedTimeRef.current.toFixed(1)}s`);
+        video.currentTime = maxWatchedTimeRef.current;
+      }
+    }, 100); // Verificar cada 100ms
+
+    return () => clearInterval(antiSkipInterval);
+  }, []);
+
   // Manejar evento de metadata cargada
   const handleLoadedMetadata = () => {
     const video = videoRef.current;
