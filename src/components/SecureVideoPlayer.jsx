@@ -426,12 +426,12 @@ const SecureVideoPlayer = ({
 
       {/* Video Container */}
       <div
-        className="relative bg-black rounded-lg overflow-hidden shadow-lg"
+        className="relative bg-black rounded-lg overflow-hidden shadow-lg group"
         onContextMenu={handleContextMenu}
       >
         <video
           ref={videoRef}
-          className="w-full aspect-video"
+          className="w-full aspect-video cursor-pointer"
           src={videoSrc}
           poster={posterImage}
           onLoadedMetadata={handleLoadedMetadata}
@@ -442,21 +442,117 @@ const SecureVideoPlayer = ({
           onPause={handlePause}
           onEnded={handleEnded}
           onRateChange={handleRateChange}
-          onDoubleClick={handleDoubleClick}
-          onClick={handleVideoClick}
+          onClick={() => {
+            const video = videoRef.current;
+            if (video) {
+              if (video.paused) {
+                video.play().catch(() => {});
+              } else {
+                video.pause();
+              }
+            }
+          }}
           controlsList="nodownload noplaybackrate"
           disablePictureInPicture
           playsInline
-          controls
         >
           Tu navegador no soporta el elemento de video.
         </video>
 
-        {/* Progress overlay mostrando máximo permitido */}
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-700">
+        {/* Controles personalizados - sin barra de avance */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="flex items-center justify-between">
+            {/* Play/Pause */}
+            <button
+              onClick={() => {
+                const video = videoRef.current;
+                if (video) {
+                  if (video.paused) {
+                    video.play().catch(() => {});
+                  } else {
+                    video.pause();
+                  }
+                }
+              }}
+              className="text-white hover:text-green-400 transition-colors"
+              aria-label={isPlaying ? 'Pausar' : 'Reproducir'}
+            >
+              {isPlaying ? (
+                <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                </svg>
+              ) : (
+                <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              )}
+            </button>
+
+            {/* Tiempo */}
+            <div className="text-white text-sm font-mono">
+              {formatTime(currentTime)} / {formatTime(duration)}
+            </div>
+
+            {/* Volumen */}
+            <button
+              onClick={() => {
+                const video = videoRef.current;
+                if (video) {
+                  video.muted = !video.muted;
+                }
+              }}
+              className="text-white hover:text-green-400 transition-colors"
+              aria-label="Volumen"
+            >
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+              </svg>
+            </button>
+
+            {/* Pantalla completa */}
+            <button
+              onClick={() => {
+                const video = videoRef.current;
+                if (video) {
+                  if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                  } else {
+                    video.requestFullscreen().catch(() => {});
+                  }
+                }
+              }}
+              className="text-white hover:text-green-400 transition-colors"
+              aria-label="Pantalla completa"
+            >
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Icono de play grande en el centro cuando está pausado */}
+        {!isPlaying && (
+          <div
+            className="absolute inset-0 flex items-center justify-center cursor-pointer"
+            onClick={() => {
+              const video = videoRef.current;
+              if (video) video.play().catch(() => {});
+            }}
+          >
+            <div className="bg-black/50 rounded-full p-4">
+              <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
+        )}
+
+        {/* Barra de progreso visual (solo lectura, no clickeable) */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-700 pointer-events-none">
           <div
             className="h-full bg-green-500 transition-all"
-            style={{ width: `${(maxWatchedTimeRef.current / duration) * 100}%` }}
+            style={{ width: `${(currentTime / (duration || 1)) * 100}%` }}
           />
         </div>
       </div>
