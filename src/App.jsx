@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast'
 import PageTransition from './components/PageTransition'
 import ErrorBoundary from './components/ui/ErrorBoundary'
 import WhatsAppFloatButton from './components/WhatsAppFloatButton'
+import SupportFloatButton from './components/SupportFloatButton'
 import ScrollToTop from './components/ScrollToTop'
 import SkipLink from './components/ui/SkipLink'
 import SimpleLoader from './components/ui/SimpleLoader'
@@ -146,6 +147,9 @@ function App() {
 
           {/* NUEVO: WhatsApp Float Button - NO ALTERAR DISEÑO EXISTENTE */}
           <WhatsAppFloatButton />
+
+          {/* Botón flotante de soporte - Solo en páginas del curso */}
+          <SupportFloatButton />
 
           {/* Toast Notifications - Sistema de notificaciones global */}
           <Toaster

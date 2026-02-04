@@ -390,7 +390,8 @@ export default function FormularioCursoSeguridad() {
     nss: '',
     tipo_servicio: '',
     proveedor: '',
-    email: ''
+    email: '',
+    email_confirm: ''
   });
 
   // Estado para foto de credencial (captura con cámara)
@@ -414,6 +415,7 @@ export default function FormularioCursoSeguridad() {
   const [examStatus, setExamStatus] = useState(null);
   const [statusError, setStatusError] = useState(null);
   const [isBlocked, setIsBlocked] = useState(false); // Nuevo estado para bloqueo
+  const [isDownloadingPDF, setIsDownloadingPDF] = useState(false);
 
   // Preparar preguntas con orden aleatorio por sección y opciones aleatorias
   const questionsWithShuffledOptions = useMemo(() => {
@@ -445,28 +447,66 @@ export default function FormularioCursoSeguridad() {
     return sectionQuestions.filter(q => answers[q.id]).length;
   };
 
+  // Regex para validación de RFC mexicano (persona física 13 chars, moral 12 chars)
+  const RFC_REGEX = /^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/i;
+
   // Validar datos personales
   const validatePersonalData = () => {
     const newErrors = {};
 
+    // Nombre: requerido + solo letras, espacios y acentos
     if (!formData.nombre_completo.trim()) {
       newErrors.nombre_completo = 'El nombre es obligatorio';
+    } else if (!/^[\p{L}\s]+$/u.test(formData.nombre_completo.trim())) {
+      newErrors.nombre_completo = 'El nombre solo debe contener letras y espacios';
     }
 
+    // RFC Colaborador: requerido + regex mexicano + 12 o 13 chars
     if (!formData.rfc_colaborador.trim()) {
       newErrors.rfc_colaborador = 'El RFC es obligatorio';
-    } else if (formData.rfc_colaborador.length < 10) {
-      newErrors.rfc_colaborador = 'El RFC debe tener al menos 10 caracteres';
+    } else {
+      const rfcVal = formData.rfc_colaborador.trim().toUpperCase();
+      if (rfcVal.length !== 12 && rfcVal.length !== 13) {
+        newErrors.rfc_colaborador = 'El RFC debe tener 12 o 13 caracteres';
+      } else if (!RFC_REGEX.test(rfcVal)) {
+        newErrors.rfc_colaborador = 'Formato de RFC inválido (ej: PEGJ850101XXX)';
+      }
     }
 
+    // RFC Empresa: opcional, pero si se llena, validar formato
+    if (formData.rfc_empresa.trim()) {
+      const rfcEmpVal = formData.rfc_empresa.trim().toUpperCase();
+      if (rfcEmpVal.length !== 12 && rfcEmpVal.length !== 13) {
+        newErrors.rfc_empresa = 'El RFC debe tener 12 o 13 caracteres';
+      } else if (!RFC_REGEX.test(rfcEmpVal)) {
+        newErrors.rfc_empresa = 'Formato de RFC inválido';
+      }
+    }
+
+    // NSS: opcional, pero si se llena, debe ser exactamente 11 dígitos
+    if (formData.nss.trim()) {
+      if (!/^\d{11}$/.test(formData.nss.trim())) {
+        newErrors.nss = 'El NSS debe ser exactamente 11 dígitos numéricos';
+      }
+    }
+
+    // Proveedor: requerido
     if (!formData.proveedor.trim()) {
       newErrors.proveedor = 'El proveedor es obligatorio';
     }
 
+    // Email: requerido + validación estricta
     if (!formData.email.trim()) {
       newErrors.email = 'El email es obligatorio';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    } else if (!/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(formData.email.trim())) {
       newErrors.email = 'Ingresa un email válido';
+    }
+
+    // Email confirmación: debe coincidir con email
+    if (!formData.email_confirm.trim()) {
+      newErrors.email_confirm = 'Confirma tu correo electrónico';
+    } else if (formData.email.trim().toLowerCase() !== formData.email_confirm.trim().toLowerCase()) {
+      newErrors.email_confirm = 'Los correos electrónicos no coinciden';
     }
 
     // La foto es opcional - no validamos si existe
@@ -795,8 +835,10 @@ export default function FormularioCursoSeguridad() {
         is_correct: answers[q.id] === q.correctAnswer
       }));
 
+      // Excluir email_confirm del payload enviado al backend
+      const { email_confirm, ...formDataWithoutConfirm } = formData;
       const payload = {
-        ...formData,
+        ...formDataWithoutConfirm,
         url_imagen: photoUrl,
         answers: formattedAnswers
       };
@@ -835,6 +877,42 @@ export default function FormularioCursoSeguridad() {
   // Volver a ver el video
   const handleWatchVideo = () => {
     navigate('/curso-seguridad');
+  };
+
+  // Descargar certificado PDF
+  const handleDownloadPDF = async () => {
+    if (!formData.rfc_colaborador) return;
+
+    setIsDownloadingPDF(true);
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/v1/onboarding/download-certificate/${formData.rfc_colaborador.toUpperCase()}`
+      );
+
+      if (!response.ok) {
+        throw new Error('Error al generar el PDF');
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `certificado_${formData.rfc_colaborador.toUpperCase()}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error('Error descargando PDF:', error);
+      alert('Error al descargar el certificado PDF. Intenta de nuevo.');
+    } finally {
+      setIsDownloadingPDF(false);
+    }
+  };
+
+  // Bloquear copiar/pegar en campo de confirmación de email
+  const handleBlockPaste = (e) => {
+    e.preventDefault();
   };
 
   // Renderizar paso 1: Datos personales
@@ -972,9 +1050,14 @@ export default function FormularioCursoSeguridad() {
               value={formData.rfc_empresa}
               onChange={handleInputChange}
               maxLength={13}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent uppercase"
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent uppercase ${
+                errors.rfc_empresa ? 'border-red-500' : 'border-gray-300'
+              }`}
               placeholder="EMP850101XXX"
             />
+            {errors.rfc_empresa && (
+              <p className="mt-1 text-sm text-red-500">{errors.rfc_empresa}</p>
+            )}
           </div>
 
           {/* NSS (opcional) */}
@@ -988,9 +1071,14 @@ export default function FormularioCursoSeguridad() {
               value={formData.nss}
               onChange={handleInputChange}
               maxLength={11}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent"
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent ${
+                errors.nss ? 'border-red-500' : 'border-gray-300'
+              }`}
               placeholder="12345678901"
             />
+            {errors.nss && (
+              <p className="mt-1 text-sm text-red-500">{errors.nss}</p>
+            )}
           </div>
 
           {/* Tipo de Servicio (opcional) */}
@@ -1046,6 +1134,30 @@ export default function FormularioCursoSeguridad() {
             {errors.email && (
               <p className="mt-1 text-sm text-red-500">{errors.email}</p>
             )}
+          </div>
+
+          {/* Confirmar Email */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Confirmar Correo Electrónico <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="email"
+              name="email_confirm"
+              value={formData.email_confirm}
+              onChange={handleInputChange}
+              onPaste={handleBlockPaste}
+              onCopy={handleBlockPaste}
+              onCut={handleBlockPaste}
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent ${
+                errors.email_confirm ? 'border-red-500' : 'border-gray-300'
+              }`}
+              placeholder="Vuelve a escribir tu correo"
+            />
+            {errors.email_confirm && (
+              <p className="mt-1 text-sm text-red-500">{errors.email_confirm}</p>
+            )}
+            <p className="mt-1 text-xs text-gray-400">Escribe tu correo nuevamente para confirmar. No se permite copiar y pegar.</p>
           </div>
 
           {/* Foto para Credencial */}
@@ -1613,9 +1725,38 @@ export default function FormularioCursoSeguridad() {
             )}
 
             {approved && (
-              <div className="text-center text-green-600 p-4 bg-green-50 rounded-lg">
-                <p className="font-medium">Recibirás tu certificación por correo electrónico.</p>
-              </div>
+              <>
+                <div className="text-center text-green-600 p-4 bg-green-50 rounded-lg">
+                  <p className="font-medium">Recibirás tu certificación por correo electrónico.</p>
+                </div>
+
+                <button
+                  onClick={handleDownloadPDF}
+                  disabled={isDownloadingPDF}
+                  className={`w-full py-4 font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 ${
+                    isDownloadingPDF
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-[#093D53] text-white hover:bg-[#0b4d68]'
+                  }`}
+                >
+                  {isDownloadingPDF ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Generando PDF...
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      Descargar Certificado PDF
+                    </>
+                  )}
+                </button>
+              </>
             )}
           </div>
         </div>
