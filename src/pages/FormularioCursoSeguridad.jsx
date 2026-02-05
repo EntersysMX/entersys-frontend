@@ -473,8 +473,10 @@ export default function FormularioCursoSeguridad() {
       }
     }
 
-    // RFC Empresa: opcional, pero si se llena, validar formato
-    if (formData.rfc_empresa.trim()) {
+    // RFC Empresa: requerido + validar formato
+    if (!formData.rfc_empresa.trim()) {
+      newErrors.rfc_empresa = 'El RFC de la empresa es obligatorio';
+    } else {
       const rfcEmpVal = formData.rfc_empresa.trim().toUpperCase();
       if (rfcEmpVal.length !== 12 && rfcEmpVal.length !== 13) {
         newErrors.rfc_empresa = 'El RFC debe tener 12 o 13 caracteres';
@@ -483,11 +485,16 @@ export default function FormularioCursoSeguridad() {
       }
     }
 
-    // NSS: opcional, pero si se llena, debe ser exactamente 11 dígitos
-    if (formData.nss.trim()) {
-      if (!/^\d{11}$/.test(formData.nss.trim())) {
-        newErrors.nss = 'El NSS debe ser exactamente 11 dígitos numéricos';
-      }
+    // NSS: requerido + exactamente 11 dígitos
+    if (!formData.nss.trim()) {
+      newErrors.nss = 'El NSS es obligatorio';
+    } else if (!/^\d{11}$/.test(formData.nss.trim())) {
+      newErrors.nss = 'El NSS debe ser exactamente 11 dígitos numéricos';
+    }
+
+    // Tipo de servicio: requerido
+    if (!formData.tipo_servicio.trim()) {
+      newErrors.tipo_servicio = 'El tipo de servicio es obligatorio';
     }
 
     // Proveedor: requerido
@@ -509,7 +516,10 @@ export default function FormularioCursoSeguridad() {
       newErrors.email_confirm = 'Los correos electrónicos no coinciden';
     }
 
-    // La foto es opcional - no validamos si existe
+    // Foto de credencial: requerida
+    if (!photoFile) {
+      newErrors.photo = 'La foto de credencial es obligatoria';
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -1039,10 +1049,10 @@ export default function FormularioCursoSeguridad() {
             )}
           </div>
 
-          {/* RFC Empresa (opcional) */}
+          {/* RFC Empresa */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              RFC de la Empresa
+              RFC de la Empresa <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -1060,10 +1070,10 @@ export default function FormularioCursoSeguridad() {
             )}
           </div>
 
-          {/* NSS (opcional) */}
+          {/* NSS */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              NSS del Colaborador
+              NSS del Colaborador <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -1081,19 +1091,24 @@ export default function FormularioCursoSeguridad() {
             )}
           </div>
 
-          {/* Tipo de Servicio (opcional) */}
+          {/* Tipo de Servicio */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Tipo de Servicio
+              Tipo de Servicio <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               name="tipo_servicio"
               value={formData.tipo_servicio}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent"
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent ${
+                errors.tipo_servicio ? 'border-red-500' : 'border-gray-300'
+              }`}
               placeholder="Ej: Mantenimiento, Limpieza, Seguridad, etc."
             />
+            {errors.tipo_servicio && (
+              <p className="mt-1 text-sm text-red-500">{errors.tipo_servicio}</p>
+            )}
           </div>
 
           {/* Proveedor */}
@@ -1163,7 +1178,7 @@ export default function FormularioCursoSeguridad() {
           {/* Foto para Credencial */}
           <div className="pt-6 border-t border-gray-200">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Foto para Credencial de Acceso <span className="text-gray-400 text-xs font-normal">(opcional)</span>
+              Foto para Credencial de Acceso <span className="text-red-500">*</span>
             </label>
 
             {/* Requisitos de la foto */}
