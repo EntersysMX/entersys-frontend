@@ -1,11 +1,12 @@
 /**
  * FormularioCursoSeguridad.jsx
- * Formulario de examen de seguridad con 30 preguntas en 3 secciones.
+ * Formulario de examen de seguridad con banco de 75 preguntas (25 por sección,
+ * se muestran 10 aleatorias por sección) en 3 secciones.
  *
  * Secciones:
- * - Sección 1 (Seguridad): Preguntas 1-10
- * - Sección 2 (Inocuidad): Preguntas 11-20
- * - Sección 3 (Ambiental): Preguntas 21-30
+ * - Sección 1 (Seguridad): Pool de 25 preguntas, se muestran 10
+ * - Sección 2 (Inocuidad): Pool de 25 preguntas, se muestran 10
+ * - Sección 3 (Ambiental): Pool de 25 preguntas, se muestran 10
  *
  * Criterios de aprobación:
  * - Cada sección debe tener mínimo 80% (8/10 correctas)
@@ -27,7 +28,7 @@ const EXAM_SECTIONS = [
   { id: 3, name: 'Ambiental', startQuestion: 21, endQuestion: 30, color: 'green' }
 ];
 
-// Banco completo de 30 preguntas del examen (Actualizado 2026-01-05)
+// Banco de 75 preguntas del examen (25 por sección, se muestran 10 aleatorias por sección)
 const EXAM_QUESTIONS = [
   // ========== SECCIÓN 1: SEGURIDAD (Preguntas 1-10) ==========
   {
@@ -366,6 +367,514 @@ const EXAM_QUESTIONS = [
       "Esperar a que se evapore"
     ],
     correctAnswer: "Notificar al encargado del área para activar el protocolo con personal capacitado"
+  },
+  // ========== SECCIÓN 1: SEGURIDAD - POOL ADICIONAL (Preguntas 31-45) ==========
+  {
+    id: 31,
+    section: 1,
+    question: "¿Cuál es la definición correcta de 'Peligro' según el curso de inducción de Coca-Cola FEMSA?",
+    options: [
+      "La combinación de la probabilidad y las consecuencias de un suceso específico.",
+      "Un suceso relacionado con el trabajo en el que ocurre o podría ocurrir un daño físico.",
+      "Fuente o situación potencial de daño en términos de lesiones o efectos negativos para la salud.",
+      "La implementación de controles para mitigar la probabilidad de un accidente."
+    ],
+    correctAnswer: "Fuente o situación potencial de daño en términos de lesiones o efectos negativos para la salud."
+  },
+  {
+    id: 32,
+    section: 1,
+    question: "En la metodología IPERC, ¿cuáles son los tres criterios principales para evaluar el riesgo?",
+    options: [
+      "Peligro, Consecuencia y Control.",
+      "Gravedad, Exposición y Frecuencia.",
+      "Costo, Tiempo y Calidad.",
+      "Probabilidad, Impacto y Mitigación."
+    ],
+    correctAnswer: "Probabilidad, Impacto y Mitigación."
+  },
+  {
+    id: 33,
+    section: 1,
+    question: "De acuerdo con la clasificación de eventos, ¿qué significa la sigla SIF?",
+    options: [
+      "Incidentes Serios o Fatalidades (Serious Injuries or Fatalities).",
+      "Seguridad Industrial y de Fuego.",
+      "Situaciones de Incidentes Frecuentes.",
+      "Sistema de Inspección de Fábricas."
+    ],
+    correctAnswer: "Incidentes Serios o Fatalidades (Serious Injuries or Fatalities)."
+  },
+  {
+    id: 34,
+    section: 1,
+    question: "Según la NOM-036-1-STPS-2018, ¿cuál es la masa máxima que puede levantar un trabajador masculino entre 18 y 45 años?",
+    options: ["15 kg", "50 kg", "20 kg", "25 kg"],
+    correctAnswer: "25 kg"
+  },
+  {
+    id: 35,
+    section: 1,
+    question: "Para trabajos con equipo de oxicorte (oxiacetileno), ¿a qué distancia mínima deben colocarse los cilindros del lugar de corte?",
+    options: ["15 metros", "11 metros", "3 metros", "6 metros"],
+    correctAnswer: "6 metros"
+  },
+  {
+    id: 36,
+    section: 1,
+    question: "¿Cuál es la función principal de un dispositivo GFCI según el curso?",
+    options: [
+      "Aumentar el voltaje para herramientas pesadas.",
+      "Regular la temperatura de los tableros eléctricos.",
+      "Protección contra choques eléctricos mediante la detección de fallas a tierra.",
+      "Permitir la conexión de múltiples adaptadores en un solo enchufe."
+    ],
+    correctAnswer: "Protección contra choques eléctricos mediante la detección de fallas a tierra."
+  },
+  {
+    id: 37,
+    section: 1,
+    question: "Bajo la Regla para Salvar Vidas número 8 (Trabajo Seguro en Sistemas Energizados), ¿cuál es el procedimiento obligatorio?",
+    options: [
+      "Procedimiento LOTO (Bloqueo y Etiquetado) para asegurar cero tensión.",
+      "Mantener una distancia de 1 metro de los cables.",
+      "Uso de guantes de carnaza y lentes de seguridad.",
+      "Solicitar autorización verbal al jefe de área."
+    ],
+    correctAnswer: "Procedimiento LOTO (Bloqueo y Etiquetado) para asegurar cero tensión."
+  },
+  {
+    id: 38,
+    section: 1,
+    question: "¿Cómo se define a un 'Contratista Regular' según la frecuencia de su trabajo?",
+    options: [
+      "Aquel que labora diariamente en el sitio reportando al personal de la instalación.",
+      "Realiza trabajos en el sitio una vez o menos en seis meses.",
+      "Realiza trabajos en el sitio más de una vez en seis meses.",
+      "Contratado para una única tarea o proyecto específico."
+    ],
+    correctAnswer: "Realiza trabajos en el sitio más de una vez en seis meses."
+  },
+  {
+    id: 39,
+    section: 1,
+    question: "En caso de emergencia, ¿qué indica un sonido de alarma CONTINUO?",
+    options: [
+      "Situación de Alerta (estar prevenidos).",
+      "Fin de la emergencia y retorno seguro.",
+      "Prueba de sistema de altavoces.",
+      "Situación de Emergencia y evacuación inmediata del área."
+    ],
+    correctAnswer: "Situación de Emergencia y evacuación inmediata del área."
+  },
+  {
+    id: 40,
+    section: 1,
+    question: "Para trabajos en alturas, ¿a partir de qué altura es obligatorio el uso de arnés de seguridad con línea de vida?",
+    options: ["1.20 metros", "1.80 metros", "2.50 metros", "1.50 metros"],
+    correctAnswer: "1.80 metros"
+  },
+  {
+    id: 41,
+    section: 1,
+    question: "De acuerdo con el código de vestimenta para proveedores/ejecutores, ¿de qué color debe ser el casco de seguridad?",
+    options: ["Verde", "Amarillo", "Rojo", "Blanco"],
+    correctAnswer: "Amarillo"
+  },
+  {
+    id: 42,
+    section: 1,
+    question: "¿Cuál de las siguientes es una prohibición estricta durante el proceso de 'Joggeo' (posicionamiento) de maquinaria?",
+    options: [
+      "Realizar el joggeo mientras otra persona interviene físicamente el equipo.",
+      "Notificar al personal del área antes de iniciar.",
+      "Reducir la velocidad del motor al 50%.",
+      "Que la misma persona que controla el mando sea quien ejecute la actividad."
+    ],
+    correctAnswer: "Realizar el joggeo mientras otra persona interviene físicamente el equipo."
+  },
+  {
+    id: 43,
+    section: 1,
+    question: "En el procedimiento LOTO, ¿cuál es el paso final antes de considerar que el bloqueo es efectivo?",
+    options: [
+      "Colocar la tarjeta de aviso.",
+      "Cerciorar la efectividad del bloqueo mediante una prueba de arranque.",
+      "Drenar las energías almacenadas.",
+      "Firmar el permiso de trabajo."
+    ],
+    correctAnswer: "Cerciorar la efectividad del bloqueo mediante una prueba de arranque."
+  },
+  {
+    id: 44,
+    section: 1,
+    question: "¿Cuál es el tiempo máximo de confirmación de una emergencia antes de proceder con el aviso masivo?",
+    options: ["1 minuto", "5 minutos", "10 minutos", "2 minutos"],
+    correctAnswer: "2 minutos"
+  },
+  {
+    id: 45,
+    section: 1,
+    question: "¿Qué requisito debe cumplir un extintor para ser aceptado en un frente de trabajo de un contratista?",
+    options: [
+      "Haber sido recargado en la última semana.",
+      "No tener manómetro para evitar fugas.",
+      "Tener el nombre de la compañía contratista rotulado de forma permanente.",
+      "Debe ser de tipo CO2 obligatoriamente."
+    ],
+    correctAnswer: "Tener el nombre de la compañía contratista rotulado de forma permanente."
+  },
+  // ========== SECCIÓN 2: INOCUIDAD - POOL ADICIONAL (Preguntas 46-60) ==========
+  {
+    id: 46,
+    section: 2,
+    question: "¿Qué se entiende por el término 'Inocuidad' según los estándares de Coca-Cola FEMSA?",
+    options: [
+      "La capacidad de la planta para producir sin generar residuos químicos en el drenaje.",
+      "La garantía de que un producto o alimento no causará daño a la salud del consumidor.",
+      "El cumplimiento estricto de los niveles de azúcar y gas en cada botella producida.",
+      "La certificación que asegura que el envase es 100% reciclable y seguro para el ambiente."
+    ],
+    correctAnswer: "La garantía de que un producto o alimento no causará daño a la salud del consumidor."
+  },
+  {
+    id: 47,
+    section: 2,
+    question: "¿Cuál es el sistema de Certificación de Inocuidad Alimentaria utilizado por la compañía?",
+    options: ["ISO 14001", "FSSC 22000", "ISO 45001", "NOM-036-STPS"],
+    correctAnswer: "FSSC 22000"
+  },
+  {
+    id: 48,
+    section: 2,
+    question: "En el contexto de peligros de inocuidad, ¿cuál de los siguientes es un ejemplo de un peligro biológico?",
+    options: [
+      "Bacterias como Salmonella o Escherichia Coli.",
+      "Residuos de lubricantes o detergentes en la línea.",
+      "Fragmentos de vidrio provenientes de botellas rotas.",
+      "Presencia de alérgenos como la soya o el trigo."
+    ],
+    correctAnswer: "Bacterias como Salmonella o Escherichia Coli."
+  },
+  {
+    id: 49,
+    section: 2,
+    question: "¿Qué tipo de peligro de inocuidad representan las astillas de madera o los pedazos de metal encontrados en un producto?",
+    options: [
+      "Peligros Físicos",
+      "Peligros Biológicos",
+      "Peligros Ergonómicos",
+      "Peligros Químicos"
+    ],
+    correctAnswer: "Peligros Físicos"
+  },
+  {
+    id: 50,
+    section: 2,
+    question: "¿Cuál es la política correcta sobre el uso de objetos personales en las áreas de producción y almacenes?",
+    options: [
+      "Está prohibido el uso de joyería, relojes, piercings o botones arriba de la cintura.",
+      "Se pueden portar plumas en las orejas para facilitar el registro de datos rápidamente.",
+      "Solo se permite el uso de relojes si son necesarios para cronometrar procesos de limpieza.",
+      "Se permite el uso de anillos de matrimonio siempre que estén cubiertos con guantes."
+    ],
+    correctAnswer: "Está prohibido el uso de joyería, relojes, piercings o botones arriba de la cintura."
+  },
+  {
+    id: 51,
+    section: 2,
+    question: "¿Qué debe hacer un colaborador si presenta síntomas como vómito, diarrea o heridas abiertas antes de iniciar su jornada?",
+    options: [
+      "Reportar inmediatamente su estado de salud al servicio médico o a su jefe directo.",
+      "Cubrir las heridas con cinta industrial y continuar trabajando para no afectar la productividad.",
+      "Tomar un medicamento por cuenta propia y evitar comentarlo para no ser enviado a casa.",
+      "Ingresar a las áreas de proceso usando un cubrebocas doble para compensar los síntomas."
+    ],
+    correctAnswer: "Reportar inmediatamente su estado de salud al servicio médico o a su jefe directo."
+  },
+  {
+    id: 52,
+    section: 2,
+    question: "¿Cuál es el objetivo principal del programa de 'Defensa de los Alimentos' (Food Defense)?",
+    options: [
+      "Asegurar que el producto tenga un sabor consistente en todas las unidades operativas.",
+      "Detectar y eliminar ataques maliciosos intencionados como sabotaje o bioterrorismo.",
+      "Capacitar a los brigadistas en el uso de extintores para proteger las bodegas de insumos.",
+      "Garantizar que los proveedores entreguen materias primas con certificados de calidad."
+    ],
+    correctAnswer: "Detectar y eliminar ataques maliciosos intencionados como sabotaje o bioterrorismo."
+  },
+  {
+    id: 53,
+    section: 2,
+    question: "En la rotación de existencias en almacenes, ¿qué principio asegura que el producto que vence primero sea el primero en salir?",
+    options: [
+      "FEFO (First Expired, First Out)",
+      "JIT (Just In Time)",
+      "LIFO (Last In, First Out)",
+      "FIFO (First In, First Out)"
+    ],
+    correctAnswer: "FEFO (First Expired, First Out)"
+  },
+  {
+    id: 54,
+    section: 2,
+    question: "¿Cuál de los siguientes grupos representa alérgenos comunes que deben controlarse para evitar la contaminación cruzada?",
+    options: [
+      "Sal, ácido cítrico y saborizantes naturales.",
+      "Carne de res, pollo, arroz y zanahorias.",
+      "Leche, huevos, pescado, nueces y soya.",
+      "Agua, dióxido de carbono y jarabe de alta fructosa."
+    ],
+    correctAnswer: "Leche, huevos, pescado, nueces y soya."
+  },
+  {
+    id: 55,
+    section: 2,
+    question: "¿Cómo debe ser el manejo de los utensilios de limpieza para evitar la contaminación cruzada microbiológica?",
+    options: [
+      "Lavar todos los utensilios con agua caliente una vez al mes para desinfectarlos.",
+      "Guardar los utensilios de limpieza dentro de las salas de jarabes para tenerlos a la mano.",
+      "Utilizar utensilios que sigan un código de colores definido para cada área específica.",
+      "Compartir los mismos trapeadores en todas las áreas para optimizar el recurso de limpieza."
+    ],
+    correctAnswer: "Utilizar utensilios que sigan un código de colores definido para cada área específica."
+  },
+  {
+    id: 56,
+    section: 2,
+    question: "En relación al Manejo Integral de Plagas, ¿cuál es una responsabilidad directa del personal operativo?",
+    options: [
+      "Mover las trampas de roedores para que no estorben durante las maniobras de carga.",
+      "Limpiar con agua a presión el interior de las lámparas de luz UV para eliminar insectos.",
+      "Aplicar insecticidas químicos personalmente cuando vean un insecto en su área.",
+      "Mantener las puertas de acceso cerradas y reportar cualquier avistamiento de plaga."
+    ],
+    correctAnswer: "Mantener las puertas de acceso cerradas y reportar cualquier avistamiento de plaga."
+  },
+  {
+    id: 57,
+    section: 2,
+    question: "¿Qué requisito adicional de la versión 6 de FSSC 22000 se enfoca en prevenir la alteración o sustitución intencionada de alimentos por razones económicas?",
+    options: [
+      "Prevención del Fraude Alimentario",
+      "Gestión de los Servicios",
+      "Control de Calidad",
+      "Cultura de Inocuidad"
+    ],
+    correctAnswer: "Prevención del Fraude Alimentario"
+  },
+  {
+    id: 58,
+    section: 2,
+    question: "¿Cuál es una medida obligatoria de higiene personal para quienes ingresan a zonas de proceso con vello facial (barba o bigote)?",
+    options: [
+      "Aplicarse gel fijador para asegurar que el vello no se desprenda durante la jornada.",
+      "Solo es necesario usar cubrebocas normal si el bigote es corto.",
+      "Usar una protección limpia (cubrebaba) que cubra totalmente el vello facial.",
+      "Recortar el vello facial al menos una vez por semana como única medida."
+    ],
+    correctAnswer: "Usar una protección limpia (cubrebaba) que cubra totalmente el vello facial."
+  },
+  {
+    id: 59,
+    section: 2,
+    question: "En el control de químicos, ¿qué se debe verificar respecto a los productos de calderas y aceites de compresores en áreas de proceso?",
+    options: [
+      "Que sean obligatoriamente de grado alimenticio.",
+      "Que tengan el color más llamativo posible para detectar fugas rápidamente.",
+      "Que sean almacenados junto a los ingredientes para facilitar su aplicación.",
+      "Que no tengan olor para que el personal no se distraiga durante la operación."
+    ],
+    correctAnswer: "Que sean obligatoriamente de grado alimenticio."
+  },
+  {
+    id: 60,
+    section: 2,
+    question: "De acuerdo con los Buenos Hábitos de Manufactura, ¿qué acción está prohibida respecto al consumo de alimentos y bebidas?",
+    options: [
+      "Consumir alimentos, mascar chicle o fumar dentro de las áreas operativas.",
+      "Tomar agua exclusivamente en vasos de vidrio transparentes cerca de la línea.",
+      "Mascar chicle siempre y cuando se use el cubrebocas correctamente colocado.",
+      "Guardar el almuerzo dentro de los lockers de herramientas para ahorrar tiempo."
+    ],
+    correctAnswer: "Consumir alimentos, mascar chicle o fumar dentro de las áreas operativas."
+  },
+  // ========== SECCIÓN 3: AMBIENTAL - POOL ADICIONAL (Preguntas 61-75) ==========
+  {
+    id: 61,
+    section: 3,
+    question: "¿Cuál es el objetivo principal del programa de certificación 'Residuo Cero' en las plantas de Coca-Cola FEMSA?",
+    options: [
+      "Prohibir el uso de cualquier material plástico dentro de las instalaciones.",
+      "Valorizar los residuos para evitar que terminen en rellenos sanitarios.",
+      "Incentivar la incineración de todos los desechos para generar calor.",
+      "Reducir los costos de producción mediante la compra de insumos usados."
+    ],
+    correctAnswer: "Valorizar los residuos para evitar que terminen en rellenos sanitarios."
+  },
+  {
+    id: 62,
+    section: 3,
+    question: "De acuerdo con los conceptos de la norma ISO 14001, ¿qué representa un 'Aspecto Ambiental'?",
+    options: [
+      "Una ley obligatoria emitida por el gobierno federal.",
+      "Elemento de las actividades o productos que interactúa con el medio ambiente.",
+      "El daño económico causado por un desastre natural.",
+      "El efecto o cambio resultante en el medio ambiente."
+    ],
+    correctAnswer: "Elemento de las actividades o productos que interactúa con el medio ambiente."
+  },
+  {
+    id: 63,
+    section: 3,
+    question: "¿Qué siglas se utilizan para identificar las características que definen a un residuo como peligroso?",
+    options: ["CRETI", "MAIA", "ASPECTO", "CRETIB"],
+    correctAnswer: "CRETIB"
+  },
+  {
+    id: 64,
+    section: 3,
+    question: "En el manejo de materiales peligrosos, ¿qué capacidad mínima debe tener un dique de contención secundaria?",
+    options: [
+      "El 50% del volumen total almacenado en el área.",
+      "Exactamente el 100% de la suma de todos los contenedores.",
+      "El 110% del volumen del contenedor más grande del área.",
+      "Un volumen estándar de 200 litros para cualquier sustancia."
+    ],
+    correctAnswer: "El 110% del volumen del contenedor más grande del área."
+  },
+  {
+    id: 65,
+    section: 3,
+    question: "¿En qué categoría se deben clasificar los residuos de 'emplaye' (película plástica) y fleje según los lineamientos de la compañía?",
+    options: [
+      "Plásticos / Emplaye.",
+      "Papel y Cartón.",
+      "Residuos de Manejo Especial.",
+      "Inorgánicos generales."
+    ],
+    correctAnswer: "Plásticos / Emplaye."
+  },
+  {
+    id: 66,
+    section: 3,
+    question: "¿Cuál de los siguientes es un ejemplo de un 'Impacto Ambiental' según la capacitación?",
+    options: [
+      "Consumo de combustibles fósiles.",
+      "Generación de emisiones a la atmósfera.",
+      "Contaminación del agua.",
+      "Uso de energía renovable."
+    ],
+    correctAnswer: "Contaminación del agua."
+  },
+  {
+    id: 67,
+    section: 3,
+    question: "¿Cuál es una práctica prohibida en el manejo de aguas residuales para evitar la contaminación de drenajes?",
+    options: [
+      "Separar los residuos sólidos de las rejillas de drenaje.",
+      "Depositar únicamente agua de limpieza de pisos.",
+      "Verter aceites, grasas o químicos en coladeras y lavabos.",
+      "Instalar charolas de contención en áreas de mantenimiento."
+    ],
+    correctAnswer: "Verter aceites, grasas o químicos en coladeras y lavabos."
+  },
+  {
+    id: 68,
+    section: 3,
+    question: "¿Cómo se determina la prioridad de un aspecto ambiental en la matriz MAIA?",
+    options: [
+      "Multiplicando la Probabilidad por la Magnitud (Impacto + Entorno).",
+      "Basándose únicamente en la opinión del gerente de planta.",
+      "Contando el número de quejas recibidas de la comunidad.",
+      "Sumando el volumen de residuos generados por mes."
+    ],
+    correctAnswer: "Multiplicando la Probabilidad por la Magnitud (Impacto + Entorno)."
+  },
+  {
+    id: 69,
+    section: 3,
+    question: "¿Qué documento es estrictamente necesario para el ingreso y manejo de cualquier sustancia química por parte de un contratista?",
+    options: [
+      "Una fotografía del envase original del proveedor.",
+      "El manual de operación del equipo que utilizará el químico.",
+      "La factura de compra que demuestre que el producto es nuevo.",
+      "La Hoja de Datos de Seguridad (HDS) con pictogramas correspondientes."
+    ],
+    correctAnswer: "La Hoja de Datos de Seguridad (HDS) con pictogramas correspondientes."
+  },
+  {
+    id: 70,
+    section: 3,
+    question: "Dentro de la clasificación de residuos peligrosos generados en mantenimiento, ¿en qué categoría entran las lámparas y balastros usados?",
+    options: [
+      "Vidrio común.",
+      "Chatarra metálica.",
+      "Inorgánicos no reciclables.",
+      "Residuos Peligrosos."
+    ],
+    correctAnswer: "Residuos Peligrosos."
+  },
+  {
+    id: 71,
+    section: 3,
+    question: "¿Cuál es la norma oficial mexicana que establece el procedimiento para identificar y clasificar los residuos peligrosos?",
+    options: [
+      "NOM-001-SEMARNAT-2021",
+      "NOM-085-SEMARNAT-2011",
+      "NOM-081-SEMARNAT-1994",
+      "NOM-052-SEMARNAT-2005"
+    ],
+    correctAnswer: "NOM-052-SEMARNAT-2005"
+  },
+  {
+    id: 72,
+    section: 3,
+    question: "En el uso eficiente de la energía, ¿cuál de las siguientes acciones es responsabilidad del personal operativo y contratista?",
+    options: [
+      "Eliminar los sensores de movimiento de las luminarias para que siempre haya luz.",
+      "Modificar la programación de los PLC para acelerar la producción.",
+      "Reportar fugas de aire comprimido y apagar equipos que no estén en uso.",
+      "Aumentar la temperatura de los aires acondicionados al máximo en verano."
+    ],
+    correctAnswer: "Reportar fugas de aire comprimido y apagar equipos que no estén en uso."
+  },
+  {
+    id: 73,
+    section: 3,
+    question: "¿Qué se debe hacer con los residuos de comida y restos de jardinería?",
+    options: [
+      "Colocarlos en el área de chatarra para su retiro.",
+      "Depositarlos en el contenedor de Residuos Orgánicos.",
+      "Mezclarlos con el papel y cartón para su degradación.",
+      "Incinerarlos en un área abierta de la planta."
+    ],
+    correctAnswer: "Depositarlos en el contenedor de Residuos Orgánicos."
+  },
+  {
+    id: 74,
+    section: 3,
+    question: "¿Cuál es la función del Almacén Temporal de Residuos Peligrosos (ATRP)?",
+    options: [
+      "Almacenar el exceso de producto terminado para la venta.",
+      "Funcionar como comedor alterno para el personal de limpieza.",
+      "Resguardar los residuos peligrosos de forma segura hasta su recolección oficial.",
+      "Servir como depósito final donde los residuos se quedan permanentemente."
+    ],
+    correctAnswer: "Resguardar los residuos peligrosos de forma segura hasta su recolección oficial."
+  },
+  {
+    id: 75,
+    section: 3,
+    question: "¿Cómo contribuye el correcto re-abastecimiento y reutilización de agua a la sostenibilidad del negocio?",
+    options: [
+      "Es un requisito que solo aplica si la planta se queda sin presupuesto.",
+      "Disminuye la explotación de recursos naturales y asegura el abasto futuro.",
+      "Aumenta el sabor del producto final mediante el uso de agua reciclada.",
+      "Permite que la planta funcione sin necesidad de permisos legales."
+    ],
+    correctAnswer: "Disminuye la explotación de recursos naturales y asegura el abasto futuro."
   }
 ];
 
@@ -416,25 +925,27 @@ export default function FormularioCursoSeguridad() {
   const [statusError, setStatusError] = useState(null);
   const [isBlocked, setIsBlocked] = useState(false); // Nuevo estado para bloqueo
   const [isDownloadingPDF, setIsDownloadingPDF] = useState(false);
+  const [examKey, setExamKey] = useState(0); // Para re-aleatorizar preguntas en reintentos
 
-  // Preparar preguntas con orden aleatorio por sección y opciones aleatorias
+  // Preparar preguntas: seleccionar 10 aleatorias de cada pool de 25 y aleatorizar opciones
   const questionsWithShuffledOptions = useMemo(() => {
-    // Agrupar preguntas por sección
-    const section1 = EXAM_QUESTIONS.filter(q => q.section === 1);
-    const section2 = EXAM_QUESTIONS.filter(q => q.section === 2);
-    const section3 = EXAM_QUESTIONS.filter(q => q.section === 3);
+    // Seleccionar 10 preguntas aleatorias de cada pool de 25
+    const section1 = shuffleArray(EXAM_QUESTIONS.filter(q => q.section === 1)).slice(0, 10);
+    const section2 = shuffleArray(EXAM_QUESTIONS.filter(q => q.section === 2)).slice(0, 10);
+    const section3 = shuffleArray(EXAM_QUESTIONS.filter(q => q.section === 3)).slice(0, 10);
 
-    // Aleatorizar el orden de preguntas dentro de cada sección
-    const shuffledSection1 = shuffleArray(section1);
-    const shuffledSection2 = shuffleArray(section2);
-    const shuffledSection3 = shuffleArray(section3);
+    // Renumerar IDs: Seguridad 1-10, Inocuidad 11-20, Ambiental 21-30
+    const renumbered = [
+      ...section1.map((q, i) => ({ ...q, id: i + 1 })),
+      ...section2.map((q, i) => ({ ...q, id: i + 11 })),
+      ...section3.map((q, i) => ({ ...q, id: i + 21 }))
+    ];
 
-    // Combinar todas las secciones y aleatorizar opciones de respuesta
-    return [...shuffledSection1, ...shuffledSection2, ...shuffledSection3].map(q => ({
+    return renumbered.map(q => ({
       ...q,
       options: shuffleArray(q.options)
     }));
-  }, []);
+  }, [examKey]);
 
   // Obtener preguntas de una sección específica (ya están en orden aleatorio)
   const getQuestionsForSection = (sectionId) => {
@@ -839,9 +1350,9 @@ export default function FormularioCursoSeguridad() {
       }
 
       // Preparar respuestas con is_correct
-      const formattedAnswers = EXAM_QUESTIONS.map(q => ({
+      const formattedAnswers = questionsWithShuffledOptions.map(q => ({
         question_id: q.id,
-        answer: answers[q.id],
+        answer: answers[q.id] || '',
         is_correct: answers[q.id] === q.correctAnswer
       }));
 
@@ -879,6 +1390,7 @@ export default function FormularioCursoSeguridad() {
   const handleRetry = () => {
     setAnswers({});
     setResult(null);
+    setExamKey(prev => prev + 1); // Nueva selección aleatoria de preguntas
     setCurrentStep(2);
     setCurrentSection(1);
     window.scrollTo(0, 0);
