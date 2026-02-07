@@ -1,14 +1,10 @@
 /**
  * FormularioCursoSeguridad.jsx
- * Formulario de examen de seguridad con 30 preguntas en 3 secciones.
- *
- * Secciones:
- * - Sección 1 (Seguridad): Preguntas 1-10
- * - Sección 2 (Inocuidad): Preguntas 11-20
- * - Sección 3 (Ambiental): Preguntas 21-30
+ * Formulario de examen de seguridad dinámico.
+ * Las preguntas y categorías se cargan desde la API (base de datos).
  *
  * Criterios de aprobación:
- * - Cada sección debe tener mínimo 80% (8/10 correctas)
+ * - Cada sección debe tener el mínimo configurado en BD (por defecto 80%)
  * - Máximo 3 intentos por RFC
  */
 
@@ -20,364 +16,15 @@ import { config } from '../config/environment';
 
 const API_BASE_URL = config.urls.api;
 
-// Definición de las 3 secciones del examen
-const EXAM_SECTIONS = [
-  { id: 1, name: 'Seguridad', startQuestion: 1, endQuestion: 10, color: 'red' },
-  { id: 2, name: 'Inocuidad', startQuestion: 11, endQuestion: 20, color: 'blue' },
-  { id: 3, name: 'Ambiental', startQuestion: 21, endQuestion: 30, color: 'green' }
-];
-
-// Banco completo de 30 preguntas del examen (Actualizado 2026-01-05)
-const EXAM_QUESTIONS = [
-  // ========== SECCIÓN 1: SEGURIDAD (Preguntas 1-10) ==========
-  {
-    id: 1,
-    section: 1,
-    question: "¿Cuál de las siguientes opciones describe mejor el concepto de 'Riesgo' en el contexto de la seguridad industrial?",
-    options: [
-      "Una fuente o situación con potencial de causar daño.",
-      "Un suceso relacionado con el trabajo donde ocurre o podría ocurrir un daño.",
-      "Cualquier condición que ha sido evaluada y declarada libre de peligros.",
-      "La combinación de la probabilidad de que ocurra un suceso y la consecuencia del mismo."
-    ],
-    correctAnswer: "La combinación de la probabilidad de que ocurra un suceso y la consecuencia del mismo."
-  },
-  {
-    id: 2,
-    section: 1,
-    question: "Según la clasificación de eventos de Coca-Cola FEMSA, un incidente que resulta en fatalidades o lesiones serias (SIF) se clasifica internamente como:",
-    options: ["Nivel 1", "Nivel 3", "Nivel 0", "Nivel 2"],
-    correctAnswer: "Nivel 3"
-  },
-  {
-    id: 3,
-    section: 1,
-    question: "¿Cuál es el propósito principal del procedimiento LOTO (Bloqueo y Etiquetado) mencionado en las 'Reglas para salvar vidas'?",
-    options: [
-      "Confirmar que no hay energía presente o está aislada antes de intervenir un equipo.",
-      "Protegerse contra caídas cuando se trabaja en altura.",
-      "Verificar que el personal tenga las habilidades adecuadas para la tarea.",
-      "Asegurar que los contratistas tengan el permiso de trabajo adecuado."
-    ],
-    correctAnswer: "Confirmar que no hay energía presente o está aislada antes de intervenir un equipo."
-  },
-  {
-    id: 4,
-    section: 1,
-    question: "¿Qué elemento del Equipo de Protección Personal (EPP) de categoría ESPECIAL es fundamental para un trabajo de soldadura?",
-    options: [
-      "Guantes de carnaza",
-      "Botas industriales con casquillo",
-      "Chaleco de alta visibilidad",
-      "Careta para soldar"
-    ],
-    correctAnswer: "Careta para soldar"
-  },
-  {
-    id: 5,
-    section: 1,
-    question: "De acuerdo con la normativa para el levantamiento manual de cargas, ¿cuál es la masa máxima que un trabajador masculino de 35 años puede levantar?",
-    options: ["25 kg", "15 kg", "7 kg", "20 kg"],
-    correctAnswer: "25 kg"
-  },
-  {
-    id: 6,
-    section: 1,
-    question: "Según las categorías de riesgo para las actividades de contratistas, ¿cómo se clasifica una tarea que implica trabajos de construcción o demolición?",
-    options: ["Riesgo Ad Hoc", "Riesgo Alto", "Riesgo Bajo", "Riesgo Medio"],
-    correctAnswer: "Riesgo Alto"
-  },
-  {
-    id: 7,
-    section: 1,
-    question: "Durante una situación de emergencia en las instalaciones, ¿qué acción se debe tomar si se escucha un sonido de alarma continuo?",
-    options: [
-      "Buscar al supervisor para confirmar si la emergencia es real.",
-      "Permanecer alerta y esperar instrucciones adicionales.",
-      "Detener el trabajo y apagar únicamente los equipos de cómputo.",
-      "Dirigirse al punto de reunión más cercano de manera ordenada."
-    ],
-    correctAnswer: "Dirigirse al punto de reunión más cercano de manera ordenada."
-  },
-  {
-    id: 8,
-    section: 1,
-    question: "Para realizar trabajos en calor, como corte y soldadura, ¿cuál es el número mínimo de personas requeridas y cuáles son sus roles?",
-    options: [
-      "Dos personas: el ejecutor que realiza el trabajo y el monitor que vigila.",
-      "Tres personas: ejecutor, monitor y un supervisor de KOF.",
-      "Una sola persona, siempre que esté debidamente capacitada.",
-      "No se especifica un número, solo se requiere un extintor cerca."
-    ],
-    correctAnswer: "Dos personas: el ejecutor que realiza el trabajo y el monitor que vigila."
-  },
-  {
-    id: 9,
-    section: 1,
-    question: "De acuerdo con las normas de seguridad para el 'joggeo' de maquinaria, ¿qué práctica está estrictamente prohibida?",
-    options: [
-      "Que una persona accione el control mientras otra persona interviene el equipo.",
-      "Realizar el joggeo a una velocidad reducida al 50% o inferior.",
-      "Notificar al personal del área antes de iniciar el joggeo.",
-      "Realizar el joggeo con las guardas de seguridad físicas correctamente colocadas."
-    ],
-    correctAnswer: "Que una persona accione el control mientras otra persona interviene el equipo."
-  },
-  {
-    id: 10,
-    section: 1,
-    question: "Al utilizar una escalera de extensión para acceder a un nivel superior, esta debe sobrepasar el punto de apoyo. ¿Cuál es la distancia mínima requerida?",
-    options: [
-      "Debe estar exactamente al mismo nivel que el punto de acceso.",
-      "La escalera no debe sobrepasar el punto de acceso para evitar tropiezos.",
-      "Debe sobrepasar 50 cm.",
-      "Debe sobrepasar 91 cm."
-    ],
-    correctAnswer: "Debe sobrepasar 91 cm."
-  },
-  // ========== SECCIÓN 2: INOCUIDAD (Preguntas 11-20) ==========
-  {
-    id: 11,
-    section: 2,
-    question: "¿Qué se entiende por Inocuidad Alimentaria?",
-    options: [
-      "Que el producto tenga buen sabor",
-      "Que el producto cumpla con requisitos comerciales",
-      "Que el producto y/o alimento no haga daño a la salud",
-      "Que el producto tenga buena presentación"
-    ],
-    correctAnswer: "Que el producto y/o alimento no haga daño a la salud"
-  },
-  {
-    id: 12,
-    section: 2,
-    question: "¿Qué sistema de certificación implementa Coca-Cola FEMSA para garantizar la inocuidad de sus productos?",
-    options: ["ISO 9001", "HACCP", "FSSC 22000", "Industria Limpia"],
-    correctAnswer: "FSSC 22000"
-  },
-  {
-    id: 13,
-    section: 2,
-    question: "¿Qué normas conforman el esquema FSSC 22000?",
-    options: [
-      "ISO 14001, ISO 45001 y NOM-051",
-      "ISO 22000, ISO/TS 22002-1 y requisitos adicionales de FSSC 22000",
-      "HACCP y BPM",
-      "ISO 9001 y ISO 14001"
-    ],
-    correctAnswer: "ISO 22000, ISO/TS 22002-1 y requisitos adicionales de FSSC 22000"
-  },
-  {
-    id: 14,
-    section: 2,
-    question: "¿Qué es un peligro de inocuidad alimentaria según ISO 22000?",
-    options: [
-      "Cualquier situación incómoda para el consumidor",
-      "Un agente biológico, químico o físico con potencial de causar daño a la salud",
-      "Un error en el proceso productivo",
-      "Un incumplimiento legal"
-    ],
-    correctAnswer: "Un agente biológico, químico o físico con potencial de causar daño a la salud"
-  },
-  {
-    id: 15,
-    section: 2,
-    question: "¿Cuál de los siguientes es un ejemplo de peligro físico?",
-    options: ["Detergentes", "Bacterias", "Vidrio", "Insecticidas"],
-    correctAnswer: "Vidrio"
-  },
-  {
-    id: 16,
-    section: 2,
-    question: "¿Qué son los Pre-requisitos (PPR) en Inocuidad Alimentaria?",
-    options: [
-      "Actividades opcionales para mejorar la calidad",
-      "Condiciones y actividades básicas para mantener un ambiente higiénico",
-      "Auditorías externas",
-      "Indicadores de desempeño"
-    ],
-    correctAnswer: "Condiciones y actividades básicas para mantener un ambiente higiénico"
-  },
-  {
-    id: 17,
-    section: 2,
-    question: "¿Cuál de las siguientes acciones corresponde a los Buenos Hábitos de Manufactura?",
-    options: [
-      "Usar joyería en áreas de proceso",
-      "Consumir alimentos en cualquier área",
-      "Usar correctamente cofia y cubrebocas",
-      "Masticar chicle en planta"
-    ],
-    correctAnswer: "Usar correctamente cofia y cubrebocas"
-  },
-  {
-    id: 18,
-    section: 2,
-    question: "¿Cuál es el objetivo del Manejo Integral de Plagas?",
-    options: [
-      "Eliminar todas las plagas con químicos",
-      "Minimizar impactos a los procesos y garantizar productos seguros",
-      "Mantener limpias solo las áreas externas",
-      "Usar únicamente trampas mecánicas"
-    ],
-    correctAnswer: "Minimizar impactos a los procesos y garantizar productos seguros"
-  },
-  {
-    id: 19,
-    section: 2,
-    question: "¿Qué acción ayuda a prevenir la contaminación cruzada?",
-    options: [
-      "Usar los mismos utensilios en todas las áreas",
-      "Respetar rutas de tránsito del personal",
-      "Mezclar ingredientes sin identificación",
-      "Ignorar monitoreos ambientales"
-    ],
-    correctAnswer: "Respetar rutas de tránsito del personal"
-  },
-  {
-    id: 20,
-    section: 2,
-    question: "¿Qué se debe hacer si se detecta personal no autorizado en áreas críticas?",
-    options: [
-      "No hacer nada",
-      "Confrontarlo directamente",
-      "Reportarlo inmediatamente al encargado del área de trabajo",
-      "Retirarse del área"
-    ],
-    correctAnswer: "Reportarlo inmediatamente al encargado del área de trabajo"
-  },
-  // ========== SECCIÓN 3: AMBIENTAL (Preguntas 21-30) ==========
-  {
-    id: 21,
-    section: 3,
-    question: "¿Cuál es la definición correcta de medio ambiente según la presentación?",
-    options: [
-      "El entorno natural sin intervención humana",
-      "Únicamente el aire, agua y suelo",
-      "El entorno en el cual una planta opera, incluyendo aire, agua, suelo, recursos naturales, flora, fauna, seres humanos y sus interrelaciones",
-      "Solo el área externa de la unidad operativa"
-    ],
-    correctAnswer: "El entorno en el cual una planta opera, incluyendo aire, agua, suelo, recursos naturales, flora, fauna, seres humanos y sus interrelaciones"
-  },
-  {
-    id: 22,
-    section: 3,
-    question: "¿Qué es la certificación ISO 14001?",
-    options: [
-      "Un programa exclusivo para residuos peligrosos",
-      "Una norma que regula únicamente el consumo de agua",
-      "Una norma internacional que apoya la protección ambiental y la prevención de la contaminación",
-      "Un plan de reciclaje obligatorio"
-    ],
-    correctAnswer: "Una norma internacional que apoya la protección ambiental y la prevención de la contaminación"
-  },
-  {
-    id: 23,
-    section: 3,
-    question: "¿Cuáles son los principales aspectos ambientales identificados en la unidad operativa?",
-    options: [
-      "Ruido, iluminación y temperatura",
-      "Agua, energía, residuos y aire",
-      "Clima, fauna y suelo",
-      "Transporte y tráfico"
-    ],
-    correctAnswer: "Agua, energía, residuos y aire"
-  },
-  {
-    id: 24,
-    section: 3,
-    question: "¿Qué es la Matriz de Aspectos e Impactos Ambientales (MAIA)?",
-    options: [
-      "Un listado de residuos peligrosos",
-      "Una herramienta para evaluar proveedores",
-      "Un instrumento para identificar y evaluar aspectos e impactos ambientales",
-      "Un plan de emergencias ambientales"
-    ],
-    correctAnswer: "Un instrumento para identificar y evaluar aspectos e impactos ambientales"
-  },
-  {
-    id: 25,
-    section: 3,
-    question: "¿Cuál de los siguientes es un residuo orgánico según la clasificación KOF?",
-    options: [
-      "Latas de aluminio",
-      "Botellas de vidrio",
-      "Restos de comida sin envoltura",
-      "Envases PET"
-    ],
-    correctAnswer: "Restos de comida sin envoltura"
-  },
-  {
-    id: 26,
-    section: 3,
-    question: "¿Qué significa la sigla CRETIB en residuos peligrosos?",
-    options: [
-      "Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable y Biológico-Infeccioso",
-      "Contaminante, Reciclable, Ecológico, Tóxico, Inflamable y Biológico",
-      "Corrosivo, Residual, Explosivo, Tóxico, Inflamable y Básico",
-      "Químico, Reactivo, Explosivo, Tóxico, Inflamable y Biológico"
-    ],
-    correctAnswer: "Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable y Biológico-Infeccioso"
-  },
-  {
-    id: 27,
-    section: 3,
-    question: "¿Cuál de los siguientes residuos se considera peligroso?",
-    options: [
-      "Papel y cartón",
-      "Restos de jardinería",
-      "Aceite contaminado con amoniaco",
-      "Botellas de vidrio"
-    ],
-    correctAnswer: "Aceite contaminado con amoniaco"
-  },
-  {
-    id: 28,
-    section: 3,
-    question: "¿Qué práctica ayuda al uso eficiente de la energía?",
-    options: [
-      "Dejar encendidos los equipos en espera",
-      "Apagar motores y transportadores cuando no estén en uso",
-      "Usar más ventiladores",
-      "Mantener enchufes conectados"
-    ],
-    correctAnswer: "Apagar motores y transportadores cuando no estén en uso"
-  },
-  {
-    id: 29,
-    section: 3,
-    question: "¿Cuál es una buena práctica para prevenir la contaminación de aguas residuales?",
-    options: [
-      "Depositar sólidos pequeños en el drenaje",
-      "Derramar aceites en coladeras",
-      "Utilizar charolas de contención durante mantenimientos",
-      "Lavar envases químicos en lavabos"
-    ],
-    correctAnswer: "Utilizar charolas de contención durante mantenimientos"
-  },
-  {
-    id: 30,
-    section: 3,
-    question: "¿Qué debe hacerse en caso de un derrame de material peligroso?",
-    options: [
-      "Limpiarlo sin notificar",
-      "Ignorarlo si es pequeño",
-      "Notificar al encargado del área para activar el protocolo con personal capacitado",
-      "Esperar a que se evapore"
-    ],
-    correctAnswer: "Notificar al encargado del área para activar el protocolo con personal capacitado"
-  }
-];
-
-// Fisher-Yates Shuffle para aleatorizar opciones
-const shuffleArray = (array) => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
+// Color map para categorías (fallback si el backend no envía un color conocido)
+const COLOR_MAP = {
+  red:   { bg: 'bg-red-500',   light: 'bg-red-50',   border: 'border-red-200',   text: 'text-red-700' },
+  blue:  { bg: 'bg-blue-500',  light: 'bg-blue-50',  border: 'border-blue-200',  text: 'text-blue-700' },
+  green: { bg: 'bg-green-500', light: 'bg-green-50',  border: 'border-green-200', text: 'text-green-700' },
+  gray:  { bg: 'bg-gray-500',  light: 'bg-gray-50',  border: 'border-gray-200',  text: 'text-gray-700' },
 };
+
+// Las preguntas y categorías se cargan dinámicamente desde GET /exam-questions
 
 export default function FormularioCursoSeguridad() {
   const navigate = useNavigate();
@@ -417,34 +64,51 @@ export default function FormularioCursoSeguridad() {
   const [isBlocked, setIsBlocked] = useState(false); // Nuevo estado para bloqueo
   const [isDownloadingPDF, setIsDownloadingPDF] = useState(false);
 
-  // Preparar preguntas con orden aleatorio por sección y opciones aleatorias
-  const questionsWithShuffledOptions = useMemo(() => {
-    // Agrupar preguntas por sección
-    const section1 = EXAM_QUESTIONS.filter(q => q.section === 1);
-    const section2 = EXAM_QUESTIONS.filter(q => q.section === 2);
-    const section3 = EXAM_QUESTIONS.filter(q => q.section === 3);
+  // Estado dinámico: preguntas y categorías cargadas desde API
+  const [examConfig, setExamConfig] = useState(null); // { categories, questions }
+  const [isLoadingQuestions, setIsLoadingQuestions] = useState(false);
 
-    // Aleatorizar el orden de preguntas dentro de cada sección
-    const shuffledSection1 = shuffleArray(section1);
-    const shuffledSection2 = shuffleArray(section2);
-    const shuffledSection3 = shuffleArray(section3);
-
-    // Combinar todas las secciones y aleatorizar opciones de respuesta
-    return [...shuffledSection1, ...shuffledSection2, ...shuffledSection3].map(q => ({
-      ...q,
-      options: shuffleArray(q.options)
-    }));
-  }, []);
-
-  // Obtener preguntas de una sección específica (ya están en orden aleatorio)
-  const getQuestionsForSection = (sectionId) => {
-    return questionsWithShuffledOptions.filter(q => q.section === sectionId);
+  // Fetch de preguntas desde el backend
+  const fetchExamQuestions = async () => {
+    setIsLoadingQuestions(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/v1/onboarding/exam-questions`);
+      if (!response.ok) throw new Error('Error al cargar las preguntas del examen');
+      const data = await response.json();
+      setExamConfig(data);
+      return data;
+    } catch (error) {
+      console.error('Error cargando preguntas:', error);
+      alert('Error al cargar las preguntas del examen. Por favor recarga la página.');
+      return null;
+    } finally {
+      setIsLoadingQuestions(false);
+    }
   };
 
-  // Contar respuestas por sección
-  const getAnsweredCountForSection = (sectionId) => {
-    const sectionQuestions = getQuestionsForSection(sectionId);
-    return sectionQuestions.filter(q => answers[q.id]).length;
+  // Categorías derivadas de examConfig (ordenadas por display_order)
+  const examCategories = useMemo(() => {
+    if (!examConfig) return [];
+    return [...examConfig.categories].sort((a, b) => a.display_order - b.display_order);
+  }, [examConfig]);
+
+  // Preguntas ya vienen aleatorias y con opciones mezcladas desde el backend
+  const examQuestions = examConfig?.questions || [];
+
+  // Obtener preguntas de una categoría específica
+  const getQuestionsForCategory = (categoryId) => {
+    return examQuestions.filter(q => q.category_id === categoryId);
+  };
+
+  // Total de preguntas esperadas
+  const totalExpectedQuestions = useMemo(() => {
+    return examCategories.reduce((sum, cat) => sum + cat.questions_to_show, 0);
+  }, [examCategories]);
+
+  // Contar respuestas por categoría
+  const getAnsweredCountForCategory = (categoryId) => {
+    const catQuestions = getQuestionsForCategory(categoryId);
+    return catQuestions.filter(q => answers[q.id]).length;
   };
 
   // Regex para validación de RFC mexicano (persona física 13 chars, moral 12 chars)
@@ -557,90 +221,71 @@ export default function FormularioCursoSeguridad() {
     return /iPhone|iPad|iPod/i.test(navigator.userAgent);
   }, []);
 
-  // Iniciar cámara
+  // Iniciar cámara (idéntico a producción)
   const startCamera = useCallback(async () => {
     setCameraError(null);
     setShowPermissionHelp(false);
 
     try {
-      // Verificar el estado actual del permiso para logging
-      let permissionStatus = 'unknown';
+      // Paso 1: Verificar estado del permiso (igual que producción)
+      let permState = 'unknown';
       try {
         if (navigator.permissions && navigator.permissions.query) {
-          const result = await navigator.permissions.query({ name: 'camera' });
-          permissionStatus = result.state;
+          permState = (await navigator.permissions.query({ name: 'camera' })).state;
         }
       } catch (e) {
-        permissionStatus = 'query-not-supported';
+        permState = 'query-not-supported';
       }
 
-      console.log('=== DIAGNÓSTICO DE CÁMARA ===');
-      console.log('Estado del permiso:', permissionStatus);
-      console.log('Navegador:', navigator.userAgent);
-      console.log('Es móvil:', isMobile());
-      console.log('Protocolo:', window.location.protocol);
-
-
-      // Si el permiso ya está denegado, mostrar mensaje específico
-      if (permissionStatus === 'denied') {
-        console.log('⚠️ El permiso de cámara está BLOQUEADO. El usuario debe habilitarlo manualmente.');
-        setCameraError('El permiso de cámara está bloqueado. Debes habilitarlo manualmente en la configuración del navegador.');
+      // Si el permiso está bloqueado, mostrar instrucciones sin intentar getUserMedia
+      if (permState === 'denied') {
+        setCameraError(
+          'El permiso de cámara está bloqueado. Debes habilitarlo manualmente en la configuración del navegador.'
+        );
         setShowPermissionHelp(true);
         return;
       }
 
-      // Configuración optimizada para móviles y escritorio
+      // Paso 2: Solicitar acceso a la cámara (el navegador muestra diálogo si permState es "prompt")
       const constraints = {
         video: {
-          facingMode: 'user', // Cámara frontal
+          facingMode: 'user',
           width: { ideal: isMobile() ? 480 : 640 },
           height: { ideal: isMobile() ? 640 : 800 }
         },
         audio: false
       };
 
-      console.log('Solicitando acceso a cámara con constraints:', JSON.stringify(constraints));
-      console.log('El navegador debería mostrar el diálogo nativo ahora...');
-
-      // Llamar a getUserMedia - esto mostrará el diálogo nativo del navegador
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
-      console.log('✅ Acceso a cámara concedido!');
 
       streamRef.current = stream;
-      // Primero activamos la cámara para que el elemento video se renderice
       setIsCameraActive(true);
 
-      // Usamos setTimeout para esperar a que el video se renderice
       setTimeout(() => {
         if (videoRef.current && streamRef.current) {
           videoRef.current.srcObject = streamRef.current;
-          videoRef.current.play().catch(err => {
-            console.log('Autoplay handled by browser:', err.message);
-          });
+          videoRef.current.play().catch(() => {});
         }
       }, 100);
     } catch (err) {
-      console.error('Error al acceder a la cámara:', err.name, err.message);
-
-      // Intentar con constraints más simples primero
+      // Fallback con constraints simples
       if (err.name === 'OverconstrainedError' || err.name === 'ConstraintNotSatisfiedError') {
         try {
-          const simpleStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-          streamRef.current = simpleStream;
+          const fallbackStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+          streamRef.current = fallbackStream;
           setIsCameraActive(true);
           setTimeout(() => {
             if (videoRef.current && streamRef.current) {
               videoRef.current.srcObject = streamRef.current;
-              videoRef.current.play().catch(err => console.log('Autoplay:', err.message));
+              videoRef.current.play().catch(() => {});
             }
           }, 100);
           return;
         } catch (e) {
-          console.error('Error con constraints simples:', e.name, e.message);
+          // continuar al manejo de errores
         }
       }
 
-      // Manejar errores específicos
       if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
         setShowPermissionHelp(true);
       } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
@@ -654,7 +299,6 @@ export default function FormularioCursoSeguridad() {
       } else if (err.name === 'TypeError') {
         setCameraError('Tu navegador no soporta acceso a la cámara.');
       } else {
-        // Mostrar error real para diagnóstico
         setCameraError(`Error: ${err.name || 'Desconocido'} - ${err.message || 'Intenta recargar la página'}`);
       }
     }
@@ -783,7 +427,7 @@ export default function FormularioCursoSeguridad() {
     }
   };
 
-  // Continuar al examen (verifica estatus primero)
+  // Continuar al examen (verifica estatus primero, luego carga preguntas)
   const handleContinueToExam = async () => {
     if (!validatePersonalData()) return;
 
@@ -791,6 +435,8 @@ export default function FormularioCursoSeguridad() {
 
     if (!status) {
       // Error al verificar, permitir continuar de todos modos (primera vez)
+      const config = await fetchExamQuestions();
+      if (!config) return;
       setCurrentStep(2);
       setCurrentSection(1);
       window.scrollTo(0, 0);
@@ -804,7 +450,9 @@ export default function FormularioCursoSeguridad() {
       return;
     }
 
-    // Puede hacer el examen
+    // Puede hacer el examen - cargar preguntas
+    const config = await fetchExamQuestions();
+    if (!config) return;
     setCurrentStep(2);
     setCurrentSection(1);
     window.scrollTo(0, 0);
@@ -820,8 +468,8 @@ export default function FormularioCursoSeguridad() {
   const handleSubmit = async () => {
     // Verificar que todas las preguntas estén contestadas
     const totalAnswered = Object.keys(answers).length;
-    if (totalAnswered < 30) {
-      alert(`Por favor responde todas las preguntas antes de enviar. Faltan ${30 - totalAnswered} preguntas.`);
+    if (totalAnswered < totalExpectedQuestions) {
+      alert(`Por favor responde todas las preguntas antes de enviar. Faltan ${totalExpectedQuestions - totalAnswered} preguntas.`);
       return;
     }
 
@@ -833,16 +481,14 @@ export default function FormularioCursoSeguridad() {
       if (photoFile) {
         photoUrl = await uploadPhoto();
         if (!photoUrl) {
-          // Si falla la subida de foto, continuar sin ella
           console.warn('No se pudo subir la foto, continuando sin ella');
         }
       }
 
-      // Preparar respuestas con is_correct
-      const formattedAnswers = EXAM_QUESTIONS.map(q => ({
+      // Preparar respuestas SIN is_correct (el backend valida contra BD)
+      const formattedAnswers = examQuestions.map(q => ({
         question_id: q.id,
-        answer: answers[q.id],
-        is_correct: answers[q.id] === q.correctAnswer
+        answer: answers[q.id] || '',
       }));
 
       // Excluir email_confirm del payload enviado al backend
@@ -875,10 +521,12 @@ export default function FormularioCursoSeguridad() {
     }
   };
 
-  // Volver a intentar el examen
-  const handleRetry = () => {
+  // Volver a intentar el examen (carga nuevas preguntas aleatorias del backend)
+  const handleRetry = async () => {
     setAnswers({});
     setResult(null);
+    const config = await fetchExamQuestions();
+    if (!config) return;
     setCurrentStep(2);
     setCurrentSection(1);
     window.scrollTo(0, 0);
@@ -1469,66 +1117,76 @@ export default function FormularioCursoSeguridad() {
         <div className="mt-8">
           <button
             onClick={handleContinueToExam}
-            disabled={isCheckingStatus}
+            disabled={isCheckingStatus || isLoadingQuestions}
             className={`w-full py-4 font-semibold rounded-lg transition-colors ${
-              isCheckingStatus
+              isCheckingStatus || isLoadingQuestions
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 : 'bg-[#D91E18] text-white hover:bg-[#b81915]'
             }`}
           >
-            {isCheckingStatus ? 'Verificando estatus...' : 'Continuar al Examen'}
+            {isCheckingStatus ? 'Verificando estatus...' : isLoadingQuestions ? 'Cargando preguntas...' : 'Continuar al Examen'}
           </button>
         </div>
       </div>
     </div>
   );
 
-  // Renderizar paso 2: Examen con secciones
+  // Renderizar paso 2: Examen con secciones (dinámico)
   const renderExamStep = () => {
-    const currentSectionQuestions = getQuestionsForSection(currentSection);
-    const currentSectionInfo = EXAM_SECTIONS.find(s => s.id === currentSection);
+    if (isLoadingQuestions || !examConfig) {
+      return (
+        <div className="max-w-4xl mx-auto text-center py-16">
+          <svg className="animate-spin h-12 w-12 text-[#D91E18] mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <p className="text-gray-600 text-lg">Cargando preguntas del examen...</p>
+        </div>
+      );
+    }
+
+    const currentCatIndex = currentSection - 1;
+    const currentCat = examCategories[currentCatIndex];
+    if (!currentCat) return null;
+
+    const currentSectionQuestions = getQuestionsForCategory(currentCat.id);
     const totalAnswered = Object.keys(answers).length;
-
-    const sectionColors = {
-      1: { bg: 'bg-red-500', light: 'bg-red-50', border: 'border-red-200', text: 'text-red-700' },
-      2: { bg: 'bg-blue-500', light: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-700' },
-      3: { bg: 'bg-green-500', light: 'bg-green-50', border: 'border-green-200', text: 'text-green-700' }
-    };
-
-    const colors = sectionColors[currentSection];
+    const colors = COLOR_MAP[currentCat.color] || COLOR_MAP.gray;
+    const totalSections = examCategories.length;
 
     return (
       <div className="max-w-4xl mx-auto">
         {/* Navegación de secciones */}
         <div className="bg-white rounded-lg shadow-lg p-4 mb-6">
           <div className="flex flex-wrap justify-between items-center gap-4">
-            {EXAM_SECTIONS.map((section) => {
-              const answeredCount = getAnsweredCountForSection(section.id);
-              const isComplete = answeredCount === 10;
-              const isCurrent = currentSection === section.id;
-              const sColors = sectionColors[section.id];
+            {examCategories.map((cat, idx) => {
+              const sIdx = idx + 1;
+              const answeredCount = getAnsweredCountForCategory(cat.id);
+              const isComplete = answeredCount === cat.questions_to_show;
+              const isCurrent = currentSection === sIdx;
+              const sColors = COLOR_MAP[cat.color] || COLOR_MAP.gray;
 
               return (
                 <button
-                  key={section.id}
-                  onClick={() => goToSection(section.id)}
+                  key={cat.id}
+                  onClick={() => goToSection(sIdx)}
                   className={`flex-1 min-w-[120px] p-3 rounded-lg transition-all ${
                     isCurrent
                       ? `${sColors.bg} text-white`
                       : `${sColors.light} ${sColors.text} hover:opacity-80`
                   }`}
                 >
-                  <div className="text-sm font-medium">Sección {section.id}</div>
-                  <div className="text-xs opacity-80">{section.name}</div>
+                  <div className="text-sm font-medium">Sección {sIdx}</div>
+                  <div className="text-xs opacity-80">{cat.name}</div>
                   <div className="text-xs mt-1">
-                    {answeredCount}/10 {isComplete && '✓'}
+                    {answeredCount}/{cat.questions_to_show} {isComplete && '✓'}
                   </div>
                 </button>
               );
             })}
           </div>
           <div className="mt-4 text-center text-sm text-gray-600">
-            Total: {totalAnswered} / 30 preguntas respondidas
+            Total: {totalAnswered} / {totalExpectedQuestions} preguntas respondidas
           </div>
         </div>
 
@@ -1536,13 +1194,13 @@ export default function FormularioCursoSeguridad() {
         <div className="bg-white rounded-lg shadow-lg p-8">
           <div className={`${colors.light} ${colors.border} border rounded-lg p-4 mb-6`}>
             <h2 className={`text-xl font-bold ${colors.text}`}>
-              Sección {currentSection}: {currentSectionInfo?.name}
+              Sección {currentSection}: {currentCat.name}
             </h2>
             <p className="text-gray-600 text-sm mt-1">
-              10 preguntas de esta sección
+              {currentCat.questions_to_show} preguntas de esta sección
             </p>
             <p className={`text-sm mt-2 ${colors.text}`}>
-              <strong>Importante:</strong> Debes obtener mínimo 80% (8 de 10 correctas) en esta sección.
+              <strong>Importante:</strong> Debes obtener mínimo {currentCat.min_score_percent}% en esta sección.
             </p>
           </div>
 
@@ -1550,7 +1208,7 @@ export default function FormularioCursoSeguridad() {
             {currentSectionQuestions.map((q, index) => (
               <div key={q.id} className="border-b border-gray-200 pb-6 last:border-0">
                 <p className="font-medium text-gray-900 mb-4">
-                  <span className={`${colors.text} font-bold`}>{index + 1}.</span> {q.question}
+                  <span className={`${colors.text} font-bold`}>{index + 1}.</span> {q.question_text}
                 </p>
                 <div className="space-y-3">
                   {q.options.map((option, optIndex) => (
@@ -1589,7 +1247,7 @@ export default function FormularioCursoSeguridad() {
               </button>
             )}
 
-            {currentSection < 3 ? (
+            {currentSection < totalSections ? (
               <button
                 onClick={() => goToSection(currentSection + 1)}
                 className={`flex-1 py-4 font-semibold rounded-lg transition-colors ${colors.bg} text-white hover:opacity-90`}
@@ -1599,14 +1257,14 @@ export default function FormularioCursoSeguridad() {
             ) : (
               <button
                 onClick={handleSubmit}
-                disabled={isSubmitting || totalAnswered < 30}
+                disabled={isSubmitting || totalAnswered < totalExpectedQuestions}
                 className={`flex-1 py-4 font-semibold rounded-lg transition-colors ${
-                  isSubmitting || totalAnswered < 30
+                  isSubmitting || totalAnswered < totalExpectedQuestions
                     ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                     : 'bg-[#D91E18] text-white hover:bg-[#b81915]'
                 }`}
               >
-                {isSubmitting ? 'Enviando...' : `Enviar Examen (${totalAnswered}/30)`}
+                {isSubmitting ? 'Enviando...' : `Enviar Examen (${totalAnswered}/${totalExpectedQuestions})`}
               </button>
             )}
           </div>
@@ -1660,12 +1318,8 @@ export default function FormularioCursoSeguridad() {
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Resultados por Sección</h3>
             <div className="space-y-4">
               {sections.map((section) => {
-                const sectionColors = {
-                  1: { bg: 'bg-red-500', light: 'bg-red-50', text: 'text-red-700' },
-                  2: { bg: 'bg-blue-500', light: 'bg-blue-50', text: 'text-blue-700' },
-                  3: { bg: 'bg-green-500', light: 'bg-green-50', text: 'text-green-700' }
-                };
-                const colors = sectionColors[section.section_number];
+                const cat = examCategories[section.section_number - 1];
+                const colors = COLOR_MAP[cat?.color] || COLOR_MAP.gray;
 
                 return (
                   <div
@@ -1861,15 +1515,15 @@ export default function FormularioCursoSeguridad() {
             <h1 className="text-3xl font-bold mb-2">
               {isBlocked && 'Acceso Restringido'}
               {!isBlocked && currentStep === 1 && 'Registro de Datos'}
-              {!isBlocked && currentStep === 2 && `Examen de Certificación - Sección ${currentSection}`}
+              {!isBlocked && currentStep === 2 && `Examen de Certificación - Sección ${currentSection}${examCategories[currentSection - 1] ? ': ' + examCategories[currentSection - 1].name : ''}`}
               {!isBlocked && currentStep === 3 && 'Resultado del Examen'}
             </h1>
             <p className="text-red-100">
               Certificación de Seguridad Industrial - Coca-Cola FEMSA
             </p>
-            {currentStep === 2 && (
+            {currentStep === 2 && examCategories.length > 0 && (
               <p className="text-red-200 text-sm mt-2">
-                30 preguntas en 3 secciones | Mínimo 80% en cada sección para aprobar
+                {totalExpectedQuestions} preguntas en {examCategories.length} secciones | Mínimo {examCategories[0]?.min_score_percent || 80}% en cada sección para aprobar
               </p>
             )}
           </div>
