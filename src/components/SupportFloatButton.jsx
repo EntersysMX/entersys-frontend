@@ -11,6 +11,7 @@ const SupportFloatButton = () => {
   const VISIBLE_ROUTES = [
     '/curso-seguridad',
     '/formulario-curso-seguridad',
+    '/actualizar-perfil',
   ];
 
   const isVisibleRoute = VISIBLE_ROUTES.some(route =>

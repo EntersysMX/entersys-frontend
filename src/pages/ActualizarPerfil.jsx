@@ -1,4 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { BiLogoFacebookCircle, BiLogoInstagram, BiLogoLinkedinSquare, BiLogoYoutube } from 'react-icons/bi';
 import { config } from '@/config/environment';
 import toastService from '@/services/toast';
 
@@ -688,6 +690,31 @@ export default function ActualizarPerfil() {
           </div>
         )}
       </main>
+
+      <footer className="bg-gray-100 py-6">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <div className="flex justify-center space-x-4 mb-4">
+            <a href={config.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-500 hover:text-[#FFC600] transition-colors">
+              <BiLogoFacebookCircle className="size-6" />
+            </a>
+            <a href={config.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-500 hover:text-[#FFC600] transition-colors">
+              <BiLogoInstagram className="size-6" />
+            </a>
+            <a href={config.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-500 hover:text-[#FFC600] transition-colors">
+              <BiLogoLinkedinSquare className="size-6" />
+            </a>
+            <a href={config.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-gray-500 hover:text-[#FFC600] transition-colors">
+              <BiLogoYoutube className="size-6" />
+            </a>
+          </div>
+          <p className="text-sm text-gray-600 mb-3">&copy; {new Date().getFullYear()} Entersys. Todos los derechos reservados.</p>
+          <div className="flex justify-center space-x-6 text-sm">
+            <Link to="/politica-de-privacidad" className="text-gray-500 hover:text-[#FFC600] transition-colors">Política de privacidad</Link>
+            <Link to="/terminos-de-servicio" className="text-gray-500 hover:text-[#FFC600] transition-colors">Términos de servicio</Link>
+            <Link to="/configuracion-de-cookies" className="text-gray-500 hover:text-[#FFC600] transition-colors">Configuración de cookies</Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
