@@ -14,6 +14,7 @@ import { initWebVitals } from './utils/webVitals'
 import { startPerformanceMonitoring } from './utils/performanceMonitor'
 import { initJourneyTracking } from './utils/advancedAnalytics'
 import { initSecurity } from './utils/security'
+import { usePWAInstallPrompt } from './hooks/usePWAInstallPrompt'
 import './utils/testAnalytics' // Auto-expose test suite in development
 
 // Lazy loading de páginas para mejor performance
@@ -65,6 +66,9 @@ const PageLoader = () => <SimpleLoader />
 function App() {
   // Obtener ubicación actual para resetear ErrorBoundary al navegar
   const location = useLocation();
+
+  // Prevenir prompt de instalación PWA en rutas de onboarding
+  usePWAInstallPrompt();
 
   // Inicializar analytics, sentry y web vitals cuando la app se carga
   useEffect(() => {
