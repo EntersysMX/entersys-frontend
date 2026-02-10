@@ -279,14 +279,7 @@ export default function ActualizarPerfil() {
       errors.nombre = 'El nombre solo puede contener letras y espacios';
     }
 
-    if (editData.rfc_colaborador) {
-      const rfcVal = editData.rfc_colaborador.trim().toUpperCase();
-      if (rfcVal.length < 12 || rfcVal.length > 13) {
-        errors.rfc_colaborador = 'El RFC debe tener 12 o 13 caracteres';
-      } else if (!/^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{2,3}$/i.test(rfcVal)) {
-        errors.rfc_colaborador = 'Formato de RFC inválido';
-      }
-    }
+    // RFC colaborador y NSS NO son editables, por lo tanto no se validan
 
     if (editData.rfc_empresa) {
       const rfcVal = editData.rfc_empresa.trim().toUpperCase();
@@ -299,10 +292,6 @@ export default function ActualizarPerfil() {
 
     if (editData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(editData.email)) {
       errors.email = 'Formato de email inválido';
-    }
-
-    if (editData.nss && !/^\d{11}$/.test(editData.nss)) {
-      errors.nss = 'El NSS debe tener exactamente 11 dígitos';
     }
 
     setEditErrors(errors);
@@ -323,15 +312,14 @@ export default function ActualizarPerfil() {
         }
       }
 
+      // NOTA: RFC colaborador y NSS NO se envían al backend (no son editables por seguridad)
       const payload = {
         row_id: profileData.row_id,
         rfc: profileData.rfc,
         nss_original: nss.trim(), // original NSS used for verification
         nombre: editData.nombre || null,
-        rfc_colaborador: editData.rfc_colaborador ? editData.rfc_colaborador.toUpperCase() : null,
         rfc_empresa: editData.rfc_empresa ? editData.rfc_empresa.toUpperCase() : null,
         email: editData.email || null,
-        nss: editData.nss || null,
         proveedor: editData.proveedor || null,
         tipo_servicio: editData.tipo_servicio || null,
         url_imagen: photoUrl || null,
@@ -358,13 +346,12 @@ export default function ActualizarPerfil() {
       if (data.success) {
         toastService.success('Perfil actualizado exitosamente');
         // Update the displayed profile data with the new values
+        // NOTA: RFC colaborador y NSS NO se actualizan (no son editables)
         setProfileData(prev => ({
           ...prev,
           nombre: editData.nombre || prev.nombre,
-          rfc: editData.rfc_colaborador || prev.rfc,
           rfc_empresa: editData.rfc_empresa || prev.rfc_empresa,
           email: editData.email || prev.email,
-          nss: editData.nss || prev.nss,
           proveedor: editData.proveedor || prev.proveedor,
           tipo_servicio: editData.tipo_servicio || prev.tipo_servicio,
           url_imagen: photoUrl || prev.url_imagen,
@@ -585,18 +572,16 @@ export default function ActualizarPerfil() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">RFC del Colaborador</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    RFC del Colaborador
+                    <span className="text-xs text-gray-500 ml-2">(No editable por seguridad)</span>
+                  </label>
                   <input
                     type="text"
                     value={editData.rfc_colaborador}
-                    onChange={e => handleEditChange('rfc_colaborador', e.target.value.toUpperCase())}
-                    placeholder="Ej: PEGJ850101XXX"
-                    maxLength={13}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D91E18] transition ${
-                      editErrors.rfc_colaborador ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    disabled
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed"
                   />
-                  {editErrors.rfc_colaborador && <p className="text-sm text-red-500 mt-1">{editErrors.rfc_colaborador}</p>}
                 </div>
 
                 <div>
@@ -629,22 +614,16 @@ export default function ActualizarPerfil() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">NSS</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    NSS
+                    <span className="text-xs text-gray-500 ml-2">(No editable por seguridad)</span>
+                  </label>
                   <input
                     type="text"
                     value={editData.nss}
-                    onChange={e => {
-                      const val = e.target.value.replace(/\D/g, '');
-                      handleEditChange('nss', val);
-                    }}
-                    placeholder="11 dígitos"
-                    maxLength={11}
-                    inputMode="numeric"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D91E18] transition ${
-                      editErrors.nss ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    disabled
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed"
                   />
-                  {editErrors.nss && <p className="text-sm text-red-500 mt-1">{editErrors.nss}</p>}
                 </div>
 
                 <div>
