@@ -18,7 +18,8 @@ const WhatsAppFloatButton = () => {
     '/curso-seguridad',
     '/formulario-curso-seguridad',
     '/certificacion-seguridad',
-    '/credencial-kof'
+    '/credencial-kof',
+    '/actualizar-perfil'
   ];
 
   // Verificar si la ruta actual está en la lista de rutas ocultas
