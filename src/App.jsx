@@ -53,6 +53,9 @@ const FormularioCursoSeguridad = lazy(() => import('./pages/FormularioCursoSegur
 // QR Generator
 const QRGenerator = lazy(() => import('./pages/QRGenerator'))
 
+// Actualizar perfil del colaborador
+const ActualizarPerfil = lazy(() => import('./pages/ActualizarPerfil'))
+
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 // Componente de loading mientras se cargan las páginas
@@ -139,6 +142,8 @@ function App() {
                 <Route path="/formulario-curso-seguridad" element={<FormularioCursoSeguridad />} />
                 {/* QR Generator */}
                 <Route path="/qr-generator" element={<QRGenerator />} />
+                {/* Actualizar perfil del colaborador */}
+                <Route path="/actualizar-perfil" element={<ActualizarPerfil />} />
                 {/* Ruta 404 - debe estar al final */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
