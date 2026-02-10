@@ -17,6 +17,9 @@ export default function ActualizarPerfil() {
   // Step 2 state - profile data
   const [profileData, setProfileData] = useState(null);
   const [editData, setEditData] = useState({
+    nombre: '',
+    rfc_colaborador: '',
+    rfc_empresa: '',
     email: '',
     nss: '',
     proveedor: '',
@@ -100,6 +103,9 @@ export default function ActualizarPerfil() {
       const data = await response.json();
       setProfileData(data);
       setEditData({
+        nombre: data.nombre || '',
+        rfc_colaborador: data.rfc || '',
+        rfc_empresa: data.rfc_empresa || '',
         email: data.email || '',
         nss: data.nss || '',
         proveedor: data.proveedor || '',
@@ -267,6 +273,28 @@ export default function ActualizarPerfil() {
   const validateEditForm = () => {
     const errors = {};
 
+    if (editData.nombre && !/^[\p{L}\s]+$/u.test(editData.nombre)) {
+      errors.nombre = 'El nombre solo puede contener letras y espacios';
+    }
+
+    if (editData.rfc_colaborador) {
+      const rfcVal = editData.rfc_colaborador.trim().toUpperCase();
+      if (rfcVal.length < 12 || rfcVal.length > 13) {
+        errors.rfc_colaborador = 'El RFC debe tener 12 o 13 caracteres';
+      } else if (!/^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{2,3}$/i.test(rfcVal)) {
+        errors.rfc_colaborador = 'Formato de RFC inválido';
+      }
+    }
+
+    if (editData.rfc_empresa) {
+      const rfcVal = editData.rfc_empresa.trim().toUpperCase();
+      if (rfcVal.length < 12 || rfcVal.length > 13) {
+        errors.rfc_empresa = 'El RFC debe tener 12 o 13 caracteres';
+      } else if (!/^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{2,3}$/i.test(rfcVal)) {
+        errors.rfc_empresa = 'Formato de RFC inválido';
+      }
+    }
+
     if (editData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(editData.email)) {
       errors.email = 'Formato de email inválido';
     }
@@ -297,6 +325,9 @@ export default function ActualizarPerfil() {
         row_id: profileData.row_id,
         rfc: profileData.rfc,
         nss_original: nss.trim(), // original NSS used for verification
+        nombre: editData.nombre || null,
+        rfc_colaborador: editData.rfc_colaborador ? editData.rfc_colaborador.toUpperCase() : null,
+        rfc_empresa: editData.rfc_empresa ? editData.rfc_empresa.toUpperCase() : null,
         email: editData.email || null,
         nss: editData.nss || null,
         proveedor: editData.proveedor || null,
@@ -327,6 +358,9 @@ export default function ActualizarPerfil() {
         // Update the displayed profile data with the new values
         setProfileData(prev => ({
           ...prev,
+          nombre: editData.nombre || prev.nombre,
+          rfc: editData.rfc_colaborador || prev.rfc,
+          rfc_empresa: editData.rfc_empresa || prev.rfc_empresa,
           email: editData.email || prev.email,
           nss: editData.nss || prev.nss,
           proveedor: editData.proveedor || prev.proveedor,
@@ -530,44 +564,53 @@ export default function ActualizarPerfil() {
                 )}
               </div>
 
-              {/* Read-only fields */}
-              <div className="space-y-4 mb-6">
-                <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Datos no editables</h2>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-500 mb-1">Nombre</label>
-                  <input
-                    type="text"
-                    value={profileData.nombre || ''}
-                    disabled
-                    className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg text-gray-600 cursor-not-allowed"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-500 mb-1">RFC del Colaborador</label>
-                  <input
-                    type="text"
-                    value={profileData.rfc || ''}
-                    disabled
-                    className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg text-gray-600 cursor-not-allowed"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-500 mb-1">RFC de la Empresa</label>
-                  <input
-                    type="text"
-                    value={profileData.rfc_empresa || ''}
-                    disabled
-                    className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg text-gray-600 cursor-not-allowed"
-                  />
-                </div>
-              </div>
-
               {/* Editable fields */}
               <div className="space-y-4 mb-8">
-                <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Datos editables</h2>
+                <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Datos del colaborador</h2>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                  <input
+                    type="text"
+                    value={editData.nombre}
+                    onChange={e => handleEditChange('nombre', e.target.value)}
+                    placeholder="Nombre completo"
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D91E18] transition ${
+                      editErrors.nombre ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                  />
+                  {editErrors.nombre && <p className="text-sm text-red-500 mt-1">{editErrors.nombre}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">RFC del Colaborador</label>
+                  <input
+                    type="text"
+                    value={editData.rfc_colaborador}
+                    onChange={e => handleEditChange('rfc_colaborador', e.target.value.toUpperCase())}
+                    placeholder="Ej: PEGJ850101XXX"
+                    maxLength={13}
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D91E18] transition ${
+                      editErrors.rfc_colaborador ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                  />
+                  {editErrors.rfc_colaborador && <p className="text-sm text-red-500 mt-1">{editErrors.rfc_colaborador}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">RFC de la Empresa</label>
+                  <input
+                    type="text"
+                    value={editData.rfc_empresa}
+                    onChange={e => handleEditChange('rfc_empresa', e.target.value.toUpperCase())}
+                    placeholder="Ej: EMP850101XXX"
+                    maxLength={13}
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D91E18] transition ${
+                      editErrors.rfc_empresa ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                  />
+                  {editErrors.rfc_empresa && <p className="text-sm text-red-500 mt-1">{editErrors.rfc_empresa}</p>}
+                </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
