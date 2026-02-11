@@ -345,6 +345,12 @@ export default function ActualizarPerfil() {
 
       if (data.success) {
         toastService.success('Perfil actualizado exitosamente');
+        // Notify about certificate email resend
+        if (data.email_sent && data.email_masked) {
+          toastService.success(`Certificado actualizado enviado a ${data.email_masked}`);
+        } else if (data.email_sent === false) {
+          toastService.warning('No se pudo reenviar el certificado por correo. Intenta desde la sección de reenvío.');
+        }
         // Update the displayed profile data with the new values
         // NOTA: RFC colaborador y NSS NO se actualizan (no son editables)
         setProfileData(prev => ({
