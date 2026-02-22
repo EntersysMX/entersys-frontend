@@ -51,6 +51,8 @@ export default function FormularioCursoSeguridad() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
+  const photoSectionRef = useRef(null);
+  const cameraAutoStarted = useRef(false);
 
   const [answers, setAnswers] = useState({});
   const [currentStep, setCurrentStep] = useState(1); // 1: datos, 2: examen, 3: resultado
@@ -351,6 +353,40 @@ export default function FormularioCursoSeguridad() {
     setPhotoFile(null);
     setPhotoPreview(null);
   }, []);
+
+  // Auto-activar cámara cuando la sección de foto es visible (estilo app bancaria)
+  useEffect(() => {
+    if (!photoSectionRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Activar cámara automáticamente cuando la sección es visible,
+        // solo si no hay foto tomada, la cámara no está activa, y no se ha intentado antes
+        if (
+          entry.isIntersecting &&
+          !photoFile &&
+          !photoPreview &&
+          !isCameraActive &&
+          !cameraAutoStarted.current
+        ) {
+          cameraAutoStarted.current = true;
+          startCamera();
+        }
+      },
+      { threshold: 0.3 } // Se activa cuando el 30% de la sección es visible
+    );
+
+    observer.observe(photoSectionRef.current);
+
+    return () => observer.disconnect();
+  }, [photoFile, photoPreview, isCameraActive, startCamera]);
+
+  // Reset auto-start flag cuando se elimina la foto (para permitir re-activación)
+  useEffect(() => {
+    if (!photoFile && !photoPreview && !isCameraActive) {
+      cameraAutoStarted.current = false;
+    }
+  }, [photoFile, photoPreview, isCameraActive]);
 
   // Limpiar cámara al desmontar componente
   useEffect(() => {
@@ -824,7 +860,7 @@ export default function FormularioCursoSeguridad() {
           </div>
 
           {/* Foto para Credencial */}
-          <div className="pt-6 border-t border-gray-200">
+          <div ref={photoSectionRef} className="pt-6 border-t border-gray-200">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Foto para Credencial de Acceso <span className="text-red-500">*</span>
             </label>
