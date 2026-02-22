@@ -221,13 +221,32 @@ export default function FormularioCursoSeguridad() {
     return /iPhone|iPad|iPod/i.test(navigator.userAgent);
   }, []);
 
-  // Iniciar cámara - solicita permiso nativo del navegador/dispositivo
+  // Iniciar cámara (idéntico a producción)
   const startCamera = useCallback(async () => {
     setCameraError(null);
     setShowPermissionHelp(false);
 
     try {
-      // Solicitar acceso a la cámara directamente (el navegador muestra su diálogo nativo de permisos)
+      // Paso 1: Verificar estado del permiso
+      let permState = 'unknown';
+      try {
+        if (navigator.permissions && navigator.permissions.query) {
+          permState = (await navigator.permissions.query({ name: 'camera' })).state;
+        }
+      } catch (e) {
+        permState = 'query-not-supported';
+      }
+
+      // Si el permiso está bloqueado, mostrar instrucciones sin intentar getUserMedia
+      if (permState === 'denied') {
+        setCameraError(
+          'El permiso de cámara está bloqueado. Debes habilitarlo manualmente en la configuración del navegador.'
+        );
+        setShowPermissionHelp(true);
+        return;
+      }
+
+      // Paso 2: Solicitar acceso a la cámara (el navegador muestra diálogo nativo si permState es "prompt")
       const constraints = {
         video: {
           facingMode: 'user',
@@ -268,9 +287,7 @@ export default function FormularioCursoSeguridad() {
       }
 
       if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-        setCameraError(
-          'Permiso de cámara denegado. Para habilitarlo, toca el icono de candado en la barra de direcciones y permite el acceso a la cámara, luego intenta de nuevo.'
-        );
+        setShowPermissionHelp(true);
       } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
         setCameraError('No se encontró ninguna cámara en tu dispositivo.');
       } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
