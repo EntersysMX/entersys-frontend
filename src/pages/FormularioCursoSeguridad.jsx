@@ -51,8 +51,6 @@ export default function FormularioCursoSeguridad() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
-  const photoSectionRef = useRef(null);
-  const cameraAutoStarted = useRef(false);
 
   const [answers, setAnswers] = useState({});
   const [currentStep, setCurrentStep] = useState(1); // 1: datos, 2: examen, 3: resultado
@@ -223,32 +221,13 @@ export default function FormularioCursoSeguridad() {
     return /iPhone|iPad|iPod/i.test(navigator.userAgent);
   }, []);
 
-  // Iniciar cámara (idéntico a producción)
+  // Iniciar cámara - solicita permiso nativo del navegador/dispositivo
   const startCamera = useCallback(async () => {
     setCameraError(null);
     setShowPermissionHelp(false);
 
     try {
-      // Paso 1: Verificar estado del permiso (igual que producción)
-      let permState = 'unknown';
-      try {
-        if (navigator.permissions && navigator.permissions.query) {
-          permState = (await navigator.permissions.query({ name: 'camera' })).state;
-        }
-      } catch (e) {
-        permState = 'query-not-supported';
-      }
-
-      // Si el permiso está bloqueado, mostrar instrucciones sin intentar getUserMedia
-      if (permState === 'denied') {
-        setCameraError(
-          'El permiso de cámara está bloqueado. Debes habilitarlo manualmente en la configuración del navegador.'
-        );
-        setShowPermissionHelp(true);
-        return;
-      }
-
-      // Paso 2: Solicitar acceso a la cámara (el navegador muestra diálogo si permState es "prompt")
+      // Solicitar acceso a la cámara directamente (el navegador muestra su diálogo nativo de permisos)
       const constraints = {
         video: {
           facingMode: 'user',
@@ -289,7 +268,9 @@ export default function FormularioCursoSeguridad() {
       }
 
       if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-        setShowPermissionHelp(true);
+        setCameraError(
+          'Permiso de cámara denegado. Para habilitarlo, toca el icono de candado en la barra de direcciones y permite el acceso a la cámara, luego intenta de nuevo.'
+        );
       } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
         setCameraError('No se encontró ninguna cámara en tu dispositivo.');
       } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
@@ -353,40 +334,6 @@ export default function FormularioCursoSeguridad() {
     setPhotoFile(null);
     setPhotoPreview(null);
   }, []);
-
-  // Auto-activar cámara cuando la sección de foto es visible (estilo app bancaria)
-  useEffect(() => {
-    if (!photoSectionRef.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Activar cámara automáticamente cuando la sección es visible,
-        // solo si no hay foto tomada, la cámara no está activa, y no se ha intentado antes
-        if (
-          entry.isIntersecting &&
-          !photoFile &&
-          !photoPreview &&
-          !isCameraActive &&
-          !cameraAutoStarted.current
-        ) {
-          cameraAutoStarted.current = true;
-          startCamera();
-        }
-      },
-      { threshold: 0.3 } // Se activa cuando el 30% de la sección es visible
-    );
-
-    observer.observe(photoSectionRef.current);
-
-    return () => observer.disconnect();
-  }, [photoFile, photoPreview, isCameraActive, startCamera]);
-
-  // Reset auto-start flag cuando se elimina la foto (para permitir re-activación)
-  useEffect(() => {
-    if (!photoFile && !photoPreview && !isCameraActive) {
-      cameraAutoStarted.current = false;
-    }
-  }, [photoFile, photoPreview, isCameraActive]);
 
   // Limpiar cámara al desmontar componente
   useEffect(() => {
@@ -860,7 +807,7 @@ export default function FormularioCursoSeguridad() {
           </div>
 
           {/* Foto para Credencial */}
-          <div ref={photoSectionRef} className="pt-6 border-t border-gray-200">
+          <div className="pt-6 border-t border-gray-200">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Foto para Credencial de Acceso <span className="text-red-500">*</span>
             </label>
