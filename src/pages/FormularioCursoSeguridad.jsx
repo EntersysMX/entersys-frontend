@@ -24,6 +24,43 @@ const COLOR_MAP = {
   gray:  { bg: 'bg-gray-500',  light: 'bg-gray-50',  border: 'border-gray-200',  text: 'text-gray-700' },
 };
 
+// Entidades federativas para búsqueda de CURP en RENAPO
+const ENTIDADES_FEDERATIVAS = [
+  { code: 'AS', name: 'Aguascalientes' },
+  { code: 'BC', name: 'Baja California' },
+  { code: 'BS', name: 'Baja California Sur' },
+  { code: 'CC', name: 'Campeche' },
+  { code: 'CL', name: 'Coahuila' },
+  { code: 'CM', name: 'Colima' },
+  { code: 'CS', name: 'Chiapas' },
+  { code: 'CH', name: 'Chihuahua' },
+  { code: 'DF', name: 'Ciudad de México' },
+  { code: 'DG', name: 'Durango' },
+  { code: 'GT', name: 'Guanajuato' },
+  { code: 'GR', name: 'Guerrero' },
+  { code: 'HG', name: 'Hidalgo' },
+  { code: 'JC', name: 'Jalisco' },
+  { code: 'MC', name: 'Estado de México' },
+  { code: 'MN', name: 'Michoacán' },
+  { code: 'MS', name: 'Morelos' },
+  { code: 'NT', name: 'Nayarit' },
+  { code: 'NL', name: 'Nuevo León' },
+  { code: 'OC', name: 'Oaxaca' },
+  { code: 'PL', name: 'Puebla' },
+  { code: 'QT', name: 'Querétaro' },
+  { code: 'QR', name: 'Quintana Roo' },
+  { code: 'SP', name: 'San Luis Potosí' },
+  { code: 'SL', name: 'Sinaloa' },
+  { code: 'SR', name: 'Sonora' },
+  { code: 'TC', name: 'Tabasco' },
+  { code: 'TS', name: 'Tamaulipas' },
+  { code: 'TL', name: 'Tlaxcala' },
+  { code: 'VZ', name: 'Veracruz' },
+  { code: 'YN', name: 'Yucatán' },
+  { code: 'ZS', name: 'Zacatecas' },
+  { code: 'NE', name: 'Nacido en el Extranjero' },
+];
+
 // Las preguntas y categorías se cargan dinámicamente desde GET /exam-questions
 
 export default function FormularioCursoSeguridad() {
@@ -31,8 +68,13 @@ export default function FormularioCursoSeguridad() {
 
   // Estado del formulario
   const [formData, setFormData] = useState({
-    nombre_completo: '',
+    nombres: '',
+    primer_apellido: '',
+    segundo_apellido: '',
     rfc_colaborador: '',
+    fecha_nacimiento: '',
+    sexo: '',
+    estado_nacimiento: '',
     rfc_empresa: '',
     nss: '',
     tipo_servicio: '',
@@ -63,6 +105,18 @@ export default function FormularioCursoSeguridad() {
   const [statusError, setStatusError] = useState(null);
   const [isBlocked, setIsBlocked] = useState(false); // Nuevo estado para bloqueo
   const [isDownloadingPDF, setIsDownloadingPDF] = useState(false);
+
+  // Estado para auto-generación de RFC
+  const [isGeneratingRfc, setIsGeneratingRfc] = useState(false);
+  const [rfcBase, setRfcBase] = useState(''); // primeros 10 chars generados
+  const [rfcHomoclave, setRfcHomoclave] = useState(''); // últimos 3 chars (editable si no existe en BD)
+  const [rfcLocked, setRfcLocked] = useState(false); // true = RFC completo encontrado en BD, no editable
+  const [rfcGenerated, setRfcGenerated] = useState(false); // true = ya se generó el RFC
+  const [curpData, setCurpData] = useState(null); // datos CURP del servicio
+  const [rfcError, setRfcError] = useState(null); // error message
+
+  // Modal de confirmación de datos antes de continuar
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   // Estado dinámico: preguntas y categorías cargadas desde API
   const [examConfig, setExamConfig] = useState(null); // { categories, questions }
@@ -118,23 +172,50 @@ export default function FormularioCursoSeguridad() {
   const validatePersonalData = () => {
     const newErrors = {};
 
-    // Nombre: requerido + solo letras, espacios y acentos
-    if (!formData.nombre_completo.trim()) {
-      newErrors.nombre_completo = 'El nombre es obligatorio';
-    } else if (!/^[\p{L}\s]+$/u.test(formData.nombre_completo.trim())) {
-      newErrors.nombre_completo = 'El nombre solo debe contener letras y espacios';
+    // Nombre(s): requerido + solo letras, espacios y acentos
+    if (!formData.nombres.trim()) {
+      newErrors.nombres = 'El nombre es obligatorio';
+    } else if (!/^[\p{L}\s]+$/u.test(formData.nombres.trim())) {
+      newErrors.nombres = 'El nombre solo debe contener letras y espacios';
     }
 
-    // RFC Colaborador: requerido + regex mexicano + 12 o 13 chars
-    if (!formData.rfc_colaborador.trim()) {
-      newErrors.rfc_colaborador = 'El RFC es obligatorio';
+    // Primer apellido: requerido
+    if (!formData.primer_apellido.trim()) {
+      newErrors.primer_apellido = 'El primer apellido es obligatorio';
+    } else if (!/^[\p{L}\s]+$/u.test(formData.primer_apellido.trim())) {
+      newErrors.primer_apellido = 'Solo debe contener letras y espacios';
+    }
+
+    // Segundo apellido: opcional pero si se llena, solo letras
+    if (formData.segundo_apellido.trim() && !/^[\p{L}\s]+$/u.test(formData.segundo_apellido.trim())) {
+      newErrors.segundo_apellido = 'Solo debe contener letras y espacios';
+    }
+
+    // RFC Colaborador: auto-generado, validar que esté completo
+    if (!rfcGenerated) {
+      newErrors.rfc_colaborador = 'Completa los datos personales para generar el RFC';
     } else {
-      const rfcVal = formData.rfc_colaborador.trim().toUpperCase();
+      const rfcVal = (rfcBase + rfcHomoclave).toUpperCase();
       if (rfcVal.length !== 12 && rfcVal.length !== 13) {
         newErrors.rfc_colaborador = 'El RFC debe tener 12 o 13 caracteres';
       } else if (!RFC_REGEX.test(rfcVal)) {
         newErrors.rfc_colaborador = 'Formato de RFC inválido (ej: PEGJ850101XXX)';
       }
+    }
+
+    // Fecha de nacimiento: requerida
+    if (!formData.fecha_nacimiento) {
+      newErrors.fecha_nacimiento = 'La fecha de nacimiento es obligatoria';
+    }
+
+    // Sexo: requerido
+    if (!formData.sexo) {
+      newErrors.sexo = 'El sexo es obligatorio';
+    }
+
+    // Estado de nacimiento: requerido
+    if (!formData.estado_nacimiento) {
+      newErrors.estado_nacimiento = 'El estado de nacimiento es obligatorio';
     }
 
     // RFC Empresa: requerido + validar formato
@@ -196,11 +277,26 @@ export default function FormularioCursoSeguridad() {
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: null }));
     }
-    // Limpiar error de estatus al cambiar RFC
-    if (name === 'rfc_colaborador') {
-      setStatusError(null);
-      setExamStatus(null);
+    // Resetear RFC generado si cambian campos que afectan la generación
+    const rfcTriggerFields = ['nombres', 'primer_apellido', 'segundo_apellido', 'fecha_nacimiento', 'sexo', 'estado_nacimiento', 'email', 'nss'];
+    if (rfcTriggerFields.includes(name) && rfcGenerated) {
+      setRfcGenerated(false);
+      setRfcBase('');
+      setRfcHomoclave('');
+      setRfcLocked(false);
+      setCurpData(null);
+      setRfcError(null);
+      setFormData(prev => ({ ...prev, [name]: value, rfc_colaborador: '' }));
+      return; // already set formData above
     }
+  };
+
+  // Manejar cambio en homoclave (3 últimos chars del RFC)
+  const handleHomoclaveChange = (e) => {
+    const val = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').substring(0, 3);
+    setRfcHomoclave(val);
+    setFormData(prev => ({ ...prev, rfc_colaborador: rfcBase + val }));
+    if (errors.rfc_colaborador) setErrors(prev => ({ ...prev, rfc_colaborador: null }));
   };
 
   // Detectar navegador y dispositivo
@@ -427,14 +523,132 @@ export default function FormularioCursoSeguridad() {
     }
   };
 
-  // Continuar al examen (verifica estatus primero, luego carga preguntas)
+  // Generar RFC base (10 chars) desde RENAPO y buscar en Smartsheet
+  const generateAndLookupRfc = async () => {
+    setIsGeneratingRfc(true);
+    setRfcError(null);
+    setCurpData(null);
+    setRfcGenerated(false);
+    setRfcBase('');
+    setRfcHomoclave('');
+    setRfcLocked(false);
+
+    try {
+      // Paso 1: Obtener CURP/RFC base desde RENAPO
+      const [year, month, day] = formData.fecha_nacimiento.split('-');
+      const fechaRenapo = `${day}/${month}/${year}`;
+
+      const payload = {
+        nombres: formData.nombres.trim().toUpperCase(),
+        primer_apellido: formData.primer_apellido.trim().toUpperCase(),
+        segundo_apellido: formData.segundo_apellido.trim().toUpperCase(),
+        fecha_nacimiento: fechaRenapo,
+        sexo: formData.sexo,
+        clave_entidad: formData.estado_nacimiento,
+      };
+
+      const curpResponse = await fetch(`${API_BASE_URL}/v1/curp/search`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const curpResult = await curpResponse.json();
+
+      if (!curpResponse.ok) {
+        const detail = curpResult.detail || curpResult;
+        const message = typeof detail === 'object' ? (detail.message || 'Error al generar RFC') : String(detail);
+        setRfcError(message);
+        return;
+      }
+
+      if (!curpResult.success || !curpResult.data || curpResult.data.length === 0) {
+        setRfcError('No se encontraron registros con los datos proporcionados. Verifica que tu información sea correcta.');
+        return;
+      }
+
+      const matchingRecord = curpResult.data[0];
+      const generatedBase = matchingRecord.curp ? matchingRecord.curp.substring(0, 10) : '';
+
+      if (!generatedBase || generatedBase.length < 10) {
+        setRfcError('No se pudo generar el RFC base. Verifica tus datos personales.');
+        return;
+      }
+
+      setCurpData(matchingRecord);
+
+      // Paso 2: Buscar en Smartsheet por NSS + email
+      try {
+        const lookupResponse = await fetch(
+          `${API_BASE_URL}/v1/onboarding/lookup-rfc?nss=${encodeURIComponent(formData.nss.trim())}&email=${encodeURIComponent(formData.email.trim())}`
+        );
+        const lookupData = await lookupResponse.json();
+
+        if (lookupResponse.ok && lookupData && lookupData.rfc) {
+          // RFC encontrado en Smartsheet
+          const foundRfc = lookupData.rfc.toUpperCase();
+          const foundBase = foundRfc.substring(0, 10);
+          const foundHomoclave = foundRfc.substring(10);
+          setRfcBase(foundBase);
+          setRfcHomoclave(foundHomoclave);
+          setRfcLocked(true);
+          setFormData(prev => ({ ...prev, rfc_colaborador: foundRfc }));
+        } else {
+          // No encontrado en Smartsheet, usuario debe ingresar homoclave
+          setRfcBase(generatedBase);
+          setRfcHomoclave('');
+          setRfcLocked(false);
+          setFormData(prev => ({ ...prev, rfc_colaborador: generatedBase }));
+        }
+      } catch (lookupErr) {
+        // Si falla el lookup, continuar solo con base generada
+        console.warn('Error en lookup de RFC:', lookupErr);
+        setRfcBase(generatedBase);
+        setRfcHomoclave('');
+        setRfcLocked(false);
+        setFormData(prev => ({ ...prev, rfc_colaborador: generatedBase }));
+      }
+
+      setRfcGenerated(true);
+
+    } catch (error) {
+      console.error('Error generando RFC:', error);
+      setRfcError('Error de conexión al generar RFC. Intenta nuevamente.');
+    } finally {
+      setIsGeneratingRfc(false);
+    }
+  };
+
+  // Auto-trigger: generar RFC cuando todos los campos necesarios están llenos
+  useEffect(() => {
+    const { nombres, primer_apellido, fecha_nacimiento, sexo, estado_nacimiento, email, nss } = formData;
+    const allFilled = nombres.trim() && primer_apellido.trim() && fecha_nacimiento && sexo && estado_nacimiento && email.trim() && nss.trim();
+
+    if (!allFilled) return;
+    if (rfcGenerated || isGeneratingRfc) return;
+
+    const timer = setTimeout(() => {
+      generateAndLookupRfc();
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, [formData.nombres, formData.primer_apellido, formData.fecha_nacimiento, formData.sexo, formData.estado_nacimiento, formData.email, formData.nss]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Continuar al examen: valida datos, luego muestra modal de confirmación
   const handleContinueToExam = async () => {
     if (!validatePersonalData()) return;
+
+    // Mostrar modal de confirmación de datos
+    setShowConfirmModal(true);
+  };
+
+  // Confirmar datos y proceder al examen (se ejecuta desde el modal)
+  const handleConfirmAndProceed = async () => {
+    setShowConfirmModal(false);
 
     const status = await checkExamStatus();
 
     if (!status) {
-      // Error al verificar, permitir continuar de todos modos (primera vez)
       const config = await fetchExamQuestions();
       if (!config) return;
       setCurrentStep(2);
@@ -444,13 +658,11 @@ export default function FormularioCursoSeguridad() {
     }
 
     if (!status.can_take_exam) {
-      // No puede hacer el examen - mostrar pantalla de bloqueo
       setStatusError(status.message);
       setIsBlocked(true);
       return;
     }
 
-    // Puede hacer el examen - cargar preguntas
     const config = await fetchExamQuestions();
     if (!config) return;
     setCurrentStep(2);
@@ -491,10 +703,17 @@ export default function FormularioCursoSeguridad() {
         answer: answers[q.id] || '',
       }));
 
-      // Excluir email_confirm del payload enviado al backend
-      const { email_confirm, ...formDataWithoutConfirm } = formData;
+      // Construir nombre_completo a partir de los campos separados
+      const nombreCompleto = [formData.nombres, formData.primer_apellido, formData.segundo_apellido]
+        .map(s => s.trim())
+        .filter(Boolean)
+        .join(' ');
+
+      // Excluir campos internos del payload enviado al backend
+      const { email_confirm, nombres, primer_apellido, segundo_apellido, fecha_nacimiento, sexo, estado_nacimiento, ...formDataBase } = formData;
       const payload = {
-        ...formDataWithoutConfirm,
+        ...formDataBase,
+        nombre_completo: nombreCompleto,
         url_imagen: photoUrl,
         answers: formattedAnswers
       };
@@ -578,9 +797,25 @@ export default function FormularioCursoSeguridad() {
     <div className="max-w-2xl mx-auto">
       <div className="bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Datos del Colaborador</h2>
-        <p className="text-gray-600 mb-8">
+        <p className="text-gray-600 mb-6">
           Complete la siguiente información antes de iniciar el examen de certificación.
         </p>
+
+        {/* Nota informativa */}
+        <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <div className="flex items-start">
+            <svg className="w-5 h-5 text-blue-500 mr-3 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <p className="text-blue-800 font-semibold text-sm">Nota importante</p>
+              <p className="text-blue-700 text-sm mt-1">
+                Tus datos ser&aacute;n verificados para garantizar la validez de tu certificaci&oacute;n.
+                Por favor aseg&uacute;rate de ingresar tu informaci&oacute;n tal como aparece en tus documentos oficiales.
+              </p>
+            </div>
+          </div>
+        </div>
 
         {/* Mensaje especial cuando ya tiene certificación vigente */}
         {examStatus && examStatus.is_approved && !examStatus.is_expired && (
@@ -656,130 +891,133 @@ export default function FormularioCursoSeguridad() {
         )}
 
         <div className="space-y-6">
-          {/* Nombre Completo */}
+          {/* 1. Nombre(s) */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Nombre Completo <span className="text-red-500">*</span>
+              Nombre(s) <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
-              name="nombre_completo"
-              value={formData.nombre_completo}
+              name="nombres"
+              value={formData.nombres}
               onChange={handleInputChange}
               className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent ${
-                errors.nombre_completo ? 'border-red-500' : 'border-gray-300'
+                errors.nombres ? 'border-red-500' : 'border-gray-300'
               }`}
-              placeholder="Juan Pérez García"
+              placeholder="Juan Carlos"
             />
-            {errors.nombre_completo && (
-              <p className="mt-1 text-sm text-red-500">{errors.nombre_completo}</p>
+            {errors.nombres && (
+              <p className="mt-1 text-sm text-red-500">{errors.nombres}</p>
             )}
           </div>
 
-          {/* RFC Colaborador */}
+          {/* 2. Primer Apellido */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              RFC del Colaborador <span className="text-red-500">*</span>
+              Primer Apellido <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
-              name="rfc_colaborador"
-              value={formData.rfc_colaborador}
-              onChange={handleInputChange}
-              maxLength={13}
-              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent uppercase ${
-                errors.rfc_colaborador ? 'border-red-500' : 'border-gray-300'
-              }`}
-              placeholder="PEGJ850101XXX"
-            />
-            {errors.rfc_colaborador && (
-              <p className="mt-1 text-sm text-red-500">{errors.rfc_colaborador}</p>
-            )}
-          </div>
-
-          {/* RFC Empresa */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              RFC de la Empresa <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="rfc_empresa"
-              value={formData.rfc_empresa}
-              onChange={handleInputChange}
-              maxLength={13}
-              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent uppercase ${
-                errors.rfc_empresa ? 'border-red-500' : 'border-gray-300'
-              }`}
-              placeholder="EMP850101XXX"
-            />
-            {errors.rfc_empresa && (
-              <p className="mt-1 text-sm text-red-500">{errors.rfc_empresa}</p>
-            )}
-          </div>
-
-          {/* NSS */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              NSS del Colaborador <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="nss"
-              value={formData.nss}
-              onChange={handleInputChange}
-              maxLength={11}
-              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent ${
-                errors.nss ? 'border-red-500' : 'border-gray-300'
-              }`}
-              placeholder="12345678901"
-            />
-            {errors.nss && (
-              <p className="mt-1 text-sm text-red-500">{errors.nss}</p>
-            )}
-          </div>
-
-          {/* Tipo de Servicio */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Tipo de Servicio <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="tipo_servicio"
-              value={formData.tipo_servicio}
+              name="primer_apellido"
+              value={formData.primer_apellido}
               onChange={handleInputChange}
               className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent ${
-                errors.tipo_servicio ? 'border-red-500' : 'border-gray-300'
+                errors.primer_apellido ? 'border-red-500' : 'border-gray-300'
               }`}
-              placeholder="Ej: Mantenimiento, Limpieza, Seguridad, etc."
+              placeholder="Pérez"
             />
-            {errors.tipo_servicio && (
-              <p className="mt-1 text-sm text-red-500">{errors.tipo_servicio}</p>
+            {errors.primer_apellido && (
+              <p className="mt-1 text-sm text-red-500">{errors.primer_apellido}</p>
             )}
           </div>
 
-          {/* Proveedor */}
+          {/* 3. Segundo Apellido */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Proveedor / Empresa <span className="text-red-500">*</span>
+              Segundo Apellido
             </label>
             <input
               type="text"
-              name="proveedor"
-              value={formData.proveedor}
+              name="segundo_apellido"
+              value={formData.segundo_apellido}
               onChange={handleInputChange}
               className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent ${
-                errors.proveedor ? 'border-red-500' : 'border-gray-300'
+                errors.segundo_apellido ? 'border-red-500' : 'border-gray-300'
               }`}
-              placeholder="Nombre de la empresa proveedora"
+              placeholder="García"
             />
-            {errors.proveedor && (
-              <p className="mt-1 text-sm text-red-500">{errors.proveedor}</p>
+            {errors.segundo_apellido && (
+              <p className="mt-1 text-sm text-red-500">{errors.segundo_apellido}</p>
             )}
           </div>
 
-          {/* Email */}
+          {/* 4. Fecha de Nacimiento */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Fecha de Nacimiento <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="date"
+              name="fecha_nacimiento"
+              value={formData.fecha_nacimiento}
+              onChange={handleInputChange}
+              max={new Date().toISOString().split('T')[0]}
+              min="1930-01-01"
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent ${
+                errors.fecha_nacimiento ? 'border-red-500' : 'border-gray-300'
+              }`}
+            />
+            {errors.fecha_nacimiento && (
+              <p className="mt-1 text-sm text-red-500">{errors.fecha_nacimiento}</p>
+            )}
+          </div>
+
+          {/* 5. Sexo */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Sexo <span className="text-red-500">*</span>
+            </label>
+            <select
+              name="sexo"
+              value={formData.sexo}
+              onChange={handleInputChange}
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent bg-white ${
+                errors.sexo ? 'border-red-500' : 'border-gray-300'
+              }`}
+            >
+              <option value="">Selecciona...</option>
+              <option value="H">Hombre</option>
+              <option value="M">Mujer</option>
+            </select>
+            {errors.sexo && (
+              <p className="mt-1 text-sm text-red-500">{errors.sexo}</p>
+            )}
+          </div>
+
+          {/* 6. Estado de Nacimiento */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Estado de Nacimiento <span className="text-red-500">*</span>
+            </label>
+            <select
+              name="estado_nacimiento"
+              value={formData.estado_nacimiento}
+              onChange={handleInputChange}
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent bg-white ${
+                errors.estado_nacimiento ? 'border-red-500' : 'border-gray-300'
+              }`}
+            >
+              <option value="">Selecciona tu estado...</option>
+              {ENTIDADES_FEDERATIVAS.map(ent => (
+                <option key={ent.code} value={ent.code}>{ent.name}</option>
+              ))}
+            </select>
+            {errors.estado_nacimiento && (
+              <p className="mt-1 text-sm text-red-500">{errors.estado_nacimiento}</p>
+            )}
+          </div>
+
+          {/* 7. Correo Electrónico */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Correo Electrónico <span className="text-red-500">*</span>
@@ -799,7 +1037,7 @@ export default function FormularioCursoSeguridad() {
             )}
           </div>
 
-          {/* Confirmar Email */}
+          {/* 8. Confirmar Correo Electrónico */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Confirmar Correo Electrónico <span className="text-red-500">*</span>
@@ -823,7 +1061,172 @@ export default function FormularioCursoSeguridad() {
             <p className="mt-1 text-xs text-gray-400">Escribe tu correo nuevamente para confirmar. No se permite copiar y pegar.</p>
           </div>
 
-          {/* Foto para Credencial */}
+          {/* 9. NSS del Colaborador */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              NSS del Colaborador <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              name="nss"
+              value={formData.nss}
+              onChange={handleInputChange}
+              maxLength={11}
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent ${
+                errors.nss ? 'border-red-500' : 'border-gray-300'
+              }`}
+              placeholder="12345678901"
+            />
+            {errors.nss && (
+              <p className="mt-1 text-sm text-red-500">{errors.nss}</p>
+            )}
+          </div>
+
+          {/* 10. Loader de generación de RFC */}
+          {isGeneratingRfc && (
+            <div className="flex items-center justify-center py-4">
+              <svg className="animate-spin h-6 w-6 text-[#D91E18] mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span className="text-sm text-gray-600">Generando RFC...</span>
+            </div>
+          )}
+
+          {/* 11. RFC del Colaborador - SPECIAL INPUT */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              RFC del Colaborador <span className="text-red-500">*</span>
+            </label>
+
+            {/* Estado: aún no se ha generado */}
+            {!rfcGenerated && !isGeneratingRfc && (
+              <input
+                type="text"
+                disabled
+                value=""
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed"
+                placeholder="Se generará automáticamente"
+              />
+            )}
+
+            {/* Estado: RFC completo encontrado en BD (locked) */}
+            {rfcGenerated && rfcLocked && (
+              <input
+                type="text"
+                disabled
+                value={rfcBase + rfcHomoclave}
+                className="w-full px-4 py-3 border-2 border-green-500 rounded-lg bg-green-50 text-gray-900 font-mono uppercase cursor-not-allowed"
+              />
+            )}
+
+            {/* Estado: RFC base generado, homoclave editable */}
+            {rfcGenerated && !rfcLocked && (
+              <div className="flex items-stretch">
+                <input
+                  type="text"
+                  disabled
+                  value={rfcBase}
+                  className="flex-shrink-0 w-[10ch] px-3 py-3 border border-gray-300 rounded-l-lg bg-gray-100 text-gray-700 font-mono uppercase cursor-not-allowed text-center"
+                  style={{ minWidth: '130px' }}
+                />
+                <input
+                  type="text"
+                  value={rfcHomoclave}
+                  onChange={handleHomoclaveChange}
+                  maxLength={3}
+                  className={`w-[5ch] px-3 py-3 border border-l-0 rounded-r-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent font-mono uppercase text-center ${
+                    errors.rfc_colaborador ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  placeholder="XXX"
+                  style={{ minWidth: '70px' }}
+                />
+              </div>
+            )}
+
+            {/* Indicadores de estado del RFC */}
+            {rfcGenerated && curpData && (
+              <p className="mt-2 text-sm text-blue-700">
+                <span className="font-medium">CURP:</span> {curpData.curp}
+              </p>
+            )}
+            {rfcError && (
+              <p className="mt-2 text-sm text-red-600">{rfcError}</p>
+            )}
+            {rfcGenerated && rfcLocked && (
+              <p className="mt-2 text-sm text-green-700 font-medium">RFC encontrado en registros anteriores</p>
+            )}
+            {rfcGenerated && !rfcLocked && (
+              <p className="mt-2 text-sm text-amber-700">Ingresa los últimos 3 caracteres de tu RFC (homoclave)</p>
+            )}
+
+            {errors.rfc_colaborador && (
+              <p className="mt-1 text-sm text-red-500">{errors.rfc_colaborador}</p>
+            )}
+          </div>
+
+          {/* 12. RFC de la Empresa */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              RFC de la Empresa <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              name="rfc_empresa"
+              value={formData.rfc_empresa}
+              onChange={handleInputChange}
+              maxLength={13}
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent uppercase ${
+                errors.rfc_empresa ? 'border-red-500' : 'border-gray-300'
+              }`}
+              placeholder="EMP850101XXX"
+            />
+            {errors.rfc_empresa && (
+              <p className="mt-1 text-sm text-red-500">{errors.rfc_empresa}</p>
+            )}
+          </div>
+
+          {/* 13. Tipo de Servicio */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Tipo de Servicio <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              name="tipo_servicio"
+              value={formData.tipo_servicio}
+              onChange={handleInputChange}
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent ${
+                errors.tipo_servicio ? 'border-red-500' : 'border-gray-300'
+              }`}
+              placeholder="Ej: Mantenimiento, Limpieza, Seguridad, etc."
+            />
+            {errors.tipo_servicio && (
+              <p className="mt-1 text-sm text-red-500">{errors.tipo_servicio}</p>
+            )}
+          </div>
+
+          {/* 14. Proveedor / Empresa */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Proveedor / Empresa <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              name="proveedor"
+              value={formData.proveedor}
+              onChange={handleInputChange}
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#D91E18] focus:border-transparent ${
+                errors.proveedor ? 'border-red-500' : 'border-gray-300'
+              }`}
+              placeholder="Nombre de la empresa proveedora"
+            />
+            {errors.proveedor && (
+              <p className="mt-1 text-sm text-red-500">{errors.proveedor}</p>
+            )}
+          </div>
+
+          {/* 15. Foto para Credencial */}
           <div className="pt-6 border-t border-gray-200">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Foto para Credencial de Acceso <span className="text-red-500">*</span>
@@ -1117,16 +1520,94 @@ export default function FormularioCursoSeguridad() {
         <div className="mt-8">
           <button
             onClick={handleContinueToExam}
-            disabled={isCheckingStatus || isLoadingQuestions}
+            disabled={isCheckingStatus || isLoadingQuestions || isGeneratingRfc}
             className={`w-full py-4 font-semibold rounded-lg transition-colors ${
-              isCheckingStatus || isLoadingQuestions
+              isCheckingStatus || isLoadingQuestions || isGeneratingRfc
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 : 'bg-[#D91E18] text-white hover:bg-[#b81915]'
             }`}
           >
-            {isCheckingStatus ? 'Verificando estatus...' : isLoadingQuestions ? 'Cargando preguntas...' : 'Continuar al Examen'}
+            {isGeneratingRfc ? 'Generando RFC...' : isCheckingStatus ? 'Verificando estatus...' : isLoadingQuestions ? 'Cargando preguntas...' : 'Continuar al Examen'}
           </button>
         </div>
+
+        {/* Modal de confirmación de datos */}
+        {showConfirmModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6">
+                {/* Header */}
+                <div className="flex items-center mb-4">
+                  <svg className="w-8 h-8 text-amber-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                  <h3 className="text-xl font-bold text-gray-900">Confirma tus datos</h3>
+                </div>
+
+                {/* Resumen de datos */}
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <h4 className="text-sm font-semibold text-gray-700 mb-3">Datos registrados:</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">Nombre:</span>
+                      <span className="font-medium text-gray-900">{formData.nombres} {formData.primer_apellido} {formData.segundo_apellido}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">RFC:</span>
+                      <span className="font-medium text-gray-900 uppercase">{formData.rfc_colaborador}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">CURP:</span>
+                      <span className="font-medium text-gray-900">{curpData?.curp || '-'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">NSS:</span>
+                      <span className="font-medium text-gray-900">{formData.nss}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">Email:</span>
+                      <span className="font-medium text-gray-900">{formData.email}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">Proveedor:</span>
+                      <span className="font-medium text-gray-900">{formData.proveedor}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Confirmación de veracidad */}
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                  <p className="text-blue-800 font-semibold text-sm mb-2">Confirmaci&oacute;n de datos</p>
+                  <p className="text-blue-700 text-sm">
+                    Al continuar, confirmo que los datos proporcionados son correctos y corresponden a mi persona.
+                    Esta informaci&oacute;n ser&aacute; utilizada para emitir mi certificaci&oacute;n de seguridad.
+                  </p>
+                </div>
+
+                {/* Botones */}
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setShowConfirmModal(false)}
+                    className="flex-1 px-4 py-3 text-sm font-semibold text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors border border-gray-300"
+                  >
+                    Cancelar y Modificar
+                  </button>
+                  <button
+                    onClick={handleConfirmAndProceed}
+                    disabled={isCheckingStatus || isLoadingQuestions}
+                    className={`flex-1 px-4 py-3 text-sm font-semibold rounded-lg transition-colors ${
+                      isCheckingStatus || isLoadingQuestions
+                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        : 'bg-[#D91E18] text-white hover:bg-[#b81915]'
+                    }`}
+                  >
+                    {isCheckingStatus ? 'Verificando...' : isLoadingQuestions ? 'Cargando...' : 'Confirmar y Continuar'}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
