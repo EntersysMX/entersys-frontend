@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import { RxChevronDown } from "react-icons/rx";
 import { Link, useLocation } from "react-router-dom";
+import { config } from "../../../config/environment";
 import "../../../styles/header.css";
 
 const useRelume = () => {
@@ -411,6 +412,12 @@ const Header = ({ colorScheme = 1, ...props }) => {
                   Contacto
                 </button>
               </Link>
+              <span className="hidden lg:inline-block text-[10px] text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
+                v{config.app.portalVersion}
+              </span>
+              <span className="lg:hidden text-[10px] text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full self-start">
+                v{config.app.portalVersion}
+              </span>
             </div>
           </motion.div>
         </div>

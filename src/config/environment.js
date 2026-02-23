@@ -32,6 +32,7 @@ export const config = {
     isStaging: IS_STAGING,
     isDev: IS_DEVELOPMENT,
     version: __APP_VERSION__ || '1.0.0',
+    portalVersion: '1.0.02',
     buildTime: __BUILD_TIME__ || new Date().toISOString(),
   },
 
