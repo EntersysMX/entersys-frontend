@@ -11,10 +11,10 @@ import SecureVideoPlayer from '../components/SecureVideoPlayer';
 import { BiLogoFacebookCircle, BiLogoInstagram, BiLogoLinkedinSquare, BiLogoYoutube } from 'react-icons/bi';
 import { config } from '../config/environment';
 
-// Configuración del video de seguridad (GCS + Cloudflare CDN)
+// Configuración del video de seguridad (servido desde servidor propio via Cloudflare CDN)
 const VIDEO_CONFIG = {
   id: 'onboarding-2026',
-  src: 'https://storage.googleapis.com/entersys-videos-cdn/Curso_On_Boarding_2026_SYS_V2.mp4',
+  src: 'https://cdn.entersys.mx/videos/Curso_On_Boarding_2026_SYS_V2.mp4',
   poster: null, // No usar poster
   title: 'Curso de On-Boarding 2026'
 };
